@@ -93,6 +93,15 @@
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zny-vX-BHA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6l-FA-FDB">
+                                <rect key="frame" x="135" y="662" width="145" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <state key="normal" title="Test add"/>
+                                <connections>
+                                    <action selector="testBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PUR-c7-5Ib"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -121,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1970" y="117"/>
+            <point key="canvasLocation" x="1969.5652173913045" y="116.51785714285714"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Ipe-8W-hpH">
@@ -355,7 +364,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CMZ-Sx-laU"/>
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
