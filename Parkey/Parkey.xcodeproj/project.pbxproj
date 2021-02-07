@@ -14,6 +14,7 @@
 		3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE822325CB257300C1E7DD /* Parkey.xcdatamodeld */; };
 		3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822625CB257500C1E7DD /* Assets.xcassets */; };
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
+		3BAE823825D042CC00C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823725D042CC00C1E7DD /* SignUpController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3BAE822625CB257500C1E7DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BAE822925CB257500C1E7DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BAE823725D042CC00C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
+				3BAE823725D042CC00C1E7DD /* SignUpController.swift */,
 			);
 			path = LoginProcedures;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BAE823825D042CC00C1E7DD /* SignUpController.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
