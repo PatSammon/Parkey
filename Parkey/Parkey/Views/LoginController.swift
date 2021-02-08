@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                 
                 if let user = try? decoder.decode(User.self, from: data)
                 {
-                    print(user.age)
+                    print(user.name + " Added user to DB")
                 }
             }
         }.resume()
