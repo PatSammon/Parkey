@@ -16,7 +16,6 @@
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
-		823E5DFA25CF0C6100F5C0E7 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF925CF0C6100F5C0E7 /* logowords.png */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		823E5DF925CF0C6100F5C0E7 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logowords.png; path = ../../../../../../Downloads/logowords.png; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +82,6 @@
 			isa = PBXGroup;
 			children = (
 				823E5DF625CF0BFF00F5C0E7 /* logo.png */,
-				823E5DF925CF0C6100F5C0E7 /* logowords.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -166,7 +163,6 @@
 			files = (
 				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
-				823E5DFA25CF0C6100F5C0E7 /* logowords.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 			);
