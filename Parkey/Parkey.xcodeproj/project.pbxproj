@@ -14,6 +14,9 @@
 		3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE822325CB257300C1E7DD /* Parkey.xcdatamodeld */; };
 		3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822625CB257500C1E7DD /* Assets.xcassets */; };
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
+		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
+		823E5DFA25CF0C6100F5C0E7 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF925CF0C6100F5C0E7 /* logowords.png */; };
+		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		3BAE822625CB257500C1E7DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BAE822925CB257500C1E7DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		823E5DF925CF0C6100F5C0E7 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logowords.png; path = ../../../../../../Downloads/logowords.png; sourceTree = "<group>"; };
+		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +64,9 @@
 		3BAE821925CB257300C1E7DD /* Parkey */ = {
 			isa = PBXGroup;
 			children = (
-				3BAE823225CD930A00C1E7DD /* LoginProcedures */,
+				829DA1AC25CF534A007B4EC5 /* Views */,
+				829DA1A725CF5217007B4EC5 /* Models */,
+				823E5DF525CF0A7000F5C0E7 /* Images */,
 				3BAE821A25CB257300C1E7DD /* AppDelegate.swift */,
 				3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */,
 				3BAE822025CB257300C1E7DD /* Main.storyboard */,
@@ -70,12 +78,29 @@
 			path = Parkey;
 			sourceTree = "<group>";
 		};
-		3BAE823225CD930A00C1E7DD /* LoginProcedures */ = {
+		823E5DF525CF0A7000F5C0E7 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				823E5DF625CF0BFF00F5C0E7 /* logo.png */,
+				823E5DF925CF0C6100F5C0E7 /* logowords.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		829DA1A725CF5217007B4EC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				829DA1A825CF52DC007B4EC5 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		829DA1AC25CF534A007B4EC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 			);
-			path = LoginProcedures;
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +161,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
+				823E5DFA25CF0C6100F5C0E7 /* logowords.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 			);
@@ -152,6 +179,7 @@
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
+				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
