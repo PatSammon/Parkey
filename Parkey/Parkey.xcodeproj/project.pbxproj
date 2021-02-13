@@ -16,6 +16,15 @@
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
+		8280F11E25D6EF2700306867 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 8280F11D25D6EF2700306867 /* logowords.png */; };
+		8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12425D6FE8500306867 /* RequestHandler.swift */; };
+		8280F12825D7066500306867 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12725D7066500306867 /* PaymentInfo.swift */; };
+		8280F12B25D712FE00306867 /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12A25D712FE00306867 /* Vehicle.swift */; };
+		8280F12E25D71C3C00306867 /* Reward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12D25D71C3C00306867 /* Reward.swift */; };
+		8280F13125D7237D00306867 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13025D7237D00306867 /* Navigation.swift */; };
+		8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13325D7238F00306867 /* ParkingSpot.swift */; };
+		8280F13725D723A100306867 /* ParkingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13625D723A100306867 /* ParkingRules.swift */; };
+		8280F13A25D723FB00306867 /* Vinny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13925D723FB00306867 /* Vinny.swift */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +40,15 @@
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		8280F11D25D6EF2700306867 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logowords.png; sourceTree = "<group>"; };
+		8280F12425D6FE8500306867 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
+		8280F12725D7066500306867 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		8280F12A25D712FE00306867 /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		8280F12D25D71C3C00306867 /* Reward.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reward.swift; sourceTree = "<group>"; };
+		8280F13025D7237D00306867 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		8280F13325D7238F00306867 /* ParkingSpot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingSpot.swift; sourceTree = "<group>"; };
+		8280F13625D723A100306867 /* ParkingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRules.swift; sourceTree = "<group>"; };
+		8280F13925D723FB00306867 /* Vinny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vinny.swift; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,8 +82,7 @@
 		3BAE821925CB257300C1E7DD /* Parkey */ = {
 			isa = PBXGroup;
 			children = (
-				829DA1AC25CF534A007B4EC5 /* Views */,
-				829DA1A725CF5217007B4EC5 /* Models */,
+				8280F12325D6FE4400306867 /* Code */,
 				823E5DF525CF0A7000F5C0E7 /* Images */,
 				3BAE821A25CB257300C1E7DD /* AppDelegate.swift */,
 				3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */,
@@ -82,14 +99,32 @@
 			isa = PBXGroup;
 			children = (
 				823E5DF625CF0BFF00F5C0E7 /* logo.png */,
+				8280F11D25D6EF2700306867 /* logowords.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		8280F12325D6FE4400306867 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				829DA1A725CF5217007B4EC5 /* Models */,
+				829DA1AC25CF534A007B4EC5 /* Views */,
+				8280F12425D6FE8500306867 /* RequestHandler.swift */,
+			);
+			path = Code;
 			sourceTree = "<group>";
 		};
 		829DA1A725CF5217007B4EC5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				829DA1A825CF52DC007B4EC5 /* User.swift */,
+				8280F12725D7066500306867 /* PaymentInfo.swift */,
+				8280F12A25D712FE00306867 /* Vehicle.swift */,
+				8280F12D25D71C3C00306867 /* Reward.swift */,
+				8280F13025D7237D00306867 /* Navigation.swift */,
+				8280F13325D7238F00306867 /* ParkingSpot.swift */,
+				8280F13625D723A100306867 /* ParkingRules.swift */,
+				8280F13925D723FB00306867 /* Vinny.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
+				8280F11E25D6EF2700306867 /* logowords.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
@@ -175,11 +211,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
+				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
+				8280F13725D723A100306867 /* ParkingRules.swift in Sources */,
+				8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
+				8280F13125D7237D00306867 /* Navigation.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
+				8280F12E25D71C3C00306867 /* Reward.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
+				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
+				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
 				3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
