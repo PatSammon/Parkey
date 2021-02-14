@@ -29,44 +29,64 @@ class SignUpController: UIViewController {
     //method to check that the password contains an uppercase Character
     
     func checkUpperCase(password: String) -> Bool{
-        let set = CharacterSet.lowercaseLetters
-        
-        //check if it has any uppercase characters
-        if let scala = UnicodeScalar(password) {
-          return set.contains(scala)
-        } else {
-          return false
+        do {
+            let regex = try NSRegularExpression(pattern: "[A-Z]")
+        if let _ = regex.firstMatch(in: password, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, password.count)) {
+                return true
+            }
+
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
         }
+
+        return false
     }
     //method to check that the password contains a special symbol
     func checkSymbol(password:String) -> Bool{
-        let set = CharacterSet.symbols
-        
-        //check if it has any symbol characters
-        if let scala = UnicodeScalar(password) {
-          return set.contains(scala)
-        } else {
-          return false
+       do {
+            let regex = try NSRegularExpression(pattern: ".*[^A-Za-z0-9].*", options: .caseInsensitive)
+        if let _ = regex.firstMatch(in: password, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, password.count)) {
+                return true
+            }
+
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
         }
+
+        return false
     }
     //method to check that the password contains a number
     func checkNumber(password:String)-> Bool{
-        let set = CharacterSet.decimalDigits
-        
-        //check if it has any symbol characters
-        if let scala = UnicodeScalar(password) {
-          return set.contains(scala)
-        } else {
-          return false
+        do {
+            let regex = try NSRegularExpression(pattern: "[0-9]")
+        if let _ = regex.firstMatch(in: password, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, password.count)) {
+                return true
+            }
+
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
         }
+
+        return false
     }
     
     //method that will be called when the user tries to sign-up
     @IBAction func SignUp(_ sender: Any) {
+        //check that none of the fields are blank
+        if Email.text == nil || Password.text == nil || Password2.text == nil || FName.text == nil || LName.text == nil{
+            ErrorMessage.text = "Must include all fields"
+            ErrorMessage.isHidden=false
+            return
+        }
+        
         //check that the email is not in use
         
+        
         //check that the password is the same for both entries
-        if Password.text != Password2.text{
+        if Password.text != Password2.text && Password.text != nil{
             //then prompt the user to reenter the password
             ErrorMessage.text = "Passwords do not match"
             ErrorMessage.isHidden=false
@@ -75,13 +95,26 @@ class SignUpController: UIViewController {
         
         //check that the password contains the necessary elements
         let passwordTemp = Password.text!
-        if !checkNumber(password: passwordTemp) || !checkSymbol(password: passwordTemp) || !checkUpperCase(password: passwordTemp){
+        if !checkSymbol(password: passwordTemp) || !checkUpperCase(password: passwordTemp) || !checkNumber(password: passwordTemp){
             //tell the user they must contain the proper format
             ErrorMessage.text = "Password must include a number, special character, and uppercase"
             ErrorMessage.isHidden=false
             return
         }
-        
+        let name:String = FName.text! + LName.text!
         //then add the entry to the database
+        RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567)
+        
+        //if the erro message was showing, make it hidden
+        if !ErrorMessage.isHidden{
+            ErrorMessage.isHidden=true
+        }
+        //set the user defaults
+        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        UserDefaults.standard.set(Email.text!, forKey: "Email")
+        UserDefaults.standard.set(Password.text!, forKey: "Password")
+        
+        //seque to home screen
+        //todo
     }
 }

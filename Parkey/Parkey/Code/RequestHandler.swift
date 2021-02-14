@@ -32,4 +32,19 @@ class RequestHandler
         }.resume()
     }
     
+    /*
+     Function that will be used when they are trying to sign in
+     */
+    /*static func sign_in(userName: String, password: String){
+        //create the URL request
+        let url = URL(string: "http://127.0.0.1:8080/newUser")!
+        //create the encoder that will be used
+        let encoder = JSONEncoder()
+        
+        //make a POST request to the database so it is more secure
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+    }*/
+    
+    
 }
