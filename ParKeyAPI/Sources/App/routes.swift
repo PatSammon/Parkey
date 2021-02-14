@@ -9,6 +9,48 @@ func routes(_ app: Application) throws
         return user.create(on: req.db).map{user}
     }
     
+    app.post("newPaymentInfo")
+    { req -> EventLoopFuture<PaymentInfo> in
+        let payment = try req.content.decode(PaymentInfo.self)
+        return payment.create(on: req.db).map{payment}
+    }
+    
+    app.post("newVehicle")
+    { req -> EventLoopFuture<Vehicle> in
+        let vehicle = try req.content.decode(Vehicle.self)
+        return vehicle.create(on: req.db).map{vehicle}
+    }
+    
+    app.post("newReward")
+    { req -> EventLoopFuture<Reward> in
+        let reward = try req.content.decode(Reward.self)
+        return reward.create(on: req.db).map{reward}
+    }
+    
+    app.post("newParkingSpot")
+    { req -> EventLoopFuture<ParkingSpot> in
+        let spot = try req.content.decode(ParkingSpot.self)
+        return spot.create(on: req.db).map{spot}
+    }
+    
+    app.post("newParkingRules")
+    { req -> EventLoopFuture<ParkingRules> in
+        let rule = try req.content.decode(ParkingRules.self)
+        return rule.create(on: req.db).map{rule}
+    }
+    
+    app.post("newNavigation")
+    { req -> EventLoopFuture<Navigation> in
+        let nav = try req.content.decode(Navigation.self)
+        return nav.create(on: req.db).map{nav}
+    }
+    
+    app.post("newRequest")
+    { req -> EventLoopFuture<Vinny> in
+        let request = try req.content.decode(Vinny.self)
+        return request.create(on: req.db).map{request}
+    }
+    
     app.get("users")
     {
         req in
@@ -17,4 +59,7 @@ func routes(_ app: Application) throws
     }
     
     try app.register(collection: UserController())
+    try app.register(collection: PaymentInfoController())
+    try app.register(collection: VehicleController())
+    try app.register(collection: RewardController())
 }

@@ -6,7 +6,12 @@ struct UserFunctionality: Migration {
         return database.schema("user")
             .id()
             .field("name", .string, .required)
-            .field("age", .int, .required)
+            .field("userName", .string, .required)
+            .field("password", .string, .required)
+            .field("email", .string, .required)
+            .field("phoneNum", .int, .required)
+            .field("availablePoints", .int)
+            .field("totalPoints", .int)
             .create()
     }
 

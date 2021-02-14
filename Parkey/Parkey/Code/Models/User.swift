@@ -1,40 +1,16 @@
-import Fluent
-import Vapor
-import FluentMongoDriver
-
-final class User: Model, Content
+class User: Codable
 {
-    init() {}
-    
-    static let schema = "user"
-    
-    @ID(custom: .id)
-    var id: ObjectId?
-    
-    @Field(key: "name")
+    var id: String?
     var name: String
-    
-    @Field(key: "userName")
     var userName: String
-    
-    @Field(key: "password")
     var password: String
-    
-    @Field(key: "phoneNum")
     var phoneNum: Int
-    
-    @Field(key: "email")
     var email: String
-    
-    @Field(key: "availablePoints")
     var availablePoints: Int
-    
-    @Field(key: "totalPoints")
     var totalPoints: Int
     
     init(name: String, userName: String, password: String, email: String, phoneNum: Int)
     {
-        self.id = ObjectId()
         self.name = name
         self.userName = userName
         self.password = password
@@ -44,4 +20,3 @@ final class User: Model, Content
         totalPoints = 0
     }
 }
-
