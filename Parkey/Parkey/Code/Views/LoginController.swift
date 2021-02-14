@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         let password = PasswordLogin.text
         
         //if the information is correct, then use the segue to continue to the app
-        
+        RequestHandler.sign_in(userName: email!, password: password!)
         
         UserDefaults.standard.set(true, forKey: "LoggedIn")
         UserDefaults.standard.set(email, forKey: "Email")

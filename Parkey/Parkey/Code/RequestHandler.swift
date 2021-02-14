@@ -31,20 +31,32 @@ class RequestHandler
             }
         }.resume()
     }
-    
     /*
      Function that will be used when they are trying to sign in
      */
-    /*static func sign_in(userName: String, password: String){
+    static func sign_in(userName: String, password: String){
         //create the URL request
-        let url = URL(string: "http://127.0.0.1:8080/newUser")!
+        let url = URL(string: "http://127.0.0.1:8080/loginUser")!
         //create the encoder that will be used
-        let encoder = JSONEncoder()
+        //let encoder = JSONEncoder()
         
         //make a POST request to the database so it is more secure
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-    }*/
-    
+        request.addValue(userName, forHTTPHeaderField: "userName")
+        request.addValue(password, forHTTPHeaderField: "password")
+        URLSession.shared.dataTask(with: request) {data, response, error in
+            if let data = data
+            {
+                
+                let decoder = JSONDecoder()
+                
+                if let user = try? decoder.decode(User.self, from: data)
+                {
+                    print(user.name + " logged in to DB")
+                }
+            }
+        }.resume()
+    }
     
 }
