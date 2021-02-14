@@ -12,7 +12,14 @@ public func configure(_ app: Application) throws {
     ), as: .mongo)
     
     app.migrations.add(UserFunctionality())
-    
+    app.migrations.add(PaymentInfoFunctionality())
+    app.migrations.add(VehicleFunctionality())
+    app.migrations.add(RewardFunctionality())
+    app.migrations.add(VinnyFunctionality())
+    app.migrations.add(ParkingRulesFunctionality())
+    app.migrations.add(ParkingSpotFunctionality())
+    app.migrations.add(NavigationFunctionality())
+
     // register routes
     try routes(app)
 }
