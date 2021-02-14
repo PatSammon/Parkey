@@ -24,6 +24,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //test to see if there is any value in User Default
+        if(UserDefaults.standard.bool(forKey: "LoggedIn")){
+            //todo
+            //check that the password has not changed
+            
+            //then you will transition to the next screen
+            //TODO
+        }
+        else{
+            //set it so that the User is loggedIn
+            UserDefaults.standard.set(false, forKey: "LoggedIn")
+        }
     }
 
     @IBAction func testBtnPressed(_ sender: Any)
@@ -105,6 +118,14 @@ class ViewController: UIViewController {
         
         //if the information is correct, then use the segue to continue to the app
         
+        //store the username, password and change LoggedIn to true
+        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        let Username = ""
+        UserDefaults.standard.set(Username, forKey: "Username")
+        let Password = ""
+        UserDefaults.standard.set(Username, forKey: "Password")
+        
+        
         //if the information is wrong, prompt the user to enter the correct information
         IncorrectCredentials.isHidden = false
     }
@@ -119,6 +140,8 @@ class ViewController: UIViewController {
         if segue.identifier == ""{
            // let Ranking:Ranking = segue.destination as! Ranking
            // Ranking.days = days
+            
+            //todo this will be the seque to laydons home view
         
         }
     }

@@ -58,7 +58,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="hSH-Ec-3B8"/>
                                                 </constraints>
-                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                                             </textField>
                                         </subviews>
@@ -91,9 +91,8 @@
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zny-vX-BHA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6l-FA-FDB">
-                                <rect key="frame" x="135" y="662" width="145" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6l-FA-FDB">
+                                <rect key="frame" x="5" y="782" width="145" height="60"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Test add"/>
                                 <connections>
@@ -109,7 +108,9 @@
                             <constraint firstItem="VL2-ab-eJ1" firstAttribute="top" secondItem="6HV-cI-Y55" secondAttribute="bottom" constant="40" id="Aaw-Yi-Kjg"/>
                             <constraint firstItem="6HV-cI-Y55" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="BmX-W7-nn9"/>
                             <constraint firstItem="p2X-5f-ypd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bxf-Jf-heQ"/>
+                            <constraint firstItem="F6l-FA-FDB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="CJK-1R-IEr"/>
                             <constraint firstItem="VL2-ab-eJ1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wxs-fY-NUl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="F6l-FA-FDB" secondAttribute="bottom" constant="20" id="Z53-E1-6eg"/>
                             <constraint firstItem="vNu-Tw-8qO" firstAttribute="top" secondItem="VL2-ab-eJ1" secondAttribute="bottom" constant="2.5" id="eBf-fF-rdN"/>
                             <constraint firstItem="B8V-8O-LXa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gtY-U9-XVa"/>
                             <constraint firstItem="p2X-5f-ypd" firstAttribute="top" secondItem="PUl-7G-c6S" secondAttribute="bottom" constant="10" id="he1-gG-aOq"/>
@@ -385,7 +386,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CMZ-Sx-laU"/>
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
