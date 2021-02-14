@@ -36,9 +36,16 @@ class ViewController: UIViewController {
      */
     @IBAction func Login(_ sender: Any) {
         //check the email exists within the database
+        let email = EmailLogin.text
         //check the password is the proper one for the email
+        let password = PasswordLogin.text
         
         //if the information is correct, then use the segue to continue to the app
+        
+        
+        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        UserDefaults.standard.set(email, forKey: "Email")
+        UserDefaults.standard.set(password, forKey: "Password")
         
         //if the information is wrong, prompt the user to enter the correct information
         IncorrectCredentials.isHidden = false
