@@ -23,8 +23,28 @@ func routes(_ app: Application) throws
         }
         print(userName)
         print(password)
+        
         //pose a query where it will find the user with that Username
-        var info = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
+        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()/*.whenComplete{ result in
+            switch result{
+            case .success(let userCred){
+                print(userCred)
+                }
+            case .failure(let error){
+                print(error)
+                }
+            }
+        }*/
+        info.whenComplete{ result in
+            switch result{
+            case .success(let userCred):
+                if userCred != nil{
+                    print(userCred)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         print (info)
         //this might work?
         return "Yes"

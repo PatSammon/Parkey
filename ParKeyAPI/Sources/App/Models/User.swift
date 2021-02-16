@@ -2,6 +2,7 @@ import Fluent
 import Vapor
 import FluentMongoDriver
 
+@dynamicMemberLookup
 final class User: Model, Content
 {
     init() {}
@@ -42,6 +43,10 @@ final class User: Model, Content
         self.phoneNum = phoneNum
         availablePoints = 0
         totalPoints = 0
+    }
+    subscript(dynamicMember member: String) -> String {
+        let properties = ["userName": self.userName, "password": self.password]
+        return properties[member, default: ""]
     }
 }
 

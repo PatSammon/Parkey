@@ -57,6 +57,7 @@ class RequestHandler
                 }
             }
         }.resume()
+        print("completed")
     }
     
 }
