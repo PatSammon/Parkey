@@ -21,31 +21,21 @@ func routes(_ app: Application) throws
         if req.headers.contains(name: "password"){
             password = req.headers.first(name: "password")!
         }
-        print(userName)
-        print(password)
         
         //pose a query where it will find the user with that Username
-        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()/*.whenComplete{ result in
-            switch result{
-            case .success(let userCred){
-                print(userCred)
-                }
-            case .failure(let error){
-                print(error)
-                }
-            }
-        }*/
+        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
+        var flag = false
         info.whenComplete{ result in
             switch result{
             case .success(let userCred):
                 if userCred != nil{
                     print(userCred)
+                    flag = true
                 }
             case .failure(let error):
                 print(error)
             }
         }
-        print (info)
         //this might work?
         return "Yes"
     }

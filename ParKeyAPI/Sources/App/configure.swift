@@ -12,6 +12,7 @@ public func configure(_ app: Application) throws {
     ), as: .mongo)
     
     app.migrations.add(UserFunctionality())
+    app.migrations.add(CreateTokens())
     app.migrations.add(PaymentInfoFunctionality())
     app.migrations.add(VehicleFunctionality())
     app.migrations.add(RewardFunctionality())
