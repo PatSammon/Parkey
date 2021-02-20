@@ -1,6 +1,17 @@
 import Fluent
 import Vapor
 
+struct NewSession: Content{
+    let token:String
+    let user:User.Public
+}
+struct UserSignup: Content{
+    let username:String
+    let password:String
+    let name:String
+}
+
+
 struct UserController: RouteCollection
 {
     func boot(routes: RoutesBuilder) throws
@@ -27,5 +38,27 @@ struct UserController: RouteCollection
             .unwrap(or: Abort(.notFound))
             .flatMap { $0.delete(on: req.db) }
             .transform(to: .ok)
+    }
+    //Function that will check if the username exists in the database
+    private func checkIfUserExists(_ username:String, req: Request) -> EventLoopFuture<Bool>{
+        User.query(on: req.db)
+            .filter(\.$userName == username)
+            .first()
+            .map{$0 != nil}
+    }
+    
+    //function to login
+    
+    fileprivate func login(req: Request) throws -> EventLoopFuture<NewSession>{
+        let user = try req.auth.require(User.self)
+        let token = try user.createToken(source: .login)
+        
+        return token.save(on: req.db).flatMapThrowing{
+            NewSession(token: token.value, user: try user.asPublic())
+        }
+    }
+    
+    func getMyOwnUser(req:Request) throws -> User.Public{
+        try req.auth.require(User.self).asPublic()
     }
 }

@@ -46,17 +46,19 @@ class RequestHandler
         request.addValue(userName, forHTTPHeaderField: "userName")
         request.addValue(password, forHTTPHeaderField: "password")
         URLSession.shared.dataTask(with: request) {data, response, error in
-            if let data = data
+            if let data = data, let dataString = String(data:data,encoding: .utf8)
             {
-                
-                let decoder = JSONDecoder()
-                
-                if let user = try? decoder.decode(User.self, from: data)
-                {
-                    print(user.name + " logged in to DB")
+                print("Completed: \(dataString)")
+                //now check to see if it equals "Yes" or "No"
+                if dataString == "Yes" {
+                    //then reposition to "Home" screen
+                }
+                else{
+                    //display the error message
                 }
             }
-        }.resume()
+            }.resume()
+        print("completed")
     }
     
 }

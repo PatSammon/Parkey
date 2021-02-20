@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D3D25D9868000A49363 /* UserLogin.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
 		3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */; };
 		3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821E25CB257300C1E7DD /* LoginController.swift */; };
@@ -38,7 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B516D3D25D9868000A49363 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE821A25CB257300C1E7DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				8280F13325D7238F00306867 /* ParkingSpot.swift */,
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
-				3B516D3D25D9868000A49363 /* UserLogin.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -257,7 +254,6 @@
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
-				3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
 				3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */,
