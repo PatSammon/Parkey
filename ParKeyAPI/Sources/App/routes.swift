@@ -24,7 +24,7 @@ func routes(_ app: Application) throws
         print(userName)
         print(password)
         //pose a query where it will find the user with that Username
-        var info = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
+        let info = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
         print (info)
         //this might work?
         return "Yes"
