@@ -16,9 +16,11 @@ class ProfileController: UIViewController {
     
     @IBOutlet weak var keychainButton: UIButton!
     
-    @IBOutlet weak var rankingButton: UIButton!
+    @IBOutlet weak var rankingsButton: UIButton!
     
     @IBOutlet weak var micButton: UIButton!
+    
+    @IBOutlet weak var buttonStack: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

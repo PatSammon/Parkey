@@ -374,72 +374,63 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-bs-Rfj">
-                                <rect key="frame" x="100" y="20.5" width="214" height="129"/>
+                                <rect key="frame" x="100" y="100.5" width="214" height="129"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="PyN-2m-UML"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="za1-xn-ACX">
-                                <rect key="frame" x="100" y="200" width="214" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Account">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="hKp-z9-xb4" kind="show" id="Rkj-hs-q1E"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsY-hh-Dq7">
-                                <rect key="frame" x="100" y="280" width="214" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Keychain">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUL-ta-Lle">
-                                <rect key="frame" x="100" y="360" width="214" height="30"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Ranking">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-dV-sRO">
-                                <rect key="frame" x="50" y="490" width="314" height="61"/>
-                                <state key="normal" image="mic_1.png"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Hq-c5-jad">
+                                <rect key="frame" x="75" y="280" width="264" height="500"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1e-dD-O8c">
+                                        <rect key="frame" x="0.0" y="0.0" width="264" height="125"/>
+                                        <state key="normal" image="account_1.png"/>
+                                        <connections>
+                                            <segue destination="hKp-z9-xb4" kind="show" id="RPp-ML-Cnd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCe-L0-p4o">
+                                        <rect key="frame" x="0.0" y="125" width="264" height="125"/>
+                                        <state key="normal" image="keychain_1.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vd7-kv-5qT">
+                                        <rect key="frame" x="0.0" y="250" width="264" height="125"/>
+                                        <state key="normal" image="ranking_1.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYD-9l-3FP">
+                                        <rect key="frame" x="0.0" y="375" width="264" height="125"/>
+                                        <state key="normal" image="mic_1.png"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="f4n-gE-PfJ"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UEg-dV-sRO" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="50" id="2kJ-Pg-lrx"/>
-                            <constraint firstItem="za1-xn-ACX" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="8cn-ts-8ma"/>
-                            <constraint firstItem="TUL-ta-Lle" firstAttribute="top" secondItem="tsY-hh-Dq7" secondAttribute="bottom" constant="50" id="AjM-5Q-ejU"/>
-                            <constraint firstItem="UEg-dV-sRO" firstAttribute="top" secondItem="TUL-ta-Lle" secondAttribute="bottom" constant="100" id="DFZ-ww-zh3"/>
-                            <constraint firstItem="tsY-hh-Dq7" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="DQY-JR-wCo"/>
-                            <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="20" id="Jmn-9A-O7l"/>
-                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
-                            <constraint firstItem="TUL-ta-Lle" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="YvI-RC-Zwj"/>
-                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="TUL-ta-Lle" secondAttribute="trailing" constant="100" id="eIf-HJ-O6m"/>
-                            <constraint firstItem="tsY-hh-Dq7" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="50" id="hQb-r9-V6O"/>
-                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="za1-xn-ACX" secondAttribute="trailing" constant="100" id="jaB-bb-2mp"/>
+                            <constraint firstItem="6Hq-c5-jad" firstAttribute="top" secondItem="gyD-bs-Rfj" secondAttribute="bottom" constant="50" id="0Mk-BT-evz"/>
+                            <constraint firstItem="6Hq-c5-jad" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="75" id="4iS-1t-yDE"/>
+                            <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="100" id="Jmn-9A-O7l"/>
+                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="6Hq-c5-jad" secondAttribute="trailing" constant="75" id="fgB-DB-ckb"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="gyD-bs-Rfj" secondAttribute="trailing" constant="100" id="oih-x5-xxi"/>
-                            <constraint firstItem="za1-xn-ACX" firstAttribute="top" secondItem="gyD-bs-Rfj" secondAttribute="bottom" constant="50" id="ruU-Sh-bB5"/>
                             <constraint firstItem="gyD-bs-Rfj" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="rvJ-Dr-dmY"/>
-                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="tsY-hh-Dq7" secondAttribute="trailing" constant="100" id="u5U-aC-n0L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b6B-jE-jtH"/>
                     </view>
                     <connections>
-                        <outlet property="accountButton" destination="za1-xn-ACX" id="UaW-ii-ZXc"/>
-                        <outlet property="keychainButton" destination="tsY-hh-Dq7" id="d4g-Wm-hSv"/>
-                        <outlet property="micButton" destination="UEg-dV-sRO" id="mbl-cS-u2R"/>
-                        <outlet property="profileImage" destination="gyD-bs-Rfj" id="py4-CH-gUA"/>
-                        <outlet property="rankingButton" destination="TUL-ta-Lle" id="4o6-35-UM1"/>
+                        <outlet property="accountButton" destination="I1e-dD-O8c" id="0GV-fu-jTc"/>
+                        <outlet property="buttonStack" destination="6Hq-c5-jad" id="5De-SK-jP7"/>
+                        <outlet property="keychainButton" destination="gCe-L0-p4o" id="z2x-dt-soO"/>
+                        <outlet property="micButton" destination="bYD-9l-3FP" id="hBC-O4-0Yp"/>
+                        <outlet property="profileImage" destination="gyD-bs-Rfj" id="hK2-AR-qU8"/>
+                        <outlet property="rankingsButton" destination="Vd7-kv-5qT" id="07s-Kp-mTT"/>
                         <segue destination="hKp-z9-xb4" kind="show" id="g3C-9X-6Cm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ul6-xF-hbr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2883" y="872"/>
+            <point key="canvasLocation" x="2882.608695652174" y="871.875"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="8Ts-OR-Ovp">
@@ -452,6 +443,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2kp-8a-idc">
                                 <rect key="frame" x="10" y="10" width="394" height="788"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reuseIdentifier" id="8k0-mu-kfe">
+                                        <rect key="frame" x="0.0" y="28" width="394" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8k0-mu-kfe" id="bWh-NS-PcS">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -492,14 +493,17 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rkj-hs-q1E"/>
+        <segue reference="RPp-ML-Cnd"/>
         <segue reference="CMZ-Sx-laU"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="account_1.png" width="111" height="36"/>
+        <image name="keychain_1.png" width="138.75" height="45"/>
         <image name="logo.png" width="2000" height="2000"/>
         <image name="logowords.png" width="750" height="1334"/>
         <image name="mic_1.png" width="42.599998474121094" height="36.599998474121094"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="ranking_1.png" width="138.75" height="45"/>
     </resources>
 </document>

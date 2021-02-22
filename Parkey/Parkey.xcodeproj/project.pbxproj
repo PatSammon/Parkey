@@ -26,14 +26,15 @@
 		8280F13725D723A100306867 /* ParkingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13625D723A100306867 /* ParkingRules.swift */; };
 		8280F13A25D723FB00306867 /* Vinny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13925D723FB00306867 /* Vinny.swift */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
-		AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0025D9CB4600F0EB5B /* keychain_1.png */; };
 		AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0125D9CB4600F0EB5B /* mic_1.png */; };
 		AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0425D9CB5300F0EB5B /* park_out.png */; };
-		AB25AF0825D9CB5300F0EB5B /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0525D9CB5300F0EB5B /* ranking_1.png */; };
 		AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0625D9CB5300F0EB5B /* park_in.png */; };
-		AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0A25D9CB5D00F0EB5B /* account_1.png */; };
 		AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */; };
 		AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */; };
+		AB36C37125E39810008CE366 /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37025E39810008CE366 /* keychain_1.png */; };
+		AB36C37325E3981B008CE366 /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37225E3981B008CE366 /* ranking_1.png */; };
+		AB36C37525E39A33008CE366 /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37425E39A33008CE366 /* account_1.png */; };
+		AB549C5125E3C03700E6B728 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB549C5025E3C03700E6B728 /* SettingsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,14 +59,15 @@
 		8280F13625D723A100306867 /* ParkingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRules.swift; sourceTree = "<group>"; };
 		8280F13925D723FB00306867 /* Vinny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vinny.swift; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AB25AF0025D9CB4600F0EB5B /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain_1.png; sourceTree = "<group>"; };
 		AB25AF0125D9CB4600F0EB5B /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
 		AB25AF0425D9CB5300F0EB5B /* park_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_out.png; sourceTree = "<group>"; };
-		AB25AF0525D9CB5300F0EB5B /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranking_1.png; sourceTree = "<group>"; };
 		AB25AF0625D9CB5300F0EB5B /* park_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_in.png; sourceTree = "<group>"; };
-		AB25AF0A25D9CB5D00F0EB5B /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_1.png; sourceTree = "<group>"; };
 		AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		AB36C37025E39810008CE366 /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keychain_1.png; path = ../../../../../../Downloads/keychain_1.png; sourceTree = "<group>"; };
+		AB36C37225E3981B008CE366 /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ranking_1.png; path = ../../../../../../Downloads/ranking_1.png; sourceTree = "<group>"; };
+		AB36C37425E39A33008CE366 /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account_1.png; path = ../../../../../../Downloads/account_1.png; sourceTree = "<group>"; };
+		AB549C5025E3C03700E6B728 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,11 +116,11 @@
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				AB25AF0A25D9CB5D00F0EB5B /* account_1.png */,
+				AB36C37425E39A33008CE366 /* account_1.png */,
+				AB36C37225E3981B008CE366 /* ranking_1.png */,
+				AB36C37025E39810008CE366 /* keychain_1.png */,
 				AB25AF0625D9CB5300F0EB5B /* park_in.png */,
 				AB25AF0425D9CB5300F0EB5B /* park_out.png */,
-				AB25AF0525D9CB5300F0EB5B /* ranking_1.png */,
-				AB25AF0025D9CB4600F0EB5B /* keychain_1.png */,
 				AB25AF0125D9CB4600F0EB5B /* mic_1.png */,
 				823E5DF625CF0BFF00F5C0E7 /* logo.png */,
 				8280F11D25D6EF2700306867 /* logowords.png */,
@@ -158,6 +160,7 @@
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
+				AB549C5025E3C03700E6B728 /* SettingsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,14 +226,14 @@
 				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
 				8280F11E25D6EF2700306867 /* logowords.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
-				AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */,
 				AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */,
+				AB36C37325E3981B008CE366 /* ranking_1.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
-				AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */,
+				AB36C37525E39A33008CE366 /* account_1.png in Resources */,
 				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
-				AB25AF0825D9CB5300F0EB5B /* ranking_1.png in Resources */,
+				AB36C37125E39810008CE366 /* keychain_1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +247,7 @@
 				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
 				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
 				8280F13725D723A100306867 /* ParkingRules.swift in Sources */,
+				AB549C5125E3C03700E6B728 /* SettingsCell.swift in Sources */,
 				8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */,
