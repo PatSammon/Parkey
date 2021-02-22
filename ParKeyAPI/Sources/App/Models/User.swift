@@ -68,8 +68,11 @@ final class User: Model, Content
     }
 }
 extension User{
-    static func create(from userSignup: UserSignup) throws -> User{
+    /*static func create(from userSignup: UserSignup) throws -> User{
         User(name: userSignup.name, userName: userSignup.username, password: userSignup.password)
+    }*/
+    static func create(from userSignup: UserSignup) throws -> User {
+        User(name: userSignup.name, userName: userSignup.username, password: try Bcrypt.hash(userSignup.password))
     }
     
     func createToken(source: SessionSource) throws -> Token{
@@ -89,8 +92,8 @@ extension User: ModelAuthenticatable{
     static let usernameKey=\User.$userName
     static let passwordHashKey = \User.$password
     
-    func verify(password: String) throws -> Bool{
-        try Bcrypt.verify(password, created: password)
+    func verify(password: String) throws -> Bool {
+      try Bcrypt.verify(password, created: self.password)
     }
 }
 

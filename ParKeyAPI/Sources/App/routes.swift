@@ -8,6 +8,7 @@ func routes(_ app: Application) throws
         let user = try req.content.decode(User.self)
         return user.create(on: req.db).map{user}
     }
+    
     app.post("loginUser")
     { req -> String in
         //decode the user login info

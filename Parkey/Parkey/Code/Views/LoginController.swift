@@ -28,7 +28,14 @@ class ViewController: UIViewController {
 
     @IBAction func testBtnPressed(_ sender: Any)
     {
-        RequestHandler.register(name: "Bob", userName: "Bobby123", password: "123abc", email: "Bobbert@gmail.com", phoneNum: 1234567)
+        RequestHandler.register(name: "Bob", userName: "Bobby123", password: "123abc", email: "Bobbert@gmail.com", phoneNum: 1234567) { (result,error) in
+                          if let result = result{
+                              print("Success: \(result)")
+                          }
+                          else if let error = error{
+                              //self.IncorrectCredentials.text = error.localizedDescription
+                              print("error: \(error.localizedDescription)")
+                   }}
     }
     
     /*
@@ -36,19 +43,28 @@ class ViewController: UIViewController {
      */
     @IBAction func Login(_ sender: Any) {
         //check the email exists within the database
-        let email = EmailLogin.text
+        let email = EmailLogin.text!
         //check the password is the proper one for the email
-        let password = PasswordLogin.text
+        let password = PasswordLogin.text!
         
         //if the information is correct, then use the segue to continue to the app
-        RequestHandler.sign_in(userName: email!, password: password!)
-        
+        RequestHandler.sign_in(userName: email, password: password) { (result,error) in
+            if let result = result{
+                print("Success: \(result)")
+            }
+            else if let error = error{
+                self.IncorrectCredentials.text = error.localizedDescription
+                self.IncorrectCredentials.isHidden = false
+                print("error: \(error.localizedDescription)")
+            }
+        }
+       /*
         UserDefaults.standard.set(true, forKey: "LoggedIn")
         UserDefaults.standard.set(email, forKey: "Email")
         UserDefaults.standard.set(password, forKey: "Password")
-        
+        */
         //if the information is wrong, prompt the user to enter the correct information
-        IncorrectCredentials.isHidden = false
+        //IncorrectCredentials.isHidden = false
     }
     
     /*

@@ -103,18 +103,25 @@ class SignUpController: UIViewController {
         }
         let name:String = FName.text! + LName.text!
         //then add the entry to the database
-        RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567)
+        RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567) { (result,error) in
+                   if let result = result{
+                       print("Success: \(result)")
+                   }
+                   else if let error = error{
+                       //self.IncorrectCredentials.text = error.localizedDescription
+                       print("error: \(error.localizedDescription)")
+            }}
         
         //if the erro message was showing, make it hidden
         if !ErrorMessage.isHidden{
             ErrorMessage.isHidden=true
         }
         //set the user defaults
-        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        /*UserDefaults.standard.set(true, forKey: "LoggedIn")
         UserDefaults.standard.set(Email.text!, forKey: "Email")
         UserDefaults.standard.set(Password.text!, forKey: "Password")
-        
-        //seque to home screen
+        */
+        //seque
         //todo
     }
 }
