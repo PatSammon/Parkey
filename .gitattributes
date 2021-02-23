@@ -1,0 +1,6 @@
+Parkey/Pods/** filter=lfs diff=lfs merge=lfs -text
+Parkey/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/GoogleMapsBase filter=lfs diff=lfs merge=lfs -text
+Parkey/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/GoogleMapsCore filter=lfs diff=lfs merge=lfs -text
+/Parkey/Pods/** filter=lfs diff=lfs merge=lfs -text
+/Parkey/Pods/* filter=lfs diff=lfs merge=lfs -text
+Parkey/Pods/GoogleMaps/Base/Frameworks/GoogleMapBase.framework/GoogleMapBase filter=lfs diff=lfs merge=lfs -text
