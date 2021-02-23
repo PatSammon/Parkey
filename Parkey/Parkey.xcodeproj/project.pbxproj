@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E7309BC2872982BD6E326DC /* libPods-Parkey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3999CADA16EE8D542ECEF93 /* libPods-Parkey.a */; };
 		3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D3D25D9868000A49363 /* UserLogin.swift */; };
+		3B516D4625E5A0E600A49363 /* InitalScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4525E5A0E600A49363 /* InitalScreenController.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
 		3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */; };
 		3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821E25CB257300C1E7DD /* LoginController.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		08979E0F5D9BD0A91887C26A /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
 		3B516D3D25D9868000A49363 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		3B516D4525E5A0E600A49363 /* InitalScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitalScreenController.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE821A25CB257300C1E7DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				825BB63C25E1A5510046865E /* MapViewController.swift */,
+				3B516D4525E5A0E600A49363 /* InitalScreenController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */,
 				8280F12E25D71C3C00306867 /* Reward.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
+				3B516D4625E5A0E600A49363 /* InitalScreenController.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
 				825BB63D25E1A5510046865E /* MapViewController.swift in Sources */,

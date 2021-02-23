@@ -58,8 +58,8 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="hSH-Ec-3B8"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <nil key="textColor"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -185,10 +185,10 @@
             </objects>
             <point key="canvasLocation" x="2882.608695652174" y="103.79464285714285"/>
         </scene>
-        <!--View Controller-->
+        <!--Inital Screen Controller-->
         <scene sceneID="Ipe-8W-hpH">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="6Aw-hH-j0S" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="6Aw-hH-j0S" customClass="InitalScreenController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rhf-8i-0Ye">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,6 +244,9 @@
                         <viewLayoutGuide key="safeArea" id="aiU-mb-LKu"/>
                     </view>
                     <navigationItem key="navigationItem" id="3lc-Ti-FKm"/>
+                    <connections>
+                        <segue destination="XO9-bj-iiK" kind="show" identifier="AutoLoginSegue" id="WtG-dA-SHU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bIR-t6-kZv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -333,7 +336,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xAg-jY-4e1">
                                                 <rect key="frame" x="93.5" y="0.0" width="240.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -349,7 +352,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQT-XE-E3f">
                                                 <rect key="frame" x="165.5" y="0.0" width="168.5" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -554,8 +557,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="Rkj-hs-q1E"/>
         <segue reference="CMZ-Sx-laU"/>
-        <segue reference="pWQ-AH-K2T"/>
-        <segue reference="xCv-nS-fTP"/>
+        <segue reference="WtG-dA-SHU"/>
+        <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="logo.png" width="2000" height="2000"/>
