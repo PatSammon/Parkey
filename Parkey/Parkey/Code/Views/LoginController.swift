@@ -28,7 +28,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        NotificationCenter.default.addObserver(self, selector: #selector(goToDifferentView), name: NSNotification.Name(rawValue: "LoginSegue"), object: nil)
+        //check if the user was already logged in
+        if UserDefaults.standard.bool(forKey: "LoggedIn"){
+            goToDifferentView()
+            
+        }
     }
 
     @IBAction func testBtnPressed(_ sender: Any)
@@ -87,6 +91,9 @@ class ViewController: UIViewController {
             sleep(1)
         }
         if loginSuccess{
+            UserDefaults.standard.set(true, forKey: "LoggedIn")
+            UserDefaults.standard.set(email, forKey: "Email")
+            UserDefaults.standard.set(password, forKey: "Password")
             goToDifferentView()
         }
         else{
