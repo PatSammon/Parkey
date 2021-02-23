@@ -4,8 +4,7 @@ import UIKit
 class RequestHandler
 {
     
-    static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping ([String: Any]?, Error?) -> Void)
-    {
+    static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
         let url = URL(string: "http://127.0.0.1:8080/user/signup")!
         //create the encoder that will be used
@@ -21,7 +20,19 @@ class RequestHandler
         request.httpBody = jsondata
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        let task = URLSession.shared.dataTask(with: request){data, response, error in
+        let task = URLSession.shared.dataTask(with: request){
+            data, response, error in
+            if let error = error{
+                completion(.failure(error))
+            }
+            else if let data = data{
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                print(responseJSON)
+                completion(.success((data,responseJSON)))
+            }
+            
+            
+            /*data, response, error in
             guard let data = data, error == nil else{
                 print(error?.localizedDescription ?? "No data")
                 return
@@ -29,7 +40,7 @@ class RequestHandler
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String:Any]{
                 print(responseJSON)
-            }
+            }*/
         }
         task.resume()
     }

@@ -414,6 +414,7 @@
                         <outlet property="LName" destination="f2a-ud-lHZ" id="hDi-Yb-70A"/>
                         <outlet property="Password" destination="xAg-jY-4e1" id="pIV-ob-hUL"/>
                         <outlet property="Password2" destination="LQT-XE-E3f" id="xOI-Y4-5bd"/>
+                        <segue destination="XO9-bj-iiK" kind="show" identifier="SignupSegue" id="pWQ-AH-K2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Op-ME-RGx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -553,7 +554,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="Rkj-hs-q1E"/>
         <segue reference="CMZ-Sx-laU"/>
-        <segue reference="bmw-e5-JLd"/>
+        <segue reference="pWQ-AH-K2T"/>
+        <segue reference="xCv-nS-fTP"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="logo.png" width="2000" height="2000"/>

@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func testBtnPressed(_ sender: Any)
+    /*@IBAction func testBtnPressed(_ sender: Any)
     {
         RequestHandler.register(name: "Bob", userName: "Bobby123", password: "123abc", email: "Bobbert@gmail.com", phoneNum: 1234567) { (result,error) in
                           if let result = result{
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                               //self.IncorrectCredentials.text = error.localizedDescription
                               print("error: \(error.localizedDescription)")
                    }}
-    }
+    }*/
     
     /*
      This is the function that will be run when the user is trying to login to the app.
