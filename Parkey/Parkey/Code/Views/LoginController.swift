@@ -64,7 +64,7 @@ class ViewController: UIViewController {
                 if response.1!.keys.contains("reason"){
                     self.loginDone = true
                     //todo make the error message pop up
-                    self.IncorrectCredentials.text = response.1!["reason"] as! String
+                    self.error = response.1!["reason"] as! String
                 }
                 else{
                     self.loginDone = true
@@ -97,9 +97,14 @@ class ViewController: UIViewController {
             goToDifferentView()
         }
         else{
-            //todo
-            print("Unsuccessful")
             loginDone = false
+            if error == "Unauthorized"{
+                IncorrectCredentials.text = "Incorrect Credentials. Please try again"
+            }
+            else{
+                IncorrectCredentials.text = error
+            }
+            
             IncorrectCredentials.isHidden = false
         }
        /*
