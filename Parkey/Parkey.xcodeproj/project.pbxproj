@@ -17,7 +17,6 @@
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
-		825BB63D25E1A5510046865E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825BB63C25E1A5510046865E /* MapViewController.swift */; };
 		8280F11E25D6EF2700306867 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 8280F11D25D6EF2700306867 /* logowords.png */; };
 		8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12425D6FE8500306867 /* RequestHandler.swift */; };
 		8280F12825D7066500306867 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12725D7066500306867 /* PaymentInfo.swift */; };
@@ -51,7 +50,6 @@
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
-		825BB63C25E1A5510046865E /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		8280F11D25D6EF2700306867 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logowords.png; sourceTree = "<group>"; };
 		8280F12425D6FE8500306867 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		8280F12725D7066500306867 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
-				825BB63C25E1A5510046865E /* MapViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,7 +257,6 @@
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
-				825BB63D25E1A5510046865E /* MapViewController.swift in Sources */,
 				3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,

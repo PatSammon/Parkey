@@ -25,11 +25,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func testBtnPressed(_ sender: Any)
-    {
-        RequestHandler.register(name: "Bob", userName: "Bobby123", password: "123abc", email: "Bobbert@gmail.com", phoneNum: 1234567)
-    }
     
     /*
      This is the function that will be run when the user is trying to login to the app.
