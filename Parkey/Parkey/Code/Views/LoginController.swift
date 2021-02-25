@@ -75,20 +75,10 @@ class ViewController: UIViewController {
                 self.loginDone=true
                 self.IncorrectCredentials.text = error.localizedDescription
             }
-            
-            
-            /*
-            if let Result.su = result{
-                print("Success: \(result)")
-            }
-            else if let error = error{
-                self.IncorrectCredentials.text = error.localizedDescription
-                self.IncorrectCredentials.isHidden = false
-                print("error: \(error.localizedDescription)")
-            }*/
         }
         while !loginDone {
             sleep(1)
+            //testing
         }
         if loginSuccess{
             UserDefaults.standard.set(true, forKey: "LoggedIn")
