@@ -61,7 +61,7 @@ class ViewController: UIViewController {
             case .failure(let error):
                 //todo
                 self.loginDone=true
-                self.IncorrectCredentials.text = error.localizedDescription
+                self.error = error.localizedDescription
             }
             
             

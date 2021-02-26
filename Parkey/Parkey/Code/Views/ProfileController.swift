@@ -24,7 +24,23 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
 
     }
-    
+    @IBAction func test(_ sender: Any) {
+        RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "") { Result in
+        switch Result{
+        case .success(let response):
+            //make the call to go to home
+            if response.1!.keys.contains("reason"){
+                //todo make the error message pop up
+                print(response.1!["reason"] as! String)
+            }
+            else{
+                print("success")
+            }
+        case .failure(let error):
+            print("failure")
+        }
+    }
+    }
 
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -16,7 +16,16 @@ extension UserSignup: Validatable {
     validations.add("password", as: String.self, is: .count(6...))
   }
 }
-
+struct UserPoints: Content{
+    let username: String
+    let addPoints: Int
+}
+extension UserPoints: Validatable {
+  static func validations(_ validations: inout Validations) {
+    validations.add("username", as: String.self, is: !.empty)
+    validations.add("addPoints", as: Int.self, is: .range(0...100))
+  }
+}
 
 struct UserController: RouteCollection
 {
@@ -33,6 +42,7 @@ struct UserController: RouteCollection
         
         let passwordProtected = users.grouped(User.authenticator())
         passwordProtected.post("login", use: login)
+        passwordProtected.post("addPoints", use: addPoints)
     }
 
     func index(req: Request) throws -> EventLoopFuture<[User]> {
@@ -89,6 +99,15 @@ struct UserController: RouteCollection
         return token.save(on: req.db).flatMapThrowing{
             NewSession(token: token.value, user: try user.asPublic())
         }
+    }
+    
+    //function to add points to user
+    fileprivate func addPoints(req: Request) throws -> EventLoopFuture<User>{
+        //check that the information there is not blank
+        let user = try req.auth.require(User.self)
+        user.$availablePoints.value! += 10
+        user.$totalPoints.value! += 10
+        return user.save(on: req.db).map{user}
     }
     
     func getMyOwnUser(req:Request) throws -> User.Public{

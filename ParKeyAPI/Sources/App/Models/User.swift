@@ -63,6 +63,7 @@ final class User: Model, Content
         self.userName = userName
         self.password = password
         self.email = userName
+        self.phoneNum = 111111111
         availablePoints = 0
         totalPoints = 0
     }
