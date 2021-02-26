@@ -19,11 +19,20 @@ class ViewController: UIViewController {
     var users = [User]()
     
     // global variables
+    var loginDone = false
+    var loginSuccess = false
+    var error = ""
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //check if the user was already logged in
+        if UserDefaults.standard.bool(forKey: "LoggedIn"){
+            goToDifferentView()
+            
+        }
     }
     
     /*
@@ -31,19 +40,68 @@ class ViewController: UIViewController {
      */
     @IBAction func Login(_ sender: Any) {
         //check the email exists within the database
-        let email = EmailLogin.text
+        let email = EmailLogin.text!
         //check the password is the proper one for the email
-        let password = PasswordLogin.text
+        let password = PasswordLogin.text!
         
         //if the information is correct, then use the segue to continue to the app
-        RequestHandler.sign_in(userName: email!, password: password!)
-        
+        RequestHandler.sign_in(userName: email, password: password) { Result in
+            switch Result{
+            case .success(let response):
+                //make the call to go to home
+                if response.1!.keys.contains("reason"){
+                    self.loginDone = true
+                    //todo make the error message pop up
+                    self.error = response.1!["reason"] as! String
+                }
+                else{
+                    self.loginDone = true
+                    self.loginSuccess = true
+                }
+            case .failure(let error):
+                //todo
+                self.loginDone=true
+                self.IncorrectCredentials.text = error.localizedDescription
+            }
+            
+            
+            /*
+            if let Result.su = result{
+                print("Success: \(result)")
+            }
+            else if let error = error{
+                self.IncorrectCredentials.text = error.localizedDescription
+                self.IncorrectCredentials.isHidden = false
+                print("error: \(error.localizedDescription)")
+            }*/
+        }
+        while !loginDone {
+            sleep(1)
+        }
+        if loginSuccess{
+            UserDefaults.standard.set(true, forKey: "LoggedIn")
+            UserDefaults.standard.set(email, forKey: "Email")
+            UserDefaults.standard.set(password, forKey: "Password")
+            goToDifferentView()
+        }
+        else{
+            loginDone = false
+            if error == "Unauthorized"{
+                IncorrectCredentials.text = "Incorrect Credentials. Please try again"
+            }
+            else{
+                IncorrectCredentials.text = error
+            }
+            
+            IncorrectCredentials.isHidden = false
+        }
+       /*
         UserDefaults.standard.set(true, forKey: "LoggedIn")
         UserDefaults.standard.set(email, forKey: "Email")
         UserDefaults.standard.set(password, forKey: "Password")
-        
+        */
         //if the information is wrong, prompt the user to enter the correct information
-        IncorrectCredentials.isHidden = false
+        //IncorrectCredentials.isHidden = false
     }
     
     /*
@@ -58,6 +116,10 @@ class ViewController: UIViewController {
            // Ranking.days = days
         
         }
+    }
+    
+    @objc func goToDifferentView(){
+        self.performSegue(withIdentifier: "LoginSegue", sender: self)
     }
 }
 
