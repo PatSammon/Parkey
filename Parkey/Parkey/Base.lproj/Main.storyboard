@@ -93,24 +93,6 @@
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zny-vX-BHA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6l-FA-FDB">
-                                <rect key="frame" x="135" y="662" width="145" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Test add"/>
-                                <connections>
-                                    <action selector="testBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PUR-c7-5Ib"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="buB-uZ-vdi">
-                                <rect key="frame" x="135" y="744" width="155" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Test map"/>
-                                <connections>
-                                    <segue destination="XO9-bj-iiK" kind="show" id="AnT-3W-NlA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -140,52 +122,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1969.5652173913045" y="116.51785714285714"/>
-        </scene>
-        <!--Address-->
-        <scene sceneID="k3p-FP-Elz">
-            <objects>
-                <viewController modalPresentationStyle="fullScreen" id="XO9-bj-iiK" customClass="MapViewController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dam-kj-Jpi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qI-iF-mRO">
-                                <rect key="frame" x="38" y="714" width="73" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.066920571200000001" green="0.19049278750000001" blue="0.38600491749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Park In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OdU-Xg-MOx">
-                                <rect key="frame" x="301" y="714" width="93" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.066920571200000001" green="0.19049278750000001" blue="0.38600491749999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Park Out">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mic_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="af0-O0-ypS">
-                                <rect key="frame" x="155" y="659" width="105" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="xdR-bA-A7V"/>
-                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Address" id="VL1-Xh-6wS">
-                        <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="7cF-Xa-nyz">
-                            <connections>
-                                <action selector="searchPressed:" destination="XO9-bj-iiK" id="hLa-f8-TVa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FOF-cv-C7B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2882.608695652174" y="103.79464285714285"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Ipe-8W-hpH">
@@ -554,13 +490,12 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Rkj-hs-q1E"/>
-        <segue reference="CMZ-Sx-laU"/>
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="logo.png" width="2000" height="2000"/>
         <image name="logowords.png" width="750" height="1334"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="mic_1.png" width="42.599998474121094" height="36.599998474121094"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="darkTextColor">
