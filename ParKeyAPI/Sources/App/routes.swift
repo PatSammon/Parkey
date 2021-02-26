@@ -8,6 +8,7 @@ func routes(_ app: Application) throws
         let user = try req.content.decode(User.self)
         return user.create(on: req.db).map{user}
     }
+    
     app.post("loginUser")
     { req -> String in
         //decode the user login info
@@ -21,11 +22,21 @@ func routes(_ app: Application) throws
         if req.headers.contains(name: "password"){
             password = req.headers.first(name: "password")!
         }
-        print(userName)
-        print(password)
+        
         //pose a query where it will find the user with that Username
-        var info = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
-        print (info)
+        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
+        var flag = false
+        info.whenComplete{ result in
+            switch result{
+            case .success(let userCred):
+                if userCred != nil{
+                    print(userCred)
+                    flag = true
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         //this might work?
         return "Yes"
     }
