@@ -1,5 +1,9 @@
 class User: Codable
 {
+    struct points : Codable{
+        var availablePoints: Int
+    }
+    
     var id: String?
     var name: String
     var userName: String

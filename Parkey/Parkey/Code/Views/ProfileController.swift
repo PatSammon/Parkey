@@ -24,8 +24,14 @@ class ProfileController: UIViewController {
         super.viewDidLoad()
 
     }
+    
+    //variable for user.points
+    var points:Int = 0
+    
+    
     @IBAction func test(_ sender: Any) {
-        RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "") { Result in
+        /*
+        RequestHandler.spendPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 10) { Result in
         switch Result{
         case .success(let response):
             //make the call to go to home
@@ -39,7 +45,21 @@ class ProfileController: UIViewController {
         case .failure(let error):
             print("failure")
         }
-    }
+    }*/
+        
+        RequestHandler.GetPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "") { Result in
+        switch Result{
+        case .success(let response):
+            print("success")
+            print(response)
+            //assign it to whatever variable u want
+            self.points = response.1.availablePoints
+            print(self.points)
+            
+        case .failure(let error):
+            print("failure")
+        }
+        }
     }
 
     /*
