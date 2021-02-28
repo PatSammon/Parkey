@@ -25,7 +25,7 @@ class ProfileController: UIViewController {
 
     }
     @IBAction func test(_ sender: Any) {
-        RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "") { Result in
+        RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 30) { Result in
         switch Result{
         case .success(let response):
             //make the call to go to home

@@ -104,9 +104,14 @@ struct UserController: RouteCollection
     //function to add points to user
     fileprivate func addPoints(req: Request) throws -> EventLoopFuture<User>{
         //check that the information there is not blank
+        var points = 0
+        if req.headers.contains(name: "Points")
+        {
+            points = Int(req.headers.first(name: "Points")!) ?? 10
+        }
         let user = try req.auth.require(User.self)
-        user.$availablePoints.value! += 10
-        user.$totalPoints.value! += 10
+        user.$availablePoints.value! += points
+        user.$totalPoints.value! += points
         return user.save(on: req.db).map{user}
     }
     

@@ -96,7 +96,7 @@ class RequestHandler
     /**
             Request to add specified points to the specified Username
      */
-    static func addPoints(userName: String, password: String, _ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
+    static func addPoints(userName: String, password: String, points: Int,_ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database
         let url = URL(string: "http://127.0.0.1:8080/user/addPoints")!
         
@@ -115,8 +115,9 @@ class RequestHandler
             return
         }
         //now encode the string
+        let pointsString:String = String(points)
         let base64LoginString = loginData.base64EncodedString()
-        
+        request.addValue(pointsString, forHTTPHeaderField: "Points")
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
