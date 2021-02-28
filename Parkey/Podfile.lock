@@ -1,0 +1,51 @@
+PODS:
+  - MaterialComponents/AnimationTiming (123.0.0)
+  - MaterialComponents/Availability (123.0.0)
+  - MaterialComponents/Cards (123.0.0):
+    - MaterialComponents/Elevation
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Icons/ic_check_circle
+    - MaterialComponents/private/Math
+    - MaterialComponents/Ripple
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Shapes
+  - MaterialComponents/Elevation (123.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/Ink (123.0.0):
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Color (123.0.0):
+    - MaterialComponents/Availability
+  - MaterialComponents/private/Icons/Base (123.0.0)
+  - MaterialComponents/private/Icons/ic_check_circle (123.0.0):
+    - MaterialComponents/private/Icons/Base
+  - MaterialComponents/private/Math (123.0.0)
+  - MaterialComponents/Ripple (123.0.0):
+    - MaterialComponents/AnimationTiming
+    - MaterialComponents/Availability
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+  - MaterialComponents/ShadowElevations (123.0.0)
+  - MaterialComponents/ShadowLayer (123.0.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Shapes (123.0.0):
+    - MaterialComponents/private/Color
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+
+DEPENDENCIES:
+  - MaterialComponents/Cards
+
+SPEC REPOS:
+  trunk:
+    - MaterialComponents
+
+SPEC CHECKSUMS:
+  MaterialComponents: 7a40e33dc8726359d12e667b74a4007d87e4abd4
+
+PODFILE CHECKSUM: 1b69ab53c749cd265abaa256b98374640ae6905a
+
+COCOAPODS: 1.10.1

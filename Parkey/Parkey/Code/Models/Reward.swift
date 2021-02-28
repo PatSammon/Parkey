@@ -1,4 +1,4 @@
-class reward: Codable
+class Reward: Codable
 {
     var id: String?
     var name: String
@@ -13,4 +13,9 @@ class reward: Codable
         self.cost = cost
         redeemed = false
     }
+}
+
+struct Rewards: Codable
+{
+    let userRewards: [Reward]
 }

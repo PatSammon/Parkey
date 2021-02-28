@@ -29,7 +29,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         settingsList.dataSource = self
         settingsList.delegate = self
-        settings.append(Settings.init(sectionName: "App Settings", settingNames: ["Notifications", "Privacy Settings", "Log Out"]))
+        settings.append(Settings.init(sectionName: "App Settings", settingNames: ["Notifications", "Privacy Settings", "Rewards", "Log Out"]))
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -44,6 +44,21 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = UITableViewCell()
         cell.textLabel?.text = settings[indexPath.section].settingNames?[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let cellName = tableView.cellForRow(at: indexPath)?.textLabel!.text
+        
+        if(cellName! == "Rewards")
+        {
+            performSegue(withIdentifier: "Rewards", sender: indexPath)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?)
+    {
+        
     }
     
 }
