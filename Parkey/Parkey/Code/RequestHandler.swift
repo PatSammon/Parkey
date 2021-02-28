@@ -3,6 +3,23 @@ import UIKit
 	
 class RequestHandler
 {
+    static func addReward(userId: String, name: String, cost: Int)
+    {
+        let url = URL(string: "http://127.0.0.1:8080/newReward")
+        let encoder = JSONEncoder()
+
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let newReward = Reward(userId: userId, name: name, cost: cost)
+        request.httpBody = try? encoder.encode(newReward)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
     
     static func getRewards(userId: String) -> [Reward]
     {
