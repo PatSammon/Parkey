@@ -43,6 +43,7 @@ struct UserController: RouteCollection
         let passwordProtected = users.grouped(User.authenticator())
         passwordProtected.post("login", use: login)
         passwordProtected.post("addPoints", use: addPoints)
+        passwordProtected.post("spendPoints", use: spendPoints)
     }
 
     func index(req: Request) throws -> EventLoopFuture<[User]> {
@@ -112,6 +113,18 @@ struct UserController: RouteCollection
         let user = try req.auth.require(User.self)
         user.$availablePoints.value! += points
         user.$totalPoints.value! += points
+        return user.save(on: req.db).map{user}
+    }
+    //function to add points to user
+    fileprivate func spendPoints(req: Request) throws -> EventLoopFuture<User>{
+        //check that the information there is not blank
+        var points = 0
+        if req.headers.contains(name: "Points")
+        {
+            points = Int(req.headers.first(name: "Points")!) ?? 10
+        }
+        let user = try req.auth.require(User.self)
+        user.$availablePoints.value! -= points
         return user.save(on: req.db).map{user}
     }
     
