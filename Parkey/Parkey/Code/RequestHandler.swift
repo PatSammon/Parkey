@@ -175,7 +175,7 @@ class RequestHandler
         task.resume()
     }
     //method that will be used to get the users available and total points
-    static func GetPoints(userName: String, password: String,_ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
+    static func GetPoints(userName: String, password: String,_ completion: @escaping (Result<(Data, User.points), Error>) -> Void){
         //grab the URL for the database
         let url = URL(string: "http://127.0.0.1:8080/user/getPoints")!
         
@@ -203,9 +203,14 @@ class RequestHandler
                 completion(.failure(error))
             }
             else if let data = data{
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                print(responseJSON)
-                completion(.success((data,responseJSON)))
+                do{
+                    let responseJSON2 = try JSONDecoder().decode(User.points.self, from: data)
+                    print(responseJSON2)
+                    completion(.success((data,responseJSON2)))
+                }
+                catch{
+                    print("JSONSerialization error:", error)
+                }
             }
         }
         task.resume()
