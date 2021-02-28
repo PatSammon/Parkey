@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var loginDone = false
     var loginSuccess = false
     var error = ""
+    var id = ""
     
     
     override func viewDidLoad() {
@@ -55,8 +56,11 @@ class ViewController: UIViewController {
                     self.error = response.1!["reason"] as! String
                 }
                 else{
+                    print(response)
                     self.loginDone = true
                     self.loginSuccess = true
+                    let answer:Dictionary = response.1!["user"]! as! Dictionary<String, String>
+                    self.id = answer["id"]!
                 }
             case .failure(let error):
                 //todo
@@ -82,6 +86,7 @@ class ViewController: UIViewController {
             UserDefaults.standard.set(true, forKey: "LoggedIn")
             UserDefaults.standard.set(email, forKey: "Email")
             UserDefaults.standard.set(password, forKey: "Password")
+            UserDefaults.standard.set(id, forKey: "UserID")
             goToDifferentView()
         }
         else{
