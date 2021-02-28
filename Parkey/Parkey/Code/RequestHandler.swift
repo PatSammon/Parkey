@@ -116,7 +116,7 @@ class RequestHandler
             }
             else if let data = data{
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                print(responseJSON)
+                //print(responseJSON)
                 completion(.success((data,responseJSON)))
             }
             /*
@@ -132,6 +132,48 @@ class RequestHandler
         }
         task.resume()
     }
+    
+    /**
+            Request to add specified points to the specified Username
+     */
+    static func addPoints(userName: String, password: String, _ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
+        //grab the URL for the database
+        let url = URL(string: "http://127.0.0.1:8080/user/addPoints")!
+        
+        //the data that you are sending over
+        let json = ["username":userName,"password":password]
+        //serialie the json data
+        let jsondata = try? JSONSerialization.data(withJSONObject:json)
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        //attach the json data and tell the server it is json data
+        request.httpBody = jsondata
+        //you have to encode the login information
+        let loginString = "\(userName):\(password)"
+        guard let loginData = loginString.data(using: String.Encoding.utf8) else{
+            return
+        }
+        //now encode the string
+        let base64LoginString = loginData.base64EncodedString()
+        
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let task = URLSession.shared.dataTask(with: request){data, response, error in
+            if let error = error{
+                completion(.failure(error))
+            }
+            else if let data = data{
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                print(responseJSON)
+                completion(.success((data,responseJSON)))
+            }
+        }
+        task.resume()
+    }
+    
+    
     /*
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int)
     {

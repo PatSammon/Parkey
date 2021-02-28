@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D3D25D9868000A49363 /* UserLogin.swift */; };
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
+		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
 		3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */; };
 		3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821E25CB257300C1E7DD /* LoginController.swift */; };
@@ -16,8 +18,6 @@
 		3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822625CB257500C1E7DD /* Assets.xcassets */; };
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
-		8232D96425EAE3CA00998C5A /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8232D96325EAE3CA00998C5A /* Podfile */; };
-		8232D96C25EAE61400998C5A /* RewardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8232D96B25EAE61400998C5A /* RewardsController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
 		8280F11E25D6EF2700306867 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 8280F11D25D6EF2700306867 /* logowords.png */; };
 		8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12425D6FE8500306867 /* RequestHandler.swift */; };
@@ -37,11 +37,12 @@
 		AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0A25D9CB5D00F0EB5B /* account_1.png */; };
 		AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */; };
 		AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */; };
-		C63E1938DAE20147269EA459 /* libPods-Parkey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A556A7408C34B746837385A8 /* libPods-Parkey.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B516D3D25D9868000A49363 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
+		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE821A25CB257300C1E7DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -52,9 +53,6 @@
 		3BAE822925CB257500C1E7DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
-		6EA886FCD2092934458B69E7 /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
-		8232D96325EAE3CA00998C5A /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		8232D96B25EAE61400998C5A /* RewardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsController.swift; sourceTree = "<group>"; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		8280F11D25D6EF2700306867 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logowords.png; sourceTree = "<group>"; };
 		8280F12425D6FE8500306867 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 		8280F13625D723A100306867 /* ParkingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRules.swift; sourceTree = "<group>"; };
 		8280F13925D723FB00306867 /* Vinny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vinny.swift; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A556A7408C34B746837385A8 /* libPods-Parkey.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Parkey.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25AF0025D9CB4600F0EB5B /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain_1.png; sourceTree = "<group>"; };
 		AB25AF0125D9CB4600F0EB5B /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
 		AB25AF0425D9CB5300F0EB5B /* park_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_out.png; sourceTree = "<group>"; };
@@ -75,7 +72,6 @@
 		AB25AF0A25D9CB5D00F0EB5B /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_1.png; sourceTree = "<group>"; };
 		AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		CCD2463203FA8B50EB496773 /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C63E1938DAE20147269EA459 /* libPods-Parkey.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,11 +88,8 @@
 		3BAE820E25CB257300C1E7DD = {
 			isa = PBXGroup;
 			children = (
-				8232D96325EAE3CA00998C5A /* Podfile */,
 				3BAE821925CB257300C1E7DD /* Parkey */,
 				3BAE821825CB257300C1E7DD /* Products */,
-				50955DFDF9A21D82F19E1B7D /* Pods */,
-				DA088D3D3E8076022AF620C9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,15 +115,6 @@
 				3BAE822325CB257300C1E7DD /* Parkey.xcdatamodeld */,
 			);
 			path = Parkey;
-			sourceTree = "<group>";
-		};
-		50955DFDF9A21D82F19E1B7D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CCD2463203FA8B50EB496773 /* Pods-Parkey.debug.xcconfig */,
-				6EA886FCD2092934458B69E7 /* Pods-Parkey.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
@@ -170,6 +153,7 @@
 				8280F13325D7238F00306867 /* ParkingSpot.swift */,
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
+				3B516D3D25D9868000A49363 /* UserLogin.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,17 +166,9 @@
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				3B516D4725E879E400A49363 /* InitialScreenController.swift */,
-				8232D96B25EAE61400998C5A /* RewardsController.swift */,
+				3B516D4925E934F500A49363 /* EarnPointsTemp.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		DA088D3D3E8076022AF620C9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A556A7408C34B746837385A8 /* libPods-Parkey.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,11 +178,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BAE822E25CB257500C1E7DD /* Build configuration list for PBXNativeTarget "Parkey" */;
 			buildPhases = (
-				66A01042E844403426F1CC45 /* [CP] Check Pods Manifest.lock */,
 				3BAE821325CB257300C1E7DD /* Sources */,
 				3BAE821425CB257300C1E7DD /* Frameworks */,
 				3BAE821525CB257300C1E7DD /* Resources */,
-				A1F4ADCB18E88D1FC20C6D03 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,7 +235,6 @@
 				AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */,
 				AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
-				8232D96425EAE3CA00998C5A /* Podfile in Resources */,
 				AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */,
 				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
@@ -272,60 +245,18 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		66A01042E844403426F1CC45 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Parkey-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A1F4ADCB18E88D1FC20C6D03 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		3BAE821325CB257300C1E7DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8232D96C25EAE61400998C5A /* RewardsController.swift in Sources */,
 				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
 				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
 				8280F13725D723A100306867 /* ParkingRules.swift in Sources */,
 				8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */,
+				3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */,
 				8280F13125D7237D00306867 /* Navigation.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
 				AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */,
@@ -334,6 +265,7 @@
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
+				3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
 				3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */,
@@ -478,7 +410,6 @@
 		};
 		3BAE822F25CB257500C1E7DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCD2463203FA8B50EB496773 /* Pods-Parkey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -496,7 +427,6 @@
 		};
 		3BAE823025CB257500C1E7DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6EA886FCD2092934458B69E7 /* Pods-Parkey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
