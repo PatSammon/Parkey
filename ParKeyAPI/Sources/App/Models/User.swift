@@ -10,6 +10,12 @@ final class User: Model, Content
         let createdAt: Date?
         let updatedAt: Date?
     }
+    struct Points: Content{
+        let username: String
+        let id: ObjectId
+        let availablePoints: Int
+        let totalPoints: Int
+    }
     
     init() {}
     
@@ -86,6 +92,12 @@ extension User{
                id: try requireID(),
                createdAt: createdAt,
                updatedAt: updatedAt)
+    }
+    func asUserPoints() throws -> Points{
+        Points(username:userName,
+               id: try requireID(),
+               availablePoints: availablePoints,
+               totalPoints: totalPoints)
     }
 }
 

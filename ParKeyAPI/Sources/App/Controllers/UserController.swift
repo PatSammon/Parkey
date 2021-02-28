@@ -10,20 +10,14 @@ struct UserSignup: Content{
     let password:String
     let name:String
 }
+struct UserPointsInfo: Content{
+    let TotalPoints:Int
+    let AvailablePoints:Int
+}
 extension UserSignup: Validatable {
   static func validations(_ validations: inout Validations) {
     validations.add("username", as: String.self, is: !.empty)
     validations.add("password", as: String.self, is: .count(6...))
-  }
-}
-struct UserPoints: Content{
-    let username: String
-    let addPoints: Int
-}
-extension UserPoints: Validatable {
-  static func validations(_ validations: inout Validations) {
-    validations.add("username", as: String.self, is: !.empty)
-    validations.add("addPoints", as: Int.self, is: .range(0...100))
   }
 }
 
@@ -44,6 +38,7 @@ struct UserController: RouteCollection
         passwordProtected.post("login", use: login)
         passwordProtected.post("addPoints", use: addPoints)
         passwordProtected.post("spendPoints", use: spendPoints)
+        passwordProtected.post("getPoints", use:getPoints)
     }
 
     func index(req: Request) throws -> EventLoopFuture<[User]> {
@@ -126,6 +121,12 @@ struct UserController: RouteCollection
         let user = try req.auth.require(User.self)
         user.$availablePoints.value! -= points
         return user.save(on: req.db).map{user}
+    }
+    
+    //function to get the available
+    fileprivate func getPoints(req: Request) throws -> User.Points{
+        let user = try req.auth.require(User.self)
+        return try user.asUserPoints()
     }
     
     func getMyOwnUser(req:Request) throws -> User.Public{

@@ -25,6 +25,7 @@ class ProfileController: UIViewController {
 
     }
     @IBAction func test(_ sender: Any) {
+        /*
         RequestHandler.spendPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 10) { Result in
         switch Result{
         case .success(let response):
@@ -39,7 +40,23 @@ class ProfileController: UIViewController {
         case .failure(let error):
             print("failure")
         }
-    }
+    }*/
+        
+        RequestHandler.GetPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "") { Result in
+        switch Result{
+        case .success(let response):
+            //make the call to go to home
+            if response.1!.keys.contains("reason"){
+                //todo make the error message pop up
+                print(response.1!["reason"] as! String)
+            }
+            else{
+                print("success")
+            }
+        case .failure(let error):
+            print("failure")
+        }
+        }
     }
 
     /*
