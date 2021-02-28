@@ -21,6 +21,11 @@ class RequestHandler
         }.resume()
     }
     
+    static func getAvailablePoints(userId: String) -> Int
+    {
+        return 0
+    }
+    
     static func getRewards(userId: String) -> [Reward]
     {
         var done = false

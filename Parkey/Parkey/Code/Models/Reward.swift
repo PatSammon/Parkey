@@ -14,8 +14,3 @@ class Reward: Codable
         redeemed = false
     }
 }
-
-struct Rewards: Codable
-{
-    let userRewards: [Reward]
-}

@@ -1,5 +1,0 @@
-target 'Parkey' do
-source 'https://cdn.cocoapods.org/'
-platform :ios, '13.0'
-pod 'MaterialComponents/Cards'
-end
