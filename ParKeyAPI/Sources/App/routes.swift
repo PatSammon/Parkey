@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import FluentMongoDriver
 
 func routes(_ app: Application) throws
 {
@@ -78,6 +79,16 @@ func routes(_ app: Application) throws
     { req -> EventLoopFuture<ParkingRules> in
         let rule = try req.content.decode(ParkingRules.self)
         return rule.create(on: req.db).map{rule}
+    }
+    
+    app.post("removeReward")
+    { req -> EventLoopFuture<HTTPStatus> in
+        
+        let rewardId = ObjectId(String(req.body.string!.dropFirst(9)))
+        
+        let reward = Reward.query(on: req.db).filter(\.$id == rewardId!)
+        
+        return reward.delete().transform(to: HTTPStatus.ok)
     }
     
     app.post("newNavigation")

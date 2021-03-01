@@ -405,18 +405,10 @@
                                 <rect key="frame" x="50" y="490" width="314" height="61"/>
                                 <state key="normal" image="mic_1.png"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ow-D0-d2C">
-                                <rect key="frame" x="184" y="703" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="test:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="M5m-jR-3Th"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b6B-jE-jtH"/>
                         <color key="backgroundColor" systemColor="secondaryLabelColor"/>
                         <constraints>
-                            <constraint firstItem="6Ow-D0-d2C" firstAttribute="centerX" secondItem="rKz-AZ-pCm" secondAttribute="centerX" id="1I5-GN-raS"/>
                             <constraint firstItem="UEg-dV-sRO" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="50" id="2kJ-Pg-lrx"/>
                             <constraint firstItem="za1-xn-ACX" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="8cn-ts-8ma"/>
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="top" secondItem="tsY-hh-Dq7" secondAttribute="bottom" constant="50" id="AjM-5Q-ejU"/>
@@ -426,7 +418,6 @@
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="YvI-RC-Zwj"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="TUL-ta-Lle" secondAttribute="trailing" constant="100" id="eIf-HJ-O6m"/>
-                            <constraint firstItem="b6B-jE-jtH" firstAttribute="bottom" secondItem="6Ow-D0-d2C" secondAttribute="bottom" constant="41" id="gHz-ke-yvK"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="50" id="hQb-r9-V6O"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="za1-xn-ACX" secondAttribute="trailing" constant="100" id="jaB-bb-2mp"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="gyD-bs-Rfj" secondAttribute="trailing" constant="100" id="oih-x5-xxi"/>
