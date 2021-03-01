@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D3D25D9868000A49363 /* UserLogin.swift */; };
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
 		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
@@ -19,6 +18,8 @@
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
+		824C514D25EC23030047C468 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C514C25EC23030047C468 /* CardCell.swift */; };
+		8267022325EB6C9100D784C1 /* RewardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8267022225EB6C9100D784C1 /* RewardsController.swift */; };
 		8280F11E25D6EF2700306867 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 8280F11D25D6EF2700306867 /* logowords.png */; };
 		8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12425D6FE8500306867 /* RequestHandler.swift */; };
 		8280F12825D7066500306867 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12725D7066500306867 /* PaymentInfo.swift */; };
@@ -40,7 +41,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3B516D3D25D9868000A49363 /* UserLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
 		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +54,8 @@
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		824C514C25EC23030047C468 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		8267022225EB6C9100D784C1 /* RewardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsController.swift; sourceTree = "<group>"; };
 		8280F11D25D6EF2700306867 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logowords.png; sourceTree = "<group>"; };
 		8280F12425D6FE8500306867 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		8280F12725D7066500306867 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
@@ -153,7 +155,7 @@
 				8280F13325D7238F00306867 /* ParkingSpot.swift */,
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
-				3B516D3D25D9868000A49363 /* UserLogin.swift */,
+				824C514C25EC23030047C468 /* CardCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +169,7 @@
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				3B516D4725E879E400A49363 /* InitialScreenController.swift */,
 				3B516D4925E934F500A49363 /* EarnPointsTemp.swift */,
+				8267022225EB6C9100D784C1 /* RewardsController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,7 +201,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = iona;
 				TargetAttributes = {
 					3BAE821625CB257300C1E7DD = {
@@ -250,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8267022325EB6C9100D784C1 /* RewardsController.swift in Sources */,
 				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
 				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
 				8280F13725D723A100306867 /* ParkingRules.swift in Sources */,
@@ -264,8 +268,8 @@
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
 				3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */,
+				824C514D25EC23030047C468 /* CardCell.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
-				3B516D3E25D9868000A49363 /* UserLogin.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
 				3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */,
@@ -320,6 +324,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -380,6 +385,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

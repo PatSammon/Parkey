@@ -123,6 +123,12 @@ class SignUpController: UIViewController {
                         self.loginSuccess = true
                         let answer:Dictionary = response.1!["user"]! as! Dictionary<String, String>
                         self.id = answer["id"]!
+                        
+                        RequestHandler.addReward(userId: self.id, name: "Reward #1", cost: 200)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #2", cost: 300)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #3", cost: 400)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #4", cost: 500)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #5", cost: 550)
                     }
                 case .failure(let error):
                     //todo
