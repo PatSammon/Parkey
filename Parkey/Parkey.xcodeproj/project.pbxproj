@@ -26,6 +26,13 @@
 		8280F13725D723A100306867 /* ParkingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13625D723A100306867 /* ParkingRules.swift */; };
 		8280F13A25D723FB00306867 /* Vinny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13925D723FB00306867 /* Vinny.swift */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
+<<<<<<< Updated upstream
+=======
+		AB06CF0A25ED0BBB007E3216 /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0925ED0BBB007E3216 /* account_1.png */; };
+		AB06CF0D25ED0BC2007E3216 /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0C25ED0BC2007E3216 /* keychain_1.png */; };
+		AB06CF1025ED0BCB007E3216 /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0F25ED0BCB007E3216 /* ranking_1.png */; };
+		AB06CF1325ED0CC0007E3216 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */; };
+>>>>>>> Stashed changes
 		AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0125D9CB4600F0EB5B /* mic_1.png */; };
 		AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0425D9CB5300F0EB5B /* park_out.png */; };
 		AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0625D9CB5300F0EB5B /* park_in.png */; };
@@ -59,6 +66,13 @@
 		8280F13625D723A100306867 /* ParkingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRules.swift; sourceTree = "<group>"; };
 		8280F13925D723FB00306867 /* Vinny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vinny.swift; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+=======
+		AB06CF0925ED0BBB007E3216 /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account_1.png; path = ../../../../../../Downloads/account_1.png; sourceTree = "<group>"; };
+		AB06CF0C25ED0BC2007E3216 /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keychain_1.png; path = ../../../../../../Downloads/keychain_1.png; sourceTree = "<group>"; };
+		AB06CF0F25ED0BCB007E3216 /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ranking_1.png; path = ../../../../../../Downloads/ranking_1.png; sourceTree = "<group>"; };
+		AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		AB25AF0125D9CB4600F0EB5B /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
 		AB25AF0425D9CB5300F0EB5B /* park_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_out.png; sourceTree = "<group>"; };
 		AB25AF0625D9CB5300F0EB5B /* park_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_in.png; sourceTree = "<group>"; };
@@ -116,9 +130,15 @@
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				AB36C37425E39A33008CE366 /* account_1.png */,
 				AB36C37225E3981B008CE366 /* ranking_1.png */,
 				AB36C37025E39810008CE366 /* keychain_1.png */,
+=======
+				AB06CF0F25ED0BCB007E3216 /* ranking_1.png */,
+				AB06CF0C25ED0BC2007E3216 /* keychain_1.png */,
+				AB06CF0925ED0BBB007E3216 /* account_1.png */,
+>>>>>>> Stashed changes
 				AB25AF0625D9CB5300F0EB5B /* park_in.png */,
 				AB25AF0425D9CB5300F0EB5B /* park_out.png */,
 				AB25AF0125D9CB4600F0EB5B /* mic_1.png */,
@@ -131,6 +151,7 @@
 		8280F12325D6FE4400306867 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */,
 				829DA1A725CF5217007B4EC5 /* Models */,
 				829DA1AC25CF534A007B4EC5 /* Views */,
 				8280F12425D6FE8500306867 /* RequestHandler.swift */,
@@ -156,11 +177,17 @@
 		829DA1AC25CF534A007B4EC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				3BAE823B25D1877000C1E7DD /* SignUpController.swift */,
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
+<<<<<<< Updated upstream
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				AB549C5025E3C03700E6B728 /* SettingsCell.swift */,
+=======
+				3B516D4725E879E400A49363 /* InitialScreenController.swift */,
+				3B516D4925E934F500A49363 /* EarnPointsTemp.swift */,
+>>>>>>> Stashed changes
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +254,7 @@
 				8280F11E25D6EF2700306867 /* logowords.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
 				AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */,
+<<<<<<< Updated upstream
 				AB36C37325E3981B008CE366 /* ranking_1.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
 				AB36C37525E39A33008CE366 /* account_1.png in Resources */,
@@ -234,6 +262,15 @@
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
 				AB36C37125E39810008CE366 /* keychain_1.png in Resources */,
+=======
+				AB06CF1025ED0BCB007E3216 /* ranking_1.png in Resources */,
+				AB06CF0A25ED0BBB007E3216 /* account_1.png in Resources */,
+				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
+				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
+				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
+				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
+				AB06CF0D25ED0BC2007E3216 /* keychain_1.png in Resources */,
+>>>>>>> Stashed changes
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +294,11 @@
 				8280F12E25D71C3C00306867 /* Reward.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
+<<<<<<< Updated upstream
+=======
+				3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */,
+				AB06CF1325ED0CC0007E3216 /* SettingsCell.swift in Sources */,
+>>>>>>> Stashed changes
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
