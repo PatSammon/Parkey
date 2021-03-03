@@ -1,4 +1,4 @@
-class reward: Codable
+class Reward: Codable
 {
     var id: String?
     var name: String
