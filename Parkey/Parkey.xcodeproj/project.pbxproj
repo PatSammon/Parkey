@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47AB25EEF5520028D726 /* ParkViewController.swift */; };
+		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
 		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
 		0C3F47AB25EEF5520028D726 /* ParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = Parkey/Code/Views/ParkViewController.swift; sourceTree = SOURCE_ROOT; };
+		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
 		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +144,6 @@
 				007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */,
 				4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -183,7 +184,6 @@
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
 				824C514C25EC23030047C468 /* CardCell.swift */,
-				0C3F47AB25EEF5520028D726 /* ParkViewController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +191,8 @@
 		829DA1AC25CF534A007B4EC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */,
+				0C3F47AB25EEF5520028D726 /* ParkViewController.swift */,
 				3BAE823B25D1877000C1E7DD /* SignUpController.swift */,
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
@@ -332,6 +334,7 @@
 				8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */,
+				0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */,
 				3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */,
 				8280F13125D7237D00306867 /* Navigation.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,

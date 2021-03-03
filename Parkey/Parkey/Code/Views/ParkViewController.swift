@@ -11,7 +11,7 @@ import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
 
-class ViewController: UIViewController, MGLMapViewDelegate {
+class ParkViewController: UIViewController, MGLMapViewDelegate {
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: Route?
