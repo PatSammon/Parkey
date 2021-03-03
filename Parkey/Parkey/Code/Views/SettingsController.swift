@@ -85,16 +85,24 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var settingsList: UITableView!
     
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUp()
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
     }
     
     func loadUp() {
         settingsList.dataSource = self
         settingsList.delegate = self
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         /*settingsList.register(SettingsCell.self, forCellReuseIdentifier: "reuseIdentifier")*/
         settings.append(Settings.init(sectionName: "App Settings", settingNames: ["Notifications", "Privacy Settings", "Log Out"]))
@@ -125,25 +133,57 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+=======
+        settingsList.register(SettingsCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        settingsList.rowHeight = 60
+        settingsList.frame = view.frame
+>>>>>>> Stashed changes
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return Sections.allCases.count
+<<<<<<< Updated upstream
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         guard let section = Sections(rawValue: section) else { return 0}
         
+=======
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        view.backgroundColor = .cyan
+        let label = UILabel(frame: CGRect(x: 20, y: 0, width: view.frame.width, height: 50))
+        label.text = Sections.init(rawValue: section)?.description
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        view.addSubview(label)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = Sections(rawValue: section) else { return 0}
+                
+>>>>>>> Stashed changes
         switch section {
         case .AppSettings: return AppSettingsSection.allCases.count
         case .AboutUs: return AboutUsSection.allCases.count
         case .ShareAndRate: return ShareRateSection.allCases.count
+<<<<<<< Updated upstream
             
+=======
+>>>>>>> Stashed changes
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         /*let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingsCell*/
@@ -152,6 +192,10 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingsCell
         guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell()}
         
+=======
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! SettingsCell
+        guard let section = Sections(rawValue: indexPath.section) else { return UITableViewCell()}
+>>>>>>> Stashed changes
         switch section {
         case .AppSettings:
             let appSettings = AppSettingsSection(rawValue: indexPath.row)
@@ -163,7 +207,10 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
             let shareAndRate = ShareRateSection(rawValue: indexPath.row)
             cell.sectionType = shareAndRate
         }
+<<<<<<< Updated upstream
         
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         return cell
     }
@@ -179,7 +226,32 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         case .ShareAndRate:
             
         }
+<<<<<<< Updated upstream
         
         
     }*/
+=======
+    }
+    
+    /*override func prepare(for segue: UIStoryboardSegue, sender:Any?)
+    {
+        
+    }*/
+    
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let section = Sections(rawValue: indexPath.section) else { return }
+            
+        switch section {
+        case .AppSettings:
+                
+        case .AboutUs:
+                
+        case .ShareAndRate:
+                
+        }
+
+    }*/
+    
+    
+>>>>>>> Stashed changes
 }

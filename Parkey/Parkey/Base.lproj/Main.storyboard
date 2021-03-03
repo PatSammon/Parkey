@@ -13,6 +13,54 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Speech Controller-->
+        <scene sceneID="HKm-c4-Z8A">
+            <objects>
+                <viewController id="1dR-P5-ay4" customClass="SpeechController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QkJ-il-tvd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sZp-r2-vhq">
+                                <rect key="frame" x="100" y="94" width="214" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hAM-ti-lNu"/>
+                                </constraints>
+                                <state key="normal" title="Speak"/>
+                                <connections>
+                                    <action selector="startOrStop:" destination="1dR-P5-ay4" eventType="touchUpInside" id="eab-dz-3oT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speech has not yet started" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1pT-3j-cVc">
+                                <rect key="frame" x="50" y="194" width="314" height="400"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="PW6-uo-4hf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemTealColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wOH-GI-FWC"/>
+                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                        <constraints>
+                            <constraint firstItem="1pT-3j-cVc" firstAttribute="leading" secondItem="wOH-GI-FWC" secondAttribute="leading" constant="50" id="I8H-6f-oV7"/>
+                            <constraint firstItem="wOH-GI-FWC" firstAttribute="trailing" secondItem="sZp-r2-vhq" secondAttribute="trailing" constant="100" id="IK1-KK-oBR"/>
+                            <constraint firstItem="sZp-r2-vhq" firstAttribute="top" secondItem="wOH-GI-FWC" secondAttribute="top" constant="50" id="Idf-Ug-Ypv"/>
+                            <constraint firstItem="1pT-3j-cVc" firstAttribute="top" secondItem="sZp-r2-vhq" secondAttribute="bottom" constant="50" id="NJ1-qa-7gC"/>
+                            <constraint firstItem="wOH-GI-FWC" firstAttribute="trailing" secondItem="1pT-3j-cVc" secondAttribute="trailing" constant="50" id="UXk-IO-Dsg"/>
+                            <constraint firstItem="sZp-r2-vhq" firstAttribute="leading" secondItem="wOH-GI-FWC" secondAttribute="leading" constant="100" id="mz9-P5-m4z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="showSpeech" destination="1pT-3j-cVc" id="U5N-bM-09J"/>
+                        <outlet property="speakButton" destination="sZp-r2-vhq" id="l3j-2m-h9P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yiw-Ad-H8f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1969.5652173913045" y="-618.08035714285711"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -502,7 +550,11 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-dV-sRO">
+<<<<<<< Updated upstream
                                 <rect key="frame" x="50" y="580" width="314" height="61"/>
+=======
+                                <rect key="frame" x="50" y="490" width="314" height="37"/>
+>>>>>>> Stashed changes
                                 <state key="normal" image="mic_1.png"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ow-D0-d2C">
@@ -637,6 +689,15 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
 >>>>>>> Stashed changes
     </resources>
