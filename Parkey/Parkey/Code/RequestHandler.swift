@@ -44,6 +44,24 @@ class RequestHandler
         }.resume()
     }
     
+    static func addPlace(name: String, cost: Int, coordinates: [Float])
+    {
+        let url = URL(string: "http://127.0.0.1:8080/newPlace")
+        let encoder = JSONEncoder()
+
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let newPlace = Place(name: name, cost: cost, coordinates: coordinates)
+        request.httpBody = try? encoder.encode(newPlace)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
     static func getRewards(userId: String) -> [Reward]
     {
         var done = false

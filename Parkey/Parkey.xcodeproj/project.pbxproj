@@ -11,6 +11,7 @@
 		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
 		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
+		3B56DB7125F11E6900F180B2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B56DB7025F11E6900F180B2 /* Place.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
 		3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */; };
 		3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821E25CB257300C1E7DD /* LoginController.swift */; };
@@ -49,6 +50,7 @@
 		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
 		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
+		3B56DB7025F11E6900F180B2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE821A25CB257300C1E7DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
 				824C514C25EC23030047C468 /* CardCell.swift */,
+				3B56DB7025F11E6900F180B2 /* Place.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B56DB7125F11E6900F180B2 /* Place.swift in Sources */,
 				8267022325EB6C9100D784C1 /* RewardsController.swift in Sources */,
 				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
 				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
