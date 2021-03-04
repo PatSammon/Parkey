@@ -10,6 +10,9 @@ final class User: Model, Content
         let createdAt: Date?
         let updatedAt: Date?
     }
+    struct Points: Content{
+        let availablePoints: Int
+    }
     
     init() {}
     
@@ -63,6 +66,7 @@ final class User: Model, Content
         self.userName = userName
         self.password = password
         self.email = userName
+        self.phoneNum = 111111111
         availablePoints = 0
         totalPoints = 0
     }
@@ -85,6 +89,9 @@ extension User{
                id: try requireID(),
                createdAt: createdAt,
                updatedAt: updatedAt)
+    }
+    func asUserPoints() throws -> Points{
+        Points(availablePoints: availablePoints)
     }
 }
 

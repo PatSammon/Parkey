@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     var loginDone = false
     var loginSuccess = false
     var error = ""
+    var id = ""
     
     
     override func viewDidLoad() {
@@ -34,18 +35,6 @@ class ViewController: UIViewController {
             
         }
     }
-
-    /*@IBAction func testBtnPressed(_ sender: Any)
-    {
-        RequestHandler.register(name: "Bob", userName: "Bobby123", password: "123abc", email: "Bobbert@gmail.com", phoneNum: 1234567) { (result,error) in
-                          if let result = result{
-                              print("Success: \(result)")
-                          }
-                          else if let error = error{
-                              //self.IncorrectCredentials.text = error.localizedDescription
-                              print("error: \(error.localizedDescription)")
-                   }}
-    }*/
     
     /*
      This is the function that will be run when the user is trying to login to the app.
@@ -67,13 +56,16 @@ class ViewController: UIViewController {
                     self.error = response.1!["reason"] as! String
                 }
                 else{
+                    print(response)
                     self.loginDone = true
                     self.loginSuccess = true
+                    let answer:Dictionary = response.1!["user"]! as! Dictionary<String, String>
+                    self.id = answer["id"]!
                 }
             case .failure(let error):
                 //todo
                 self.loginDone=true
-                self.IncorrectCredentials.text = error.localizedDescription
+                self.error = error.localizedDescription
             }
             
             
@@ -94,6 +86,7 @@ class ViewController: UIViewController {
             UserDefaults.standard.set(true, forKey: "LoggedIn")
             UserDefaults.standard.set(email, forKey: "Email")
             UserDefaults.standard.set(password, forKey: "Password")
+            UserDefaults.standard.set(id, forKey: "UserID")
             goToDifferentView()
         }
         else{
