@@ -1,5 +1,6 @@
 import Fluent
 import Vapor
+import FluentMongoDriver
 
 func routes(_ app: Application) throws
 {
@@ -8,6 +9,7 @@ func routes(_ app: Application) throws
         let user = try req.content.decode(User.self)
         return user.create(on: req.db).map{user}
     }
+    
     app.post("loginUser")
     { req -> String in
         //decode the user login info
@@ -40,6 +42,15 @@ func routes(_ app: Application) throws
         return "Yes"
     }
     
+    
+    app.post("userRewards")
+    { req -> EventLoopFuture<[Reward]> in
+        
+        let userId = String(req.body.string!.dropFirst(7))
+        
+        return Reward.query(on: req.db).filter(\.$userId == userId).all()
+    }
+    
     app.post("newPaymentInfo")
     { req -> EventLoopFuture<PaymentInfo> in
         let payment = try req.content.decode(PaymentInfo.self)
@@ -68,6 +79,16 @@ func routes(_ app: Application) throws
     { req -> EventLoopFuture<ParkingRules> in
         let rule = try req.content.decode(ParkingRules.self)
         return rule.create(on: req.db).map{rule}
+    }
+    
+    app.post("removeReward")
+    { req -> EventLoopFuture<HTTPStatus> in
+        
+        let rewardId = ObjectId(String(req.body.string!.dropFirst(9)))
+        
+        let reward = Reward.query(on: req.db).filter(\.$id == rewardId!)
+        
+        return reward.delete().transform(to: HTTPStatus.ok)
     }
     
     app.post("newNavigation")

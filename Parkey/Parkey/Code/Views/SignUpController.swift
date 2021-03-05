@@ -18,6 +18,11 @@ class SignUpController: UIViewController {
     @IBOutlet weak var Password2: UITextField!
     @IBOutlet weak var ErrorMessage: UILabel!
     
+    //global variables
+    var loginDone = false
+    var loginSuccess = false
+    var error = ""
+    var id = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,18 +108,73 @@ class SignUpController: UIViewController {
         }
         let name:String = FName.text! + LName.text!
         //then add the entry to the database
-        RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567)
+        RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567) {
+                Result in
+                switch Result{
+                case .success(let response):
+                    //make the call to go to home
+                    if response.1!.keys.contains("reason"){
+                        self.loginDone = true
+                        //todo make the error message pop up
+                        self.ErrorMessage.text = response.1!["reason"] as! String
+                    }
+                    else{
+                        self.loginDone = true
+                        self.loginSuccess = true
+                        let answer:Dictionary = response.1!["user"]! as! Dictionary<String, String>
+                        self.id = answer["id"]!
+                        
+                        RequestHandler.addReward(userId: self.id, name: "Reward #1", cost: 200)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #2", cost: 300)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #3", cost: 400)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #4", cost: 500)
+                        RequestHandler.addReward(userId: self.id, name: "Reward #5", cost: 550)
+                    }
+                case .failure(let error):
+                    //todo
+                    self.loginDone=true
+                    self.ErrorMessage.text = error.localizedDescription
+                }
+            
+            /*(result,error) in
+                   if let result = result{
+                       print("Success: \(result)")
+                   }
+                   else if let error = error{
+                       //self.IncorrectCredentials.text = error.localizedDescription
+                       print("error: \(error.localizedDescription)")
+            }*/}
         
         //if the erro message was showing, make it hidden
         if !ErrorMessage.isHidden{
             ErrorMessage.isHidden=true
         }
         //set the user defaults
-        UserDefaults.standard.set(true, forKey: "LoggedIn")
+        /*UserDefaults.standard.set(true, forKey: "LoggedIn")
         UserDefaults.standard.set(Email.text!, forKey: "Email")
         UserDefaults.standard.set(Password.text!, forKey: "Password")
-        
-        //seque to home screen
+        */
+        //seque
         //todo
+        while !loginDone {
+            sleep(1)
+        }
+        if loginSuccess{
+            UserDefaults.standard.set(true, forKey: "LoggedIn")
+            UserDefaults.standard.set(Email.text!, forKey: "Email")
+            UserDefaults.standard.set(Password.text!, forKey: "Password")
+            UserDefaults.standard.set(id, forKey: "UserID")
+            goToDifferentView()
+        }
+        else{
+            //todo
+            print("Unsuccessful")
+            loginDone = false
+            ErrorMessage.isHidden = false
+        }
+    }
+    //function that will perform the segue
+    @objc func goToDifferentView(){
+        self.performSegue(withIdentifier: "SignupSegue", sender: self)
     }
 }

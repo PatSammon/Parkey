@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47AB25EEF5520028D726 /* ParkViewController.swift */; };
+		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
+		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
+		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
 		3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */; };
 		3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821E25CB257300C1E7DD /* LoginController.swift */; };
@@ -16,6 +20,8 @@
 		3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAE822825CB257500C1E7DD /* LaunchScreen.storyboard */; };
 		3BAE823C25D1877000C1E7DD /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE823B25D1877000C1E7DD /* SignUpController.swift */; };
 		823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 823E5DF625CF0BFF00F5C0E7 /* logo.png */; };
+		824C514D25EC23030047C468 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824C514C25EC23030047C468 /* CardCell.swift */; };
+		8267022325EB6C9100D784C1 /* RewardsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8267022225EB6C9100D784C1 /* RewardsController.swift */; };
 		8280F11E25D6EF2700306867 /* logowords.png in Resources */ = {isa = PBXBuildFile; fileRef = 8280F11D25D6EF2700306867 /* logowords.png */; };
 		8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12425D6FE8500306867 /* RequestHandler.swift */; };
 		8280F12825D7066500306867 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F12725D7066500306867 /* PaymentInfo.swift */; };
@@ -26,36 +32,23 @@
 		8280F13725D723A100306867 /* ParkingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13625D723A100306867 /* ParkingRules.swift */; };
 		8280F13A25D723FB00306867 /* Vinny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13925D723FB00306867 /* Vinny.swift */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-		AB06CF0A25ED0BBB007E3216 /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0925ED0BBB007E3216 /* account_1.png */; };
-		AB06CF0D25ED0BC2007E3216 /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0C25ED0BC2007E3216 /* keychain_1.png */; };
-		AB06CF1025ED0BCB007E3216 /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB06CF0F25ED0BCB007E3216 /* ranking_1.png */; };
-		AB06CF1325ED0CC0007E3216 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */; };
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+		A3AC654A5AFC860934FF1817 /* Pods_Parkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */; };
+		AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0025D9CB4600F0EB5B /* keychain_1.png */; };
 		AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0125D9CB4600F0EB5B /* mic_1.png */; };
 		AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0425D9CB5300F0EB5B /* park_out.png */; };
+		AB25AF0825D9CB5300F0EB5B /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0525D9CB5300F0EB5B /* ranking_1.png */; };
 		AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0625D9CB5300F0EB5B /* park_in.png */; };
+		AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0A25D9CB5D00F0EB5B /* account_1.png */; };
 		AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */; };
 		AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */; };
-<<<<<<< Updated upstream
-		AB36C37125E39810008CE366 /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37025E39810008CE366 /* keychain_1.png */; };
-		AB36C37325E3981B008CE366 /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37225E3981B008CE366 /* ranking_1.png */; };
-		AB36C37525E39A33008CE366 /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB36C37425E39A33008CE366 /* account_1.png */; };
-		AB549C5125E3C03700E6B728 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB549C5025E3C03700E6B728 /* SettingsCell.swift */; };
-=======
-		AB8304DF25EF7C4B00DB418E /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8304DE25EF7C4B00DB418E /* SettingCell.swift */; };
-		AB8304E525EF8A2C00DB418E /* account_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8304E425EF8A2C00DB418E /* account_1.png */; };
-		AB8304E825EF8A3800DB418E /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8304E725EF8A3800DB418E /* keychain_1.png */; };
-		AB8304EB25EF8A4500DB418E /* ranking_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB8304EA25EF8A4500DB418E /* ranking_1.png */; };
-		AB8304EF25EF944500DB418E /* SpeechController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8304EE25EF944500DB418E /* SpeechController.swift */; };
->>>>>>> Stashed changes
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
+		0C3F47AB25EEF5520028D726 /* ParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = Parkey/Code/Views/ParkViewController.swift; sourceTree = SOURCE_ROOT; };
+		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
+		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE821A25CB257300C1E7DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BAE821C25CB257300C1E7DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +59,11 @@
 		3BAE822925CB257500C1E7DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
+		6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		824C514C25EC23030047C468 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		8267022225EB6C9100D784C1 /* RewardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsController.swift; sourceTree = "<group>"; };
 		8280F11D25D6EF2700306867 /* logowords.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logowords.png; sourceTree = "<group>"; };
 		8280F12425D6FE8500306867 /* RequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHandler.swift; sourceTree = "<group>"; };
 		8280F12725D7066500306867 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
@@ -77,33 +74,14 @@
 		8280F13625D723A100306867 /* ParkingRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingRules.swift; sourceTree = "<group>"; };
 		8280F13925D723FB00306867 /* Vinny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vinny.swift; sourceTree = "<group>"; };
 		829DA1A825CF52DC007B4EC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-		AB06CF0925ED0BBB007E3216 /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account_1.png; path = ../../../../../../Downloads/account_1.png; sourceTree = "<group>"; };
-		AB06CF0C25ED0BC2007E3216 /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keychain_1.png; path = ../../../../../../Downloads/keychain_1.png; sourceTree = "<group>"; };
-		AB06CF0F25ED0BCB007E3216 /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ranking_1.png; path = ../../../../../../Downloads/ranking_1.png; sourceTree = "<group>"; };
-		AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+		AB25AF0025D9CB4600F0EB5B /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain_1.png; sourceTree = "<group>"; };
 		AB25AF0125D9CB4600F0EB5B /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
 		AB25AF0425D9CB5300F0EB5B /* park_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_out.png; sourceTree = "<group>"; };
+		AB25AF0525D9CB5300F0EB5B /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranking_1.png; sourceTree = "<group>"; };
 		AB25AF0625D9CB5300F0EB5B /* park_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_in.png; sourceTree = "<group>"; };
+		AB25AF0A25D9CB5D00F0EB5B /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_1.png; sourceTree = "<group>"; };
 		AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
-		AB36C37025E39810008CE366 /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keychain_1.png; path = ../../../../../../Downloads/keychain_1.png; sourceTree = "<group>"; };
-		AB36C37225E3981B008CE366 /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ranking_1.png; path = ../../../../../../Downloads/ranking_1.png; sourceTree = "<group>"; };
-		AB36C37425E39A33008CE366 /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account_1.png; path = ../../../../../../Downloads/account_1.png; sourceTree = "<group>"; };
-		AB549C5025E3C03700E6B728 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
-=======
-		AB8304DE25EF7C4B00DB418E /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
-		AB8304E425EF8A2C00DB418E /* account_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account_1.png; path = ../../../../../../Downloads/account_1.png; sourceTree = "<group>"; };
-		AB8304E725EF8A3800DB418E /* keychain_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keychain_1.png; path = ../../../../../../Downloads/keychain_1.png; sourceTree = "<group>"; };
-		AB8304EA25EF8A4500DB418E /* ranking_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ranking_1.png; path = ../../../../../../Downloads/ranking_1.png; sourceTree = "<group>"; };
-		AB8304EE25EF944500DB418E /* SpeechController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechController.swift; sourceTree = "<group>"; };
->>>>>>> Stashed changes
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,17 +89,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AC654A5AFC860934FF1817 /* Pods_Parkey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25B7A6751D0EC818BD6647EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3BAE820E25CB257300C1E7DD = {
 			isa = PBXGroup;
 			children = (
 				3BAE821925CB257300C1E7DD /* Parkey */,
 				3BAE821825CB257300C1E7DD /* Products */,
+				733E1BC08D7250E1CCA06BDA /* Pods */,
+				25B7A6751D0EC818BD6647EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,26 +138,23 @@
 			path = Parkey;
 			sourceTree = "<group>";
 		};
+		733E1BC08D7250E1CCA06BDA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */,
+				4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-				AB36C37425E39A33008CE366 /* account_1.png */,
-				AB36C37225E3981B008CE366 /* ranking_1.png */,
-				AB36C37025E39810008CE366 /* keychain_1.png */,
-=======
-				AB06CF0F25ED0BCB007E3216 /* ranking_1.png */,
-				AB06CF0C25ED0BC2007E3216 /* keychain_1.png */,
-				AB06CF0925ED0BBB007E3216 /* account_1.png */,
->>>>>>> Stashed changes
-=======
-				AB8304EA25EF8A4500DB418E /* ranking_1.png */,
-				AB8304E725EF8A3800DB418E /* keychain_1.png */,
-				AB8304E425EF8A2C00DB418E /* account_1.png */,
->>>>>>> Stashed changes
+				AB25AF0A25D9CB5D00F0EB5B /* account_1.png */,
 				AB25AF0625D9CB5300F0EB5B /* park_in.png */,
 				AB25AF0425D9CB5300F0EB5B /* park_out.png */,
+				AB25AF0525D9CB5300F0EB5B /* ranking_1.png */,
+				AB25AF0025D9CB4600F0EB5B /* keychain_1.png */,
 				AB25AF0125D9CB4600F0EB5B /* mic_1.png */,
 				823E5DF625CF0BFF00F5C0E7 /* logo.png */,
 				8280F11D25D6EF2700306867 /* logowords.png */,
@@ -179,7 +165,6 @@
 		8280F12325D6FE4400306867 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				AB06CF1225ED0CC0007E3216 /* SettingsCell.swift */,
 				829DA1A725CF5217007B4EC5 /* Models */,
 				829DA1AC25CF534A007B4EC5 /* Views */,
 				8280F12425D6FE8500306867 /* RequestHandler.swift */,
@@ -190,7 +175,6 @@
 		829DA1A725CF5217007B4EC5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AB8304DE25EF7C4B00DB418E /* SettingCell.swift */,
 				829DA1A825CF52DC007B4EC5 /* User.swift */,
 				8280F12725D7066500306867 /* PaymentInfo.swift */,
 				8280F12A25D712FE00306867 /* Vehicle.swift */,
@@ -199,6 +183,7 @@
 				8280F13325D7238F00306867 /* ParkingSpot.swift */,
 				8280F13625D723A100306867 /* ParkingRules.swift */,
 				8280F13925D723FB00306867 /* Vinny.swift */,
+				824C514C25EC23030047C468 /* CardCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,22 +191,15 @@
 		829DA1AC25CF534A007B4EC5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
+				0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */,
+				0C3F47AB25EEF5520028D726 /* ParkViewController.swift */,
 				3BAE823B25D1877000C1E7DD /* SignUpController.swift */,
 				3BAE821E25CB257300C1E7DD /* LoginController.swift */,
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
-<<<<<<< Updated upstream
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
-				AB549C5025E3C03700E6B728 /* SettingsCell.swift */,
-=======
 				3B516D4725E879E400A49363 /* InitialScreenController.swift */,
 				3B516D4925E934F500A49363 /* EarnPointsTemp.swift */,
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
 				8267022225EB6C9100D784C1 /* RewardsController.swift */,
-				AB8304EE25EF944500DB418E /* SpeechController.swift */,
->>>>>>> Stashed changes
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,9 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BAE822E25CB257500C1E7DD /* Build configuration list for PBXNativeTarget "Parkey" */;
 			buildPhases = (
+				FA5F2EEA974AFE1C495CCA42 /* [CP] Check Pods Manifest.lock */,
 				3BAE821325CB257300C1E7DD /* Sources */,
 				3BAE821425CB257300C1E7DD /* Frameworks */,
 				3BAE821525CB257300C1E7DD /* Resources */,
+				CB979408D85F7826E1438FD0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -253,7 +233,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1160;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = iona;
 				TargetAttributes = {
 					3BAE821625CB257300C1E7DD = {
@@ -287,63 +267,84 @@
 				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
 				8280F11E25D6EF2700306867 /* logowords.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
+				AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */,
 				AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-				AB36C37325E3981B008CE366 /* ranking_1.png in Resources */,
 				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
-				AB36C37525E39A33008CE366 /* account_1.png in Resources */,
+				AB25AF0B25D9CB5D00F0EB5B /* account_1.png in Resources */,
 				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
-				AB36C37125E39810008CE366 /* keychain_1.png in Resources */,
-=======
-				AB06CF1025ED0BCB007E3216 /* ranking_1.png in Resources */,
-				AB06CF0A25ED0BBB007E3216 /* account_1.png in Resources */,
-=======
-				AB8304EB25EF8A4500DB418E /* ranking_1.png in Resources */,
-				AB8304E525EF8A2C00DB418E /* account_1.png in Resources */,
->>>>>>> Stashed changes
-				3BAE822725CB257500C1E7DD /* Assets.xcassets in Resources */,
-				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
-				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
-				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
-<<<<<<< Updated upstream
-				AB06CF0D25ED0BC2007E3216 /* keychain_1.png in Resources */,
->>>>>>> Stashed changes
-=======
-				AB8304E825EF8A3800DB418E /* keychain_1.png in Resources */,
->>>>>>> Stashed changes
+				AB25AF0825D9CB5300F0EB5B /* ranking_1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CB979408D85F7826E1438FD0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA5F2EEA974AFE1C495CCA42 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Parkey-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3BAE821325CB257300C1E7DD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8267022325EB6C9100D784C1 /* RewardsController.swift in Sources */,
 				8280F12B25D712FE00306867 /* Vehicle.swift in Sources */,
 				8280F12525D6FE8500306867 /* RequestHandler.swift in Sources */,
 				8280F13725D723A100306867 /* ParkingRules.swift in Sources */,
-				AB549C5125E3C03700E6B728 /* SettingsCell.swift in Sources */,
 				8280F13425D7238F00306867 /* ParkingSpot.swift in Sources */,
-				AB8304EF25EF944500DB418E /* SpeechController.swift in Sources */,
 				3BAE821F25CB257300C1E7DD /* LoginController.swift in Sources */,
 				AB25AF0D25D9CD4100F0EB5B /* ProfileController.swift in Sources */,
+				0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */,
+				3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */,
 				8280F13125D7237D00306867 /* Navigation.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
 				AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */,
-				AB8304DF25EF7C4B00DB418E /* SettingCell.swift in Sources */,
 				8280F12E25D71C3C00306867 /* Reward.swift in Sources */,
 				3BAE821D25CB257300C1E7DD /* SceneDelegate.swift in Sources */,
 				829DA1A925CF52DC007B4EC5 /* User.swift in Sources */,
-<<<<<<< Updated upstream
-=======
 				3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */,
-				AB06CF1325ED0CC0007E3216 /* SettingsCell.swift in Sources */,
->>>>>>> Stashed changes
+				0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */,
+				824C514D25EC23030047C468 /* CardCell.swift in Sources */,
 				8280F13A25D723FB00306867 /* Vinny.swift in Sources */,
 				3BAE822525CB257300C1E7DD /* Parkey.xcdatamodeld in Sources */,
 				8280F12825D7066500306867 /* PaymentInfo.swift in Sources */,
@@ -399,6 +400,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -459,6 +461,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -489,6 +492,7 @@
 		};
 		3BAE822F25CB257500C1E7DD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -506,6 +510,7 @@
 		};
 		3BAE823025CB257500C1E7DD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

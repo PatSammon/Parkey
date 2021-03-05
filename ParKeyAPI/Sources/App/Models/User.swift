@@ -10,6 +10,9 @@ final class User: Model, Content
         let createdAt: Date?
         let updatedAt: Date?
     }
+    struct Points: Content{
+        let availablePoints: Int
+    }
     
     init() {}
     
@@ -63,13 +66,17 @@ final class User: Model, Content
         self.userName = userName
         self.password = password
         self.email = userName
+        self.phoneNum = 111111111
         availablePoints = 0
         totalPoints = 0
     }
 }
 extension User{
-    static func create(from userSignup: UserSignup) throws -> User{
+    /*static func create(from userSignup: UserSignup) throws -> User{
         User(name: userSignup.name, userName: userSignup.username, password: userSignup.password)
+    }*/
+    static func create(from userSignup: UserSignup) throws -> User {
+        User(name: userSignup.name, userName: userSignup.username, password: try Bcrypt.hash(userSignup.password))
     }
     
     func createToken(source: SessionSource) throws -> Token{
@@ -83,14 +90,17 @@ extension User{
                createdAt: createdAt,
                updatedAt: updatedAt)
     }
+    func asUserPoints() throws -> Points{
+        Points(availablePoints: availablePoints)
+    }
 }
 
 extension User: ModelAuthenticatable{
     static let usernameKey=\User.$userName
     static let passwordHashKey = \User.$password
     
-    func verify(password: String) throws -> Bool{
-        try Bcrypt.verify(password, created: password)
+    func verify(password: String) throws -> Bool {
+      try Bcrypt.verify(password, created: self.password)
     }
 }
 
