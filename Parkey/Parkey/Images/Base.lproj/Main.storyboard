@@ -703,7 +703,7 @@
         <!--Registered Vehicle-->
         <scene sceneID="RTc-2P-1Li">
             <objects>
-                <viewController title="Registered Vehicle" modalPresentationStyle="fullScreen" id="lbO-F2-Jg4" sceneMemberID="viewController">
+                <viewController title="Registered Vehicle" modalPresentationStyle="fullScreen" id="lbO-F2-Jg4" customClass="RegisterVehicleViewController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MCB-Zp-Qdi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -769,7 +769,11 @@
                             <constraint firstItem="IB9-AO-c7p" firstAttribute="trailing" secondItem="F24-1M-rSO" secondAttribute="trailing" constant="20" id="yIN-3f-Osm"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aHV-mM-MYV"/>
                     <connections>
+                        <outlet property="color" destination="3ja-rY-RwJ" id="o2A-Le-VTp"/>
+                        <outlet property="licensePlate" destination="pG6-bZ-TEj" id="BkU-df-atg"/>
+                        <outlet property="makeModel" destination="RD4-Cw-TVn" id="3PG-2S-yph"/>
                         <segue destination="3ZI-zR-6NM" kind="show" id="5SB-gb-Kzu"/>
                     </connections>
                 </viewController>
@@ -777,10 +781,10 @@
             </objects>
             <point key="canvasLocation" x="5026.0869565217399" y="874.55357142857144"/>
         </scene>
-        <!--View Controller-->
+        <!--Car Profile-->
         <scene sceneID="pgO-N5-wYB">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="3ZI-zR-6NM" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="3ZI-zR-6NM" customClass="CarProfile" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jPC-Ks-947">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -807,7 +811,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5SB-gb-Kzu"/>
+        <segue reference="7eM-MB-Cmn"/>
         <segue reference="g3C-9X-6Cm"/>
         <segue reference="mcB-Dl-v9C"/>
         <segue reference="OAk-PU-giw"/>

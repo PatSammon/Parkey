@@ -10,6 +10,7 @@
 		0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47AB25EEF5520028D726 /* ParkViewController.swift */; };
 		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
 		104A976B25EFFF580044DE78 /* RegisterVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104A976A25EFFF580044DE78 /* RegisterVehicleViewController.swift */; };
+		10E128DF25F18ED300C24C0F /* CarProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E128DE25F18ED300C24C0F /* CarProfile.swift */; };
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
 		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE821A25CB257300C1E7DD /* AppDelegate.swift */; };
@@ -49,6 +50,7 @@
 		0C3F47AB25EEF5520028D726 /* ParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = Parkey/Code/Views/ParkViewController.swift; sourceTree = SOURCE_ROOT; };
 		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		104A976A25EFFF580044DE78 /* RegisterVehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVehicleViewController.swift; sourceTree = "<group>"; };
+		10E128DE25F18ED300C24C0F /* CarProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarProfile.swift; sourceTree = "<group>"; };
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
 		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3BAE821725CB257300C1E7DD /* Parkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +202,7 @@
 				AB25AF0C25D9CD4100F0EB5B /* ProfileController.swift */,
 				AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */,
 				104A976A25EFFF580044DE78 /* RegisterVehicleViewController.swift */,
+				10E128DE25F18ED300C24C0F /* CarProfile.swift */,
 				3B516D4725E879E400A49363 /* InitialScreenController.swift */,
 				3B516D4925E934F500A49363 /* EarnPointsTemp.swift */,
 				8267022225EB6C9100D784C1 /* RewardsController.swift */,
@@ -340,6 +343,7 @@
 				0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */,
 				3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */,
 				8280F13125D7237D00306867 /* Navigation.swift in Sources */,
+				10E128DF25F18ED300C24C0F /* CarProfile.swift in Sources */,
 				3BAE821B25CB257300C1E7DD /* AppDelegate.swift in Sources */,
 				AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */,
 				8280F12E25D71C3C00306867 /* Reward.swift in Sources */,
