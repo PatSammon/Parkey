@@ -81,6 +81,12 @@ func routes(_ app: Application) throws
         
         User.query(on: req.db).all()
     }
+    app.get("places")
+    {
+        req in
+        
+        Places.query(on: req.db).all()
+    }
     
     try app.register(collection: UserController())
     try app.register(collection: PaymentInfoController())

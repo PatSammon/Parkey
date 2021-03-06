@@ -125,27 +125,24 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         self.present(navigationViewController, animated: true, completion: nil)
     }
 
-    /*func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        // Create point to represent where the symbol should be placed
-        let point = MGLPointFeature()
-        point.coordinate = CLLocationCoordinate2DMake(40.741894, -73.98931)
-         
-        // Create a data source to hold the point data
-        let shapeSource = MGLShapeSource(identifier: "marker-source", shape: point, options: nil)
-         
-        // Create a style layer for the symbol
-        let shapeLayer = MGLSymbolStyleLayer(identifier: "Pats-Pizza", source: shapeSource)
-         
-        // Add the image to the style's sprite
-        if let image = UIImage(named: "food.png")?.resizableImage(withCapInsets: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)) {
-            style.setImage(image, forName: "food-symbol")
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        
+        //make request handler call
+        let array = RequestHandler.getPlaces()
+        
+        //iterate through the items
+        for item in array{
+            let annotation = MGLPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.coordinates[0]), CLLocationDegrees(item.coordinates[1]))
+            annotation.title=item.name
+            annotation.subtitle="Cost: \(item.cost)"
+            mapView.addAnnotation(annotation)
         }
-         
-        // Tell the layer to use the image in the sprite
-        shapeLayer.iconImageName = NSExpression(forConstantValue: "food-symbol")
-         
-        // Add the source and style layer to the map
-        style.addSource(shapeSource)
-        style.addLayer(shapeLayer)
-    }*/
+       /* // Create point to represent where the symbol should be placed
+        let annotation = MGLPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake(40.749193, -73.987456)
+        annotation.title="Pats Pizzeria"
+        annotation.subtitle="The best Pizza in NYC"
+        mapView.addAnnotation(annotation)*/
+    }
 }
