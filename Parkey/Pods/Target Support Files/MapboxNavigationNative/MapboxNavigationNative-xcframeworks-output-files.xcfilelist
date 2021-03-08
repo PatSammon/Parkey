@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5a7419fc284410dd7a6d0e8b12750476cf65147db07edb36129e629690384afd
-size 53
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxNavigationNative

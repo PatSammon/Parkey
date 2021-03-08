@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0a4649bef710fafc6766e8a51042d4caf39a937f10455c39f227a3d1f0bc3ec5
-size 475
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+#import "MBXRouteAlertTollCollectionType.h"
+
+NS_SWIFT_NAME(RouteAlertTollCollectionInfo)
+__attribute__((visibility ("default")))
+@interface MBXRouteAlertTollCollectionInfo : NSObject
+
+- (nonnull instancetype)initWithType:(MBXRouteAlertTollCollectionType)type;
+
+/** type of toll collection point */
+@property (nonatomic, readonly) MBXRouteAlertTollCollectionType type;
+
+
+@end

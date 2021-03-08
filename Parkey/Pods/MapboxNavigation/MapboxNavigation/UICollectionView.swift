@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a32acab81b7e7d75c09d6e7eddf41213e29ad6cb138d22e883f482e0da76c9b3
-size 925
+import UIKit
+
+extension UICollectionView {
+    func numberOfRows(using delegate: UIViewController & UICollectionViewDelegateFlowLayout) -> Int {
+        let layout = (collectionViewLayout as? UICollectionViewFlowLayout)!
+        
+        var totalNumberOfItems = 0
+        for section in 0...numberOfSections - 1 {
+            totalNumberOfItems += numberOfItems(inSection: section)
+        }
+        
+        let insets = layout.sectionInset
+        let width = bounds.width - insets.left - insets.right
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cellWidth = delegate.collectionView!(self, layout: layout, sizeForItemAt: indexPath).width
+        let cellSpacing = layout.minimumInteritemSpacing
+        let numberOfItemsInRow = floor(width / (cellWidth + cellSpacing))
+        let numberOfRows = ceil(CGFloat(totalNumberOfItems) / numberOfItemsInRow)
+        
+        return Int(numberOfRows)
+    }
+}

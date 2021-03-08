@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a1bc2a840e1b68a4c38cb7d129c428b65dca993027083b67d8ec72ed0cebd0bb
-size 619
+#import <CoreLocation/CoreLocation.h>
+
+@interface CLLocationManager (MMEMobileEvents)
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+void mme_linkCLLocationManagerCategory();
+#pragma clang diagnostic pop
+
+- (CLAuthorizationStatus)mme_authorizationStatus;
+- (NSString *)mme_authorizationStatusString;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000
+- (CLAccuracyAuthorization)mme_accuracyStatus API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0), tvos(14.0));
+- (NSString *)mme_accuracyAutorizationString API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0), tvos(14.0));
+#endif
+@end

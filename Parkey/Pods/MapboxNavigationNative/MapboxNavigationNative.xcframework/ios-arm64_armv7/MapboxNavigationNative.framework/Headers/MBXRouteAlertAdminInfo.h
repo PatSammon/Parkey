@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:11231991b56c6bd19c039f1b8375457ea71bab0f9fbc1773978d382d3a5dcab2
-size 638
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+NS_SWIFT_NAME(RouteAlertAdminInfo)
+__attribute__((visibility ("default")))
+@interface MBXRouteAlertAdminInfo : NSObject
+
+- (nonnull instancetype)initWithIso_3166_1_alpha3:(nonnull NSString *)iso_3166_1_alpha3
+                                       iso_3166_1:(nonnull NSString *)iso_3166_1;
+
+/** ISO-3166-1-alpha-3 (3-letter country name) */
+@property (nonatomic, readonly, nonnull, copy) NSString *iso_3166_1_alpha3;
+
+/** ISO-3166-1 (2-letter country name) */
+@property (nonatomic, readonly, nonnull, copy) NSString *iso_3166_1;
+
+
+@end

@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:56b340f4ee9900ec13c80e58b42de65156defc6b6324bc5df673fa91fc816aa5
-size 259
+// This file is generated and will be overwritten automatically.
+
+#import "MBXRouteState.h"
+#import "MBXSensorType.h"
+#import "MBXFixLocation.h"
+#import "MBXSensorData.h"
+#import "MBXGraphPosition.h"
+#import "MBXCacheHandle.h"
+#import "MBXLocationObserver.h"

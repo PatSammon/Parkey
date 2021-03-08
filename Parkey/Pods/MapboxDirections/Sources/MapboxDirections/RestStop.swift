@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:caad8286ed3c5e55c047f38f34820d23bde86d9b7802d0861ffd3d2390774c32
-size 483
+import Foundation
+
+/**
+ `RestStop` describes corresponding object on the route.
+ */
+public struct RestStop: Codable, Equatable {
+
+    public enum StopType: String, Codable {
+        case serviceArea = "service_area"
+        case restArea = "rest_area"
+    }
+
+    /**
+     The kind of the rest stop.
+     */
+    public let type: StopType
+
+    private enum CodingKeys: String, CodingKey {
+        case type
+    }
+    
+    public init(type: StopType) {
+        self.type = type
+    }
+}

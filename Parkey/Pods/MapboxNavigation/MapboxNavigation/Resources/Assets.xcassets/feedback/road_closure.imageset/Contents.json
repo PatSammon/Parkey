@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2915005491680ea59efa9aa4c2c12e83e7c97f136aa07da6763257ffffabb32c
-size 277
+{
+  "images" : [
+    {
+      "filename" : "road_closure.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}

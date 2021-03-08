@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:90c830eee38bc65ca7a1c1841c7c27eacd47aafdfda3edf6417286cbc5bbed3d
-size 537
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXGraphPosition;
+
+NS_SWIFT_NAME(MapMatch)
+__attribute__((visibility ("default")))
+@interface MBXMapMatch : NSObject
+
+- (nonnull instancetype)initWithPosition:(nonnull MBXGraphPosition *)position
+                                   proba:(float)proba;
+
+@property (nonatomic, readonly, nonnull) MBXGraphPosition *position;
+/** probability of user is actually on this position */
+@property (nonatomic, readonly) float proba;
+
+
+@end

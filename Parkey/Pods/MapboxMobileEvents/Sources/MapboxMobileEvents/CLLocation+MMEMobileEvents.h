@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5c0ef2f764935242d1e94170d8e241408a76e59aa6116ec2c77f7195973da164
-size 617
+#import <CoreLocation/CoreLocation.h>
+
+@interface CLLocation (MMEMobileEvents)
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+void mme_linkCLLocationCategory();
+#pragma clang diagnostic pop
+
+- (CLLocationSpeed)mme_roundedSpeed;
+- (CLLocationDirection)mme_roundedCourse;
+- (CLLocationDistance)mme_roundedAltitude;
+- (CLLocationAccuracy)mme_roundedHorizontalAccuracy;
+- (CLLocationAccuracy)mme_roundedVerticalAccuracy;
+- (CLLocationDegrees)mme_latitudeRoundedWithPrecision:(NSUInteger)precision;
+- (CLLocationDegrees)mme_longitudeRoundedWithPrecision:(NSUInteger)precision;
+
+@end

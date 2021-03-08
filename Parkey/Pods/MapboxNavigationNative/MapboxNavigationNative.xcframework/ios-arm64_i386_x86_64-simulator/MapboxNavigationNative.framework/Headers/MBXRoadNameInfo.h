@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:733f8becf4608f2caf5a143ed0f73d8a0a8a83ea3273e7886d1c30a8505fda1d
-size 459
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+NS_SWIFT_NAME(RoadNameInfo)
+__attribute__((visibility ("default")))
+@interface MBXRoadNameInfo : NSObject
+
+- (nonnull instancetype)initWithName:(nonnull NSString *)name
+                            shielded:(BOOL)shielded;
+
+@property (nonatomic, readonly, nonnull, copy) NSString *name;
+@property (nonatomic, readonly, getter=isShielded) BOOL shielded;
+
+@end

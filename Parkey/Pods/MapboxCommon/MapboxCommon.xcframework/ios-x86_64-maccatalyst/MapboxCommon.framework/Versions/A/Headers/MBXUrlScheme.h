@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2cbe1047b345707d439efc36b59f870905a7ad731dd794f0493716d3238a40f5
-size 341
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** Enum which contains support schemes. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXUrlScheme)
+{
+    /** HTTP. */
+    MBXUrlSchemeHttp,
+    /** HTTPS. */
+    MBXUrlSchemeHttps
+} NS_SWIFT_NAME(UrlScheme);

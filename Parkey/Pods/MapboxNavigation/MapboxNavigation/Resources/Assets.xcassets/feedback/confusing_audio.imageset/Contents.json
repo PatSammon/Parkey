@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1242b86e37889f84fff8463007390ba3359c4db713cc7e1efebf46c1414c461b
-size 326
+{
+  "images" : [
+    {
+      "filename" : "confusing_audio.pdf",
+      "idiom" : "universal",
+      "language-direction" : "left-to-right"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}

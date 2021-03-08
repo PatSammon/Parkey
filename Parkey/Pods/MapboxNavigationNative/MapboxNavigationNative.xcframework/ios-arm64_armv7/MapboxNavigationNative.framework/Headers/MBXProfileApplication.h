@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a31f103d07e017bb257dcd6b54e90a257b1bb8e6b99ff2afec8364b38592b38b
-size 301
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXProfileApplication)
+{
+    MBXProfileApplicationKMobile,
+    MBXProfileApplicationKAuto
+} NS_SWIFT_NAME(ProfileApplication);

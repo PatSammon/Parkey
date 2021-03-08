@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c5247fbc9db10f63892fefc2916c1d3fc19f12608701581215d45257ee69f1c3
-size 574
+import Foundation
+
+extension Date {
+    var ISO8601: String {
+        return Date.ISO8601Formatter.string(from: self)
+    }
+
+    static let ISO8601Formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
+    }()
+    
+    var nanosecondsSince1970: Double {
+        // UnitDuration.nanoseconds requires iOS 13
+        return timeIntervalSince1970 * 1e6
+    }
+}

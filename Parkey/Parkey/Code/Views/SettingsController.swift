@@ -54,6 +54,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         {
             performSegue(withIdentifier: "Rewards", sender: indexPath)
         }
+
         if (cellName! == "Log Out"){
             LogOut()
         }
@@ -63,6 +64,7 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     {
         
     }
+    
     //method that will be used to log the user out of the app
     func LogOut(){
         //remove the user default values

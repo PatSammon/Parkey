@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5e2d7f1f8c647ec8c2a34153ec978bc0f3a2e6a0c5e8e5c75113e3e915cc12de
-size 986
+#import "MBXAccounts+CoreNavigationAdditions.h"
+
+static NSString * const MBXNavigationBillingMethodUser = @"user";
+static NSString * const MBXNavigationBillingMethodRequest = @"request";
+
+@implementation MBXAccounts (CoreNavigationAdditions)
+
++ (void)load {
+    NSString *billingMethodValue = [NSBundle.mainBundle objectForInfoDictionaryKey:@"MBXNavigationBillingMethod"];
+    if (!billingMethodValue.length || [billingMethodValue isEqualToString:MBXNavigationBillingMethodUser]) {
+        [MBXAccounts activateSKUID:MBXAccountsSKUIDNavigationUser];
+    } else if (![billingMethodValue isEqualToString:MBXNavigationBillingMethodRequest]) {
+        // Billing method is not the default in the absence of a SKU ID.
+        [NSException raise:@"MBXInvalidNavigationBillingMethod"
+                    format:@"Unrecognized billing method %@. Valid billing methods are: %@, %@.",
+         billingMethodValue, MBXNavigationBillingMethodUser, MBXNavigationBillingMethodRequest];
+    }
+}
+
+@end

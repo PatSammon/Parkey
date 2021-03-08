@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a5145a4baa1e60942066769e0c015a3c87c53463be9929eea93931d337f9d026
-size 278
+{
+  "images" : [
+    {
+      "filename" : "route_quality.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}

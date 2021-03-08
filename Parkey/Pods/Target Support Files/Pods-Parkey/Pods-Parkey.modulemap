@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:256775b03670686da29abc0aefa55f6b5016eab1b89c06eb91cca05fb4c03517
-size 112
+framework module Pods_Parkey {
+  umbrella header "Pods-Parkey-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9d676c6ae3835215dae87ae77191e90b566f58b4b4627a53a090bd8b49d1f14c
-size 343
+#import <Foundation/Foundation.h>
+
+@class MBXGeometry;
+
+__attribute__((visibility ("default")))
+@interface MBXFeature: NSObject
+
+@property (readonly, retain, nonnull) NSObject *identifier;
+@property (readonly, retain, nonnull) MBXGeometry *geometry;
+@property(readonly, retain, nonnull) NSDictionary<NSString *, NSObject *> *properties;
+
+@end
