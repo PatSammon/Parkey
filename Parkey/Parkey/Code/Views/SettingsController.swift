@@ -54,6 +54,10 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         {
             performSegue(withIdentifier: "Rewards", sender: indexPath)
         }
+
+        if (cellName! == "Log Out"){
+            LogOut()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?)
@@ -61,4 +65,15 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    //method that will be used to log the user out of the app
+    func LogOut(){
+        //remove the user default values
+        UserDefaults.standard.removeObject(forKey: "LoggedIn")
+        UserDefaults.standard.removeObject(forKey: "Email")
+        UserDefaults.standard.removeObject(forKey: "Password")
+        UserDefaults.standard.removeObject(forKey: "UserID")
+    
+        //now preform the segue to the initial screen
+        self.performSegue(withIdentifier: "LogOut", sender: self)
+    }
 }

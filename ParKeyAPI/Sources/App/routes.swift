@@ -10,36 +10,12 @@ func routes(_ app: Application) throws
         return user.create(on: req.db).map{user}
     }
     
-    app.post("loginUser")
-    { req -> String in
-        //decode the user login info
+    app.post("userRewards")
+    { req -> EventLoopFuture<[Reward]> in
         
-        var userName=""
-        var password=""
-        if req.headers.contains(name: "userName")
-        {
-            userName = req.headers.first(name: "userName")!
-        }
-        if req.headers.contains(name: "password"){
-            password = req.headers.first(name: "password")!
-        }
+        let userId = String(req.body.string!.dropFirst(7))
         
-        //pose a query where it will find the user with that Username
-        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
-        var flag = false
-        info.whenComplete{ result in
-            switch result{
-            case .success(let userCred):
-                if userCred != nil{
-                    print(userCred)
-                    flag = true
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-        //this might work?
-        return "Yes"
+        return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
     
@@ -67,6 +43,11 @@ func routes(_ app: Application) throws
     { req -> EventLoopFuture<Reward> in
         let reward = try req.content.decode(Reward.self)
         return reward.create(on: req.db).map{reward}
+    }
+    app.post("newPlace")
+    { req -> EventLoopFuture<Places> in
+        let place = try req.content.decode(Places.self)
+        return place.create(on: req.db).map{place}
     }
     
     app.post("newParkingSpot")
@@ -108,6 +89,12 @@ func routes(_ app: Application) throws
         req in
         
         User.query(on: req.db).all()
+    }
+    app.get("places")
+    {
+        req in
+        
+        Places.query(on: req.db).all()
     }
     
     try app.register(collection: UserController())

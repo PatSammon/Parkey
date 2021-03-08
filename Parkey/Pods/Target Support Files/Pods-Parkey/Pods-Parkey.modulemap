@@ -1,0 +1,6 @@
+framework module Pods_Parkey {
+  umbrella header "Pods-Parkey-umbrella.h"
+
+  export *
+  module * { export * }
+}
