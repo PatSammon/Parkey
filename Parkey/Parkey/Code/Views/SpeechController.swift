@@ -1,11 +1,3 @@
-//
-//  SpeechController.swift
-//  Parkey
-//
-//  Created by user188405 on 3/6/21.
-//  Copyright © 2021 iona. All rights reserved.
-//
-
 import UIKit
 import Speech
 
@@ -14,7 +6,6 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var speakButton: UIButton!
     
     @IBOutlet weak var showSpeech: UILabel!
-    
     
     
     let audioEngine = AVAudioEngine()
@@ -29,7 +20,6 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
         // Do any additional setup after loading the view.
     }
     
-   
     @IBAction func startOrStop(_ sender: Any) {
         started = !started
         if started {
@@ -43,8 +33,6 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
             speakButton.backgroundColor = .systemGreen
         }
     }
-    
-    
     
     
     func getPermission() {
@@ -71,6 +59,7 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
     func startSpeech() {
         let node = audioEngine.inputNode
         let recordFormat = node.outputFormat(forBus: 0)
+        node.removeTap(onBus: 0)
         node.installTap(onBus: 0, bufferSize: 1024, format: recordFormat) { (buffer, _) in
             self.recognitionRequest.append(buffer)
         }
