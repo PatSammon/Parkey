@@ -124,4 +124,25 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         navigationViewController.modalPresentationStyle = .fullScreen
         self.present(navigationViewController, animated: true, completion: nil)
     }
+
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        
+        //make request handler call
+        let array = RequestHandler.getPlaces()
+        
+        //iterate through the items
+        for item in array{
+            let annotation = MGLPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.coordinates[0]), CLLocationDegrees(item.coordinates[1]))
+            annotation.title=item.name
+            annotation.subtitle="Cost: \(item.cost)"
+            mapView.addAnnotation(annotation)
+        }
+       /* // Create point to represent where the symbol should be placed
+        let annotation = MGLPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2DMake(40.749193, -73.987456)
+        annotation.title="Pats Pizzeria"
+        annotation.subtitle="The best Pizza in NYC"
+        mapView.addAnnotation(annotation)*/
+    }
 }
