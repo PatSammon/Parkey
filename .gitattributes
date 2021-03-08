@@ -4,3 +4,4 @@ Parkey/Pods/GoogleMaps/Base/Frameworks/GoogleMapsBase.framework/GoogleMapsCore f
 /Parkey/Pods/** filter=lfs diff=lfs merge=lfs -text
 /Parkey/Pods/* filter=lfs diff=lfs merge=lfs -text
 Parkey/Pods/GoogleMaps/Base/Frameworks/GoogleMapBase.framework/GoogleMapBase filter=lfs diff=lfs merge=lfs -text
+Parkey/Pods/MapboxNavigationNative/MapboxNavigationNative.xcframework/ios-arm64_armv7/MapboxNavigationNative.framework/MapboxNavigationNative filter=lfs diff=lfs merge=lfs -text
