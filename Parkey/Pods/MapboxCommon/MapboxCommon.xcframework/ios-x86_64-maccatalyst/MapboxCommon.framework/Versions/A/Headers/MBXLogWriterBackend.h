@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fb43593fbe9b26a8e9799b3955a282fbe00533c594672ac3d9b3c6de8ca20185
-size 621
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+#import "MBXLoggingLevel.h"
+
+@class MBXPeerWrapper;
+
+NS_SWIFT_NAME(LogWriterBackend)
+@protocol MBXLogWriterBackend
+/**
+ * @brief Writes a log message with a given level.
+ *
+ * @param level Severity of the message.
+ * @param message Log message
+ * @param category to organize log messages.
+ */
+- (void)writeLogForLevel:(MBXLoggingLevel)level
+                 message:(nonnull NSString *)message
+                category:(nullable NSString *)category;
+
+@property (nonatomic, nullable, readwrite) MBXPeerWrapper *peer;
+@end

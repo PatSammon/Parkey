@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c9324a90d8f09a76c10a461aa02084eb22beffd062345b307575b27ad977ebee
-size 440
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+@class MBXPeerWrapper;
+
+NS_SWIFT_NAME(LocationObserver)
+@protocol MBXLocationObserver
+/** Called when Navigator receive new location after 'updateLocation' */
+- (void)onLocationChangedForLocation:(CLLocationCoordinate2D)location;
+
+@property (nonatomic, nullable, readwrite) MBXPeerWrapper *peer;
+@end

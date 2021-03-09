@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b892af171059092f3e81330f32a82cbfffedf1cb620095a7b3844dea516c32a0
-size 350
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXRouteAlertTollCollectionType)
+{
+    MBXRouteAlertTollCollectionTypeKTollBooth,
+    MBXRouteAlertTollCollectionTypeKTollGantry
+} NS_SWIFT_NAME(RouteAlertTollCollectionType);

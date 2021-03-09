@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:190ba49696049990a689dd9d9da26766e90f4fd87ac37e3b68a8abe4433e170e
-size 1202
+import CoreLocation
+import Foundation
+import MapboxNavigationNative
+
+extension FixLocation {
+    convenience init(_ location: CLLocation) {
+        var bearingAccuracy: NSNumber? = nil
+        if #available(iOS 13.4, *) {
+            bearingAccuracy = location.courseAccuracy >= 0 ? location.courseAccuracy as NSNumber : nil
+        }
+        
+        self.init(coordinate: location.coordinate,
+                  monotonicTimestampNanoseconds: 0, // use time instead; see also `Navigator.status(at:)`
+                  time: location.timestamp,
+                  speed: location.speed >= 0 ? location.speed as NSNumber : nil,
+                  bearing: location.course >= 0 ? location.course as NSNumber : nil,
+                  altitude: location.altitude as NSNumber,
+                  accuracyHorizontal: location.horizontalAccuracy >= 0 ? location.horizontalAccuracy as NSNumber : nil,
+                  provider: nil,
+                  bearingAccuracy: bearingAccuracy,
+                  speedAccuracy: location.speedAccuracy >= 0 ? location.speedAccuracy as NSNumber : nil,
+                  verticalAccuracy: location.verticalAccuracy >= 0 ? location.verticalAccuracy as NSNumber : nil)
+    }
+}

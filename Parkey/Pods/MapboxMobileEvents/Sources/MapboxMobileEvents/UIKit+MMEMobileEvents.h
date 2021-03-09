@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:94f53237b84fa4a18ed89de3bc5c0fec2b1d41956d0f10a6b7828e994f2585d9
-size 556
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSObject (MMEMobileEvents)
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wstrict-prototypes"
+void mme_linkUIKitCategories();
+#pragma clang diagnostic pop
+
+@end
+
+#pragma mark -
+
+@interface UIDevice (MMEMobileEvents)
+
+- (NSString *)mme_deviceOrientation;
+
+@end
+
+#pragma mark -
+
+@interface UIApplication (MMEMobileEvents)
+
+- (NSInteger)mme_contentSizeScale;
+
+@end
+
+@interface NSExtensionContext (MMEMobileEvents)
+
++ (NSInteger)mme_contentSizeScale;
+
+@end
+
+NS_ASSUME_NONNULL_END

@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:dfdf2b522a9736df67ec3f15741b3985fd5d8ddec7192d1e3801b189db6bc173
-size 227
+{
+  "images" : [
+    {
+      "filename" : "feedback.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

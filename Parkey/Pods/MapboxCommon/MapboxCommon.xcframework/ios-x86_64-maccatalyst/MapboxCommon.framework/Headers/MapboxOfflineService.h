@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8b08a786e9518c7a5ac2165e75eef6b7ca418413aacfb5411918fed267a8e0bc
-size 528
+// This file is generated and will be overwritten automatically.
+
+#import "MBXOfflineDataDomain.h"
+#import "MBXOfflineDataErrorCode.h"
+#import "MBXOfflineDataPackStatus.h"
+#import "MBXOfflineServiceOptions.h"
+#import "MBXOfflineDataPackMetadata.h"
+#import "MBXOfflineDataRegionMetadata.h"
+#import "MBXOfflineDataError.h"
+#import "MBXOfflineDataPack.h"
+#import "MBXOfflineService.h"
+#import "MBXOfflineServiceListAvailableRegionsCallback.h"
+#import "MBXOfflineDataPackAcknowledgeCallback.h"
+#import "MBXOfflineServiceObserver.h"

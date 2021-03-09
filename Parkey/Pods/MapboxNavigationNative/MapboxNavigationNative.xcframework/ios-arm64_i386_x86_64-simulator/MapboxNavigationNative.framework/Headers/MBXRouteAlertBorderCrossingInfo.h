@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0d01fddfbed21d65417235e489e4b205fd466be6e85bbb22f809db8a8b2cb5f5
-size 570
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXRouteAlertAdminInfo;
+
+NS_SWIFT_NAME(RouteAlertBorderCrossingInfo)
+__attribute__((visibility ("default")))
+@interface MBXRouteAlertBorderCrossingInfo : NSObject
+
+- (nonnull instancetype)initWithFrom:(nonnull MBXRouteAlertAdminInfo *)from
+                                  to:(nonnull MBXRouteAlertAdminInfo *)to;
+
+@property (nonatomic, readonly, nonnull) MBXRouteAlertAdminInfo *from;
+@property (nonatomic, readonly, nonnull) MBXRouteAlertAdminInfo *to;
+
+@end

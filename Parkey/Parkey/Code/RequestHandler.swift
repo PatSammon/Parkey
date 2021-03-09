@@ -101,7 +101,7 @@ class RequestHandler
         
         return returnArray
     }
-    
+
     static func getPlaces() -> [Place]{
         var done = false
         var returnArray: [Place] = []

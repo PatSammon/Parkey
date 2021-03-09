@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:742e3065316e0a7bd499538addd10d8e0a63bee9c5227da1ab57c6ac7b6aadce
-size 264
+import Foundation
+#if !os(Linux)
+import CoreLocation
+#endif
+
+
+public struct MultiPoint: Equatable {
+    public var coordinates: [CLLocationCoordinate2D]
+    
+    public init(_ coordinates: [CLLocationCoordinate2D]) {
+        self.coordinates = coordinates
+    }
+}

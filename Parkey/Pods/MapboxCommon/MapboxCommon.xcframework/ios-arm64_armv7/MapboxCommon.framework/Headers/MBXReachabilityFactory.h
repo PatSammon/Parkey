@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c76a74ba0eaf3a2cf27a26f3371a56e9e0b36ff90abad7920f7bbd779deddcc5
-size 720
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@protocol MBXReachabilityInterface;
+
+/**
+ * @brief A factory class used to instantiate a platform-specific interface to
+ * monitor network reachability.
+ */
+NS_SWIFT_NAME(ReachabilityFactory)
+__attribute__((visibility ("default")))
+@interface MBXReachabilityFactory : NSObject
+
+/**
+ * @brief A factory method used to instantiate a platform-specific interface
+ * to monitor network reachability.
+ * @param hostname Optional hostname to monitor
+ * @return A reachability interface
+ */
++ (nonnull id<MBXReachabilityInterface>)reachabilityForHostname:(nullable NSString *)hostname __attribute((ns_returns_retained));
+
+@end

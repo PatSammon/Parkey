@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5152c6a547e59247e3ab9ea311e8efc101eaa43bcf87cb63e00a8b3dc78a273f
-size 769
+import Polyline
+import MapboxDirections
+import AVFoundation
+import MapboxMobileEvents
+
+let SecondsBeforeCollectionAfterFeedbackEvent: TimeInterval = 20
+let EventVersion = 8
+
+extension MMEEventsManager {
+    public static var unrated: Int { return -1 }
+}
+
+extension UIDevice {
+    @nonobjc var machine: String {
+        get {
+            var systemInfo = utsname()
+            uname(&systemInfo)
+            let machineMirror = Mirror(reflecting: systemInfo.machine)
+            return machineMirror.children.reduce("") { (identifier: String, element: Mirror.Child) in
+                guard let value = element.value as? Int8, value != 0 else { return identifier }
+                return identifier + String(UnicodeScalar(UInt8(value)))
+            }
+        }
+    }
+}
+

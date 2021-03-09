@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:72f3de0f4cd7d51e381b0d56d213a0ad1339617298aef9d41ca9d234e240374c
-size 345
+// This file is generated and will be overwritten automatically.
+
+#import "MBXFRC.h"
+#import "MBXElectronicHorizonResultType.h"
+#import "MBXRoadNameInfo.h"
+#import "MBXElectronicHorizonEdge.h"
+#import "MBXElectronicHorizon.h"
+#import "MBXRoadObjectDistanceInfo.h"
+#import "MBXElectronicHorizonOptions.h"
+#import "MBXElectronicHorizonObserver.h"

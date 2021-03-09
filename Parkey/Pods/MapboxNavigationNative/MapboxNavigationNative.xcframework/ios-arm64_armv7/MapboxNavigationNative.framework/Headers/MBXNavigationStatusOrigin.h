@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7571634948097afa5a68e7a5a710b06e2045eca067a2528d869314f1d6614e01
-size 411
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXNavigationStatusOrigin)
+{
+    MBXNavigationStatusOriginLocationUpdate,
+    MBXNavigationStatusOriginLegChange,
+    MBXNavigationStatusOriginSetRoute,
+    MBXNavigationStatusOriginUnconditional
+} NS_SWIFT_NAME(NavigationStatusOrigin);

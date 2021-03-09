@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:219c16029460f92a040693831a9dce4fa7c07d6d7f84fc0a87c50a3e90113288
-size 928
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXMapMatch;
+
+NS_SWIFT_NAME(MapMatcherOutput)
+__attribute__((visibility ("default")))
+@interface MBXMapMatcherOutput : NSObject
+
+- (nonnull instancetype)initWithMatches:(nonnull NSArray<MBXMapMatch *> *)matches
+                             isTeleport:(BOOL)isTeleport;
+
+/**
+ * Probable user positions on the road graph sorted from the most probable to the least probable.
+ * If map matcher failed or was not configured will be empty.
+ */
+@property (nonatomic, readonly, nonnull, copy) NSArray<MBXMapMatch *> *matches;
+
+/**
+ * Returns true if map matcher changed its opinion about most probable path on last update.
+ * In practice it means we don't need to animate puck movement from previous to current location
+ * and just do "teleport".
+ */
+@property (nonatomic, readonly, getter=isIsTeleport) BOOL isTeleport;
+
+
+@end

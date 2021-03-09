@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7f73387b6146f332178ae68ee3cf806a2825b02a7f73a73624d2810c3262ca78
-size 1082
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXBannerComponent;
+
+NS_SWIFT_NAME(BannerSection)
+__attribute__((visibility ("default")))
+@interface MBXBannerSection : NSObject
+
+- (nonnull instancetype)initWithText:(nonnull NSString *)text
+                                type:(nullable NSString *)type
+                            modifier:(nullable NSString *)modifier
+                             degrees:(nullable NSNumber *)degrees
+                         drivingSide:(nullable NSString *)drivingSide
+                          components:(nullable NSArray<MBXBannerComponent *> *)components;
+
+@property (nonatomic, readonly, nonnull, copy) NSString *text;
+@property (nonatomic, readonly, nullable, copy) NSString *type;
+@property (nonatomic, readonly, nullable, copy) NSString *modifier;
+@property (nonatomic, readonly, nullable) NSNumber *degrees;
+@property (nonatomic, readonly, nullable, copy) NSString *drivingSide;
+@property (nonatomic, readonly, nullable, copy) NSArray<MBXBannerComponent *> *components;
+
+@end

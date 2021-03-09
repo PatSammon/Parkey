@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:135817dc20cacf2af63004b9b0c66555c8fb10a5c08c49f25fc75bd902d7b2dd
-size 302
+#pragma once
+
+#import "MBXLogWriterBackend.h"
+
+NS_SWIFT_NAME(OsLogBackend)
+__attribute__((visibility ("default")))
+@interface MBXOsLogBackend: NSObject<MBXLogWriterBackend>
+- (void)writeLogForLevel:(MBXLoggingLevel)level message:(nonnull NSString *)message category:(nullable NSString *)category;
+@end

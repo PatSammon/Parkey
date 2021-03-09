@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ba937169e3a6794f212439d75c3ab9e64540a22e42f2241f9fc5f9d23d0610ed
-size 894
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** Record which contains data received in HTTP response. */
+NS_SWIFT_NAME(HttpResponseData)
+__attribute__((visibility ("default")))
+@interface MBXHttpResponseData : NSObject
+
+- (nonnull instancetype)initWithHeaders:(nonnull NSDictionary<NSString *, NSString *> *)headers
+                                   code:(int64_t)code
+                                   data:(nonnull NSData *)data;
+
+/** Map which contains HTTP response headers in a format header name:value. All the header names are in lower case format. */
+@property (nonatomic, readonly, nonnull, copy) NSDictionary<NSString *, NSString *> *headers;
+
+/** HTTP response code. */
+@property (nonatomic, readonly) int64_t code;
+
+/** Data chunk received in HTTP response. */
+@property (nonatomic, readonly, nonnull) NSData *data;
+
+
+@end

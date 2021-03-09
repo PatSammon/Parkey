@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8347b9b388c3964c66efb06ede2c363ae7e9844a690c35939eb1018a7cd7e602
-size 596
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXActiveGuidanceMode)
+{
+    /** To be used if profile used in Directions API is `mapbox/driving` or `mapbox/driving-traffic` */
+    MBXActiveGuidanceModeKDriving,
+    /** To be used if profile used in Directions API is `mapbox/walking` */
+    MBXActiveGuidanceModeKWalking,
+    /** To be used if profile used in Directions API is `mapbox/cycling` */
+    MBXActiveGuidanceModeKCycling
+} NS_SWIFT_NAME(ActiveGuidanceMode);

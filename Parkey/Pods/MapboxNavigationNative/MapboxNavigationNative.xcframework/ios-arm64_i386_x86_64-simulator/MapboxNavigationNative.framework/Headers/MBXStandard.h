@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2eea033294afa5da6abcd546d405026a2571b6b6400b74c6bcb57bf80899d8e7
-size 498
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** Standard of OpenLR */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXStandard)
+{
+    /**
+     * TomTom OpenLR (http://www.openlr.org/)
+     * Supported references: line location, point along line, polygon.
+     */
+    MBXStandardKTomTom,
+    /**
+     * TPEG OpenLR.
+     * Only line locations are supported.
+     */
+    MBXStandardKTPEG
+} NS_SWIFT_NAME(Standard);

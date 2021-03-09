@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cf4c0f2a9910323c2b05c5de09b9c98ae838f50bd93f701ff035d7a9f643dbe3
-size 430
+import Foundation
+#if !os(Linux)
+import CoreLocation
+#endif
+
+
+public struct Point: Equatable {
+    /** Note: The pluralization of `coordinates` is defined
+     in the GeoJSON RFC, so we've kept it for consistency.
+     https://tools.ietf.org/html/rfc7946#section-1.5 */
+    public var coordinates: CLLocationCoordinate2D
+    
+    public init(_ coordinates: CLLocationCoordinate2D) {
+        self.coordinates = coordinates
+    }
+}
