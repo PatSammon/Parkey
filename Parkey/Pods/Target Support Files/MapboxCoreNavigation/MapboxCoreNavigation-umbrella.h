@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:cbc501fa29e6cd89b33bda95ff68ce6a3d56e3d62b3dab88d2c0546674a8f644
-size 440
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+#import "MapboxCoreNavigation.h"
+#import "MBXAccounts+CoreNavigationAdditions.h"
+#import "MBXPeerWrapper.h"
+
+FOUNDATION_EXPORT double MapboxCoreNavigationVersionNumber;
+FOUNDATION_EXPORT const unsigned char MapboxCoreNavigationVersionString[];
+

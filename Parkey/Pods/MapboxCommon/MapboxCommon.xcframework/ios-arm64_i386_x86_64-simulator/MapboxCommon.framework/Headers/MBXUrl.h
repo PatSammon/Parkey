@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a9563fbb48d41d145d541108445c6edd4f80f161a6e279ddc43f5c7c640062f5
-size 386
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** @brief Class which represents URL address. */
+NS_SWIFT_NAME(Url)
+__attribute__((visibility ("default")))
+@interface MBXUrl : NSObject
+
+/**
+ * @brief Returns underlying URL string.
+ * @return URL string.
+ */
+- (nonnull NSString *)getString __attribute((ns_returns_retained));
+
+@end

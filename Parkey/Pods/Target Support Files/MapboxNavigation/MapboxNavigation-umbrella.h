@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b3796047f8e8b79b985e058a512871b0ae06857b4ca030273276185042b8fa78
-size 452
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+#import "CLLocationManager+MGLNavigationAdditions.h"
+#import "MapboxNavigation.h"
+#import "MGLMapView+MGLNavigationAdditions.h"
+
+FOUNDATION_EXPORT double MapboxNavigationVersionNumber;
+FOUNDATION_EXPORT const unsigned char MapboxNavigationVersionString[];
+

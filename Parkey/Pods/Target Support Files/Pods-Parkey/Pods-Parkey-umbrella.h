@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0c805cc97e9223bacbd71456f5f2bc4f6481b45d4b648b2b1e02a076057695fb
-size 314
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#else
+#ifndef FOUNDATION_EXPORT
+#if defined(__cplusplus)
+#define FOUNDATION_EXPORT extern "C"
+#else
+#define FOUNDATION_EXPORT extern
+#endif
+#endif
+#endif
+
+
+FOUNDATION_EXPORT double Pods_ParkeyVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_ParkeyVersionString[];
+

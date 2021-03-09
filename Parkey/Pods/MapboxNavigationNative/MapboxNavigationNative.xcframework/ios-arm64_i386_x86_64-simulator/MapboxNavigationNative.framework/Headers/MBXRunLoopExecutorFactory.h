@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5456d1bc1df1f6f425ad406d37111545e34762a825ac0f1d9068218f884d7fad
-size 620
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXRunLoopExecutorHandle;
+
+NS_SWIFT_NAME(RunLoopExecutorFactory)
+__attribute__((visibility ("default")))
+@interface MBXRunLoopExecutorFactory : NSObject
+
+/** Builds run loop executor which can be re-used in various instances */
++ (nonnull MBXRunLoopExecutorHandle *)build __attribute((ns_returns_retained));
+/** Builds run loop executor which allows to manually control execution by `runOne` method(useful for tests) */
++ (nonnull MBXRunLoopExecutorHandle *)buildManual __attribute((ns_returns_retained));
+
+@end

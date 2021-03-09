@@ -1,3 +1,18 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:35a77b86aae9a2956742491fe7931267f3fc893f4afd30b32c0ec6951597dac0
-size 358
+import Foundation
+
+/**
+ A `DrivingSide` indicates which side of the road cars and traffic flow.
+ */
+public enum DrivingSide: String, Codable {
+    /**
+     Indicates driving occurs on the `left` side.
+     */
+    case left
+
+    /**
+     Indicates driving occurs on the `right` side.
+     */
+    case right
+    
+    static let `default` = DrivingSide.right
+}

@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:213581dbcebc8db9873ca6308613264f16abc232971c766ca81a66498b91beb1
-size 343
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** The usage domain of an offline pack. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXOfflineDataDomain)
+{
+    MBXOfflineDataDomainMaps,
+    MBXOfflineDataDomainNavigation
+} NS_SWIFT_NAME(OfflineDataDomain);

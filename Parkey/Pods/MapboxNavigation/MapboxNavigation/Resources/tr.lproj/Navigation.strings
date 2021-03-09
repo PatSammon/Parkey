@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:90bf0214ca6aa6abd19dd22cde4e6b78fcd980af32c3bba452103ee03fddeae8
-size 259
+
+/* Class = "UIButton"; normalTitle = "End Navigation"; ObjectID = "5f2-dT-la4"; */
+"5f2-dT-la4.normalTitle" = "Navigasyonu bitir";
+
+/* Class = "UILabel"; text = "Rate your trip"; ObjectID = "W5U-cV-cDO"; */
+"W5U-cV-cDO.text" = "Seyahatinizi derecelendirin";

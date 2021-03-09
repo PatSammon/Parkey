@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4484d8c2b473e6b137891f94c9ee4ee0d1b2bb3fb2410f2a5c9f77c05913e7c1
-size 790
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+NS_SWIFT_NAME(VoiceInstruction)
+__attribute__((visibility ("default")))
+@interface MBXVoiceInstruction : NSObject
+
+- (nonnull instancetype)initWithSsmlAnnouncement:(nonnull NSString *)ssmlAnnouncement
+                                    announcement:(nonnull NSString *)announcement
+                           remainingStepDistance:(float)remainingStepDistance
+                                           index:(uint32_t)index;
+
+@property (nonatomic, readonly, nonnull, copy) NSString *ssmlAnnouncement;
+@property (nonatomic, readonly, nonnull, copy) NSString *announcement;
+@property (nonatomic, readonly) float remainingStepDistance;
+@property (nonatomic, readonly) uint32_t index;
+
+@end

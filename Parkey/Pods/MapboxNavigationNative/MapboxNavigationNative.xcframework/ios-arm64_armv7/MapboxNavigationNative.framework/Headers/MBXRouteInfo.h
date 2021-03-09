@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:763dc817000007501c00145cbc98b58411f2376a4236b52c444bfd7e5dc0e22f
-size 396
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXRouteAlert;
+
+NS_SWIFT_NAME(RouteInfo)
+__attribute__((visibility ("default")))
+@interface MBXRouteInfo : NSObject
+
+- (nonnull instancetype)initWithAlerts:(nonnull NSArray<MBXRouteAlert *> *)alerts;
+
+@property (nonatomic, readonly, nonnull, copy) NSArray<MBXRouteAlert *> *alerts;
+
+@end

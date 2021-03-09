@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7f95a5d16e01a4a0808f19dc94f2f1134351ac126c9d61e6667a8090b736405d
-size 346
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+@class MBXExpected;
+
+@class MBXLocation;
+
+/** returns either decoded location or string with description of error */
+NS_SWIFT_NAME(DecodeCallback)
+typedef void (^MBXDecodeCallback)(NSArray<MBXExpected *> * result); // NOLINT(modernize-use-using)

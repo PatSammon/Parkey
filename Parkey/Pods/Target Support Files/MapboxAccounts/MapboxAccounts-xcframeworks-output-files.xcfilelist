@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:564aa71beaa2ab854b7db58acaa70d1c0e944103908b912a814d48b00259da06
-size 45
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxAccounts

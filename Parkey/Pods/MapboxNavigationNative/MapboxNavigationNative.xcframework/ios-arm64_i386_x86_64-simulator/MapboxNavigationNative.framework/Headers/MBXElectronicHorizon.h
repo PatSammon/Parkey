@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:969d5a2fcc110404d1766416ea7fd970ef3c203305180a93d9e506a152227b6e
-size 414
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXElectronicHorizonEdge;
+
+NS_SWIFT_NAME(ElectronicHorizon)
+__attribute__((visibility ("default")))
+@interface MBXElectronicHorizon : NSObject
+
+- (nonnull instancetype)initWithStart:(nonnull MBXElectronicHorizonEdge *)start;
+
+@property (nonatomic, readonly, nonnull) MBXElectronicHorizonEdge *start;
+
+@end

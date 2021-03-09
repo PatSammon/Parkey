@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2b238b8c7a06ce83da97678e7a4b11e91d6c7c228faa1c14de84c6eabac028f0
-size 1038
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+@class MBXElectronicHorizonOptions;
+@class MBXPollingConfig;
+
+NS_SWIFT_NAME(NavigatorConfig)
+__attribute__((visibility ("default")))
+@interface MBXNavigatorConfig : NSObject
+
+- (nonnull instancetype)initWithVoiceInstructionThreshold:(nullable NSNumber *)voiceInstructionThreshold
+                                 electronicHorizonOptions:(nullable MBXElectronicHorizonOptions *)electronicHorizonOptions
+                                                  polling:(nullable MBXPollingConfig *)polling;
+
+/**
+ * The threshold at which we will return a voice instruction after current progress has passed it.
+ * Pass null to use default value.
+ */
+@property (nonatomic, readwrite, nullable) NSNumber *voiceInstructionThreshold;
+
+@property (nonatomic, readwrite, nullable) MBXElectronicHorizonOptions *electronicHorizonOptions;
+/** configuration of status polling */
+@property (nonatomic, readwrite, nullable) MBXPollingConfig *polling;
+
+
+@end

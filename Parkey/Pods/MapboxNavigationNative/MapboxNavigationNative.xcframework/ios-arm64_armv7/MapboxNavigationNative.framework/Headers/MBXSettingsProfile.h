@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:10bf4a25c43fc907f9b7953a20ed0deb028f31788b57cedae22e7ccc421fe46d
-size 567
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+#import "MBXProfileApplication.h"
+#import "MBXProfilePlatform.h"
+
+NS_SWIFT_NAME(SettingsProfile)
+__attribute__((visibility ("default")))
+@interface MBXSettingsProfile : NSObject
+
+- (nonnull instancetype)initWithApplication:(MBXProfileApplication)application
+                                   platform:(MBXProfilePlatform)platform;
+
+@property (nonatomic, readonly) MBXProfileApplication application;
+@property (nonatomic, readonly) MBXProfilePlatform platform;
+
+@end

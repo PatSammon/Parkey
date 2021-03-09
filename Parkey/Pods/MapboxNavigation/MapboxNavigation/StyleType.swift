@@ -1,3 +1,28 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:68555a4965ad623200c29d2ac99d37717416443a9fcada59b3c19a1c68896977
-size 574
+import Foundation
+
+@objc public enum StyleType: Int, CustomStringConvertible {
+    case day
+    case night
+    
+    public init?(description: String) {
+        let type: StyleType
+        switch description {
+        case "day":
+            type = .day
+        case "night":
+            type = .night
+        default:
+            return nil
+        }
+        self.init(rawValue: type.rawValue)
+    }
+    
+    public var description: String {
+        switch self {
+        case .day:
+            return "day"
+        case .night:
+            return "night"
+        }
+    }
+}

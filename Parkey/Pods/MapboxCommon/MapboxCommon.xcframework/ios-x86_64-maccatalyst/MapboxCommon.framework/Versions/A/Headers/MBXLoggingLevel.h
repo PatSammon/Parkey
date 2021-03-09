@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:920a313326160dd423bfaef5ea74f01e316be12f2fe38bccc5f3339c7ced0f36
-size 631
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** State level of a log message. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXLoggingLevel)
+{
+    /** Verbose log data to understand how the code executes. */
+    MBXLoggingLevelDebug,
+    /** Normal application behavior. */
+    MBXLoggingLevelInfo,
+    /** To log a situation that might be a problem, or an unusual situation. */
+    MBXLoggingLevelWarning,
+    /** A log message providing information when a significant error occured. */
+    MBXLoggingLevelError
+} NS_SWIFT_NAME(LoggingLevel);
