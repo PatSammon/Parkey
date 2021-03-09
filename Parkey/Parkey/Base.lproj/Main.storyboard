@@ -9,56 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Speech Controller-->
-        <scene sceneID="cNo-22-GeN">
-            <objects>
-                <viewController id="nwg-9b-2wK" customClass="SpeechController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ywA-pm-ffv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9O-Cg-GOh">
-                                <rect key="frame" x="120" y="94" width="174" height="75"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="NbW-WO-YTv"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Speak"/>
-                                <connections>
-                                    <action selector="startOrStop:" destination="nwg-9b-2wK" eventType="touchUpInside" id="WcB-Cj-F7B"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Speak to Begin Recording" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc7-10-nr1">
-                                <rect key="frame" x="75" y="219" width="264" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Yyq-w9-bRk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemTealColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="RUS-ON-JT7"/>
-                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
-                        <constraints>
-                            <constraint firstItem="T9O-Cg-GOh" firstAttribute="leading" secondItem="RUS-ON-JT7" secondAttribute="leading" constant="120" id="D9O-R8-7gv"/>
-                            <constraint firstItem="RUS-ON-JT7" firstAttribute="trailing" secondItem="T9O-Cg-GOh" secondAttribute="trailing" constant="120" id="TEo-4W-ugr"/>
-                            <constraint firstItem="hc7-10-nr1" firstAttribute="top" secondItem="T9O-Cg-GOh" secondAttribute="bottom" constant="50" id="chS-Mh-oxD"/>
-                            <constraint firstItem="RUS-ON-JT7" firstAttribute="trailing" secondItem="hc7-10-nr1" secondAttribute="trailing" constant="75" id="dST-Uh-HSg"/>
-                            <constraint firstItem="hc7-10-nr1" firstAttribute="leading" secondItem="RUS-ON-JT7" secondAttribute="leading" constant="75" id="mz8-7c-578"/>
-                            <constraint firstItem="T9O-Cg-GOh" firstAttribute="top" secondItem="RUS-ON-JT7" secondAttribute="top" constant="50" id="wai-e8-f6U"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="showSpeech" destination="hc7-10-nr1" id="2yJ-Q3-aOB"/>
-                        <outlet property="speakButton" destination="T9O-Cg-GOh" id="pm7-eC-Eat"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CUw-WC-SdH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2619" y="-704"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -173,6 +123,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1969.5652173913045" y="116.51785714285714"/>
+        </scene>
+        <!--Speech Controller-->
+        <scene sceneID="jOu-Wq-0eQ">
+            <objects>
+                <viewController id="ePY-NI-swK" customClass="SpeechController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c5V-IJ-EVE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJe-Et-HDI">
+                                <rect key="frame" x="160" y="94" width="94" height="50"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="YF1-2R-dUa"/>
+                                </constraints>
+                                <state key="normal" title="Speak">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="startOrStop:" destination="ePY-NI-swK" eventType="touchUpInside" id="5TC-nz-YYx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Speak to Record Voice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsL-JU-19M">
+                                <rect key="frame" x="50" y="194" width="314" height="225"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="225" id="Tsf-u8-Qfb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Orn-jg-B6e"/>
+                        <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                        <constraints>
+                            <constraint firstItem="HsL-JU-19M" firstAttribute="leading" secondItem="Orn-jg-B6e" secondAttribute="leading" constant="50" id="9fJ-WS-DSg"/>
+                            <constraint firstItem="uJe-Et-HDI" firstAttribute="top" secondItem="Orn-jg-B6e" secondAttribute="top" constant="50" id="E5r-C5-dor"/>
+                            <constraint firstItem="HsL-JU-19M" firstAttribute="top" secondItem="uJe-Et-HDI" secondAttribute="bottom" constant="50" id="PXg-an-eJb"/>
+                            <constraint firstItem="Orn-jg-B6e" firstAttribute="trailing" secondItem="uJe-Et-HDI" secondAttribute="trailing" constant="160" id="Sgw-G8-HHJ"/>
+                            <constraint firstItem="uJe-Et-HDI" firstAttribute="leading" secondItem="Orn-jg-B6e" secondAttribute="leading" constant="160" id="fy7-74-qnW"/>
+                            <constraint firstItem="Orn-jg-B6e" firstAttribute="trailing" secondItem="HsL-JU-19M" secondAttribute="trailing" constant="50" id="q9d-ph-jLo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="showSpeech" destination="HsL-JU-19M" id="GMo-2o-t9Y"/>
+                        <outlet property="speakButton" destination="uJe-Et-HDI" id="TTQ-Zc-8vd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLt-Yl-3yM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2793" y="-527"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="MBk-6E-47s">
@@ -705,7 +707,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="uU2-Xb-C6D"/>
                     <connections>
-                        <outlet property="settingsList" destination="2kp-8a-idc" id="qO0-d5-eYr"/>
+                        <outlet property="settingsList" destination="2kp-8a-idc" id="Ih3-TE-ZT3"/>
                         <segue destination="gAc-BQ-8AG" kind="show" identifier="Rewards" id="a0S-sL-QNp"/>
                         <segue destination="6Aw-hH-j0S" kind="show" identifier="LogOut" id="GSf-p4-M2s"/>
                     </connections>
@@ -782,9 +784,6 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

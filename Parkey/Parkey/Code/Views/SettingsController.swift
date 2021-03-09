@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 protocol SectionType: CustomStringConvertible {
     var hasSwitch: Bool { get }
 }
@@ -85,12 +83,12 @@ enum ShareRateSection: Int, CaseIterable, SectionType {
     }
 }
 
+
 class SettingsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
     
     @IBOutlet weak var settingsList: UITableView!
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,12 +149,11 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender:Any?)
+    /*override func prepare(for segue: UIStoryboardSegue, sender:Any?)
     {
         
-    }
-    //method that will be used to log the user out of the app
+    }*/
+
     func LogOut(){
         //remove the user default values
         UserDefaults.standard.removeObject(forKey: "LoggedIn")
@@ -176,12 +173,15 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         {
             performSegue(withIdentifier: "Rewards", sender: indexPath)
         }
-    
-    if (cellName! == "Log Out"){
+
+        if (cellName! == "Log Out"){
             LogOut()
         }
     }
-    
+
+
+
+
     
     
 }

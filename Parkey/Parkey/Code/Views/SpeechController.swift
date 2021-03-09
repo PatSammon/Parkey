@@ -20,6 +20,7 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
         // Do any additional setup after loading the view.
     }
     
+    
     @IBAction func startOrStop(_ sender: Any) {
         started = !started
         if started {
@@ -57,9 +58,11 @@ class SpeechController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func startSpeech() {
+        let audioSession = AVAudioSession.sharedInstance()
+       
         let node = audioEngine.inputNode
-        let recordFormat = node.outputFormat(forBus: 0)
-        node.removeTap(onBus: 0)
+        let recordFormat = AVAudioFormat(standardFormatWithSampleRate: 44100, channels: 1)
+        
         node.installTap(onBus: 0, bufferSize: 1024, format: recordFormat) { (buffer, _) in
             self.recognitionRequest.append(buffer)
         }
