@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7cacd335ab41e8005aaed29c25cea4a7f4288585fca653d67c8358fbc12c1726
-size 284
+#import <UIKit/UIKit.h>
+
+//! Project version number for MapboxAccounts.
+FOUNDATION_EXPORT double MapboxAccountsVersionNumber;
+
+//! Project version string for MapboxAccounts.
+FOUNDATION_EXPORT const unsigned char MapboxAccountsVersionString[];
+
+#import <MapboxAccounts/MBXAccounts.h>
+

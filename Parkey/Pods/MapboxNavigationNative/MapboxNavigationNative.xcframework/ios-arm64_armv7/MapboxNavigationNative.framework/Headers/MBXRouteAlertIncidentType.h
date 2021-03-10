@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9f07a674cf852a7c347ba9e40ef7d8dc6a5d8a56cd3d5bb67c689ad11e2dedc5
-size 760
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXRouteAlertIncidentType)
+{
+    MBXRouteAlertIncidentTypeKAccident,
+    MBXRouteAlertIncidentTypeKCongestion,
+    MBXRouteAlertIncidentTypeKConstruction,
+    MBXRouteAlertIncidentTypeKDisabledVehicle,
+    MBXRouteAlertIncidentTypeKLaneRestriction,
+    MBXRouteAlertIncidentTypeKMassTransit,
+    MBXRouteAlertIncidentTypeKMiscellaneous,
+    MBXRouteAlertIncidentTypeKOtherNews,
+    MBXRouteAlertIncidentTypeKPlannedEvent,
+    MBXRouteAlertIncidentTypeKRoadClosure,
+    MBXRouteAlertIncidentTypeKRoadHazard,
+    MBXRouteAlertIncidentTypeKWeather
+} NS_SWIFT_NAME(RouteAlertIncidentType);

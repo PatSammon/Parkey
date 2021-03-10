@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:42048d1f82acbb01a2a87b0ba45a73b884311f18aa1d52dcf9770103c7ab716c
-size 359
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXSpeedLimitUnit)
+{
+    /** kilometres per hour */
+    MBXSpeedLimitUnitKilometresPerHour,
+    /** miles per hour */
+    MBXSpeedLimitUnitMilesPerHour
+} NS_SWIFT_NAME(SpeedLimitUnit);

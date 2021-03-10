@@ -1,3 +1,12 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6cb87aeffd13a26155568e8159d9fba3a4669c2ec29f02999f0ab4d07b40c52a
-size 329
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXSpeedLimitSign)
+{
+    /** mutcd sign */
+    MBXSpeedLimitSignMutcd,
+    /** vienna sign */
+    MBXSpeedLimitSignVienna
+} NS_SWIFT_NAME(SpeedLimitSign);

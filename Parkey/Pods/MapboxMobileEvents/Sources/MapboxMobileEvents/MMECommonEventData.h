@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:4a1d98a52ab351da9d8994bb33f91c49d2265f5b48609d03b5b60ca491f6bf17
-size 865
+#import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
+extern NSString * const MMEApplicationStateForeground;
+extern NSString * const MMEApplicationStateBackground;
+extern NSString * const MMEApplicationStateInactive;
+extern NSString * const MMEApplicationStateUnknown;
+extern NSString * const MMEApplicationStateExtension;
+
+@interface MMECommonEventData : NSObject
+
+@property (nonatomic) NSString * vendorId;
+@property (nonatomic) NSString * model;
+@property (nonatomic) NSString * osVersion;
+@property (nonatomic) NSString * platform;
+@property (nonatomic) NSString * device;
+@property (nonatomic) CGFloat scale;
+
+/*! @returns a mutable dictionary of common event data, suitable for crash reports v2 schema */
++ (NSMutableDictionary *)commonCrashEventData;
+
+/*! @return the application state as a string */
++ (NSString *)applicationState;
+
+@end

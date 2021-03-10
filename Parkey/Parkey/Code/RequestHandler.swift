@@ -44,6 +44,24 @@ class RequestHandler
         }.resume()
     }
     
+    static func addPlace(name: String, cost: Int, coordinates: [Float])
+    {
+        let url = URL(string: "http://127.0.0.1:8080/newPlace")
+        let encoder = JSONEncoder()
+
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let newPlace = Place(name: name, cost: cost, coordinates: coordinates)
+        request.httpBody = try? encoder.encode(newPlace)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
     static func getRewards(userId: String) -> [Reward]
     {
         var done = false
@@ -81,6 +99,40 @@ class RequestHandler
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }while !done
         
+        return returnArray
+    }
+
+    static func getPlaces() -> [Place]{
+        var done = false
+        var returnArray: [Place] = []
+        let url = URL(string: "http://127.0.0.1:8080/places")!
+            
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+                
+            if error != nil
+            {
+                print(error!)
+                return
+            }
+                
+            if let data = data
+            {
+                let Places = try? JSONDecoder().decode([Place].self, from: data)
+                   
+                returnArray = Places!
+                done=true
+            }
+        }.resume()
+            
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+            
         return returnArray
     }
     

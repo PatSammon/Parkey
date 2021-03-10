@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:678ce009625d0d5cf4c11f41847f5f7b1482d4b7a8bbdfe97e06e0762a726658
-size 1100
+#import <Foundation/Foundation.h>
+
+#import "MMETypes.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class MMEEvent;
+
+@interface MMEAPIClient : NSObject
+/// Are we currently getting configuration updates?
+@property (nonatomic, readonly) BOOL isGettingConfigUpdates;
+
+- (instancetype)initWithAccessToken:(NSString *)accessToken userAgentBase:(NSString *)userAgentBase hostSDKVersion:(NSString *)hostSDKVersion;
+
+// MARK: - Events Service
+
+- (void)postEvents:(NSArray *)events completionHandler:(nullable void (^)(NSError * _Nullable error))completionHandler;
+- (void)postEvent:(MMEEvent *)event completionHandler:(nullable void (^)(NSError * _Nullable error))completionHandler;
+- (void)postMetadata:(NSArray *)metadata filePaths:(NSArray *)filePaths completionHandler:(nullable void (^)(NSError * _Nullable error))completionHandler;
++ (nullable NSString *)parseDigestHeader:(NSString *)digestHeader;
+
+// MARK: - Configuration Service
+
+/// Start the Configuration update process
+- (void)startGettingConfigUpdates;
+
+/// Stop the Configuration update process
+- (void)stopGettingConfigUpdates;
+
+@end
+
+NS_ASSUME_NONNULL_END

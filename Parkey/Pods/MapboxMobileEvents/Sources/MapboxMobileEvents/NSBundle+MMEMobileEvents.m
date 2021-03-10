@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c394677813e3260c58f7508e468e599650745cfc3e5027f0e156045218dfaf2f
-size 199
+#import "NSBundle+MMEMobileEvents.h"
+
+@implementation NSBundle (MMEMobileEvents)
+
++ (BOOL)mme_isExtension {
+    return [NSBundle.mainBundle.bundleURL.pathExtension isEqualToString:@"appex"];
+}
+
+@end

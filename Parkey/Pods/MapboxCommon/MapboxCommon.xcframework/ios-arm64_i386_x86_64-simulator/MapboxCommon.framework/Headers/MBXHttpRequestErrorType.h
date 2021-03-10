@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:792387e2075710c1013a3551b3ddab236c9739988bb2a63af5d4d3fc03c155a8
-size 818
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** @brief Enum which describes possible error types which could happen during HTTP request/download calls. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXHttpRequestErrorType)
+{
+    /** Establishing connection related error. */
+    MBXHttpRequestErrorTypeConnectionError,
+    /** SSL related error. */
+    MBXHttpRequestErrorTypeSSLError,
+    /** Request was cancelled by the user. */
+    MBXHttpRequestErrorTypeRequestCancelled,
+    /** Timeout error. */
+    MBXHttpRequestErrorTypeRequestTimedOut,
+    /** Range request failed. */
+    MBXHttpRequestErrorTypeRangeError,
+    /** Other than above error. */
+    MBXHttpRequestErrorTypeOtherError
+} NS_SWIFT_NAME(HttpRequestErrorType);

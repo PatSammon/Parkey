@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bd4559ab9e17f3ff7e66a8fc5ef4cc632246fe4070d65b7300c3d60af3b6fa24
-size 468
+import Foundation
+#if !os(Linux)
+import CoreLocation
+#endif
+
+
+public struct GeometryCollection {
+    public var geometries: [Geometry]
+    
+    public init(geometries: [Geometry]) {
+        self.geometries = geometries
+    }
+    
+    public init(_ multiPolygon: MultiPolygon) {
+        self.geometries = multiPolygon.coordinates.map {
+            $0.count > 1 ?
+                .multiLineString(.init($0)) :
+                .lineString(.init($0[0]))
+        }
+    }
+}

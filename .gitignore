@@ -90,3 +90,5 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
+.DS_Store
+Parkey/.DS_Store

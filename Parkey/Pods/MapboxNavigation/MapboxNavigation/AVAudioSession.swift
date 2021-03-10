@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:81f264b23b51ea035e5ead12fff17c8603e85f05dcac379f7e8edc65e71889f4
-size 730
+import AVFoundation
+
+public extension AVAudioSession {
+    func tryDuckAudio() -> Error? {
+        do {
+            if #available(iOS 12.0, *) {
+                try setCategory(.playback, mode: .voicePrompt, options: [.duckOthers, .mixWithOthers])
+            } else {
+                try setCategory(.ambient, mode: .spokenAudio, options: [.duckOthers, .mixWithOthers])
+            }
+            try setActive(true)
+        } catch {
+            return error
+        }
+        return nil
+    }
+    
+    func tryUnduckAudio() -> Error? {
+        do {
+            try setActive(false,
+                          options: [.notifyOthersOnDeactivation])
+        } catch {
+            return error
+        }
+        return nil
+    }
+}

@@ -1,3 +1,37 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:21ff59978bae8b14b35f728a38995478df27af38d91b4bf4718852b6cbf3b959
-size 1480
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@class MMEDate;
+
+@interface MMEMetrics : NSObject
+
+@property (nonatomic) NSUInteger requests;
+@property (nonatomic, readonly) NSUInteger totalBytesSent;
+@property (nonatomic) NSUInteger cellBytesSent;
+@property (nonatomic) NSUInteger wifiBytesSent;
+@property (nonatomic, readonly) NSUInteger totalBytesReceived;
+@property (nonatomic) NSUInteger cellBytesReceived;
+@property (nonatomic) NSUInteger wifiBytesReceived;
+@property (nonatomic) NSUInteger appWakeups;
+@property (nonatomic) NSUInteger eventCountFailed;
+@property (nonatomic) NSUInteger eventCountTotal;
+@property (nonatomic) NSUInteger eventCountMax;
+@property (nonatomic) CLLocationDegrees deviceLat;
+@property (nonatomic) CLLocationDegrees deviceLon;
+@property (nonatomic) MMEDate *recordingStarted;
+@property (nonatomic) NSString *dateUTCString;
+@property (nonatomic) NSDictionary *configResponseDict;
+@property (nonatomic) NSMutableDictionary *eventCountPerType;
+@property (nonatomic) NSMutableDictionary *failedRequestsDict;
+@property (nonatomic) NSUInteger locationsInForeground;
+@property (nonatomic) NSUInteger locationsInBackground;
+@property (nonatomic) NSUInteger locationsWithApproximateValues;
+@property (nonatomic) NSUInteger locationsDroppedBecauseOfHAF;
+@property (nonatomic) NSUInteger locationsDroppedDueTimeout;
+@property (nonatomic) NSUInteger locationsConvertedIntoEvents;
+
+@end
+
+NS_ASSUME_NONNULL_END

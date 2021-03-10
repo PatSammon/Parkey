@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a5dbd8df4f2f3c23f3549e1b18ffd8110fa9b997303bba76f5efbf23801c68f5
-size 742
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+#import "MBXDecodeCallback.h"
+#import "MBXStandard.h"
+
+@class MBXCacheHandle;
+
+NS_SWIFT_NAME(OpenLRDecoder)
+__attribute__((visibility ("default")))
+@interface MBXOpenLRDecoder : NSObject
+
+- (nonnull instancetype)initWithCache:(nonnull MBXCacheHandle *)cache;
+/**
+ * Decodes given base64-encoded reference and returns result in callback.
+ * In case of error(if there is no tiles in cache, decoding failed etc) returns it's description.
+ */
+- (void)decodeForBase64Encoded:(nonnull NSArray<NSString *> *)base64Encoded
+                      standard:(MBXStandard)standard
+                      callback:(nonnull MBXDecodeCallback)callback;
+
+@end

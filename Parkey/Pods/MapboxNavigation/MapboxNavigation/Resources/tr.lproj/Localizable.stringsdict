@@ -1,3 +1,38 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9a986847b2ee74a10acc4f6eba03c9e7ed7a58453eff8bf7780c63527c64b6d5
-size 1045
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>RATING_ACCESSIBILITY_SET</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@stars@</string>
+		<key>stars</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>one</key>
+			<string>%ld-yıldız ile derecelendir.</string>
+			<key>other</key>
+			<string>%ld-yıldız ile derecelendir.</string>
+		</dict>
+	</dict>
+	<key>RATING_STARS_FORMAT</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@stars@</string>
+		<key>stars</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>ld</string>
+			<key>one</key>
+			<string>%ld yıldız.</string>
+			<key>other</key>
+			<string>%ld yıldız.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
