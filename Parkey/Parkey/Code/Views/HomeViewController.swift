@@ -12,14 +12,14 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
-    @IBOutlet weak var label: UILabel!
+    //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
     }
     //@IBOutlet weak var accountLabel: UIImageView!
     //@IBOutlet weak var mic: UIImageView!
     //@IBOutlet weak var logo: UIImageView!
     //@IBOutlet weak var ParKey: UIImageView!
-    @IBOutlet weak var bottomLabel: UILabel!
+    //@IBOutlet weak var bottomLabel: UILabel!
     @IBAction func ParkIn(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
         present(vc, animated: true)
@@ -37,12 +37,6 @@ class HomeViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    func centerViewOnUserLocation() {
-        if let location = locationManager.location?.coordinate{
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            MapView.setRegion(region, animated: true)
-        }
-    }
 
     func CheckLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
@@ -57,7 +51,6 @@ class HomeViewController: UIViewController {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             //MapView.showsUserLocation = true
-            centerViewOnUserLocation()
             locationManager.startUpdatingLocation()
             break
         case .denied:
@@ -76,8 +69,8 @@ extension HomeViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {return}
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion.init(center: center, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-        MapView.setRegion(region, animated: true)
+        _ = MKCoordinateRegion.init(center: center, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+        //MapView.setRegion(region, animated: true)
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         checkLocationAuthorization()
