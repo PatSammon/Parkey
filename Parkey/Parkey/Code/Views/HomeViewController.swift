@@ -12,6 +12,7 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
     }
@@ -23,6 +24,9 @@ class HomeViewController: UIViewController {
     @IBAction func ParkIn(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
         present(vc, animated: true)
+    }
+    @IBAction func ToAccountPage(_ sender: Any) {
+        performSegue(withIdentifier: "AccountSegue", sender: self)
     }
     @IBOutlet weak var MapView: MKMapView!
     let locationManager = CLLocationManager()
