@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     let regionInMeters: Double = 1000
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         CheckLocationServices()
     }
     
