@@ -12,21 +12,28 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
-    
-    @IBOutlet var voice: UIView!
-    @IBOutlet var account: UIView!
-    @IBOutlet var Logo: UIView!
-    @IBOutlet var ParKeyLogo: UIView!
+    @IBOutlet weak var AccountIcon: UIImageView!
+    //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
     }
+    //@IBOutlet weak var accountLabel: UIImageView!
+    //@IBOutlet weak var mic: UIImageView!
+    //@IBOutlet weak var logo: UIImageView!
+    //@IBOutlet weak var ParKey: UIImageView!
+    //@IBOutlet weak var bottomLabel: UILabel!
     @IBAction func ParkIn(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
         present(vc, animated: true)
     }
+    @IBAction func ToAccountPage(_ sender: Any) {
+        performSegue(withIdentifier: "AccountSegue", sender: self)
+    }
+    @IBOutlet weak var MapView: MKMapView!
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 1000
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         CheckLocationServices()
     }
     
