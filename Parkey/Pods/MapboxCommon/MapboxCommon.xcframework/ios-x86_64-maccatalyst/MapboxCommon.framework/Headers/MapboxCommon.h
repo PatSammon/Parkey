@@ -2,8 +2,6 @@
 #import "MBXFeature.h"
 #import "MBXGeometry.h"
 #import "MBXHTTPService.h"
-#import "MBXNsLogBackend.h"
-#import "MBXOsLogBackend.h"
 #import "MBXPeerWrapper.h"
 #import "MBXReachability.h"
 #import "MapboxAccounts.h"

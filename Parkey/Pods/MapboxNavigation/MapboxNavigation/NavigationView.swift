@@ -1,4 +1,5 @@
 import UIKit
+import MapboxDirections
 
 /**
  A view that represents the root view of the MapboxNavigation drop-in UI.
@@ -47,7 +48,6 @@ open class NavigationView: UIView {
     
     lazy var endOfRouteHeightConstraint: NSLayoutConstraint? = self.endOfRouteView?.heightAnchor.constraint(equalToConstant: Constants.endOfRouteHeight)
     
-    
     private enum Images {
         static let overview = UIImage(named: "overview", in: .mapboxNavigation, compatibleWith: nil)!.withRenderingMode(.alwaysTemplate)
         static let volumeUp = UIImage(named: "volume_up", in: .mapboxNavigation, compatibleWith: nil)!.withRenderingMode(.alwaysTemplate)
@@ -73,30 +73,6 @@ open class NavigationView: UIView {
     lazy var overviewButton = FloatingButton.rounded(image: Images.overview)
     lazy var muteButton = FloatingButton.rounded(image: Images.volumeUp, selectedImage: Images.volumeOff)
     lazy var reportButton = FloatingButton.rounded(image: Images.feedback)
-    
-    func reinstallConstraints() {
-        if let activeFloatingStackView = self.constraints(affecting: self.floatingStackView) {
-            NSLayoutConstraint.deactivate(activeFloatingStackView)
-        }
-        if let activeSpeedLimitView = self.constraints(affecting: self.speedLimitView) {
-            NSLayoutConstraint.deactivate(activeSpeedLimitView)
-        }
-
-        setupConstraints()
-    }
-    
-    var floatingButtonsPosition: MapOrnamentPosition = .topTrailing {
-        didSet {
-            reinstallConstraints()
-        }
-    }
-    
-    var floatingButtons : [UIButton]? {
-        didSet {
-            clearStackViews()
-            setupStackViews()
-        }
-    }
     
     lazy var resumeButton: ResumeButton = .forAutoLayout()
     
@@ -150,26 +126,17 @@ open class NavigationView: UIView {
     }
     
     func commonInit() {
-        floatingButtons = [overviewButton, muteButton, reportButton]
         setupViews()
         setupConstraints()
     }
     
-    func clearStackViews() {
-        let oldFloatingButtons: [UIView] = floatingStackView.subviews
-        for floatingButton in oldFloatingButtons {
-            floatingStackView.removeArrangedSubview(floatingButton)
-            floatingButton.removeFromSuperview()
-        }
-    }
-    
     func setupStackViews() {
-        if let buttons = floatingButtons {
-            floatingStackView.addArrangedSubviews(buttons)
-        }
+        floatingStackView.addArrangedSubviews([overviewButton, muteButton, reportButton])
     }
     
     func setupViews() {
+        setupStackViews()
+        
         let children: [UIView] = [
             mapView,
             topBannerContainerView,

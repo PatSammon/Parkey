@@ -1,8 +1,10 @@
 import UIKit
 import MapboxCoreNavigation
+import AVFoundation
 
 extension FeedbackViewController: UIViewControllerTransitioningDelegate {
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        abortAutodismiss()
         return DismissAnimator()
     }
     
@@ -62,32 +64,19 @@ public extension FeedbackViewControllerDelegate {
  A view controller containing a grid of buttons the user can use to denote an issue their current navigation experience.
  */
 public class FeedbackViewController: UIViewController, DismissDraggable, UIGestureRecognizerDelegate {
+    var activeFeedbackItem: FeedbackItem?
+    
     static let sceneTitle = NSLocalizedString("FEEDBACK_TITLE", value: "Report Problem", comment: "Title of view controller for sending feedback")
     static let cellReuseIdentifier = "collectionViewCellId"
     static let autoDismissInterval: TimeInterval = 10
     static let verticalCellPadding: CGFloat = 20.0
-    static let titleHeaderHeight: CGFloat = 30.0
-    static let contentInset: UIEdgeInsets = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     
     let interactor = Interactor()
+    
     /**
      The feedback items that are visible and selectable by the user.
      */
-    public var sections: [FeedbackItem] {
-        [FeedbackType.incorrectVisual(subtype: nil),
-         FeedbackType.confusingAudio(subtype: nil),
-         FeedbackType.illegalRoute(subtype: nil),
-         FeedbackType.roadClosure(subtype: nil),
-         FeedbackType.routeQuality(subtype: nil),
-         FeedbackType.positioning(subtype: nil)].map { $0.generateFeedbackItem() }
-    }
-
-    /**
-     Controls whether or not the feedback view controller shows a second level of detail for feedback items.
-     When disabled, feedback will be submitted on a single tap of a top level category.
-     When enabled, a first tap reveals an instance of FeedbackSubtypeViewController. A second tap on an item there will submit a feedback.
-     */
-    public var detailedFeedbackEnabled: Bool = false
+    public var sections: [FeedbackItem] = [.turnNotAllowed, .closure, .reportTraffic, .confusingInstructions, .generalMapError, .badRoute]
     
     public weak var delegate: FeedbackViewControllerDelegate?
     
@@ -97,7 +86,6 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         view.backgroundColor = .clear
         view.delegate = self
         view.dataSource = self
-        view.contentInset = FeedbackViewController.contentInset
         view.register(FeedbackCollectionViewCell.self, forCellWithReuseIdentifier: FeedbackCollectionViewCell.defaultIdentifier)
         return view
     }()
@@ -116,12 +104,15 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         return layout
     }()
     
+    lazy var progressBar: ProgressBar = .forAutoLayout()
+    
     var draggableHeight: CGFloat {
+        // V:|-0-recordingAudioLabel.height-collectionView.height-progressBar.height-0-|
         let numberOfRows = collectionView.numberOfRows(using: self)
         let padding = (flowLayout.sectionInset.top + flowLayout.sectionInset.bottom) * CGFloat(numberOfRows)
         let indexPath = IndexPath(row: 0, section: 0)
         let collectionViewHeight = collectionView(collectionView, layout: collectionView.collectionViewLayout, sizeForItemAt: indexPath).height * CGFloat(numberOfRows) + padding + view.safeArea.bottom
-        let fullHeight = reportIssueLabel.bounds.height+collectionViewHeight + FeedbackViewController.titleHeaderHeight + FeedbackViewController.contentInset.top
+        let fullHeight = reportIssueLabel.bounds.height+collectionViewHeight+progressBar.bounds.height
         return fullHeight
     }
     
@@ -164,24 +155,39 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         setupConstraints()
         view.layoutIfNeeded()
         transitioningDelegate = self
-        if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemBackground
-        } else {
-            view.backgroundColor = .white
-        }
+        view.backgroundColor = .white
         enableDraggableDismiss()
+    }
+    
+    override public func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        progressBar.progress = 1
     }
     
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         delegate?.feedbackViewControllerDidOpen(self)
+        
+        UIView.animate(withDuration: FeedbackViewController.autoDismissInterval) {
+            self.progressBar.progress = 0
+        }
+        
+        enableAutoDismiss()
     }
     
-    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-
+    override public func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
         // Dismiss the feedback view when switching between landscape and portrait mode.
-        dismissFeedback()
+        if traitCollection.verticalSizeClass != newCollection.verticalSizeClass {
+            dismissFeedback()
+        }
+    }
+    
+    func enableAutoDismiss() {
+        abortAutodismiss()
+        perform(#selector(dismissFeedback), with: nil, afterDelay: FeedbackViewController.autoDismissInterval)
     }
     
     func presentError(_ message: String) {
@@ -194,10 +200,16 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         present(controller, animated: true, completion: nil)
     }
     
+    func abortAutodismiss() {
+        progressBar.progress = 0
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(dismissFeedback), object: nil)
+    }
+    
     /**
      Instantly dismisses the FeedbackViewController if it is currently presented.
      */
     @objc public func dismissFeedback() {
+        abortAutodismiss()
         dismissFeedbackItem()
     }
     
@@ -211,25 +223,30 @@ public class FeedbackViewController: UIViewController, DismissDraggable, UIGestu
         dismissFeedback()
     }
     
-    internal func setupViews() {
-        let children = [reportIssueLabel, collectionView]
+    private func setupViews() {
+        let children = [reportIssueLabel, collectionView, progressBar]
         view.addSubviews(children)
     }
     
-    internal func setupConstraints() {
+    private func setupConstraints() {
         let labelTop = reportIssueLabel.topAnchor.constraint(equalTo: view.topAnchor)
-        let labelHeight = reportIssueLabel.heightAnchor.constraint(equalToConstant: FeedbackViewController.titleHeaderHeight)
+        let labelHeight = reportIssueLabel.heightAnchor.constraint(equalToConstant: 30.0)
         let labelLeading = reportIssueLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         let labelTrailing = reportIssueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         let collectionLabelSpacing = collectionView.topAnchor.constraint(equalTo: reportIssueLabel.bottomAnchor)
         let collectionLeading = collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         let collectionTrailing = collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        let collectionBarSpacing = collectionView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor)
+        let collectionBarSpacing = collectionView.bottomAnchor.constraint(equalTo: progressBar.topAnchor)
         
         let constraints = [labelTop, labelHeight, labelLeading, labelTrailing,
                            collectionLabelSpacing, collectionLeading, collectionTrailing, collectionBarSpacing]
         
         NSLayoutConstraint.activate(constraints)
+        
+        progressBar.heightAnchor.constraint(equalToConstant: 6.0).isActive = true
+        progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        progressBar.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
     }
     
     func send(_ item: FeedbackItem) {
@@ -263,7 +280,7 @@ extension FeedbackViewController: UICollectionViewDataSource {
         let item = sections[indexPath.row]
         
         cell.titleLabel.text = item.title
-        cell.imageView.tintColor = .white
+        cell.imageView.tintColor = .clear
         cell.imageView.image = item.image
         
         return cell
@@ -276,26 +293,20 @@ extension FeedbackViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sections.count
     }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // In case the view is scrolled, dismiss the feedback window immediately
+        // and reset the `progressBar` back to a full progress.
+        abortAutodismiss()
+        progressBar.progress = 1.0
+    }
 }
 
 extension FeedbackViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        abortAutodismiss()
         let item = sections[indexPath.row]
-
-        if detailedFeedbackEnabled, let eventsManager = eventsManager {
-            let feedbackViewController = FeedbackSubtypeViewController(eventsManager: eventsManager, feedbackType: item.feedbackType)
-
-            guard let parent = presentingViewController else {
-                dismiss(animated: true)
-                return
-            }
-
-            dismiss(animated: true) {
-                parent.present(feedbackViewController, animated: true, completion: nil)
-            }
-        } else {
-            send(item)
-        }
+        send(item)
     }
 }
 
@@ -307,9 +318,11 @@ extension FeedbackViewController: UICollectionViewDelegateFlowLayout {
         let width = traitCollection.verticalSizeClass == .compact
             ? floor(availableWidth / CGFloat(sections.count))
             : floor(availableWidth / CGFloat(sections.count / 2))
-        let cellHeight: CGFloat = FeedbackCollectionViewCell.Constants.circleSize.height
+        let item = sections[indexPath.row]
+        let titleHeight = item.title.height(constrainedTo: width, font: FeedbackCollectionViewCell.Constants.titleFont)
+        let cellHeight: CGFloat = FeedbackCollectionViewCell.Constants.imageSize.height
             + FeedbackCollectionViewCell.Constants.padding
-            + FeedbackCollectionViewCell.Constants.verticalPadding // top and bottom padding
+            + titleHeight
             + FeedbackViewController.verticalCellPadding
         return CGSize(width: width, height: cellHeight )
     }

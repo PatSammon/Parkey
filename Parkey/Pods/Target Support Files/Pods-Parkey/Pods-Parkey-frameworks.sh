@@ -176,31 +176,35 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
+  install_framework "${PODS_ROOT}/MapboxAccounts/MapboxAccounts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxDirections/MapboxDirections.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxNavigation/MapboxNavigation.framework"
+  install_framework "${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Solar/Solar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Turf/Turf.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxAccounts/MapboxAccounts.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxCommon/MapboxCommon.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxNavigationNative/MapboxNavigationNative.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearch/MapboxSearch.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearchUI/MapboxSearchUI.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
+  install_framework "${PODS_ROOT}/MapboxAccounts/MapboxAccounts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxDirections/MapboxDirections.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxNavigation/MapboxNavigation.framework"
+  install_framework "${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Solar/Solar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Turf/Turf.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxAccounts/MapboxAccounts.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxCommon/MapboxCommon.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxNavigationNative/MapboxNavigationNative.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearch/MapboxSearch.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearchUI/MapboxSearchUI.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

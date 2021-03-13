@@ -50,7 +50,7 @@
 		</data>
 		<key>Headers/MBXHttpRequest.h</key>
 		<data>
-		GM+dC4t0J8LMdqBm+gC8lTuHFeA=
+		x0/4eipMXgpM6hrtUfPENb0r1Vc=
 		</data>
 		<key>Headers/MBXHttpRequestError.h</key>
 		<data>
@@ -100,10 +100,6 @@
 		<data>
 		lEhkjdVEW5DN7hgFPanI4i8HbSY=
 		</data>
-		<key>Headers/MBXNsLogBackend.h</key>
-		<data>
-		3Zyfl9jHthYeoQfO5NRaR4yVBAo=
-		</data>
 		<key>Headers/MBXOfflineDataDomain.h</key>
 		<data>
 		IGfI22vviXgJCMLC0YryhMxnUDM=
@@ -152,10 +148,6 @@
 		<data>
 		RBKIEK+339nroGGu33Q7n6w0gVk=
 		</data>
-		<key>Headers/MBXOsLogBackend.h</key>
-		<data>
-		2yBAfNG1LkEhoP1vJ8WBgpEnASk=
-		</data>
 		<key>Headers/MBXPeerWrapper.h</key>
 		<data>
 		NBYUwbxWR89WusbfVOcUwvWr8LM=
@@ -188,10 +180,6 @@
 		<data>
 		l9yYgS7DsQiJQrYTGAY+sOY/yUo=
 		</data>
-		<key>Headers/MBXUAComponents.h</key>
-		<data>
-		HiGRYGYxUtDgAd9VYcRFK3FYrqM=
-		</data>
 		<key>Headers/MBXUrl.h</key>
 		<data>
 		UQcm8ID6dop1vH4j/Ai03Hb91S4=
@@ -204,13 +192,17 @@
 		<data>
 		NZ0yyKAS6+L6wL5yiECfKBx+YVg=
 		</data>
+		<key>Headers/MBXUserAgentComponents.h</key>
+		<data>
+		loWYliBNKApQePwnqH6wkBm/ciU=
+		</data>
 		<key>Headers/MBXValueConverter.h</key>
 		<data>
 		PU9AkhOLA4hpGGgcBOvWhLQBOlQ=
 		</data>
 		<key>Headers/MBXVersion.h</key>
 		<data>
-		47Zc00pKmSHJl9DoJaeC65tsy/Q=
+		tqGQL64j+lWkT6W9VQOHY7uQk50=
 		</data>
 		<key>Headers/MapboxAccounts.h</key>
 		<data>
@@ -218,11 +210,11 @@
 		</data>
 		<key>Headers/MapboxCommon.h</key>
 		<data>
-		LxB6nXiViuWKTZ3/xd7wWdW/kQM=
+		v4gAlMjGAhb8JcI9Ep7IydTCmFY=
 		</data>
 		<key>Headers/MapboxHttp.h</key>
 		<data>
-		VKlTXV08hC07+VJ0Q+As9ScHWHc=
+		BZIU62DesRkedf/ENG9Gz4myAUQ=
 		</data>
 		<key>Headers/MapboxLogging.h</key>
 		<data>
@@ -250,7 +242,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		7kYo/O3GfhTBYV422+TL3Skr+7c=
+		mTMYG4iaonYjEA47Jl+7j6GjJE8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -384,11 +376,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			GM+dC4t0J8LMdqBm+gC8lTuHFeA=
+			x0/4eipMXgpM6hrtUfPENb0r1Vc=
 			</data>
 			<key>hash2</key>
 			<data>
-			6YuK30mVAnAubig6wp+yszi37GMrWPgJr/sLQyfICvg=
+			pYhawcMvHhwGpJeCeSckT7zMCaVBWn87XSem0mekUB4=
 			</data>
 		</dict>
 		<key>Headers/MBXHttpRequestError.h</key>
@@ -523,17 +515,6 @@
 			aRHlU+eN7Qt5Db6PZ2UZplOmY8kyZwdaswa9En30vVo=
 			</data>
 		</dict>
-		<key>Headers/MBXNsLogBackend.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			3Zyfl9jHthYeoQfO5NRaR4yVBAo=
-			</data>
-			<key>hash2</key>
-			<data>
-			BNmR+rMLnoOlBQ+ztagjEBXarJApF/Xl3qWC6J5EpF4=
-			</data>
-		</dict>
 		<key>Headers/MBXOfflineDataDomain.h</key>
 		<dict>
 			<key>hash</key>
@@ -666,17 +647,6 @@
 			HWZcQYg57BKInXrpm64PF/ZKKdPYBVfAJzvCk2IeRsM=
 			</data>
 		</dict>
-		<key>Headers/MBXOsLogBackend.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2yBAfNG1LkEhoP1vJ8WBgpEnASk=
-			</data>
-			<key>hash2</key>
-			<data>
-			E1gX3CDKzyr2MAS5sMZlVcj7EKXAjEnyX8db2QLXst0=
-			</data>
-		</dict>
 		<key>Headers/MBXPeerWrapper.h</key>
 		<dict>
 			<key>hash</key>
@@ -765,17 +735,6 @@
 			voM/46w2PoRdQRA65X9phAPCbAi1e5WhvhOSjfW3z+c=
 			</data>
 		</dict>
-		<key>Headers/MBXUAComponents.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			HiGRYGYxUtDgAd9VYcRFK3FYrqM=
-			</data>
-			<key>hash2</key>
-			<data>
-			q7ihCDgAaLp+PueReBOaGLDL9a8XavQYKLruTvyE7Zo=
-			</data>
-		</dict>
 		<key>Headers/MBXUrl.h</key>
 		<dict>
 			<key>hash</key>
@@ -809,6 +768,17 @@
 			LL4QR7NFcH1Dnvw2tZ+HCQWnrXMd15TwSTcW0yOKQPU=
 			</data>
 		</dict>
+		<key>Headers/MBXUserAgentComponents.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			loWYliBNKApQePwnqH6wkBm/ciU=
+			</data>
+			<key>hash2</key>
+			<data>
+			CgwfOkajrK2xGuZm03icOIszDa5XpjeRyU7Zr03e1qs=
+			</data>
+		</dict>
 		<key>Headers/MBXValueConverter.h</key>
 		<dict>
 			<key>hash</key>
@@ -824,11 +794,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			47Zc00pKmSHJl9DoJaeC65tsy/Q=
+			tqGQL64j+lWkT6W9VQOHY7uQk50=
 			</data>
 			<key>hash2</key>
 			<data>
-			solExeMAYoMFDDV21ueeqmCX+maoYr4XaRhH56mRbPs=
+			7BKllLmzHzZ4bXY37fwvLZhTpXgvuq+F4gBHPScRQjI=
 			</data>
 		</dict>
 		<key>Headers/MapboxAccounts.h</key>
@@ -846,22 +816,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LxB6nXiViuWKTZ3/xd7wWdW/kQM=
+			v4gAlMjGAhb8JcI9Ep7IydTCmFY=
 			</data>
 			<key>hash2</key>
 			<data>
-			kO0/sG932Y2HnQSh7LfROB0V1g7OoowfjIjaVuGeWuc=
+			5Mf5DGBOuu4Lz3j+XQd1OgnAEUU0BIs40l9U2FwmK2s=
 			</data>
 		</dict>
 		<key>Headers/MapboxHttp.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VKlTXV08hC07+VJ0Q+As9ScHWHc=
+			BZIU62DesRkedf/ENG9Gz4myAUQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			eCrWMYQpNh/dw/6cC+svRfdwEPwyfDxUf6KUlyIyY+k=
+			ujJ2I2kF8VSwNIcPFaY6HXTDuYxAPM3ez4sVr53SQ/c=
 			</data>
 		</dict>
 		<key>Headers/MapboxLogging.h</key>

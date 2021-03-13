@@ -1,8 +1,4 @@
 import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-import Turf
 
 public typealias OfflineVersion = String
 public typealias OfflineDownloaderCompletionHandler = (_ location: URL?,_ response: URLResponse?, _ error: Error?) -> Void
@@ -28,7 +24,7 @@ public protocol OfflineDirectionsProtocol {
      - parameter version: The version to download. Version is represented as a String (yyyy-MM-dd-x)
      - parameter completionHandler: A closure of type `OfflineDownloaderCompletionHandler` which will be called when the request completes
      */
-    func downloadTiles(in coordinateBounds: BoundingBox, version: OfflineVersion, completionHandler: @escaping OfflineDownloaderCompletionHandler) -> URLSessionDownloadTask
+    func downloadTiles(in coordinateBounds: CoordinateBounds, version: OfflineVersion, completionHandler: @escaping OfflineDownloaderCompletionHandler) -> URLSessionDownloadTask
 }
 
 extension Directions: OfflineDirectionsProtocol {
@@ -49,7 +45,7 @@ extension Directions: OfflineDirectionsProtocol {
      - parameter version: A version obtained from `availableVersionsURL`.
      - returns: The URL to generate and download the tile pack that covers the coordinate bounds.
      */
-    public func tilesURL(for coordinateBounds: BoundingBox, version: OfflineVersion) -> URL {
+    public func tilesURL(for coordinateBounds: CoordinateBounds, version: OfflineVersion) -> URL {
         let url = credentials.host.appendingPathComponent("route-tiles/v1").appendingPathComponent(coordinateBounds.description)
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         components?.queryItems = [URLQueryItem(name: "version", value: version),
@@ -66,29 +62,19 @@ extension Directions: OfflineDirectionsProtocol {
     public func fetchAvailableOfflineVersions(completionHandler: @escaping OfflineVersionsHandler) -> URLSessionDataTask {
         let task = URLSession.shared.dataTask(with: availableVersionsURL) { (data, response, error) in
             if let error = error {
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
-                }
-                return
+                return completionHandler(nil, error)
             }
             
             guard let data = data else {
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
-                }
-                return
+                return completionHandler(nil, error)
             }
             
             do {
                 let versionResponse = try JSONDecoder().decode(AvailableVersionsResponse.self, from: data)
                 let availableVersions = versionResponse.availableVersions.sorted(by: >)
-                DispatchQueue.main.async {
-                    completionHandler(availableVersions, error)
-                }
+                completionHandler(availableVersions, error)
             } catch {
-                DispatchQueue.main.async {
-                    completionHandler(nil, error)
-                }
+                completionHandler(nil, error)
             }
         }
         
@@ -105,13 +91,11 @@ extension Directions: OfflineDirectionsProtocol {
      - parameter completionHandler: A closure of type `OfflineDownloaderCompletionHandler` which will be called when the request completes
      */
     @discardableResult
-    public func downloadTiles(in coordinateBounds: BoundingBox,
+    public func downloadTiles(in coordinateBounds: CoordinateBounds,
                               version: OfflineVersion,
                               completionHandler: @escaping OfflineDownloaderCompletionHandler) -> URLSessionDownloadTask {
         let url = tilesURL(for: coordinateBounds, version: version)
-        let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: url) {
-                completionHandler($0, $1, $2)
-            }
+        let task: URLSessionDownloadTask = URLSession.shared.downloadTask(with: url, completionHandler: completionHandler)
         task.resume()
         return task
     }

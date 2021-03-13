@@ -153,10 +153,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logowords.png" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-qq-TFE">
-                                <rect key="frame" x="-331" y="-114" width="834" height="403"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6c-82-Xrw">
                                 <rect key="frame" x="257" y="638" width="94" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -173,6 +169,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logowords.png" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-qq-TFE">
+                                <rect key="frame" x="-334" y="-93" width="822" height="354"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RiI-AC-yMf"/>
                         <color key="backgroundColor" systemColor="secondaryLabelColor"/>
@@ -184,6 +184,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4k6-c0-nNu"/>
+                    <connections>
+                        <outlet property="Logo" destination="vQw-P1-8aQ" id="vhy-eI-2kY"/>
+                        <outlet property="ParKeyLogo" destination="vQw-P1-8aQ" id="erP-HW-iUw"/>
+                        <outlet property="account" destination="vQw-P1-8aQ" id="jwG-kN-UkM"/>
+                        <outlet property="voice" destination="vQw-P1-8aQ" id="iwB-bj-Qlx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag5-Yk-GhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

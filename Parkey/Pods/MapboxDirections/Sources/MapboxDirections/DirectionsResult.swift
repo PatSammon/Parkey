@@ -1,9 +1,7 @@
 import Foundation
-import Polyline
-#if canImport(CoreLocation)
+import struct Polyline.Polyline
 import CoreLocation
-#endif
-import Turf
+import struct Turf.LineString
 
 /**
  A `DirectionsResult` represents a result returned from either the Mapbox Directions service.
@@ -16,7 +14,6 @@ open class DirectionsResult: Codable {
         case legs
         case distance
         case expectedTravelTime = "duration"
-        case typicalTravelTime = "duration_typical"
         case directionsOptions
         case routeIdentifier
         case speechLocale = "voiceLocale"
@@ -24,13 +21,11 @@ open class DirectionsResult: Codable {
     
     // MARK: Creating a Directions Result
     
-    init(legs: [RouteLeg], shape: LineString?, distance: CLLocationDistance, expectedTravelTime: TimeInterval, typicalTravelTime: TimeInterval? = nil) {
+    init(legs: [RouteLeg], shape: LineString?, distance: CLLocationDistance, expectedTravelTime: TimeInterval) {
         self.legs = legs
         self.shape = shape
         self.distance = distance
         self.expectedTravelTime = expectedTravelTime
-        self.typicalTravelTime = typicalTravelTime
-        self.responseContainsSpeechLocale = false
     }
     
     public required init(from decoder: Decoder) throws {
@@ -52,7 +47,6 @@ open class DirectionsResult: Codable {
         
         distance = try container.decode(CLLocationDistance.self, forKey: .distance)
         expectedTravelTime = try container.decode(TimeInterval.self, forKey: .expectedTravelTime)
-        typicalTravelTime = try container.decodeIfPresent(TimeInterval.self, forKey: .typicalTravelTime)
     
         if let polyLineString = try container.decodeIfPresent(PolyLineString.self, forKey: .shape) {
             shape = try LineString(polyLineString: polyLineString)
@@ -68,8 +62,6 @@ open class DirectionsResult: Codable {
         } else {
             speechLocale = nil
         }
-
-        responseContainsSpeechLocale = container.contains(.speechLocale)
     }
     
     
@@ -84,12 +76,8 @@ open class DirectionsResult: Codable {
         }
         try container.encode(distance, forKey: .distance)
         try container.encode(expectedTravelTime, forKey: .expectedTravelTime)
-        try container.encodeIfPresent(typicalTravelTime, forKey: .typicalTravelTime)
         try container.encodeIfPresent(routeIdentifier, forKey: .routeIdentifier)
-
-        if responseContainsSpeechLocale {
-            try container.encode(speechLocale?.identifier, forKey: .speechLocale)
-        }
+        try container.encodeIfPresent(speechLocale?.identifier, forKey: .speechLocale)
     }
     
     // MARK: Getting the Shape of the Route
@@ -145,15 +133,6 @@ open class DirectionsResult: Codable {
      */
     open var expectedTravelTime: TimeInterval
     
-    /**
-     The route’s typical travel time, measured in seconds.
-     
-     The value of this property reflects the typical time it takes to traverse the entire route. It is the sum of the `typicalTravelTime` properties of the route’s legs. This property is available when using the `DirectionsProfileIdentifier.automobileAvoidingTraffic` profile. This property reflects typical traffic conditions at the time of the request, not necessarily the typical traffic conditions at the time the user would begin the route. If the route makes use of a ferry, the typical travel time may additionally be subject to the schedule of this service.
-     
-     Do not assume that the user would travel along the route at a fixed speed. For more granular typical travel times, use the `RouteLeg.typicalTravelTime` or `RouteStep.typicalTravelTime`.
-     */
-    open var typicalTravelTime: TimeInterval?
-    
     // MARK: Configuring Speech Synthesis
     
     /**
@@ -189,15 +168,6 @@ open class DirectionsResult: Codable {
      This property does not persist after encoding and decoding.
      */
     open var responseEndDate: Date?
-
-    /**
-     Internal indicator of whether response contained the `voiceLocale` entry.
-
-     Directions API includes `voiceLocale` if `voice_instructions=true` option was specified in the request.
-
-     This property persists after encoding and decoding.
-     */
-    internal let responseContainsSpeechLocale: Bool
 }
 
 extension DirectionsResult: CustomStringConvertible {
@@ -205,7 +175,6 @@ extension DirectionsResult: CustomStringConvertible {
         return legs.map { $0.name }.joined(separator: " – ")
     }
 }
-
 extension DirectionsResult: CustomQuickLookConvertible {
     func debugQuickLookObject() -> Any? {
         guard let shape = shape else {

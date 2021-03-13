@@ -1,5 +1,7 @@
 import UIKit
 import MapboxDirections
+import MapboxCoreNavigation
+import Turf
 
 /// A view that contains a simple image indicating a type of maneuver.
 @IBDesignable
@@ -32,25 +34,6 @@ open class ManeuverView: UIView {
             setNeedsDisplay()
         }
     }
-
-    @objc public dynamic var primaryColorHighlighted: UIColor = .defaultTurnArrowPrimaryHighlighted {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-
-    @objc public dynamic var secondaryColorHighlighted: UIColor = .defaultTurnArrowSecondaryHighlighted {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-
-    public var shouldShowHighlightedColors: Bool = false {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-
 
     public var isStart = false {
         didSet {
@@ -92,21 +75,19 @@ open class ManeuverView: UIView {
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        let currentPrimaryColor = shouldShowHighlightedColors ? primaryColorHighlighted : primaryColor
-        let currentSecondaryColor = shouldShowHighlightedColors ? secondaryColorHighlighted : secondaryColor
         transform = .identity
         let resizing: ManeuversStyleKit.ResizingBehavior = .aspectFit
 
         #if TARGET_INTERFACE_BUILDER
-        ManeuversStyleKit.drawFork(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor, secondaryColor: currentSecondaryColor)
-        return
+            ManeuversStyleKit.drawFork(frame: bounds, resizing: resizing, primaryColor: primaryColor, secondaryColor: secondaryColor)
+            return
         #endif
 
         guard let visualInstruction = visualInstruction else {
             if isStart {
-                ManeuversStyleKit.drawStarting(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawStarting(frame: bounds, resizing: resizing, primaryColor: primaryColor)
             } else if isEnd {
-                ManeuversStyleKit.drawDestination(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawDestination(frame: bounds, resizing: resizing, primaryColor: primaryColor)
             }
             return
         }
@@ -120,53 +101,53 @@ open class ManeuverView: UIView {
 
         switch type {
         case .merge:
-            ManeuversStyleKit.drawMerge(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor, secondaryColor: currentSecondaryColor)
+            ManeuversStyleKit.drawMerge(frame: bounds, resizing: resizing, primaryColor: primaryColor, secondaryColor: secondaryColor)
             flip = [.left, .slightLeft, .sharpLeft].contains(direction)
         case .takeOffRamp:
-            ManeuversStyleKit.drawOfframp(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor, secondaryColor: currentSecondaryColor)
+            ManeuversStyleKit.drawOfframp(frame: bounds, resizing: resizing, primaryColor: primaryColor, secondaryColor: secondaryColor)
             flip = [.left, .slightLeft, .sharpLeft].contains(direction)
         case .reachFork:
-            ManeuversStyleKit.drawFork(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor, secondaryColor: currentSecondaryColor)
+            ManeuversStyleKit.drawFork(frame: bounds, resizing: resizing, primaryColor: primaryColor, secondaryColor: secondaryColor)
             flip = [.left, .slightLeft, .sharpLeft].contains(direction)
         case .takeRoundabout, .turnAtRoundabout, .takeRotary:
-            ManeuversStyleKit.drawRoundabout(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor, secondaryColor: currentSecondaryColor, roundabout_angle: CGFloat(visualInstruction.finalHeading ?? 180))
+            ManeuversStyleKit.drawRoundabout(frame: bounds, resizing: resizing, primaryColor: primaryColor, secondaryColor: secondaryColor, roundabout_angle: CGFloat(visualInstruction.finalHeading ?? 180))
             flip = drivingSide == .left
             
         case .arrive:
             switch direction {
             case .right:
-                ManeuversStyleKit.drawArriveright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArriveright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
             case .left:
-                ManeuversStyleKit.drawArriveright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArriveright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = true
             default:
-                ManeuversStyleKit.drawArrive(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrive(frame: bounds, resizing: resizing, primaryColor: primaryColor)
             }
         default:
             switch direction {
             case .right:
-                ManeuversStyleKit.drawArrowright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = false
             case .slightRight:
-                ManeuversStyleKit.drawArrowslightright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowslightright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = false
             case .sharpRight:
-                ManeuversStyleKit.drawArrowsharpright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowsharpright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = false
             case .left:
-                ManeuversStyleKit.drawArrowright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = true
             case .slightLeft:
-                ManeuversStyleKit.drawArrowslightright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowslightright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = true
             case .sharpLeft:
-                ManeuversStyleKit.drawArrowsharpright(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowsharpright(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = true
             case .uTurn:
-                ManeuversStyleKit.drawArrow180right(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrow180right(frame: bounds, resizing: resizing, primaryColor: primaryColor)
                 flip = drivingSide == .right // 180 turn is turning clockwise so we flip it if it's right-hand rule of the road
             default:
-                ManeuversStyleKit.drawArrowstraight(frame: bounds, resizing: resizing, primaryColor: currentPrimaryColor)
+                ManeuversStyleKit.drawArrowstraight(frame: bounds, resizing: resizing, primaryColor: primaryColor)
             }
         }
 

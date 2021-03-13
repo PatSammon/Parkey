@@ -1,8 +1,8 @@
 CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/MapboxCoreNavigation
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/MapboxDirections" "${PODS_CONFIGURATION_BUILD_DIR}/MapboxMobileEvents" "${PODS_CONFIGURATION_BUILD_DIR}/Polyline" "${PODS_CONFIGURATION_BUILD_DIR}/Turf" "${PODS_ROOT}/MapboxAccounts" "${PODS_ROOT}/MapboxCommon" "${PODS_ROOT}/MapboxNavigationNative" "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxAccounts" "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxCommon" "${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxNavigationNative"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/MapboxDirections" "${PODS_CONFIGURATION_BUILD_DIR}/MapboxMobileEvents" "${PODS_CONFIGURATION_BUILD_DIR}/Polyline" "${PODS_CONFIGURATION_BUILD_DIR}/Turf" "${PODS_ROOT}/MapboxAccounts" "${PODS_ROOT}/MapboxNavigationNative"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-OTHER_LDFLAGS = $(inherited) -framework "MapboxAccounts" -framework "MapboxCommon" -framework "MapboxNavigationNative"
+OTHER_LDFLAGS = $(inherited) -framework "MapboxAccounts" -framework "MapboxNavigationNative"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

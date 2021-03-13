@@ -1,18 +1,21 @@
 import Foundation
 
 extension UIImage {
-    
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1.0, height: 1.0)) {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
-        color.setFill()
-        UIRectFill(rect)
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+    public func roundedWithBorder(width: CGFloat, color: UIColor) -> UIImage? {
+        let square = CGSize(width: min(size.width, size.height) + width * 3, height: min(size.width, size.height) + width * 3)
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: square))
+        imageView.contentMode = .center
+        imageView.image = self
+        imageView.layer.cornerRadius = square.width/2
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = width
+        imageView.layer.backgroundColor = color.cgColor
+        imageView.layer.borderColor = color.cgColor
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
         defer { UIGraphicsEndImageContext() }
-        
-        guard let cgImage = image?.cgImage else { return nil }
-        self.init(cgImage: cgImage)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.render(in: context)
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
     
     func withCenteredText(_ text: String, color: UIColor, font: UIFont, scale: CGFloat) -> UIImage {
