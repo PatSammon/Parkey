@@ -5,17 +5,13 @@ import Turf
 /**
  `RouteProgress` stores the user’s progress along a route.
  */
-open class RouteProgress: Codable {
+open class RouteProgress {
     private static let reroutingAccuracy: CLLocationAccuracy = 90
-    
-    var indexedRoute: IndexedRoute
 
     /**
      Returns the current `Route`.
      */
-    public var route: Route {
-        return indexedRoute.0
-    }
+    public let route: Route
     
     public let routeOptions: RouteOptions
 
@@ -145,13 +141,6 @@ open class RouteProgress: Codable {
     }
     
     /**
-     Upcoming `RouteAlerts` as reported by the navigation engine.
-     
-     The contents of the array depend on user's current progress along the route and are modified on each location update. This array contains only the alerts that the user has not passed. Some events may have non-zero length and are also included while the user is traversing it. You can use this property to get information about incoming points of interest.
-     */
-    public internal(set) var upcomingRouteAlerts: [RouteAlert] = []
-    
-    /**
      Returns an array of `CLLocationCoordinate2D` of the coordinates along the current step and any adjacent steps.
      
      - important: The adjacent steps may be part of legs other than the current leg.
@@ -174,27 +163,59 @@ open class RouteProgress: Codable {
     /**
      If the route contains both `segmentCongestionLevels` and `expectedSegmentTravelTimes`, this property is set to a deeply nested array of `TimeCongestionLevels` per segment per step per leg.
      */
-    public private(set) var congestionTravelTimesSegmentsByStep: [[[TimedCongestionLevel]]] = []
+    public var congestionTravelTimesSegmentsByStep: [[[TimedCongestionLevel]]] = []
 
     /**
      An dictionary containing a `TimeInterval` total per `CongestionLevel`. Only `CongestionLevel` founnd on that step will present. Broken up by leg and then step.
      */
-    public private(set) var congestionTimesPerStep: [[[CongestionLevel: TimeInterval]]]  = [[[:]]]
+    public var congestionTimesPerStep: [[[CongestionLevel: TimeInterval]]]  = [[[:]]]
 
     /**
      Intializes a new `RouteProgress`.
 
      - parameter route: The route to follow.
-     - parameter routeIndex: The index of the route in the `RouteResponse`. By default, the route is the first route in the response.
      - parameter legIndex: Zero-based index indicating the current leg the user is on.
      */
-    public init(route: Route, routeIndex: Int, options: RouteOptions, legIndex: Int = 0, spokenInstructionIndex: Int = 0) {
-        self.indexedRoute = (route, routeIndex)
+    public init(route: Route, options: RouteOptions, legIndex: Int = 0, spokenInstructionIndex: Int = 0) {
+        self.route = route
         self.routeOptions = options
         self.legIndex = legIndex
         self.currentLegProgress = RouteLegProgress(leg: route.legs[legIndex], stepIndex: 0, spokenInstructionIndex: spokenInstructionIndex)
 
-        self.calculateLegsCongestion()
+        for (legIndex, leg) in route.legs.enumerated() {
+            var maneuverCoordinateIndex = 0
+
+            congestionTimesPerStep.append([])
+
+            /// An index into the route’s coordinates and congestionTravelTimesSegmentsByStep that corresponds to a step’s maneuver location.
+            var congestionTravelTimesSegmentsByLeg: [[TimedCongestionLevel]] = []
+
+            if let segmentCongestionLevels = leg.segmentCongestionLevels, let expectedSegmentTravelTimes = leg.expectedSegmentTravelTimes {
+                for step in leg.steps {
+                    guard let coordinates = step.shape?.coordinates else { continue }
+                    let stepCoordinateCount = step.maneuverType == .arrive ? Int(coordinates.count) : coordinates.dropLast().count
+                    let nextManeuverCoordinateIndex = maneuverCoordinateIndex + stepCoordinateCount - 1
+
+                    guard nextManeuverCoordinateIndex < segmentCongestionLevels.count else { continue }
+                    guard nextManeuverCoordinateIndex < expectedSegmentTravelTimes.count else { continue }
+
+                    let stepSegmentCongestionLevels = Array(segmentCongestionLevels[maneuverCoordinateIndex..<nextManeuverCoordinateIndex])
+                    let stepSegmentTravelTimes = Array(expectedSegmentTravelTimes[maneuverCoordinateIndex..<nextManeuverCoordinateIndex])
+                    maneuverCoordinateIndex = nextManeuverCoordinateIndex
+
+                    let stepTimedCongestionLevels = Array(zip(stepSegmentCongestionLevels, stepSegmentTravelTimes))
+                    congestionTravelTimesSegmentsByLeg.append(stepTimedCongestionLevels)
+                    var stepCongestionValues: [CongestionLevel: TimeInterval] = [:]
+                    for (segmentCongestion, segmentTime) in stepTimedCongestionLevels {
+                        stepCongestionValues[segmentCongestion] = (stepCongestionValues[segmentCongestion] ?? 0) + segmentTime
+                    }
+
+                    congestionTimesPerStep[legIndex].append(stepCongestionValues)
+                }
+            }
+
+            congestionTravelTimesSegmentsByStep.append(congestionTravelTimesSegmentsByLeg)
+        }
     }
 
     public var averageCongestionLevelRemainingOnLeg: CongestionLevel? {
@@ -251,108 +272,401 @@ open class RouteProgress: Codable {
 
         return newOptions
     }
+}
+
+/**
+ `RouteLegProgress` stores the user’s progress along a route leg.
+ */
+open class RouteLegProgress {
+    /**
+     Returns the current `RouteLeg`.
+     */
+    public let leg: RouteLeg
+
+    /**
+     Index representing the current step.
+     */
+    public var stepIndex: Int {
+        didSet {
+            assert(stepIndex >= 0 && stepIndex < leg.steps.endIndex)
+            currentStepProgress = RouteStepProgress(step: currentStep)
+        }
+    }
+
+    /**
+     The remaining steps for user to complete.
+     */
+    public var remainingSteps: [RouteStep] {
+        return Array(leg.steps.suffix(from: stepIndex + 1))
+    }
+
+    /**
+     Total distance traveled in meters along current leg.
+     */
+    public var distanceTraveled: CLLocationDistance {
+        return leg.steps.prefix(upTo: stepIndex).map { $0.distance }.reduce(0, +) + currentStepProgress.distanceTraveled
+    }
+
+    /**
+     Duration remaining in seconds on current leg.
+     */
+    public var durationRemaining: TimeInterval {
+        return remainingSteps.map { $0.expectedTravelTime }.reduce(0, +) + currentStepProgress.durationRemaining
+    }
+
+    /**
+     Distance remaining on the current leg.
+     */
+    public var distanceRemaining: CLLocationDistance {
+        return remainingSteps.map { $0.distance }.reduce(0, +) + currentStepProgress.distanceRemaining
+    }
+
+    /**
+     Number between 0 and 1 representing how far along the current leg the user has traveled.
+     */
+    public var fractionTraveled: Double {
+        return distanceTraveled / leg.distance
+    }
+
+    public var userHasArrivedAtWaypoint = false
+
+    /**
+     Returns the `RouteStep` before a given step. Returns `nil` if there is no step prior.
+     */
+    public func stepBefore(_ step: RouteStep) -> RouteStep? {
+        guard let index = leg.steps.firstIndex(of: step) else {
+            return nil
+        }
+        if index > 0 {
+            return leg.steps[index-1]
+        }
+        return nil
+    }
+
+    /**
+     Returns the `RouteStep` after a given step. Returns `nil` if there is not a step after.
+     */
+    public func stepAfter(_ step: RouteStep) -> RouteStep? {
+        guard let index = leg.steps.firstIndex(of: step) else {
+            return nil
+        }
+        if index+1 < leg.steps.endIndex {
+            return leg.steps[index+1]
+        }
+        return nil
+    }
+
+    /**
+     Returns the `RouteStep` before the current step.
+
+     If there is no `priorStep`, nil is returned.
+     */
+    public var priorStep: RouteStep? {
+        guard stepIndex - 1 >= 0 else {
+            return nil
+        }
+        return leg.steps[stepIndex - 1]
+    }
+
+    /**
+     Returns the current `RouteStep` for the leg the user is on.
+     */
+    public var currentStep: RouteStep {
+        return leg.steps[stepIndex]
+    }
+
+    /**
+     Returns the upcoming `RouteStep`.
+
+     If there is no `upcomingStep`, nil is returned.
+     */
+    @available(swift, obsoleted: 0.1, renamed: "upcomingStep")
+    public var upComingStep: RouteStep? {
+        fatalError()
+    }
     
-    func calculateLegsCongestion() {
-        congestionTimesPerStep.removeAll()
-        congestionTravelTimesSegmentsByStep.removeAll()
-        
-        for (legIndex, leg) in route.legs.enumerated() {
-            var maneuverCoordinateIndex = 0
+    public var upcomingStep: RouteStep? {
+        guard stepIndex + 1 < leg.steps.endIndex else {
+            return nil
+        }
+        return leg.steps[stepIndex + 1]
+    }
 
-            congestionTimesPerStep.append([])
+    /**
+     Returns step 2 steps ahead.
 
-            /// An index into the route’s coordinates and congestionTravelTimesSegmentsByStep that corresponds to a step’s maneuver location.
-            var congestionTravelTimesSegmentsByLeg: [[TimedCongestionLevel]] = []
+     If there is no `followOnStep`, nil is returned.
+     */
+    public var followOnStep: RouteStep? {
+        guard stepIndex + 2 < leg.steps.endIndex else {
+            return nil
+        }
+        return leg.steps[stepIndex + 2]
+    }
 
-            if let segmentCongestionLevels = leg.segmentCongestionLevels, let expectedSegmentTravelTimes = leg.expectedSegmentTravelTimes {
-                for step in leg.steps {
-                    guard let coordinates = step.shape?.coordinates else { continue }
-                    let stepCoordinateCount = step.maneuverType == .arrive ? Int(coordinates.count) : coordinates.dropLast().count
-                    let nextManeuverCoordinateIndex = maneuverCoordinateIndex + stepCoordinateCount - 1
+    /**
+     Return bool whether step provided is the current `RouteStep` the user is on.
+     */
+    public func isCurrentStep(_ step: RouteStep) -> Bool {
+        return step == currentStep
+    }
 
-                    guard nextManeuverCoordinateIndex < segmentCongestionLevels.count else { continue }
-                    guard nextManeuverCoordinateIndex < expectedSegmentTravelTimes.count else { continue }
+    /**
+     Returns the progress along the current `RouteStep`.
+     */
+    public var currentStepProgress: RouteStepProgress
 
-                    let stepSegmentCongestionLevels = Array(segmentCongestionLevels[maneuverCoordinateIndex..<nextManeuverCoordinateIndex])
-                    let stepSegmentTravelTimes = Array(expectedSegmentTravelTimes[maneuverCoordinateIndex..<nextManeuverCoordinateIndex])
-                    maneuverCoordinateIndex = nextManeuverCoordinateIndex
+    /**
+     Intializes a new `RouteLegProgress`.
 
-                    let stepTimedCongestionLevels = Array(zip(stepSegmentCongestionLevels, stepSegmentTravelTimes))
-                    congestionTravelTimesSegmentsByLeg.append(stepTimedCongestionLevels)
-                    var stepCongestionValues: [CongestionLevel: TimeInterval] = [:]
-                    for (segmentCongestion, segmentTime) in stepTimedCongestionLevels {
-                        stepCongestionValues[segmentCongestion] = (stepCongestionValues[segmentCongestion] ?? 0) + segmentTime
-                    }
+     - parameter leg: Leg on a `Route`.
+     - parameter stepIndex: Current step the user is on.
+     */
+    public init(leg: RouteLeg, stepIndex: Int = 0, spokenInstructionIndex: Int = 0) {
+        self.leg = leg
+        self.stepIndex = stepIndex
+        currentStepProgress = RouteStepProgress(step: leg.steps[stepIndex], spokenInstructionIndex: spokenInstructionIndex)
+    }
 
-                    congestionTimesPerStep[legIndex].append(stepCongestionValues)
-                }
+    typealias StepIndexDistance = (index: Int, distance: CLLocationDistance)
+
+    func closestStep(to coordinate: CLLocationCoordinate2D) -> StepIndexDistance? {
+        var currentClosest: StepIndexDistance?
+        let remainingSteps = leg.steps.suffix(from: stepIndex)
+
+        for (currentStepIndex, step) in remainingSteps.enumerated() {
+            guard let shape = step.shape else { continue }
+            guard let closestCoordOnStep = shape.closestCoordinate(to: coordinate) else { continue }
+            let foundIndex = currentStepIndex + stepIndex
+
+            // First time around, currentClosest will be `nil`.
+            guard let currentClosestDistance = currentClosest?.distance else {
+                currentClosest = (index: foundIndex, distance: closestCoordOnStep.distance)
+                continue
             }
 
-            congestionTravelTimesSegmentsByStep.append(congestionTravelTimesSegmentsByLeg)
+            if closestCoordOnStep.distance < currentClosestDistance {
+                currentClosest = (index: foundIndex, distance: closestCoordOnStep.distance)
+            }
         }
+
+        return currentClosest
     }
     
     /**
-     Updates the current route with attributes from the given skeletal route.
+     The waypoints remaining on the current leg, not including the leg’s destination.
      */
-    public func refreshRoute(with refreshedRoute: RefreshedRoute, at location: CLLocation) {
-        route.refreshLegAttributes(from: refreshedRoute)
-        currentLegProgress = RouteLegProgress(leg: route.legs[legIndex],
-                                              stepIndex: currentLegProgress.stepIndex,
-                                              spokenInstructionIndex: currentLegProgress.currentStepProgress.spokenInstructionIndex)
-        calculateLegsCongestion()
-        updateDistanceTraveled(with: location)
+    func remainingWaypoints(among waypoints: [Waypoint]) -> [Waypoint] {
+        guard waypoints.count > 1 else {
+            // The leg has only a source and no via points. Save ourselves a call to RouteLeg.coordinates, which can be expensive.
+            return []
+        }
+        let legPolyline = leg.shape
+        guard let userCoordinateIndex = legPolyline.indexedCoordinateFromStart(distance: distanceTraveled)?.index else {
+            // The leg is empty, so none of the waypoints are meaningful.
+            return []
+        }
+        var slice = legPolyline
+        var accumulatedCoordinates = 0
+        return Array(waypoints.drop { (waypoint) -> Bool in
+            var newSlice = slice.sliced(from: waypoint.coordinate)
+            // Work around <https://github.com/mapbox/turf-swift/pull/79>.
+            if newSlice.coordinates.count > 2 && newSlice.coordinates.last == newSlice.coordinates.dropLast().last {
+                newSlice.coordinates.removeLast()
+            }
+            accumulatedCoordinates += slice.coordinates.count - newSlice.coordinates.count
+            slice = newSlice
+            return accumulatedCoordinates <= userCoordinateIndex
+        })
+    }
+
+    /**
+     Returns the SpeedLimit for the current position along the route. Returns SpeedLimit.invalid if the speed limit is unknown or missing.
+     
+     The maximum speed may be an advisory speed limit for segments where legal limits are not posted, such as highway entrance and exit ramps. If the speed limit along a particular segment is unknown, it is set to `nil`. If the speed is unregulated along the segment, such as on the German _Autobahn_ system, it is represented by a measurement whose value is `Double.infinity`.
+     
+     Speed limit data is available in [a number of countries and territories worldwide](https://docs.mapbox.com/help/how-mapbox-works/directions/).
+     */
+    public var currentSpeedLimit: Measurement<UnitSpeed>? {
+        guard let segmentMaximumSpeedLimits = leg.segmentMaximumSpeedLimits else {
+            return nil
+        }
+        
+        let distanceTraveled = currentStepProgress.distanceTraveled
+        guard var index = currentStep.shape?.indexedCoordinateFromStart(distance: distanceTraveled)?.index else {
+            return nil
+        }
+        
+        var range = leg.segmentRangesByStep[stepIndex]
+        
+        // indexedCoordinateFromStart(distance:) can return a coordinate indexed to the last coordinate of the step, which is past any segment on the current step.
+        if index == range.count && upcomingStep != nil {
+            range = leg.segmentRangesByStep[stepIndex.advanced(by: 1)]
+            index = 0
+        }
+        guard index < range.count && range.upperBound <= segmentMaximumSpeedLimits.endIndex else {
+            return nil
+        }
+        
+        let speedLimit = segmentMaximumSpeedLimits[range][range.lowerBound.advanced(by: index)]
+        if let speedUnit = currentStep.speedLimitUnit {
+            return speedLimit?.converted(to: speedUnit)
+        } else {
+            return speedLimit
+        }
+    }
+}
+
+/**
+ `RouteStepProgress` stores the user’s progress along a route step.
+ */
+open class RouteStepProgress {
+    /**
+     Returns the current `RouteStep`.
+     */
+    public let step: RouteStep
+
+    /**
+     Returns distance user has traveled along current step.
+     */
+    public var distanceTraveled: CLLocationDistance = 0
+
+    /**
+     Returns distance from user to end of step.
+     */
+    public var userDistanceToManeuverLocation: CLLocationDistance
+
+    /**
+     Total distance in meters remaining on current step.
+     */
+    public var distanceRemaining: CLLocationDistance {
+        return step.distance - distanceTraveled
+    }
+
+    /**
+     Number between 0 and 1 representing fraction of current step traveled.
+     */
+    public var fractionTraveled: Double {
+        guard step.distance > 0 else { return 1 }
+        return distanceTraveled / step.distance
+    }
+
+    /**
+     Number of seconds remaining on current step.
+     */
+    public var durationRemaining: TimeInterval {
+        return (1 - fractionTraveled) * step.expectedTravelTime
     }
     
     /**
-     Increments the progress according to new location specified.
-     - parameter location: Updated user location.
+     Intializes a new `RouteStepProgress`.
+
+     - parameter step: Step on a `RouteLeg`.
      */
-    public func updateDistanceTraveled(with location: CLLocation) {
-        let stepProgress = currentLegProgress.currentStepProgress
-        let step = stepProgress.step
-        
-        //Increment the progress model
-        guard let polyline = step.shape else {
-            preconditionFailure("Route steps used for navigation must have shape data")
+    public init(step: RouteStep, spokenInstructionIndex: Int = 0) {
+        self.step = step
+        self.userDistanceToManeuverLocation = step.distance
+        self.intersectionIndex = 0
+        self.spokenInstructionIndex = spokenInstructionIndex
+    }
+
+    /**
+     All intersections on the current `RouteStep` and also the first intersection on the upcoming `RouteStep`.
+
+     The upcoming `RouteStep` first `Intersection` is added because it is omitted from the current step.
+     */
+    public var intersectionsIncludingUpcomingManeuverIntersection: [Intersection]?
+
+    /**
+     The next intersection the user will travel through.
+
+     The step must contain `intersectionsIncludingUpcomingManeuverIntersection` otherwise this property will be `nil`.
+     */
+    public var upcomingIntersection: Intersection? {
+        guard let intersections = intersectionsIncludingUpcomingManeuverIntersection, intersections.startIndex..<intersections.endIndex-1 ~= intersectionIndex else {
+            return nil
         }
-        if let closestCoordinate = polyline.closestCoordinate(to: location.coordinate) {
-            let remainingDistance = polyline.distance(from: closestCoordinate.coordinate)!
-            let distanceTraveled = step.distance - remainingDistance
-            stepProgress.distanceTraveled = distanceTraveled
+
+        return intersections[intersections.index(after: intersectionIndex)]
+    }
+
+    /**
+     Index representing the current intersection.
+     */
+    public var intersectionIndex: Int = 0
+
+    /**
+     The current intersection the user will travel through.
+
+     The step must contain `intersectionsIncludingUpcomingManeuverIntersection` otherwise this property will be `nil`.
+     */
+    public var currentIntersection: Intersection? {
+        guard let intersections = intersectionsIncludingUpcomingManeuverIntersection, intersections.startIndex..<intersections.endIndex ~= intersectionIndex else {
+            return nil
         }
+
+        return intersections[intersectionIndex]
+    }
+
+    /**
+     Returns an array of the calculated distances from the current intersection to the next intersection on the current step.
+     */
+    public var intersectionDistances: Array<CLLocationDistance>?
+
+    /**
+     The distance in meters the user is to the next intersection they will pass through.
+     */
+    public var userDistanceToUpcomingIntersection: CLLocationDistance?
+
+    /**
+     Index into `step.instructionsDisplayedAlongStep` representing the current visual instruction for the step.
+     */
+    public var visualInstructionIndex: Int = 0
+
+    /**
+     An `Array` of remaining `VisualInstruction` for a step.
+     */
+    public var remainingVisualInstructions: [VisualInstructionBanner]? {
+        guard let visualInstructions = step.instructionsDisplayedAlongStep else { return nil }
+        return Array(visualInstructions.suffix(from: visualInstructionIndex))
+    }
+
+    /**
+     Index into `step.instructionsSpokenAlongStep` representing the current spoken instruction.
+     */
+    public var spokenInstructionIndex: Int = 0
+
+    /**
+     An `Array` of remaining `SpokenInstruction` for a step.
+     */
+    public var remainingSpokenInstructions: [SpokenInstruction]? {
+        guard let instructions = step.instructionsSpokenAlongStep else { return nil }
+        return Array(instructions.suffix(from: spokenInstructionIndex))
+    }
+
+    /**
+     Current spoken instruction for the user's progress along a step.
+     */
+    public var currentSpokenInstruction: SpokenInstruction? {
+        guard let instructionsSpokenAlongStep = step.instructionsSpokenAlongStep else { return nil }
+        guard spokenInstructionIndex < instructionsSpokenAlongStep.count else { return nil }
+        return instructionsSpokenAlongStep[spokenInstructionIndex]
+    }
+
+    /**
+     Current visual instruction for the user's progress along a step.
+     */
+    public var currentVisualInstruction: VisualInstructionBanner? {
+        guard let instructionsDisplayedAlongStep = step.instructionsDisplayedAlongStep else { return nil }
+        guard visualInstructionIndex < instructionsDisplayedAlongStep.count else { return nil }
+        return instructionsDisplayedAlongStep[visualInstructionIndex]
     }
     
-    // MARK: - Codable implementation
-    
-    private enum CodingKeys: String, CodingKey {
-        case indexedRoute
-        case indexedRouteIndex
-        case routeOptions
-        case legIndex
-        case currentLegProgress
-    }
-        
-    required public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        let route = try container.decode(Route.self, forKey: .indexedRoute)
-        let routeIndex = try container.decode(Int.self, forKey: .indexedRouteIndex)
-        self.indexedRoute = (route, routeIndex)
-        self.routeOptions = try container.decode(RouteOptions.self, forKey: .routeOptions)
-        self.legIndex = try container.decode(Int.self, forKey: .legIndex)
-        self.currentLegProgress = try container.decode(RouteLegProgress.self, forKey: .currentLegProgress)
-        
-        calculateLegsCongestion()
+    public var keyPathsAffectingValueForRemainingVisualInstructions: Set<String> {
+        return ["step.instructionsDisplayedAlongStep", "visualInstructionIndex"]
     }
     
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(indexedRoute.0, forKey: .indexedRoute)
-        try container.encode(indexedRoute.1, forKey: .indexedRouteIndex)
-        try container.encode(routeOptions, forKey: .routeOptions)
-        try container.encode(legIndex, forKey: .legIndex)
-        try container.encode(currentLegProgress, forKey: .currentLegProgress)
+    public var keyPathsAffectingValueForRemainingSpokenInstructions: Set<String> {
+        return ["step.instructionsDisplayedAlongStep", "spokenInstructionIndex"]
     }
 }

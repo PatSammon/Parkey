@@ -33,14 +33,12 @@ open class Style: NSObject {
     /**
      URL of the style to display on the map during turn-by-turn navigation.
      */
-    @objc open var mapStyleURL: URL = MGLStyle.navigationDayStyleURL
+    @objc open var mapStyleURL: URL = MGLStyle.navigationGuidanceDayStyleURL
     
     /**
      URL of the style to display on the map when previewing a route, for example on CarPlay or your own route preview map.
-     
-     Defaults to same style as `mapStyleURL`.
      */
-    @objc open var previewMapStyleURL: URL = MGLStyle.navigationDayStyleURL
+    @objc open var previewMapStyleURL: URL = MGLStyle.navigationPreviewDayStyleURL
     
     /**
      Applies the style for all changed properties.
@@ -65,16 +63,10 @@ open class CancelButton: Button { }
 @objc(MBDismissButton)
 open class DismissButton: Button { }
 
-/**
- A rounded button with an icon that is designed to float above `NavigationMapView`.
- */
+/// :nodoc:
 @objc(MBFloatingButton)
 open class FloatingButton: Button {
-    /**
-     The default size of a floating button.
-     */
-    public static let buttonSize = CGSize(width: 50, height: 50)
-    
+    static let buttonSize = CGSize(width: 50, height: 50)
     static let sizeConstraintPriority = UILayoutPriority(999.0) //Don't fight with the stack view (superview) when it tries to hide buttons.
     
     lazy var widthConstraint: NSLayoutConstraint = {
@@ -100,14 +92,7 @@ open class FloatingButton: Button {
         }
     }
     
-    /**
-     Return a `FloatingButton` with given images and size.
-     
-     - parameter image: The `UIImage` of this button.
-     - parameter selectedImage: The `UIImage` of this button when selected.
-     - parameter size: The size of this button,  or `FloatingButton.buttonSize` if this argument is not specified.
-     */
-    public class func rounded<T: FloatingButton>(image: UIImage? = nil, selectedImage: UIImage? = nil, size: CGSize = FloatingButton.buttonSize) -> T {
+    class func rounded<T: FloatingButton>(image: UIImage? = nil, selectedImage: UIImage? = nil, size: CGSize = FloatingButton.buttonSize) -> T {
         let button = T.init(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.constrainedSize = size
@@ -231,37 +216,28 @@ open class StepListIndicatorView: UIView {
 open class StylableLabel: UILabel {
     // Workaround the fact that UILabel properties are not marked with UI_APPEARANCE_SELECTOR
     @objc dynamic open var normalTextColor: UIColor = .black {
-        didSet { update() }
+        didSet {
+            textColor = normalTextColor
+        }
     }
     
     @objc dynamic open var normalFont: UIFont = .systemFont(ofSize: 16) {
-        didSet { update() }
-    }
-
-    @objc dynamic public var textColorHighlighted: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) {
-        didSet { update() }
-    }
-
-    @objc public var showHighlightedTextColor: Bool = false {
-        didSet { update() }
-    }
-
-    open func update() {
-        textColor = showHighlightedTextColor ? textColorHighlighted : normalTextColor
-        font = normalFont
+        didSet {
+            font = normalFont
+        }
     }
 }
 
 /// :nodoc:
 @objc(MBStylableView)
 open class StylableView: UIView {
-    @objc dynamic public var borderWidth: CGFloat = 0.0 {
+    @objc dynamic var borderWidth: CGFloat = 0.0 {
         didSet {
             layer.borderWidth = borderWidth
         }
     }
     
-    @objc dynamic public var cornerRadius: CGFloat = 0.0 {
+    @objc dynamic var cornerRadius: CGFloat = 0.0 {
         didSet {
             layer.cornerRadius = cornerRadius
         }
@@ -298,12 +274,6 @@ open class DistanceLabel: StylableLabel {
     @objc dynamic public var unitTextColor: UIColor = #colorLiteral(red: 0.6274509804, green: 0.6274509804, blue: 0.6274509804, alpha: 1) {
         didSet { update() }
     }
-    @objc dynamic public var valueTextColorHighlighted: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) {
-        didSet { update() }
-    }
-    @objc dynamic public var unitTextColorHighlighted: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) {
-        didSet { update() }
-    }
     @objc dynamic public var valueFont: UIFont = UIFont.systemFont(ofSize: 16, weight: .medium) {
         didSet { update() }
     }
@@ -323,7 +293,7 @@ open class DistanceLabel: StylableLabel {
         }
     }
     
-    open override func update() {
+    fileprivate func update() {
         guard let attributedDistanceString = attributedDistanceString else {
             return
         }
@@ -336,11 +306,11 @@ open class DistanceLabel: StylableLabel {
             let foregroundColor: UIColor
             let font: UIFont
             if let _ = emphasizedDistanceString.attribute(.quantity, at: range.location, effectiveRange: nil) {
-                foregroundColor = showHighlightedTextColor ? valueTextColorHighlighted : valueTextColor
+                foregroundColor = valueTextColor
                 font = valueFont
                 hasQuantity = true
             } else {
-                foregroundColor = showHighlightedTextColor ? unitTextColorHighlighted : unitTextColor
+                foregroundColor = unitTextColor
                 font = unitFont
             }
             emphasizedDistanceString.addAttributes([.foregroundColor: foregroundColor, .font: font], range: range)
@@ -572,7 +542,7 @@ open class StylableButton: UIButton {
 open class ManeuverContainerView: UIView {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
-    @objc dynamic public var height: CGFloat = 100 {
+    @objc dynamic var height: CGFloat = 100 {
         didSet {
             heightConstraint.constant = height
             setNeedsUpdateConstraints()
@@ -594,10 +564,8 @@ open class BottomBannerView: UIView { }
 
 open class BottomPaddingView: BottomBannerView { }
 
-/**
- `NavigationAnnotation` is an annotation, which is used to mark final destination on `NavigationMapView`.
- */
-public class NavigationAnnotation: MGLPointAnnotation { }
+/// :nodoc:
+class NavigationAnnotation: MGLPointAnnotation { }
 
 /// :nodoc:
 @objc(MBMarkerView)

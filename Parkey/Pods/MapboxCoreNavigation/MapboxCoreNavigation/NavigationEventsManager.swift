@@ -31,7 +31,8 @@ open class NavigationEventsManager {
      Indicates whether the application depends on MapboxNavigation in addition to MapboxCoreNavigation.
      */
     var usesDefaultUserInterface = {
-        return Bundle.mapboxNavigationIfInstalled != nil
+        // Assumption: MapboxNavigation.framework includes NavigationViewController and exposes it to the Objective-C runtime as MapboxNavigation.NavigationViewController.
+        return NSClassFromString("MapboxNavigation.NavigationViewController") != nil
     }()
 
     /// :nodoc: the internal lower-level mobile events manager is an implementation detail which should not be manipulated directly

@@ -1,9 +1,5 @@
 import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#else
-import Turf
-#endif
 
 /**
  A `Tracepoint` represents a location matched to the road network.

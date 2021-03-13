@@ -64,7 +64,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate{
     /**
      Called immediately before the navigation view controller calculates a new route.
      
-     This method is called after `navigationViewController(_:shouldRerouteFrom:)` is called, simultaneously with the `Notification.Name.routeControllerWillReroute` notification being posted, and before `navigationViewController(_:didRerouteAlong:)` is called.
+     This method is called after `navigationViewController(_:shouldRerouteFrom:)` is called, simultaneously with the `RouteControllerWillReroute` notification being posted, and before `navigationViewController(_:didRerouteAlong:)` is called.
      
      - parameter navigationViewController: The navigation view controller that will calculate a new route.
      - parameter location: The user’s current location.
@@ -74,7 +74,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate{
     /**
      Called immediately after the navigation view controller receives a new route.
      
-     This method is called after `navigationViewController(_:willRerouteFrom:)` and simultaneously with the `Notification.Name.routeControllerDidReroute` notification being posted.
+     This method is called after `navigationViewController(_:willRerouteFrom:)` and simultaneously with the `RouteControllerDidReroute` notification being posted.
      
      - parameter navigationViewController: The navigation view controller that has calculated a new route.
      - parameter route: The new route.
@@ -84,7 +84,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate{
     /**
      Called when the navigation view controller fails to receive a new route.
      
-     This method is called after `navigationViewController(_:willRerouteFrom:)` and simultaneously with the `Notification.Name.routeControllerDidFailToReroute` notification being posted.
+     This method is called after `navigationViewController(_:willRerouteFrom:)` and simultaneously with the `RouteControllerDidFailToReroute` notification being posted.
      
      - parameter navigationViewController: The navigation view controller that has calculated a new route.
      - parameter error: An error raised during the process of obtaining a new route.
@@ -92,42 +92,18 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate{
     func navigationViewController(_ navigationViewController: NavigationViewController, didFailToRerouteWith error: Error)
     
     /**
-     Called immediately after the navigation view controller refreshes the route.
+     Returns an `MGLStyleLayer` that determines the appearance of the route line.
      
-     This method is called simultaneously with the `Notification.Name.routeControllerDidRefreshRoute` notification being posted.
-     
-     - parameter navigationViewController: The navigation view controller that has refreshed the route.
-     - parameter routeProgress: The updated route progress with the refreshed route.
-     */
-    func navigationViewController(_ navigationViewController: NavigationViewController, didRefresh routeProgress: RouteProgress)
-
-    /**
-     Returns an `MGLStyleLayer` that determines the appearance of the main route line.
-
      If this method is unimplemented, the navigation view controller’s map view draws the route line using an `MGLLineStyleLayer`.
-    */
-    func navigationViewController(_ navigationViewController: NavigationViewController, mainRouteStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
-
+     */
+    func navigationViewController(_ navigationViewController: NavigationViewController, routeStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
+    
     /**
-     Returns an `MGLStyleLayer` that determines the appearance of the casing around the main route line.
-
-     If this method is unimplemented, the navigation view controller’s map view draws the casing for the main route line using an `MGLLineStyleLayer`.
-    */
-    func navigationViewController(_ navigationViewController: NavigationViewController, mainRouteCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
-
-    /**
-     Returns an `MGLStyleLayer` that determines the appearance of alternative route lines.
-
-     If this method is unimplemented, the navigation view controller’s map view draws the alternative route lines using an `MGLLineStyleLayer`.
-    */
-    func navigationViewController(_ navigationViewController: NavigationViewController, alternativeRouteStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
-
-    /**
-     Returns an `MGLStyleLayer` that determines the appearance of the casing around the alternative route lines.
-
-     If this method is unimplemented, the navigation view controller’s map view draws the casing for the alternative route lines using an `MGLLineStyleLayer`.
-    */
-    func navigationViewController(_ navigationViewController: NavigationViewController, alternativeRouteCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
+     Returns an `MGLStyleLayer` that determines the appearance of the route line’s casing.
+     
+     If this method is unimplemented, the navigation view controller’s map view draws the route line’s casing using an `MGLLineStyleLayer` whose width is greater than that of the style layer returned by `navigationViewController(_:routeStyleLayerWithIdentifier:source:)`.
+     */
+    func navigationViewController(_ navigationViewController: NavigationViewController, routeCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer?
     
     /**
      Returns an `MGLShape` that represents the path of the route line.
@@ -197,6 +173,16 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate{
      - returns: The road name to display in the label, or nil to hide the label.
      */
     func navigationViewController(_ navigationViewController: NavigationViewController, roadNameAt location: CLLocation) -> String?
+    
+    //MARK: Obsolete
+    
+    @available(*, deprecated, message: "Use MGLMapViewDelegate.mapView(_:imageFor:) instead.")
+    
+    func navigationViewController(_ navigationViewController: NavigationViewController, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage?
+    
+    @available(*, deprecated, message: "Use MGLMapViewDelegate.mapView(_:viewFor:) instead.")
+    
+    func navigationViewController(_ navigationViewController: NavigationViewController, viewFor annotation: MGLAnnotation) -> MGLAnnotationView?
 }
 
 public extension NavigationViewControllerDelegate {
@@ -261,29 +247,15 @@ public extension NavigationViewControllerDelegate {
     /**
      `UnimplementedLogging` prints a warning to standard output the first time this method is called.
      */
-    func navigationViewController(_ navigationViewController: NavigationViewController, didRefresh routeProgress: RouteProgress) {
-        logUnimplemented(protocolType: NavigationViewControllerDelegate.self, level: .debug)
+    func navigationViewController(_ navigationViewController: NavigationViewController, routeStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
+        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
+        return nil
     }
-
+    
     /**
      `UnimplementedLogging` prints a warning to standard output the first time this method is called.
      */
-    func navigationViewController(_ navigationViewController: NavigationViewController, mainRouteStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
-        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
-        return nil
-    }
-
-    func navigationViewController(_ navigationViewController: NavigationViewController, mainRouteCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
-        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
-        return nil
-    }
-
-    func navigationViewController(_ navigationViewController: NavigationViewController, alternativeRouteStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
-        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
-        return nil
-    }
-
-    func navigationViewController(_ navigationViewController: NavigationViewController, alternativeRouteCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
+    func navigationViewController(_ navigationViewController: NavigationViewController, routeCasingStyleLayerWithIdentifier identifier: String, source: MGLSource) -> MGLStyleLayer? {
         logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
         return nil
     }
@@ -355,6 +327,22 @@ public extension NavigationViewControllerDelegate {
      `UnimplementedLogging` prints a warning to standard output the first time this method is called.
      */
     func navigationViewController(_ navigationViewController: NavigationViewController, roadNameAt location: CLLocation) -> String? {
+        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
+        return nil
+    }
+    
+    /**
+     `UnimplementedLogging` prints a warning to standard output the first time this method is called.
+     */
+    func navigationViewController(_ navigationViewController: NavigationViewController, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
+        logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
+        return nil
+    }
+    
+    /**
+     `UnimplementedLogging` prints a warning to standard output the first time this method is called.
+     */
+    func navigationViewController(_ navigationViewController: NavigationViewController, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         logUnimplemented(protocolType: NavigationViewControllerDelegate.self,  level: .debug)
         return nil
     }

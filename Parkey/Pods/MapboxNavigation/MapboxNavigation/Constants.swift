@@ -68,3 +68,8 @@ public struct StyleManagerNotificationUserInfoKey: Hashable, Equatable, RawRepre
      */
     static let styleManagerKey: StyleManagerNotificationUserInfoKey = .init(rawValue: "styleManager")
 }
+
+/**
+ Key used for constructing errors when spoken instructions fail.
+ */
+let SpokenInstructionErrorCodeKey: String = "MBSpokenInstructionErrorCode"

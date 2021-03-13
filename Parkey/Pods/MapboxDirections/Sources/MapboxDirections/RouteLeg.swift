@@ -1,9 +1,7 @@
 import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#endif
 import Polyline
-import Turf
+import struct Turf.LineString
 
 /**
  A `RouteLeg` object defines a single leg of a route between two waypoints. If the overall route has only two waypoints, it has a single `RouteLeg` object that covers the entire route. The route leg object includes information about the leg, such as its name, distance, and expected travel time. Depending on the criteria used to calculate the route, the route leg object may also include detailed turn-by-turn instructions.
@@ -18,11 +16,16 @@ open class RouteLeg: Codable {
         case name = "summary"
         case distance
         case expectedTravelTime = "duration"
-        case typicalTravelTime = "duration_typical"
         case profileIdentifier
         case annotation
-        case administrativeRegions = "admins"
-        case incidents
+    }
+    
+    private enum AnnotationCodingKeys: String, CodingKey {
+        case segmentDistances = "distance"
+        case expectedSegmentTravelTimes = "duration"
+        case segmentSpeeds = "speed"
+        case segmentCongestionLevels = "congestion"
+        case segmentMaximumSpeedLimits = "maxspeed"
     }
     
     // MARK: Creating a Leg
@@ -33,15 +36,13 @@ open class RouteLeg: Codable {
      - parameter steps: The steps that are traversed in order.
      - parameter name: A name that describes the route leg.
      - parameter expectedTravelTime: The route leg’s expected travel time, measured in seconds.
-     - parameter typicalTravelTime: The route leg’s typical travel time, measured in seconds.
      - parameter profileIdentifier: The primary mode of transportation for the route leg.
      */
-    public init(steps: [RouteStep], name: String, distance: CLLocationDistance, expectedTravelTime: TimeInterval, typicalTravelTime: TimeInterval? = nil, profileIdentifier: DirectionsProfileIdentifier) {
+    public init(steps: [RouteStep], name: String, distance: CLLocationDistance, expectedTravelTime: TimeInterval, profileIdentifier: DirectionsProfileIdentifier) {
         self.steps = steps
         self.name = name
         self.distance = distance
         self.expectedTravelTime = expectedTravelTime
-        self.typicalTravelTime = typicalTravelTime
         self.profileIdentifier = profileIdentifier
         
         segmentDistances = nil
@@ -60,10 +61,10 @@ open class RouteLeg: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         source = try container.decodeIfPresent(Waypoint.self, forKey: .source)
         destination = try container.decodeIfPresent(Waypoint.self, forKey: .destination)
+        steps = try container.decode([RouteStep].self, forKey: .steps)
         name = try container.decode(String.self, forKey: .name)
         distance = try container.decode(CLLocationDistance.self, forKey: .distance)
         expectedTravelTime = try container.decode(TimeInterval.self, forKey: .expectedTravelTime)
-        typicalTravelTime = try container.decodeIfPresent(TimeInterval.self, forKey: .typicalTravelTime)
         
         if let profileIdentifier = try container.decodeIfPresent(DirectionsProfileIdentifier.self, forKey: .profileIdentifier) {
             self.profileIdentifier = profileIdentifier
@@ -73,19 +74,16 @@ open class RouteLeg: Codable {
             throw DirectionsCodingError.missingOptions
         }
         
-        if let admins = try container.decodeIfPresent([AdministrativeRegion].self, forKey: .administrativeRegions) {
-            self.administrativeRegions = admins
-            steps = try RouteStep.decode(from: container.superDecoder(forKey: .steps), administrativeRegions: self.administrativeRegions!)
-        } else {
-            steps = try container.decode([RouteStep].self, forKey: .steps)
-        }
+        let annotation = try? container.nestedContainer(keyedBy: AnnotationCodingKeys.self, forKey: .annotation)
+        segmentDistances = try annotation?.decodeIfPresent([CLLocationDistance].self, forKey: .segmentDistances)
+        expectedSegmentTravelTimes = try annotation?.decodeIfPresent([TimeInterval].self, forKey: .expectedSegmentTravelTimes)
+        segmentSpeeds = try annotation?.decodeIfPresent([CLLocationSpeed].self, forKey: .segmentSpeeds)
+        segmentCongestionLevels = try annotation?.decodeIfPresent([CongestionLevel].self, forKey: .segmentCongestionLevels)
         
-        if let attributes = try container.decodeIfPresent(Attributes.self, forKey: .annotation) {
-            self.attributes = attributes
-        }
-
-        if let incidents = try container.decodeIfPresent([Incident].self, forKey: .incidents) {
-            self.incidents = incidents
+        if let speedLimitDescriptors = try annotation?.decodeIfPresent([SpeedLimitDescriptor].self, forKey: .segmentMaximumSpeedLimits) {
+            segmentMaximumSpeedLimits = speedLimitDescriptors.map { Measurement<UnitSpeed>(speedLimitDescriptor: $0) }
+        } else {
+            segmentMaximumSpeedLimits = nil
         }
     }
     
@@ -97,23 +95,21 @@ open class RouteLeg: Codable {
         try container.encode(name, forKey: .name)
         try container.encode(distance, forKey: .distance)
         try container.encode(expectedTravelTime, forKey: .expectedTravelTime)
-        try container.encodeIfPresent(typicalTravelTime, forKey: .typicalTravelTime)
         try container.encode(profileIdentifier, forKey: .profileIdentifier)
         
-        let attributes = self.attributes
-        if !attributes.isEmpty {
-            try container.encode(attributes, forKey: .annotation)
-        }
-
-        if let admins = administrativeRegions {
-            try container.encode(admins, forKey: .administrativeRegions)
-        }
-
-        if let incidents = incidents {
-            try container.encode(incidents, forKey: .incidents)
+        if segmentDistances != nil || expectedSegmentTravelTimes != nil || segmentSpeeds != nil || segmentCongestionLevels != nil || segmentMaximumSpeedLimits != nil {
+            var annotationContainer = container.nestedContainer(keyedBy: AnnotationCodingKeys.self, forKey: .annotation)
+            try annotationContainer.encodeIfPresent(segmentDistances, forKey: .segmentDistances)
+            try annotationContainer.encodeIfPresent(expectedSegmentTravelTimes, forKey: .expectedSegmentTravelTimes)
+            try annotationContainer.encodeIfPresent(segmentSpeeds, forKey: .segmentSpeeds)
+            try annotationContainer.encodeIfPresent(segmentCongestionLevels, forKey: .segmentCongestionLevels)
+            
+            if let speedLimitDescriptors = segmentMaximumSpeedLimits?.map({ SpeedLimitDescriptor(speed: $0) }) {
+                try annotationContainer.encode(speedLimitDescriptors, forKey: .segmentMaximumSpeedLimits)
+            }
         }
     }
-    
+
     // MARK: Getting the Endpoints of the Leg
 
     /**
@@ -193,7 +189,7 @@ open class RouteLeg: Codable {
 
      This property is set if the `RouteOptions.attributeOptions` property contains `AttributeOptions.speed`.
      */
-    open var segmentSpeeds: [LocationSpeed]?
+    open var segmentSpeeds: [CLLocationSpeed]?
 
     /**
      An array containing the traffic congestion level along each road segment in the route leg geometry.
@@ -216,42 +212,6 @@ open class RouteLeg: Codable {
      This property is set if the `RouteOptions.attributeOptions` property contains `AttributeOptions.maximumSpeedLimit`.
      */
     open var segmentMaximumSpeedLimits: [Measurement<UnitSpeed>?]?
-    
-    /**
-     The full collection of attributes along the leg.
-     */
-    var attributes: Attributes {
-        get {
-            return Attributes(segmentDistances: segmentDistances,
-                              expectedSegmentTravelTimes: expectedSegmentTravelTimes,
-                              segmentSpeeds: segmentSpeeds,
-                              segmentCongestionLevels: segmentCongestionLevels,
-                              segmentMaximumSpeedLimits: segmentMaximumSpeedLimits)
-        }
-        set {
-            segmentDistances = newValue.segmentDistances
-            expectedSegmentTravelTimes = newValue.expectedSegmentTravelTimes
-            segmentSpeeds = newValue.segmentSpeeds
-            segmentCongestionLevels = newValue.segmentCongestionLevels
-            segmentMaximumSpeedLimits = newValue.segmentMaximumSpeedLimits
-        }
-    }
-    
-    /**
-     Returns the ISO 3166-1 alpha-2 region code for the administrative region through which the given intersection passes. The intersection is identified by its step index and intersection index.
-     
-     - seealso: `Intersection.regionCode`
-     */
-    public func regionCode(atStepIndex stepIndex: Int, intersectionIndex: Int) -> String? {
-        // check index ranges
-        guard let administrativeRegions = administrativeRegions,
-              stepIndex < steps.count,
-              intersectionIndex < steps[stepIndex].administrativeAreaContainerByIntersection?.count ?? -1,
-              let adminIndex = steps[stepIndex].administrativeAreaContainerByIntersection?[intersectionIndex] else {
-            return nil
-        }
-        return administrativeRegions[adminIndex].countryCode
-    }
     
     // MARK: Getting Statistics About the Leg
 
@@ -279,32 +239,6 @@ open class RouteLeg: Codable {
      Do not assume that the user would travel along the leg at a fixed speed. For the expected travel time on each individual segment along the leg, use the `RouteStep.expectedTravelTimes` property. For more granularity, specify the `AttributeOptions.expectedTravelTime` option and use the `expectedSegmentTravelTimes` property.
      */
     open var expectedTravelTime: TimeInterval
-
-    /**
-     The administrative regions through which the leg passes.
-     
-     Items are ordered by appearance, most recent one is at the beginning.
-     This property is set to `nil` if no administrative region data is available.
-     You can alse refer to `Incident.regionCode` to get corresponding region string code.
-     */
-    open var administrativeRegions: [AdministrativeRegion]?
-
-    /**
-     Contains `Incident`s data which occur during current `RouteLeg`.
-     
-     Items are ordered by appearance, most recent one is at the beginning.
-     This property is set to `nil` if incidents data is not available.
-     */
-    open var incidents: [Incident]?
-    
-    /**
-     The route leg’s typical travel time, measured in seconds.
-     
-     The value of this property reflects the typical time it takes to traverse the route leg. This property is available when using the `DirectionsProfileIdentifier.automobileAvoidingTraffic` profile. This property reflects typical traffic conditions at the time of the request, not necessarily the typical traffic conditions at the time the user would begin this leg. If the leg makes use of a ferry, the typical travel time may additionally be subject to the schedule of this service.
-     
-     Do not assume that the user would travel along the route at a fixed speed. For more granular typical travel times, use the `RouteStep.typicalTravelTime` property.
-     */
-    open var typicalTravelTime: TimeInterval?
     
     // MARK: Reproducing the Route
     
@@ -329,7 +263,6 @@ extension RouteLeg: Equatable {
             lhs.name == rhs.name &&
             lhs.distance == rhs.distance &&
             lhs.expectedTravelTime == rhs.expectedTravelTime &&
-            lhs.typicalTravelTime == rhs.typicalTravelTime &&
             lhs.profileIdentifier == rhs.profileIdentifier
     }
 }
@@ -350,9 +283,10 @@ extension RouteLeg: CustomQuickLookConvertible {
     }
 }
 
+
 public extension Array where Element == RouteLeg {
     /**
-     Populates source and destination information for each leg with waypoint information, typically gathered from `DirectionsOptions`.
+     Populates source and destination information for each leg with waypoint information, typically gathered from DirectionsOptions.
      */
     func populate(waypoints: [Waypoint]) {
         let legInfo = zip(zip(waypoints.prefix(upTo: waypoints.endIndex - 1), waypoints.suffix(from: 1)), self)

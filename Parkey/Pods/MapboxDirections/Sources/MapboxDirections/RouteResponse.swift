@@ -1,7 +1,4 @@
 import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
 
 public enum ResponseOptions {
     case route(RouteOptions)
@@ -110,16 +107,8 @@ extension RouteResponse: Codable {
             // The response lists the same number of tracepoints as the waypoints in the request, whether or not a given waypoint is leg-separating.
             waypoints = zip(decodedWaypoints, optionsWaypoints).map { (pair) -> Waypoint in
                 let (decodedWaypoint, waypointInOptions) = pair
-                let waypoint = Waypoint(coordinate: decodedWaypoint.coordinate,
-                                        coordinateAccuracy: waypointInOptions.coordinateAccuracy,
-                                        name: waypointInOptions.name?.nonEmptyString ?? decodedWaypoint.name)
-
-                waypoint.targetCoordinate = waypointInOptions.targetCoordinate
-                waypoint.heading = waypointInOptions.heading
-                waypoint.headingAccuracy = waypointInOptions.headingAccuracy
+                let waypoint = Waypoint(coordinate: decodedWaypoint.coordinate, coordinateAccuracy: waypointInOptions.coordinateAccuracy, name: waypointInOptions.name?.nonEmptyString ?? decodedWaypoint.name)
                 waypoint.separatesLegs = waypointInOptions.separatesLegs
-                waypoint.allowsArrivingOnOppositeSide = waypointInOptions.allowsArrivingOnOppositeSide
-                
                 return waypoint
             }
             waypoints?.first?.separatesLegs = true

@@ -71,7 +71,7 @@ class InstructionPresenter {
             attributedTextRepresentation.enumerateAttribute(.abbreviationPriority, in: wholeRange, options: []) { (priority, range, stop) in
                 var abbreviationRange = range
                 if priority as? Int == currentPriority,
-                   let abbreviation = attributedTextRepresentation.attribute(.abbreviation, at: range.location, effectiveRange: &abbreviationRange) as? String {
+                    let abbreviation = attributedTextRepresentation.attribute(.abbreviation, at: range.location, effectiveRange: &abbreviationRange) as? String {
                     assert(abbreviationRange == range, "Abbreviation and abbreviation priority should be applied to the same effective range.")
                     attributedTextRepresentation.replaceCharacters(in: abbreviationRange, with: abbreviation)
                 }
@@ -135,8 +135,6 @@ class InstructionPresenter {
                     ?? NSAttributedString(string: text.text, attributes: defaultAttributes)
             case .lane(_, _):
                 preconditionFailure("Lane component has no attributed string representation.")
-            case .guidanceView(_, let alternativeText):
-                return NSAttributedString(string: alternativeText.text, attributes: defaultAttributes)
             }
         }
         let separator = NSAttributedString(string: " ", attributes: defaultAttributes)
@@ -160,6 +158,7 @@ class InstructionPresenter {
     private func shieldImageForComponent(representation: VisualInstruction.Component.ImageRepresentation, in repository: ImageRepository, cacheKey: String, completion: @escaping ImageDownloadCompletion) {
         guard let imageURL = representation.imageURL(scale: VisualInstruction.Component.scale, format: .png) else { return }
         
+
         repository.imageWithURL(imageURL, cacheKey: cacheKey, completion: completion )
     }
 

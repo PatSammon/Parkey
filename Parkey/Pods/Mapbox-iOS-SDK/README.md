@@ -2,27 +2,15 @@
 
 The Mapbox Maps SDK for iOS is an open-source framework for embedding interactive map views with scalable, customizable vector maps into Cocoa Touch applications on iOS 9.0 and above using Objective-C, Swift, or Interface Builder. It takes stylesheets that conform to the [Mapbox Style Specification](https://www.mapbox.com/mapbox-gl-style-spec/), applies them to vector tiles that conform to the [Mapbox Vector Tile Specification](https://www.mapbox.com/developers/vector-tiles/), and renders them using OpenGL.
 
-For more information, check out the [Mapbox Maps SDK for iOS homepage](https://www.mapbox.com/ios-sdk/) and the [full changelog](https://github.com/mapbox/mapbox-gl-native-ios/blob/main/platform/ios/CHANGELOG.md) online.
+For more information, check out the [Mapbox Maps SDK for iOS homepage](https://www.mapbox.com/ios-sdk/) and the [full changelog](https://github.com/mapbox/mapbox-gl-native-ios/blob/master/platform/ios/CHANGELOG.md) online.
 
-[![](https://raw.githubusercontent.com/mapbox/mapbox-gl-native-ios/main/platform/ios/docs/img/screenshot.png)]()
+[![](https://raw.githubusercontent.com/mapbox/mapbox-gl-native-ios/master/platform/ios/docs/img/screenshot.png)]()
 
 ## Installation
 
 The Mapbox Maps SDK for iOS may be installed as either a dynamic framework or a static framework. (To reduce the download size, the static framework is omitted from some distributions; you may need to download the full package from the [release page](https://github.com/mapbox/mapbox-gl-native-ios/releases/).)
 
 Integrating the Mapbox Maps SDK for iOS requires Xcode 8.0 or higher.
-
-### Pre-requisite
-
-Before choosing either the dynamic or static route below, please ensure that you create a Mapbox API token (from your account page on [mapbox.com](https://www.mapbox.com)) with the `DOWNLOADS:READ` scope. 
-**PLEASE NOTE: This is not the same as your production Mapbox API token.** 
-
-Once you have the token, create a `~/.netrc` which looks like this:
-   ```
-   machine api.mapbox.com 
-      login mapbox
-      password <INSERT API TOKEN>
-   ```
 
 
 ### Dynamic framework

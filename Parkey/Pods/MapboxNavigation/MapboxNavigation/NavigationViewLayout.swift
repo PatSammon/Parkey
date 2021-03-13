@@ -6,12 +6,13 @@ extension NavigationView {
         mapView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-  
+        
         topBannerContainerView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         topBannerContainerView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         topBannerContainerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
 
         floatingStackView.topAnchor.constraint(equalTo: topBannerContainerView.bottomAnchor, constant: 10).isActive = true
+        floatingStackView.trailingAnchor.constraint(equalTo: safeTrailingAnchor, constant: -10).isActive = true
         
         resumeButton.leadingAnchor.constraint(equalTo: safeLeadingAnchor, constant: 10).isActive = true
         resumeButton.bottomAnchor.constraint(equalTo: bottomBannerContainerView.topAnchor, constant: -10).isActive = true
@@ -24,17 +25,9 @@ extension NavigationView {
         wayNameView.bottomAnchor.constraint(equalTo: bottomBannerContainerView.topAnchor, constant: -10).isActive = true
         
         speedLimitView.topAnchor.constraint(equalTo: topBannerContainerView.bottomAnchor, constant: 10).isActive = true
+        speedLimitView.leadingAnchor.constraint(equalTo: safeLeadingAnchor, constant: 10).isActive = true
         speedLimitView.widthAnchor.constraint(equalToConstant: FloatingButton.buttonSize.width).isActive = true
         speedLimitView.heightAnchor.constraint(equalToConstant: FloatingButton.buttonSize.height).isActive = true
-        
-        switch floatingButtonsPosition {
-        case .topLeading:
-            floatingStackView.leadingAnchor.constraint(equalTo: safeLeadingAnchor, constant: 10).isActive = true
-            speedLimitView.trailingAnchor.constraint(equalTo: safeTrailingAnchor, constant: -10).isActive = true
-        case .topTrailing:
-            floatingStackView.trailingAnchor.constraint(equalTo: safeTrailingAnchor, constant: -10).isActive = true
-            speedLimitView.leadingAnchor.constraint(equalTo: safeLeadingAnchor, constant: 10).isActive = true
-        }
     }
 
     func constrainEndOfRoute() {

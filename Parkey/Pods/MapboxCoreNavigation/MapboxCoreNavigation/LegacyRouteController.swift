@@ -29,14 +29,10 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
     public var waypointArrivalThreshold: TimeInterval = 5.0
     
     public var reroutesProactively = true
-    
-    public var refreshesRoute: Bool = true
 
     var didFindFasterRoute = false
     
     var lastProactiveRerouteDate: Date?
-    
-    var lastRouteRefresh: Date?
 
     public var routeProgress: RouteProgress {
         get {
@@ -57,21 +53,16 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
         }
     }
     
-    public var indexedRoute: IndexedRoute {
+    public var route: Route {
         get {
-            return routeProgress.indexedRoute
+            return routeProgress.route
         }
         set {
-            routeProgress.indexedRoute = newValue
+            routeProgress = RouteProgress(route: newValue, options: routeProgress.routeOptions)
         }
-    }
-    
-    public var route: Route {
-        return indexedRoute.0
     }
 
     var isRerouting = false
-    var isRefreshing = false
     var lastRerouteLocation: CLLocation?
 
     var routeTask: URLSessionDataTask?
@@ -87,11 +78,10 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
 
     var userSnapToStepDistanceFromManeuver: CLLocationDistance?
     
-    required public init(along route: Route, routeIndex: Int, options: RouteOptions, directions: Directions = Directions.shared, dataSource source: RouterDataSource) {
+    required public init(along route: Route, options: RouteOptions, directions: Directions = Directions.shared, dataSource source: RouterDataSource) {
         self.directions = directions
-        self._routeProgress = RouteProgress(route: route, routeIndex: routeIndex, options: options)
+        self._routeProgress = RouteProgress(route: route, options: options)
         self.dataSource = source
-        self.refreshesRoute = options.profileIdentifier == .automobileAvoidingTraffic && options.refreshingEnabled
         UIDevice.current.isBatteryMonitoringEnabled = true
 
         super.init()
@@ -222,7 +212,7 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
         return isCloseToCurrentStep
     }
     
-    public func advanceLegIndex() {
+    public func advanceLegIndex(location: CLLocation) {
         precondition(!routeProgress.isFinalLeg, "Can not increment leg index beyond final leg.")
         routeProgress.legIndex += 1
     }
@@ -286,21 +276,33 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
         updateSpokenInstructionProgress()
         
         // Check for faster route proactively (if reroutesProactively is enabled)
-        refreshAndCheckForFasterRoute(from: location, routeProgress: routeProgress)
+        checkForFasterRoute(from: location, routeProgress: routeProgress)
     }
     
     private func update(progress: RouteProgress, with location: CLLocation, rawLocation: CLLocation) {
-        progress.updateDistanceTraveled(with: rawLocation)
+        let stepProgress = progress.currentLegProgress.currentStepProgress
+        let step = stepProgress.step
         
-        //Fire the delegate method
-        delegate?.router(self, didUpdate: progress, with: location, rawLocation: rawLocation)
+        //Increment the progress model
+        guard let polyline = step.shape else {
+            preconditionFailure("Route steps used for navigation must have shape data")
+        }
         
-        //Fire the notification (for now)
-        NotificationCenter.default.post(name: .routeControllerProgressDidChange, object: self, userInfo: [
-            RouteController.NotificationUserInfoKey.routeProgressKey: progress,
-            RouteController.NotificationUserInfoKey.locationKey: location, //guaranteed value
-            RouteController.NotificationUserInfoKey.rawLocationKey: rawLocation, //raw
-        ])
+        if let closestCoordinate = polyline.closestCoordinate(to: rawLocation.coordinate) {
+            let remainingDistance = polyline.distance(from: closestCoordinate.coordinate)
+            let distanceTraveled = step.distance - remainingDistance
+            stepProgress.distanceTraveled = distanceTraveled
+            
+            //Fire the delegate method
+            delegate?.router(self, didUpdate: progress, with: location, rawLocation: rawLocation)
+            
+            //Fire the notification (for now)
+            NotificationCenter.default.post(name: .routeControllerProgressDidChange, object: self, userInfo: [
+                RouteController.NotificationUserInfoKey.routeProgressKey: progress,
+                RouteController.NotificationUserInfoKey.locationKey: location, //guaranteed value
+                RouteController.NotificationUserInfoKey.rawLocationKey: rawLocation, //raw
+            ])
+        }
     }
         
     func updateIntersectionIndex(for currentStepProgress: RouteStepProgress) {
@@ -329,7 +331,7 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
                 let advancesToNextLeg = delegate?.router(self, didArriveAt: currentDestination) ?? RouteController.DefaultBehavior.didArriveAtWaypoint
                 
                 guard !routeProgress.isFinalLeg && advancesToNextLeg else { return }
-                advanceLegIndex()
+                advanceLegIndex(location: location)
                 updateDistanceToManeuver()
             } else { //we are approaching the destination
                 delegate?.router(self, willArriveAt: currentDestination, after: legProgress.durationRemaining, distance: legProgress.distanceRemaining)
@@ -374,8 +376,8 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
                 guard case let .route(options) = response.options, let route = response.routes?.first else {
                     return
                 }
-                strongSelf.indexedRoute = (route, 0) // unconditionally getting the first route above
-                strongSelf._routeProgress = RouteProgress(route: route, routeIndex: 0, options: options, legIndex: 0)
+                strongSelf.route = route
+                strongSelf._routeProgress = RouteProgress(route: route, options: options, legIndex: 0)
                 strongSelf._routeProgress.currentLegProgress.stepIndex = 0
                 strongSelf.announce(reroute: route, at: location, proactive: false)
             }
@@ -527,7 +529,7 @@ open class LegacyRouteController: NSObject, Router, InternalRouter, CLLocationMa
 
     func updateIntersectionDistances() {
         if let shape = routeProgress.currentLegProgress.currentStep.shape, let intersections = routeProgress.currentLegProgress.currentStep.intersections {
-            let distances: [CLLocationDistance] = intersections.compactMap { shape.distance(from: shape.coordinates.first, to: $0.location) }
+            let distances: [CLLocationDistance] = intersections.map { shape.distance(from: shape.coordinates.first, to: $0.location) }
             routeProgress.currentLegProgress.currentStepProgress.intersectionDistances = distances
         }
     }

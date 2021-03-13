@@ -1,7 +1,4 @@
 import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
 
 public struct MapMatchingResponse {
     public let httpResponse: HTTPURLResponse?
@@ -53,5 +50,6 @@ extension MapMatchingResponse: Codable {
         
         tracepoints = try container.decodeIfPresent([Tracepoint?].self, forKey: .tracepoints)
         matches = try container.decodeIfPresent([Match].self, forKey: .matches)
+
     }
 }

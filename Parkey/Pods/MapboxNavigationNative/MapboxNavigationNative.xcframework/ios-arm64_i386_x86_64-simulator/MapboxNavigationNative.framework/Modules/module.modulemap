@@ -1,6 +1,0 @@
-framework module MapboxNavigationNative {
-  umbrella header "MapboxNavigationNative.h"
-
-  export *
-  module * { export * }
-}

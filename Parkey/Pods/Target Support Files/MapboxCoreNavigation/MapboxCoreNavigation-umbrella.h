@@ -12,7 +12,6 @@
 
 #import "MapboxCoreNavigation.h"
 #import "MBXAccounts+CoreNavigationAdditions.h"
-#import "MBXPeerWrapper.h"
 
 FOUNDATION_EXPORT double MapboxCoreNavigationVersionNumber;
 FOUNDATION_EXPORT const unsigned char MapboxCoreNavigationVersionString[];
