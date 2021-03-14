@@ -18,15 +18,6 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
-    
-    app.post("userRewards")
-    { req -> EventLoopFuture<[Reward]> in
-        
-        let userId = String(req.body.string!.dropFirst(7))
-        
-        return Reward.query(on: req.db).filter(\.$userId == userId).all()
-    }
-    
     app.post("newPaymentInfo")
     { req -> EventLoopFuture<PaymentInfo> in
         let payment = try req.content.decode(PaymentInfo.self)
