@@ -139,7 +139,6 @@
                                 </state>
                                 <connections>
                                     <action selector="ParkIn:" destination="qBx-G2-GA8" eventType="touchUpInside" id="END-Qy-XSl"/>
-                                    <segue destination="EgS-Vw-M2d" kind="show" id="paz-mu-xWt"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-rL-8c3">
@@ -166,7 +165,7 @@
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="ParkOut:" destination="qBx-G2-GA8" eventType="touchUpInside" id="TXl-X1-cUX"/>
+                                    <action selector="ParkOut:" destination="qBx-G2-GA8" eventType="touchUpInside" id="B5G-O9-Jtl"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="mic.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-s3-IBl">
@@ -196,6 +195,7 @@
                     <connections>
                         <outlet property="AccountIcon" destination="T82-gy-Hxs" id="YmN-Ia-nLs"/>
                         <segue destination="QVR-Qz-xaR" kind="show" identifier="AccountSegue" id="kZD-b0-yZh"/>
+                        <segue destination="EgS-Vw-M2d" kind="show" identifier="toMapView" id="dIT-dj-d5E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag5-Yk-GhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -708,6 +708,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="kZD-b0-yZh"/>
         <segue reference="Rkj-hs-q1E"/>
         <segue reference="CMZ-Sx-laU"/>
         <segue reference="kKN-QJ-N9e"/>

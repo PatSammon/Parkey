@@ -18,6 +18,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
+    var ParkOut = false
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -27,6 +28,13 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //check to see if the user is Parking in or Parking out
+        if ParkOut {
+            //store the latitude and longitude of the users location
+            //mapboxSFOfficeCoordinate.latitude
+            //mapboxSFOfficeCoordinate.longitude
+        }
 
         mapView = NavigationMapView(frame: view.bounds)
         mapView.frame = view.bounds

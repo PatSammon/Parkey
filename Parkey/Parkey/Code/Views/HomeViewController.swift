@@ -15,6 +15,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
+        //RequestHandler.addParkingSpot(latitude: 37.7911551, longitude: -122.3966103, date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
     }
     //@IBOutlet weak var accountLabel: UIImageView!
     //@IBOutlet weak var mic: UIImageView!
@@ -22,8 +23,9 @@ class HomeViewController: UIViewController {
     //@IBOutlet weak var ParKey: UIImageView!
     //@IBOutlet weak var bottomLabel: UILabel!
     @IBAction func ParkIn(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
-        present(vc, animated: true)
+        //let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
+        performSegue(withIdentifier: "toMapView", sender: self)
+        //present(vc, animated: true)
     }
     @IBAction func ToAccountPage(_ sender: Any) {
         performSegue(withIdentifier: "AccountSegue", sender: self)
@@ -79,6 +81,15 @@ extension HomeViewController: CLLocationManagerDelegate{
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         checkLocationAuthorization()
+    }
+    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+        let objDateformat: DateFormatter = DateFormatter()
+        objDateformat.dateFormat = "yyyy-MM-dd"
+        let strTime: String = objDateformat.string(from: dateToConvert as Date)
+        let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
+        let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
+        let strTimeStamp: String = "\(milliseconds)"
+        return strTimeStamp
     }
 }
 
