@@ -23,8 +23,9 @@ class HomeViewController: UIViewController {
     //@IBOutlet weak var ParKey: UIImageView!
     //@IBOutlet weak var bottomLabel: UILabel!
     @IBAction func ParkIn(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
-        present(vc, animated: true)
+        //let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
+        performSegue(withIdentifier: "toMapView", sender: self)
+        //present(vc, animated: true)
     }
     @IBAction func ToAccountPage(_ sender: Any) {
         performSegue(withIdentifier: "AccountSegue", sender: self)
