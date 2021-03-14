@@ -29,11 +29,11 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(ParkOut)
         //check to see if the user is Parking in or Parking out
         if ParkOut {
             //store the latitude and longitude of the users location
-            //mapboxSFOfficeCoordinate.latitude
-            //mapboxSFOfficeCoordinate.longitude
+            RequestHandler.addParkingSpot(latitude: Float(mapboxSFOfficeCoordinate.latitude), longitude: Float(mapboxSFOfficeCoordinate.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
         }
 
         mapView = NavigationMapView(frame: view.bounds)
@@ -159,6 +159,16 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         let navigationViewController = NavigationViewController(for: route, routeOptions: routeOptions)
         navigationViewController.modalPresentationStyle = .fullScreen
         self.present(navigationViewController, animated: true, completion: nil)
+    }
+    
+    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+        let objDateformat: DateFormatter = DateFormatter()
+        objDateformat.dateFormat = "yyyy-MM-dd"
+        let strTime: String = objDateformat.string(from: dateToConvert as Date)
+        let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
+        let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
+        let strTimeStamp: String = "\(milliseconds)"
+        return strTimeStamp
     }
 }
 extension ParkViewController: SearchControllerDelegate {
