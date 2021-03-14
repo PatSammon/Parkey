@@ -1,6 +1,0 @@
-framework module MapboxAccounts {
-  umbrella header "MapboxAccounts.h"
-
-  export *
-  module * { export * }
-}

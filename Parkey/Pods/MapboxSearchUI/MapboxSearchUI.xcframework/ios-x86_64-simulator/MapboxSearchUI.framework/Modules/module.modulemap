@@ -1,0 +1,6 @@
+framework module MapboxSearchUI {
+  header "MapboxSearchUI-Swift.h"
+
+  export *
+  module MapboxSearchUI { export * }
+}

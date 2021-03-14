@@ -1,7 +1,7 @@
 # [Mapbox Navigation SDK for iOS](https://docs.mapbox.com/ios/navigation/)
 
 [![CircleCI](https://circleci.com/gh/mapbox/mapbox-navigation-ios.svg?style=svg)](https://circleci.com/gh/mapbox/mapbox-navigation-ios)
-[![codecov](https://codecov.io/gh/mapbox/mapbox-navigation-ios/branch/main/graph/badge.svg)](https://codecov.io/gh/mapbox/mapbox-navigation-ios)
+[![codecov](https://codecov.io/gh/mapbox/mapbox-navigation-ios/branch/master/graph/badge.svg)](https://codecov.io/gh/mapbox/mapbox-navigation-ios)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods](https://img.shields.io/cocoapods/v/MapboxNavigation.svg)](https://cocoapods.org/pods/MapboxNavigation/)
 
@@ -24,7 +24,7 @@ Get up and running in a few minutes with our drop-in turn-by-turn navigation `Na
 
 ## Requirements
 
-The Mapbox Navigation SDK and Core Navigation are compatible with applications written in Swift 5 in Xcode 11.4.1 and above. The Mapbox Navigation and Mapbox Core Navigation frameworks run on iOS 10.0 and above.
+The Mapbox Navigation SDK and Core Navigation are compatible with applications written in Swift 5 in Xcode 10.2 and above. The Mapbox Navigation and Mapbox Core Navigation frameworks run on iOS 10.0 and above.
 
 The Mapbox Navigation SDK is also available [for Android](https://github.com/mapbox/mapbox-navigation-android/).
 
@@ -34,53 +34,25 @@ The Mapbox Navigation SDK is also available [for Android](https://github.com/map
 
 To install Mapbox Navigation using [CocoaPods](https://cocoapods.org/):
 
-1. Go to your [Mapbox account dashboard](https://account.mapbox.com/) and create an access token that has the `DOWNLOADS:READ` scope. **PLEASE NOTE: This is not the same as your production Mapbox API token. Make sure to keep it private and do not insert it into any Info.plist file.** Create a file named `.netrc` in your home directory if it doesn’t already exist, then add the following lines to the end of the file:
-   ```
-   machine api.mapbox.com 
-     login mapbox
-     password PRIVATE_MAPBOX_API_TOKEN
-   ```
-   where _PRIVATE_MAPBOX_API_TOKEN_ is your Mapbox API token with the `DOWNLOADS:READ` scope. 
-
 1. Create a [Podfile](https://guides.cocoapods.org/syntax/podfile.html) with the following specification:
    ```ruby
-   # Latest stable release
-   pod 'MapboxNavigation', '~> 1.2'
-   # Latest prerelease
-   pod 'MapboxCoreNavigation', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v1.2.0-rc.1'
-   pod 'MapboxNavigation', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v1.2.0-rc.1'
+   pod 'MapboxNavigation', '~> 0.40.0'
    ```
 
 1. Run `pod repo update && pod install` and open the resulting Xcode workspace.
 
 ### Using Carthage
 
-Alternatively, to install Mapbox Navigation using [Carthage](https://github.com/Carthage/Carthage/) v0.35 or above:
-
-1. Go to your [Mapbox account dashboard](https://account.mapbox.com/) and create an access token that has the `DOWNLOADS:READ` scope. **PLEASE NOTE: This is not the same as your production Mapbox API token. Make sure to keep it private and do not insert it into any Info.plist file.** Create a file named `.netrc` in your home directory if it doesn’t already exist, then add the following lines to the end of the file:
-   ```
-   machine api.mapbox.com
-     login mapbox
-     password PRIVATE_MAPBOX_API_TOKEN
-   ```
-   where _PRIVATE_MAPBOX_API_TOKEN_ is your Mapbox API token with the `DOWNLOADS:READ` scope. 
-
-1. _(Optional)_ Clear your Carthage caches:
-   ```bash
-   rm -rf ~/Library/Caches/carthage/ ~/Library/Caches/org.carthage.CarthageKit/binaries/{MapboxAccounts,MapboxCommon-ios,MapboxNavigationNative,mapbox-ios-sdk-dynamic}
-   ```
+Alternatively, to install Mapbox Navigation using [Carthage](https://github.com/Carthage/Carthage/):
 
 1. Create a [Cartfile](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md#github-repositories) with the following dependency:
    ```cartfile
-   # Latest stable release
-   github "mapbox/mapbox-navigation-ios" ~> 1.2
-   # Latest prerelease
-   github "mapbox/mapbox-navigation-ios" "v1.2.0-rc.1"
+   github "mapbox/mapbox-navigation-ios" ~> 0.40
    ```
 
-1. Run `./Carthage/Checkouts/mapbox-navigation-ios/scripts/wcarthage.sh bootstrap --platform iOS --cache-builds --use-netrc`. (wcarthage.sh is a temporary replacement for `carthage` to work around [a linker error in Xcode 12](https://github.com/Carthage/Carthage/issues/3019).)
+1. Run `carthage update --platform iOS` to build just the iOS dependencies.
 
-1. Follow the rest of [Carthage’s iOS integration instructions](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). Your application target’s Embed Frameworks build phase should include `MapboxNavigation.framework`, `MapboxCoreNavigation.framework`, `MapboxNavigationNative.framework`, `MapboxCommon.framework`, and `MapboxAccounts.framework`.
+1. Follow the rest of [Carthage’s iOS integration instructions](https://github.com/Carthage/Carthage#if-youre-building-for-ios-tvos-or-watchos). Your application target’s Embedded Frameworks should include `MapboxNavigation.framework`, `MapboxCoreNavigation.framework`, `MapboxNavigationNative.framework`, and `MapboxAccounts.framework`.
 
 ## Configuration
 
@@ -100,27 +72,17 @@ import MapboxNavigation
 ```
 
 ```swift
-// Define two waypoints to travel between
 let origin = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 38.9131752, longitude: -77.0324047), name: "Mapbox")
 let destination = Waypoint(coordinate: CLLocationCoordinate2D(latitude: 38.8977, longitude: -77.0365), name: "White House")
 
-// Set options
-let routeOptions = NavigationRouteOptions(waypoints: [origin, destination])
+let options = NavigationRouteOptions(waypoints: [origin, destination])
 
-// Request a route using MapboxDirections
-Directions.shared.calculate(routeOptions) { [weak self] (session, result) in
-    switch result {
-    case .failure(let error):
-        print(error.localizedDescription)
-    case .success(let response):
-        guard let route = response.routes?.first, let strongSelf = self else {
-            return
-        }
-        // Pass the generated route to the the NavigationViewController
-        let viewController = NavigationViewController(for: route, routeIndex: 0, routeOptions: routeOptions)
-        viewController.modalPresentationStyle = .fullScreen
-        strongSelf.present(viewController, animated: true, completion: nil)
-    }
+Directions.shared.calculate(options) { (waypoints, routes, error) in
+    guard let route = routes?.first else { return }
+ 
+    let viewController = NavigationViewController(for: route)
+    viewController.modalPresentationStyle = .fullScreen
+    present(viewController, animated: true, completion: nil)
 }
 ```
 
@@ -130,10 +92,10 @@ Consult the [API reference](https://docs.mapbox.com/ios/api/navigation/) for fur
 
 The [API reference](https://docs.mapbox.com/ios/api/navigation/) includes example code for accomplishing common tasks. You can run these examples as part of the [navigation-ios-examples](https://github.com/mapbox/navigation-ios-examples) project.
 
-This repository also contains [a testbed](https://github.com/mapbox/mapbox-navigation-ios/tree/main/Example) that exercises a variety of navigation SDK features:
+This repository also contains [a testbed](https://github.com/mapbox/mapbox-navigation-ios/tree/master/Example) that exercises a variety of navigation SDK features:
 
-1. Clone the repository or download the [.zip file](https://github.com/mapbox/mapbox-navigation-ios/archive/main.zip)
-1. Run `carthage update --platform ios --use-netrc` to build just the iOS dependencies.
+1. Clone the repository or download the [.zip file](https://github.com/mapbox/mapbox-navigation-ios/archive/master.zip)
+1. Run `carthage update --platform ios` to build just the iOS dependencies.
 1. Open `MapboxNavigation.xcodeproj`.
 1. Sign up or log in to your Mapbox account and grab a [Mapbox Access Token](https://account.mapbox.com/access-tokens/).
 1. Open the Info.plist in the `Example` target and paste your [Mapbox Access Token](https://account.mapbox.com/access-tokens/) into `MGLMapboxAccessToken`. (Alternatively, if you plan to use this project as the basis for a public project on GitHub, place the access token in a plain text file named `.mapbox` or `mapbox` in your home directory instead of adding it to Info.plist.)
@@ -143,7 +105,7 @@ This repository also contains [a testbed](https://github.com/mapbox/mapbox-navig
 
 ### Styling
 
-You can customize the appearance in order to blend in with the rest of your app. Checkout [`DayStyle.swift`](https://github.com/mapbox/mapbox-navigation-ios/blob/main/MapboxNavigation/DayStyle.swift) for all styleable elements.
+You can customize the appearance in order to blend in with the rest of your app. Checkout [`DayStyle.swift`](https://github.com/mapbox/mapbox-navigation-ios/blob/master/MapboxNavigation/DayStyle.swift) for all styleable elements.
 
 ```swift
 class CustomStyle: DayStyle {
@@ -163,8 +125,8 @@ class CustomStyle: DayStyle {
 then initialize `NavigationViewController` with your style or styles:
 
 ```swift
-let navigationOptions = NavigationOptions(styles: [CustomStyle()])
-NavigationViewController(for: route, routeOptions: routeOptions, navigationOptions: navigationOptions)
+let options = NavigationOptions(styles: [CustomStyle()])
+NavigationViewController(for: route, options: options)
 ```
 
 ### Starting from scratch
@@ -177,6 +139,7 @@ We welcome feedback and code contributions! Please see [CONTRIBUTING.md](./CONTR
 
 ## License
 
-The Mapbox Navigation SDK for iOS is released under the ISC License. See [LICENSE.md](./LICENSE.md) for details.
+Mapbox Navigation SDK for iOS is released under the ISC License. See [LICENSE.md](https://github.com/mapbox/mapbox-navigation-ios/blob/master/LICENSE.md) for details.
 
-The Mapbox Navigation SDK for iOS depends on private binary distributions of the Mapbox Maps SDK for iOS and MapboxNavigationNative. These binaries may be used with a Mapbox account and under the [Mapbox Terms of Service](https://www.mapbox.com/tos/). If you do not wish to use these binaries, make sure you swap out these dependencies in the [Cartfile](./Cartfile#L3) or override them in your Podfile.
+Mapbox Navigation SDK uses [Mapbox Navigator](https://github.com/mapbox/mapbox-navigation-ios/blob/master/Cartfile#L2), a private binary, as a dependency. The Mapbox Navigator binary may be used with a Mapbox account and under the [Mapbox TOS](https://www.mapbox.com/tos/). If you do not wish to use this binary, make sure you swap out this dependency in the [Cartfile](https://github.com/mapbox/mapbox-navigation-ios/blob/master/Cartfile#L2). Code in this repository is released under the [MIT license](./LICENSE.md).
+

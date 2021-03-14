@@ -1,9 +1,5 @@
 import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#else
-import Turf
-#endif
 
 /**
  An instruction about an upcoming `RouteStep`’s maneuver, optimized for speech synthesis.

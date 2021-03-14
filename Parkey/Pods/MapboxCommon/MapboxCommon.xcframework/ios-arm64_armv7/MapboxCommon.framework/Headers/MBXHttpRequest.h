@@ -3,7 +3,7 @@
 #import <Foundation/Foundation.h>
 #import "MBXHttpMethod.h"
 
-@class MBXUAComponents;
+@class MBXUserAgentComponents;
 
 /** @brief HttpRequest holds basic information for construction of an HTTP request */
 NS_SWIFT_NAME(HttpRequest)
@@ -12,7 +12,7 @@ __attribute__((visibility ("default")))
 
 - (nonnull instancetype)initWithUrl:(nonnull NSString *)url
                             headers:(nonnull NSDictionary<NSString *, NSString *> *)headers
-                       uaComponents:(nonnull MBXUAComponents *)uaComponents
+                userAgentComponents:(nonnull MBXUserAgentComponents *)userAgentComponents
                                body:(nonnull NSData *)body;
 
 - (nonnull instancetype)initWithMethod:(MBXHttpMethod)method
@@ -20,7 +20,7 @@ __attribute__((visibility ("default")))
                                headers:(nonnull NSDictionary<NSString *, NSString *> *)headers
                        keepCompression:(BOOL)keepCompression
                                timeout:(uint64_t)timeout
-                          uaComponents:(nonnull MBXUAComponents *)uaComponents
+                   userAgentComponents:(nonnull MBXUserAgentComponents *)userAgentComponents
                                   body:(nonnull NSData *)body;
 
 /**
@@ -48,7 +48,7 @@ __attribute__((visibility ("default")))
 @property (nonatomic, readonly) uint64_t timeout;
 
 /** Application and SDK information for generating a User-Agent string. */
-@property (nonatomic, readonly, nonnull) MBXUAComponents *uaComponents;
+@property (nonatomic, readonly, nonnull) MBXUserAgentComponents *userAgentComponents;
 
 /**
  * HTTP Body data transmitted in an HTTP transaction message immediatelly following the headers if there is any.

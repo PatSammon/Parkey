@@ -1,15 +1,7 @@
 import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#endif
 import Polyline
-import Turf
-
-extension BoundingBox: CustomStringConvertible {
-    public var description: String {
-        return "\(southWest.longitude),\(southWest.latitude);\(northEast.longitude),\(northEast.latitude)"
-    }
-}
+import struct Turf.LineString
 
 extension LineString {
     init(polyLineString: PolyLineString) throws {
@@ -22,20 +14,10 @@ extension LineString {
     }
     
     init(encodedPolyline: String, precision: Double) throws {
-        guard var coordinates = decodePolyline(encodedPolyline, precision: precision) as [LocationCoordinate2D]? else {
+        guard let coordinates = decodePolyline(encodedPolyline, precision: precision) as [CLLocationCoordinate2D]? else {
             throw GeometryError.cannotDecodePolyline(precision: precision)
         }
-        // If the polyline has zero length with both endpoints at the same coordinate, Polyline drops one of the coordinates.
-        // https://github.com/raphaelmor/Polyline/issues/59
-        // Duplicate the coordinate to ensure a valid GeoJSON geometry.
-        if coordinates.count == 1 {
-            coordinates.append(coordinates[0])
-        }
-        #if canImport(CoreLocation)
         self.init(coordinates)
-        #else
-        self.init(coordinates.map { CLLocationCoordinate2D($0) })
-        #endif
     }
 }
 

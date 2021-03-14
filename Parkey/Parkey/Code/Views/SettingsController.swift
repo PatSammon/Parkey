@@ -161,8 +161,9 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
         UserDefaults.standard.removeObject(forKey: "Password")
         UserDefaults.standard.removeObject(forKey: "UserID")
     
+        self.navigationController?.popToRootViewController(animated: true)
         //now preform the segue to the initial screen
-        self.performSegue(withIdentifier: "LogOut", sender: self)
+        //self.performSegue(withIdentifier: "LogOut", sender: self)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

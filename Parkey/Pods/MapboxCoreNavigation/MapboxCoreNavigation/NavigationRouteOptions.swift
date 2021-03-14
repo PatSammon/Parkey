@@ -25,9 +25,6 @@ open class NavigationRouteOptions: RouteOptions, OptimizedForNavigation {
             attributeOptions = [.congestionLevel, .expectedTravelTime, .maximumSpeedLimit]
         }
         includesExitRoundaboutManeuver = true
-        if profileIdentifier == .automobileAvoidingTraffic {
-            refreshingEnabled = true
-        }
 
         optimizeForNavigation()
     }

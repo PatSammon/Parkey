@@ -54,18 +54,7 @@ struct PerformanceEventDetails: EventDetails {
 
 struct NavigationEventDetails: EventDetails {
     let audioType: String = AVAudioSession.sharedInstance().audioType
-    let applicationState: UIApplication.State = {
-        var state: UIApplication.State!
-        if Thread.isMainThread {
-            state = UIApplication.shared.applicationState
-        } else {
-            DispatchQueue.main.sync {
-                state = UIApplication.shared.applicationState
-            }
-        }
-        
-        return state
-    }()
+    let applicationState = UIApplication.shared.applicationState
     let batteryLevel: Int = UIDevice.current.batteryLevel >= 0 ? Int(UIDevice.current.batteryLevel * 100) : -1
     let batteryPluggedIn: Bool = [.charging, .full].contains(UIDevice.current.batteryState)
     let coordinate: CLLocationCoordinate2D?
@@ -118,8 +107,6 @@ struct NavigationEventDetails: EventDetails {
     var newDistanceRemaining: CLLocationDistance?
     var newDurationRemaining: TimeInterval?
     var newGeometry: String?
-    var totalTimeInForeground: TimeInterval
-    var totalTimeInBackground: TimeInterval
     
     init(dataSource: EventsManagerDataSource, session: SessionState, defaultInterface: Bool) {
         coordinate = dataSource.router.rawLocation?.coordinate
@@ -180,9 +167,9 @@ struct NavigationEventDetails: EventDetails {
         }
         percentTimeInPortrait = totalTimeInPortrait + totalTimeInLandscape == 0 ? 100 : Int((totalTimeInPortrait / (totalTimeInPortrait + totalTimeInLandscape)) * 100)
         
-        totalTimeInForeground = session.timeSpentInForeground
-        totalTimeInBackground = session.timeSpentInBackground
-        if applicationState == .active {
+        var totalTimeInForeground = session.timeSpentInForeground
+        var totalTimeInBackground = session.timeSpentInBackground
+        if UIApplication.shared.applicationState == .active {
             totalTimeInForeground += abs(session.lastTimeInForeground.timeIntervalSinceNow)
         } else {
             totalTimeInBackground += abs(session.lastTimeInBackground.timeIntervalSinceNow)
@@ -251,8 +238,6 @@ struct NavigationEventDetails: EventDetails {
         case newDurationRemaining
         case newGeometry
         case routeLegProgress = "step"
-        case totalTimeInForeground
-        case totalTimeInBackground
     }
     
     func encode(to encoder: Encoder) throws {
@@ -307,9 +292,39 @@ struct NavigationEventDetails: EventDetails {
         try container.encodeIfPresent(secondsSinceLastReroute, forKey: .secondsSinceLastReroute)
         try container.encodeIfPresent(newDistanceRemaining, forKey: .newDistanceRemaining)
         try container.encodeIfPresent(newDurationRemaining, forKey: .newDurationRemaining)
-        try container.encode(totalTimeInForeground, forKey: .totalTimeInForeground)
-        try container.encode(totalTimeInBackground, forKey: .totalTimeInBackground)
-        try container.encodeIfPresent(rating, forKey: .rating)
+    }
+}
+
+extension RouteLegProgress: Encodable {
+    private enum CodingKeys: String, CodingKey {
+        case upcomingInstruction
+        case upcomingType
+        case upcomingModifier
+        case upcomingName
+        case previousInstruction
+        case previousType
+        case previousModifier
+        case previousName
+        case distance
+        case duration
+        case distanceRemaining
+        case durationRemaining
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(upcomingStep?.instructions, forKey: .upcomingInstruction)
+        try container.encodeIfPresent(upcomingStep?.maneuverType, forKey: .upcomingType)
+        try container.encodeIfPresent(upcomingStep?.maneuverDirection, forKey: .upcomingModifier)
+        try container.encodeIfPresent(upcomingStep?.names?.joined(separator: ";"), forKey: .upcomingName)
+        try container.encodeIfPresent(currentStep.instructions, forKey: .previousInstruction)
+        try container.encode(currentStep.maneuverType, forKey: .previousType)
+        try container.encode(currentStep.maneuverDirection, forKey: .previousModifier)
+        try container.encode(currentStep.names?.joined(separator: ";"), forKey: .previousName)
+        try container.encode(Int(currentStep.distance), forKey: .distance)
+        try container.encode(Int(currentStep.expectedTravelTime), forKey: .duration)
+        try container.encode(Int(currentStepProgress.distanceRemaining), forKey: .distanceRemaining)
+        try container.encode(Int(currentStepProgress.durationRemaining), forKey: .durationRemaining)
     }
 }
 

@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Restaurants",
+    "iconName": "maki/restaurant",
+    "legacyName": "restaurant",
+    "canonicalId": "restaurant"
+  },
+  {
+    "name": "Bars",
+    "iconName": "maki/bar",
+    "legacyName": "bar",
+    "canonicalId": "bar"
+  },
+  {
+    "name": "Coffee Shop / Cafe",
+    "iconName": "maki/cafe",
+    "legacyName": "cafe",
+    "canonicalId": "cafe"
+  },
+  {
+    "name": "Hotel",
+    "iconName": "maki/hotel",
+    "legacyName": "hotel",
+    "canonicalId": "hotel"
+  },
+  {
+    "name": "Gas Station",
+    "iconName": "maki/fuel",
+    "legacyName": "fuel",
+    "canonicalId": "gas_station"
+  },
+  {
+    "name": "EV Charging Station",
+    "iconName": "maki/charging-station",
+    "legacyName": "charging station",
+    "canonicalId": "charging_station"
+  },
+  {
+    "name": "Parking",
+    "iconName": "maki/parking",
+    "legacyName": "parking",
+    "canonicalId": "parking_lot"
+  },
+  {
+    "name": "Bus station",
+    "iconName": "maki/bus",
+    "legacyName": "bus station",
+    "canonicalId": "bus_station"
+  },
+  {
+    "name": "Train station",
+    "iconName": "maki/rail",
+    "legacyName": "train station",
+    "canonicalId": "railway_station"
+  },
+  {
+    "name": "Shopping malls",
+    "iconName": "maki/shop",
+    "legacyName": "mall",
+    "canonicalId": "shopping_mall"
+  },
+  {
+    "name": "Supermarket / Grocery",
+    "iconName": "maki/grocery",
+    "legacyName": "grocery",
+    "canonicalId": "grocery"
+  },
+  {
+    "name": "Clothing / shoes",
+    "iconName": "maki/clothing-store",
+    "legacyName": "clothes",
+    "canonicalId": "clothing_store"
+  },
+  {
+    "name": "Pharmacy",
+    "iconName": "maki/pharmacy",
+    "legacyName": "pharmacy",
+    "canonicalId": "pharmacy"
+  },
+  {
+    "name": "Museums",
+    "iconName": "maki/museum",
+    "legacyName": "museum",
+    "canonicalId": "museum"
+  },
+  {
+    "name": "Parks",
+    "iconName": "maki/park",
+    "legacyName": "park",
+    "canonicalId": "park"
+  },
+  {
+    "name": "Movie Theaters",
+    "iconName": "maki/cinema",
+    "legacyName": "cinema",
+    "canonicalId": "cinema"
+  },
+  {
+    "name": "Gym / Fitness",
+    "iconName": "maki/fitness-centre",
+    "legacyName": "fitness center",
+    "canonicalId": "fitness_center"
+  },
+  {
+    "name": "Night clubs",
+    "iconName": "maki/nightclub",
+    "legacyName": "nightclub",
+    "canonicalId": "nightclub"
+  },
+  {
+    "name": "Auto repair / mechanic",
+    "iconName": "maki/auto-repair",
+    "legacyName": "auto repair",
+    "canonicalId": "auto_repair"
+  },
+  {
+    "name": "ATM",
+    "iconName": "maki/bank",
+    "legacyName": "atm",
+    "canonicalId": "atm"
+  },
+  {
+    "name": "Hospital",
+    "iconName": "maki/hospital",
+    "legacyName": "hospital",
+    "canonicalId": "hospital"
+  },
+  {
+    "name": "ER",
+    "iconName": "maki/emergency-phone",
+    "legacyName": "emergency room",
+    "canonicalId": "emergency_room"
+  }
+]

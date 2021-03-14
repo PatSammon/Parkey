@@ -1,10 +1,7 @@
 import Foundation
 
 extension Bundle {
-    /**
-     The Mapbox Navigation framework bundle.
-     */
-    public class var mapboxNavigation: Bundle {
+    class var mapboxNavigation: Bundle {
         get { return Bundle(for: NavigationViewController.self) }
     }
     

@@ -30,17 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of Mapbox GL Native v1.7.0 and above.
-License: [Mapbox Terms of Service](https://mapbox.com/legal/tos/)
-
-===========================================================================
-
-Mapbox Maps SDK for iOS uses portions of Mapbox Accounts SDK for iOS.  
-License: [Mapbox Terms of Service](https://mapbox.com/legal/tos/)
-
-===========================================================================
-
-Mapbox Maps SDK for iOS uses portions of Boost.
+Mapbox GL uses portions of Boost.
 
 Distributed under the Boost Software License, Version 1.0.
 
@@ -48,7 +38,7 @@ http://www.boost.org/LICENSE_1_0.txt
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of Clipper.
+Mapbox GL uses portions of Clipper.
 
 Author    :  Angus Johnson
 Version   :  6.1.3a
@@ -81,7 +71,7 @@ http://www.me.berkeley.edu/~mcmains/pubs/DAC05OffsetPolygon.pdf
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of BugshotKit.
+Mapbox GL uses portions of BugshotKit.
 
 The MIT License (MIT)
 
@@ -106,7 +96,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of CSS Color Parser.
+Mapbox GL uses portions of CSS Color Parser.
 
 (c) Dean McNamee <dean@gmail.com>, 2012.
 C++ port by Konstantin Käfer <mail@kkaefer.com>, 2014.
@@ -134,7 +124,7 @@ IN THE SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of GLFW.
+Mapbox GL uses portions of GLFW.
 
 Copyright (c) 2002-2006 Marcus Geelnard
 Copyright (c) 2006-2010 Camilla Berglund <elmindreda@elmindreda.org>
@@ -160,7 +150,7 @@ freely, subject to the following restrictions:
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libc++.
+Mapbox GL uses portions of libc++.
 
 The libc++ library is dual licensed under both the University of Illinois
 "BSD-Like" license and the MIT license.  As a user of this code you may choose
@@ -237,7 +227,7 @@ THE SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libcurl.
+Mapbox GL uses portions of libcurl.
 
 COPYRIGHT AND PERMISSION NOTICE
 
@@ -263,7 +253,7 @@ in this Software without prior written authorization of the copyright holder.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libjpeg-turbo.
+Mapbox GL uses portions of libjpeg-turbo.
 
 This software is based in part on the work of the Independent JPEG Group.
 
@@ -297,7 +287,7 @@ TurboJPEG/LJT: this implements the TurboJPEG API using libjpeg or libjpeg-turbo
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libpng.
+Mapbox GL uses portions of libpng.
 
 This copy of the libpng notices is provided for your convenience.  In case of
 any discrepancy between this copy and the notices in the file png.h that is
@@ -392,7 +382,7 @@ appreciated.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libuv.
+Mapbox GL uses portions of libuv.
 
 libuv is part of the Node project: http://nodejs.org/
 libuv may be distributed alone under Node's license:
@@ -443,7 +433,7 @@ The externally maintained libraries used by libuv are:
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of libzip.
+Mapbox GL uses portions of libzip.
 
 Copyright (C) 1999-2014 Dieter Baron and Thomas Klausner
 
@@ -479,7 +469,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of the Mapbox iOS SDK, which was derived from the
+Mapbox GL uses portions of the Mapbox iOS SDK, which was derived from the
 Route-Me open source project, including the Alpstein fork of it.
 
 The Route-Me license appears below.
@@ -510,7 +500,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of nunicode.
+Mapbox GL uses portions of nunicode.
 
 Copyright (c) 2013 Aleksey Tulinov <aleksey.tulinov@gmail.com>
 
@@ -534,7 +524,7 @@ THE SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of OpenSSL.
+Mapbox GL uses portions of OpenSSL.
 
 LICENSE ISSUES
 ==============
@@ -659,7 +649,7 @@ copied and put under another distribution licence
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of RapidJSON.
+Mapbox GL uses portions of RapidJSON.
 
 Tencent is pleased to support the open source community by making RapidJSON
 available.
@@ -766,7 +756,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of Reachability.
+Mapbox GL uses portions of Reachability.
 
 Copyright (c) 2011, Tony Million.
 All rights reserved.
@@ -795,7 +785,7 @@ POSSIBILITY OF SUCH DAMAGE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of SQLite.
+Mapbox GL uses portions of SQLite.
 
 2001 September 15
 
@@ -808,7 +798,7 @@ a legal notice, here is a blessing:
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of SVPulsingAnnotationView.
+Mapbox GL uses portions of SVPulsingAnnotationView.
 
 Copyright (c) 2013, Sam Vermette <hello@samvermette.com>
 
@@ -826,7 +816,7 @@ THIS SOFTWARE.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of zlib.
+Mapbox GL uses portions of zlib.
 
 Acknowledgments:
 
@@ -860,7 +850,7 @@ freely, subject to the following restrictions:
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of Realm Objective-C.
+Mapbox GL uses portions of Realm Objective-C.
 
 Copyright 2015 Realm Inc.
 
@@ -878,7 +868,7 @@ limitations under the License.
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of SMCalloutView.
+Mapbox GL uses portions of SMCalloutView.
 
 Copyright 2016 Nick Farina. 
 
@@ -888,9 +878,9 @@ https://github.com/nfarina/calloutview/blob/master/LICENSE
 
 ===========================================================================
 
-Mapbox Maps SDK for iOS uses portions of software listed in [platform/android/LICENSE.md](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/LICENSE.md).
+Mapbox GL uses portions of software listed in [platform/android/LICENSE.md](https://github.com/mapbox/mapbox-gl-native/blob/master/platform/android/LICENSE.md).
 
-Mapbox Maps SDK for iOS uses portions of software listed in [platform/ios/vendor/mapbox-events-ios/LICENSE.md](https://github.com/mapbox/mobile-events-ios/blob/master/LICENSE.md).
+Mapbox GL uses portions of software listed in [platform/ios/vendor/mapbox-events-ios/LICENSE.md](https://github.com/mapbox/mobile-events-ios/blob/master/LICENSE.md).
 
 
 ## MapboxAccounts
@@ -914,13 +904,11 @@ All other rights reserved.
 
 ## MapboxCoreNavigation
 
-Copyright © 2014–2021, Mapbox
+Copyright © 2014–2020, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
-----
 
 Copyright (c) 2016 Matthijs Hollemans and contributors
 
@@ -945,7 +933,7 @@ THE SOFTWARE.
 
 ## MapboxDirections
 
-Copyright © 2014–2021, Mapbox
+Copyright © 2014–2020, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -1065,13 +1053,11 @@ THE SOFTWARE.
 
 ## MapboxNavigation
 
-Copyright © 2014–2021, Mapbox
+Copyright © 2014–2020, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-
-----
 
 Copyright (c) 2016 Matthijs Hollemans and contributors
 
@@ -1097,6 +1083,18 @@ THE SOFTWARE.
 ## MapboxNavigationNative
 
 Copyright © 2018 Mapbox, Inc. You may use this code with your Mapbox account and under the Mapbox Terms of Service (available at: https://www.mapbox.com/tos/). All other rights reserved.
+
+
+## MapboxSearch
+
+Copyright © 2020 Mapbox, Inc.
+You may use this code with your Mapbox account and under the Mapbox Terms of Service (available at: https://www.mapbox.com/legal/tos). All other rights reserved.
+
+
+## MapboxSearchUI
+
+Copyright © 2020 Mapbox, Inc.
+You may use this code with your Mapbox account and under the Mapbox Terms of Service (available at: https://www.mapbox.com/legal/tos). All other rights reserved.
 
 
 ## MapboxSpeech
@@ -1159,7 +1157,7 @@ SOFTWARE.
 
 ## Turf
 
-Copyright © 2014–2021, Mapbox
+Copyright © 2014–2017, Mapbox
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

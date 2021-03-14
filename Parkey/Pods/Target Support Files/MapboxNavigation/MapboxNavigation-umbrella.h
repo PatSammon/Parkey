@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "CLLocationManager+MGLNavigationAdditions.h"
 #import "MapboxNavigation.h"
 #import "MGLMapView+MGLNavigationAdditions.h"
 

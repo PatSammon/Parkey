@@ -1,9 +1,11 @@
 import UIKit
 import MapboxDirections
+import MapboxCoreNavigation
 
 /// :nodoc:
 public class InstructionsCardCell: UICollectionViewCell {
     public var container: InstructionsCardContainerView!
+    public var style: InstructionsCardStyle = DayInstructionsCardStyle()
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,7 +45,7 @@ public class InstructionsCardCell: UICollectionViewCell {
     public func configure(for step: RouteStep, distance: CLLocationDistance) {
         addSubview(container)
         setupConstraints()
-        container.prepareLayout()
+        container.prepareLayout(for: style)
         container.updateInstruction(for: step, distance: distance)
     }
 }

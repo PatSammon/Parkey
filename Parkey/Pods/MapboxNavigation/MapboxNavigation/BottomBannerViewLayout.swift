@@ -9,15 +9,15 @@ extension BottomBannerViewController {
     
     func setupRootViewConstraints() {
         let constraints = [
-            bottomBannerView.topAnchor.constraint(equalTo: view.topAnchor),
-            bottomBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomBannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBannerView.bottomAnchor.constraint(equalTo: bottomPaddingView.topAnchor),
-            
-            bottomPaddingView.topAnchor.constraint(equalTo: view.safeBottomAnchor),
-            bottomPaddingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomPaddingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomPaddingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        bottomBannerView.topAnchor.constraint(equalTo: view.topAnchor),
+        bottomBannerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        bottomBannerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        bottomBannerView.bottomAnchor.constraint(equalTo: bottomPaddingView.topAnchor),
+        
+        bottomPaddingView.topAnchor.constraint(equalTo: view.safeBottomAnchor),
+        bottomPaddingView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+        bottomPaddingView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        bottomPaddingView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -81,8 +81,7 @@ extension BottomBannerViewController {
         c.append(distanceRemainingLabel.lastBaselineAnchor.constraint(equalTo: timeRemainingLabel.lastBaselineAnchor))
         
         c.append(verticalDividerView.widthAnchor.constraint(equalToConstant: 1))
-        c.append(verticalDividerView.topAnchor.constraint(equalTo: bottomBannerView.topAnchor, constant: 10))
-        c.append(verticalDividerView.bottomAnchor.constraint(equalTo: bottomBannerView.bottomAnchor, constant: -10))
+        c.append(verticalDividerView.heightAnchor.constraint(equalToConstant: 40))
         c.append(verticalDividerView.centerYAnchor.constraint(equalTo: bottomBannerView.centerYAnchor))
         c.append(verticalDividerView.trailingAnchor.constraint(equalTo: cancelButton.leadingAnchor))
         
@@ -96,7 +95,8 @@ extension BottomBannerViewController {
     }
     
     fileprivate func setupVerticalRegularLayout(_ c: inout [NSLayoutConstraint]) {
-        c.append(bottomBannerView.heightAnchor.constraint(equalToConstant: 80))
+        let size = bottomBannerView.heightAnchor.constraint(equalToConstant: 80)
+        c.append(size)
         
         c.append(timeRemainingLabel.leadingAnchor.constraint(equalTo: bottomBannerView.leadingAnchor, constant: 10))
         c.append(timeRemainingLabel.lastBaselineAnchor.constraint(equalTo: bottomBannerView.centerYAnchor, constant: 0))
@@ -110,8 +110,7 @@ extension BottomBannerViewController {
         c.append(cancelButton.bottomAnchor.constraint(equalTo: bottomBannerView.bottomAnchor))
         
         c.append(verticalDividerView.widthAnchor.constraint(equalToConstant: 1))
-        c.append(verticalDividerView.topAnchor.constraint(equalTo: bottomBannerView.topAnchor, constant: 10))
-        c.append(verticalDividerView.bottomAnchor.constraint(equalTo: bottomBannerView.bottomAnchor, constant: -10))
+        c.append(verticalDividerView.heightAnchor.constraint(equalToConstant: 40))
         c.append(verticalDividerView.centerYAnchor.constraint(equalTo: bottomBannerView.centerYAnchor))
         c.append(verticalDividerView.trailingAnchor.constraint(equalTo: cancelButton.leadingAnchor))
         

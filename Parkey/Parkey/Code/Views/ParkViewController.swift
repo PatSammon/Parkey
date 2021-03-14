@@ -5,23 +5,43 @@
 //  Created by Azka Ghaffar on 2/23/21.
 //
 
+
 import UIKit
 import Mapbox
 import MapboxCoreNavigation
 import MapboxNavigation
 import MapboxDirections
+import MapboxSearch
+import MapboxSearchUI
 
-class ParkViewController: UIViewController, MGLMapViewDelegate {
+class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegate {
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
-    var route: Route?
+    var route: MapboxDirections.Route?
+    var ParkOut = false
+    lazy var searchController = MapboxSearchController()
+    
+    /// `LocationProvider` protocol implementation
+    func currentLocation() -> CLLocationCoordinate2D? { mapboxSFOfficeCoordinate }
+    lazy var panelController = MapboxPanelController(rootViewController: searchController)
+    let mapboxSFOfficeCoordinate = CLLocationCoordinate2D(latitude: 37.7911551, longitude: -122.3966103)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(ParkOut)
+        //check to see if the user is Parking in or Parking out
+        if ParkOut {
+            //store the latitude and longitude of the users location
+            RequestHandler.addParkingSpot(latitude: Float(mapboxSFOfficeCoordinate.latitude), longitude: Float(mapboxSFOfficeCoordinate.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+        }
 
         mapView = NavigationMapView(frame: view.bounds)
-
-        view.addSubview(mapView)
+        mapView.frame = view.bounds
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.showsUserLocation = true
+         
+        mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false);   view.addSubview(mapView)
 
         // Set the map view's delegate
         mapView.delegate = self
@@ -29,6 +49,9 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         // Allow the map to display the user's location
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true, completionHandler: nil)
+        searchController.delegate = self
+        let panelController = MapboxPanelController(rootViewController: searchController)
+        addChild(panelController)
 
         // Add a gesture recognizer to the map view
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
@@ -87,7 +110,7 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         }
     }
 
-    func drawRoute(route: Route) {
+    func drawRoute(route: MapboxDirections.Route) {
         guard let routeShape = route.shape, routeShape.coordinates.count > 0 else { return }
         // Convert the route’s coordinates into a polyline
         var routeCoordinates = routeShape.coordinates
@@ -109,7 +132,20 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
             mapView.style?.addLayer(lineStyle)
         }
     }
-
+    func showAnnotation(_ annotations: [MGLAnnotation], isPOI: Bool) {
+    guard !annotations.isEmpty else { return }
+     
+    if let existingAnnotations = mapView.annotations {
+    mapView.removeAnnotations(existingAnnotations)
+    }
+    mapView.addAnnotations(annotations)
+     
+    if annotations.count == 1, let annotation = annotations.first {
+    mapView.setCenter(annotation.coordinate, zoomLevel: 15, animated: true)
+    } else {
+    mapView.showAnnotations(annotations, animated: true)
+    }
+    }
     // Implement the delegate method that allows annotations to show callouts when tapped
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
@@ -120,29 +156,51 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         guard let route = route, let routeOptions = routeOptions else {
             return
         }
-        let navigationViewController = NavigationViewController(for: route, routeIndex: 0, routeOptions: routeOptions)
+        let navigationViewController = NavigationViewController(for: route, routeOptions: routeOptions)
         navigationViewController.modalPresentationStyle = .fullScreen
         self.present(navigationViewController, animated: true, completion: nil)
     }
-
-    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        
-        //make request handler call
-        let array = RequestHandler.getPlaces()
-        
-        //iterate through the items
-        for item in array{
-            let annotation = MGLPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.coordinates[0]), CLLocationDegrees(item.coordinates[1]))
-            annotation.title=item.name
-            annotation.subtitle="Cost: \(item.cost)"
-            mapView.addAnnotation(annotation)
-        }
-       /* // Create point to represent where the symbol should be placed
-        let annotation = MGLPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2DMake(40.749193, -73.987456)
-        annotation.title="Pats Pizzeria"
-        annotation.subtitle="The best Pizza in NYC"
-        mapView.addAnnotation(annotation)*/
+    
+    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+        let objDateformat: DateFormatter = DateFormatter()
+        objDateformat.dateFormat = "yyyy-MM-dd"
+        let strTime: String = objDateformat.string(from: dateToConvert as Date)
+        let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
+        let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
+        let strTimeStamp: String = "\(milliseconds)"
+        return strTimeStamp
     }
 }
+extension ParkViewController: SearchControllerDelegate {
+    func categorySearchResultsReceived(results: [SearchResult]) {
+    let annotations = results.map { searchResult -> MGLPointAnnotation in
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = searchResult.coordinate
+    annotation.title = searchResult.name
+    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
+    return annotation
+    }
+     
+    showAnnotation(annotations, isPOI: false)
+    }
+     
+    func searchResultSelected(_ searchResult: SearchResult) {
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = searchResult.coordinate
+    annotation.title = searchResult.name
+    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
+     
+    showAnnotation([annotation], isPOI: searchResult.type == .POI)
+    }
+     
+    func userFavoriteSelected(_ userFavorite: FavoriteRecord) {
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = userFavorite.coordinate
+    annotation.title = userFavorite.name
+    annotation.subtitle = userFavorite.address?.formattedAddress(style: .medium)
+     
+    showAnnotation([annotation], isPOI: true)
+    }
+
+    }
+

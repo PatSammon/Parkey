@@ -1,9 +1,4 @@
-import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#else
-import Turf
-#endif
 
 /**
  A `RouteOptions` object is a structure that specifies the criteria for results returned by the Mapbox Directions API.
@@ -25,7 +20,6 @@ open class RouteOptions: DirectionsOptions {
         super.init(waypoints: waypoints, profileIdentifier: profileIdentifier)
     }
 
-    #if canImport(CoreLocation)
     /**
      Initializes a route options object for routes between the given locations and an optional profile identifier.
 
@@ -38,7 +32,6 @@ open class RouteOptions: DirectionsOptions {
         let waypoints = locations.map { Waypoint(location: $0) }
         self.init(waypoints: waypoints, profileIdentifier: profileIdentifier)
     }
-    #endif
 
     /**
      Initializes a route options object for routes between the given geographic coordinates and an optional profile identifier.
@@ -56,7 +49,6 @@ open class RouteOptions: DirectionsOptions {
         case includesAlternativeRoutes
         case includesExitRoundaboutManeuver
         case roadClassesToAvoid
-        case refreshingEnabled
     }
     
     public override func encode(to encoder: Encoder) throws {
@@ -66,7 +58,6 @@ open class RouteOptions: DirectionsOptions {
         try container.encode(includesAlternativeRoutes, forKey: .includesAlternativeRoutes)
         try container.encode(includesExitRoundaboutManeuver, forKey: .includesExitRoundaboutManeuver)
         try container.encode(roadClassesToAvoid, forKey: .roadClassesToAvoid)
-        try container.encode(refreshingEnabled, forKey: .refreshingEnabled)
     }
     
     public required init(from decoder: Decoder) throws {
@@ -78,8 +69,6 @@ open class RouteOptions: DirectionsOptions {
         includesExitRoundaboutManeuver = try container.decode(Bool.self, forKey: .includesExitRoundaboutManeuver)
     
         roadClassesToAvoid = try container.decode(RoadClasses.self, forKey: .roadClassesToAvoid)
-        
-        refreshingEnabled = try container.decode(Bool.self, forKey: .refreshingEnabled)
         try super.init(from: decoder)
     }
     
@@ -148,7 +137,7 @@ open class RouteOptions: DirectionsOptions {
      
      The value of this property must be at least `CLLocationSpeed.minimumWalking` and at most `CLLocationSpeed.maximumWalking`. The default value is `CLLocationSpeed.normalWalking`.
      */
-    open var speed: LocationSpeed = .normalWalking
+    open var speed: CLLocationSpeed = .normalWalking
     
     // MARK: Specifying the Response Format
 
@@ -170,16 +159,12 @@ open class RouteOptions: DirectionsOptions {
      */
     open var includesExitRoundaboutManeuver = false
     
-    /**
-     A Boolean value indicating whether `Directions` can refresh time-dependent properties of the `RouteLeg`s of the resulting `Route`s.
-     
-     To refresh the `RouteLeg.expectedSegmentTravelTimes`, `RouteLeg.segmentSpeeds`, and `RouteLeg.segmentCongestionLevels` properties, use the `Directions.refreshRoute(responseIdentifier:routeIndex:fromLegAtIndex:completionHandler:)` method. This property is ignored unless `profileIdentifier` is `DirectionsProfileIdentifier.automobileAvoidingTraffic`. This option is set to `false` by default.
-     */
-    open var refreshingEnabled = false
-    
     // MARK: Getting the Request URL
     
-    override open var urlQueryItems: [URLQueryItem] {
+    /**
+     An array of URL parameters to include in the request URL.
+     */
+    override var urlQueryItems: [URLQueryItem] {
         var params: [URLQueryItem] = [
             URLQueryItem(name: "alternatives", value: String(includesAlternativeRoutes)),
             URLQueryItem(name: "continue_straight", value: String(!allowsUTurnAtWaypoint)),
@@ -205,12 +190,8 @@ open class RouteOptions: DirectionsOptions {
             }
         }
         
-        if refreshingEnabled && profileIdentifier == .automobileAvoidingTraffic {
-            params.append(URLQueryItem(name: "enable_refresh", value: String(refreshingEnabled)))
-        }
-        
         if waypoints.first(where: { $0.targetCoordinate != nil }) != nil {
-            let targetCoordinates = waypoints.filter { $0.separatesLegs }.map { $0.targetCoordinate?.requestDescription ?? "" }.joined(separator: ";")
+            let targetCoordinates = waypoints.map { $0.targetCoordinate?.requestDescription ?? "" }.joined(separator: ";")
             params.append(URLQueryItem(name: "waypoint_targets", value: targetCoordinates))
         }
 
@@ -218,19 +199,19 @@ open class RouteOptions: DirectionsOptions {
     }
 }
 
-extension LocationSpeed {
+extension CLLocationSpeed {
     /**
      By default, pedestrians are assumed to walk at an average rate of 1.42 meters per second (5.11 kilometers per hour or 3.18 miles per hour), corresponding to a typical preferred walking speed.
      */
-    static let normalWalking: LocationSpeed = 1.42
+    static let normalWalking: CLLocationSpeed = 1.42
     
     /**
      Pedestrians are assumed to walk no slower than 0.14 meters per second (0.50 kilometers per hour or 0.31 miles per hour) on average.
      */
-    static let minimumWalking: LocationSpeed = 0.14
+    static let minimumWalking: CLLocationSpeed = 0.14
     
     /**
      Pedestrians are assumed to walk no faster than 6.94 meters per second (25.0 kilometers per hour or 15.5 miles per hour) on average.
      */
-    static let maximumWalking: LocationSpeed = 6.94
+    static let maximumWalking: CLLocationSpeed = 6.94
 }

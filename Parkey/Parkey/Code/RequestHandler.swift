@@ -62,6 +62,23 @@ class RequestHandler
         }.resume()
     }
     
+    static func addParkingSpot(latitude: Float, longitude: Float, date: String){
+        let url = URL(string: "http://127.0.0.1:8080/newParkingSpot")
+        let encoder = JSONEncoder()
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        let newParkingSpot = ParkingSpot(latitude: latitude, longitude: longitude, available: true, timeAvailable: date)
+        request.httpBody = try? encoder.encode(newParkingSpot)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
     static func getRewards(userId: String) -> [Reward]
     {
         var done = false

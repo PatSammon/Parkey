@@ -47,14 +47,6 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     public var tapGestureDistanceThreshold: CGFloat = 50
     
     /**
-     A collection of street road classes for which a congestion level substitution should occur.
-     
-     For any street road class included in the `roadClassesWithOverriddenCongestionLevels`, all route segments with an `CongestionLevel.unknown` traffic congestion level and a matching `MapboxDirections.MapboxStreetsRoadClass`
-     will be replaced with the `CongestionLevel.low` congestion level.
-     */
-    public var roadClassesWithOverriddenCongestionLevels: Set<MapboxStreetsRoadClass>? = nil
-    
-    /**
      The object that acts as the navigation delegate of the map view.
      */
     public weak var navigationMapViewDelegate: NavigationMapViewDelegate?
@@ -71,6 +63,9 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     let sourceOptions: [MGLShapeSourceOption: Any] = [.maximumZoomLevel: 16]
 
     struct SourceIdentifier {
+        static let route = "\(identifierNamespace).route"
+        static let routeCasing = "\(identifierNamespace).routeCasing"
+
         static let waypoint = "\(identifierNamespace).waypoints"
         static let waypointCircle = "\(identifierNamespace).waypointsCircle"
         static let waypointSymbol = "\(identifierNamespace).waypointsSymbol"
@@ -80,12 +75,13 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         static let arrowStroke = "\(identifierNamespace).arrowStroke"
         
         static let instruction = "\(identifierNamespace).instruction"
-        
-        static let buildingExtrusion = "\(identifierNamespace).buildingExtrusion"
     }
     
     struct StyleLayerIdentifier {
         static let namespace = Bundle.mapboxNavigation.bundleIdentifier ?? ""
+        
+        static let route = "\(identifierNamespace).route"
+        static let routeCasing = "\(identifierNamespace).routeCasing"
 
         static let waypointCircle = "\(identifierNamespace).waypointsCircle"
         static let waypointSymbol = "\(identifierNamespace).waypointsSymbol"
@@ -97,16 +93,6 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
 
         static let instructionLabel = "\(identifierNamespace).instructionLabel"
         static let instructionCircle = "\(identifierNamespace).instructionCircle"
-        
-        static let buildingExtrusion = "\(identifierNamespace).buildingExtrusion"
-    }
-    
-    enum IdentifierType: Int {
-        case source
-        
-        case route
-        
-        case routeCasing
     }
 
     // MARK: - Instance Properties
@@ -118,29 +104,14 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     @objc dynamic public var routeCasingColor: UIColor = .defaultRouteCasing
     @objc dynamic public var routeAlternateColor: UIColor = .defaultAlternateLine
     @objc dynamic public var routeAlternateCasingColor: UIColor = .defaultAlternateLineCasing
-    @objc dynamic public var traversedRouteColor: UIColor = .defaultTraversedRouteColor
     @objc dynamic public var maneuverArrowColor: UIColor = .defaultManeuverArrow
     @objc dynamic public var maneuverArrowStrokeColor: UIColor = .defaultManeuverArrowStroke
-    @objc dynamic public var buildingDefaultColor: UIColor = .defaultBuildingColor
-    @objc dynamic public var buildingHighlightColor: UIColor = .defaultBuildingHighlightColor
-    @objc dynamic public var reducedAccuracyActivatedMode: Bool = false {
-        didSet {
-            userCourseView = reducedAccuracyActivatedMode ? UserHaloCourseView(frame: CGRect(origin: .zero, size: 75.0)) : UserPuckCourseView(frame: CGRect(origin: .zero, size: 75.0))
-        }
-    }
     
     var userLocationForCourseTracking: CLLocation?
     var animatesUserLocation: Bool = false
     var altitude: CLLocationDistance
     var routes: [Route]?
     var isAnimatingToOverheadMode = false
-    var routePoints: RoutePoints?
-    var routeLineGranularDistances: RouteLineGranularDistances?
-    var routeRemainingDistancesIndex: Int?
-    var routeLineTracksTraversal: Bool = false
-    var fractionTraveled: Double = 0.0
-    var preFractionTraveled: Double = 0.0
-    var vanishingRouteLineUpdateTimer: Timer? = nil
     
     var shouldPositionCourseViewFrameByFrame = false {
         didSet {
@@ -152,11 +123,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     
     var showsRoute: Bool {
         get {
-            guard let mainRouteLayerIdentifier = identifier(routes?.first, identifierType: .route),
-                  let mainRouteCasingLayerIdentifier = identifier(routes?.first, identifierType: .routeCasing) else { return false }
-            
-            return style?.layer(withIdentifier: mainRouteLayerIdentifier) != nil &&
-                style?.layer(withIdentifier: mainRouteCasingLayerIdentifier) != nil
+            return style?.layer(withIdentifier: StyleLayerIdentifier.route) != nil
         }
     }
     
@@ -265,8 +232,6 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         addGestureRecognizer(mapTapGesture)
         
         installUserCourseView()
-        showsUserLocation = false
-        
     }
     
     open override func layoutMarginsDidChange() {
@@ -325,14 +290,15 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         let expectedTravelTime = stepProgress.step.expectedTravelTime
         let durationUntilNextManeuver = stepProgress.durationRemaining
         let durationSincePreviousManeuver = expectedTravelTime - durationUntilNextManeuver
-        let conservativeFramesPerSecond = UIDevice.current.isPluggedIn ? FrameIntervalOptions.pluggedInFramesPerSecond : minimumFramesPerSecond
         
-        if let upcomingStep = routeProgress.currentLegProgress.upcomingStep,
-           upcomingStep.maneuverDirection == .straightAhead || upcomingStep.maneuverDirection == .slightLeft || upcomingStep.maneuverDirection == .slightRight {
-            preferredFramesPerSecond = shouldPositionCourseViewFrameByFrame ? FrameIntervalOptions.defaultFramesPerSecond : conservativeFramesPerSecond
+        if UIDevice.current.isPluggedIn {
+            preferredFramesPerSecond = FrameIntervalOptions.pluggedInFramesPerSecond
+        } else if let upcomingStep = routeProgress.currentLegProgress.upcomingStep,
+            upcomingStep.maneuverDirection == .straightAhead || upcomingStep.maneuverDirection == .slightLeft || upcomingStep.maneuverDirection == .slightRight {
+            preferredFramesPerSecond = shouldPositionCourseViewFrameByFrame ? FrameIntervalOptions.defaultFramesPerSecond : minimumFramesPerSecond
         } else if durationUntilNextManeuver > FrameIntervalOptions.durationUntilNextManeuver &&
-                    durationSincePreviousManeuver > FrameIntervalOptions.durationSincePreviousManeuver {
-            preferredFramesPerSecond = shouldPositionCourseViewFrameByFrame ? FrameIntervalOptions.defaultFramesPerSecond : conservativeFramesPerSecond
+            durationSincePreviousManeuver > FrameIntervalOptions.durationSincePreviousManeuver {
+            preferredFramesPerSecond = shouldPositionCourseViewFrameByFrame ? FrameIntervalOptions.defaultFramesPerSecond : minimumFramesPerSecond
         } else {
             preferredFramesPerSecond = FrameIntervalOptions.pluggedInFramesPerSecond
         }
@@ -374,26 +340,22 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             return
         }
         
-        let centerUserCourseView = { [weak self] in
-            guard let point = self?.convert(location.coordinate, toPointTo: self) else { return }
-            self?.userCourseView.center = point
-        }
-        
         if tracksUserCourse {
-            centerUserCourseView()
-            
             let newCamera = camera ?? MGLMapCamera(lookingAtCenter: location.coordinate, altitude: altitude, pitch: 45, heading: location.course)
             let function: CAMediaTimingFunction? = animated ? CAMediaTimingFunction(name: .linear) : nil
             setCamera(newCamera, withDuration: duration, animationTimingFunction: function, completionHandler: nil)
         } else {
             // Animate course view updates in overview mode
-            UIView.animate(withDuration: duration, delay: 0, options: [.curveLinear], animations: centerUserCourseView)
+            UIView.animate(withDuration: duration, delay: 0, options: [.curveLinear], animations: { [weak self] in
+                guard let point = self?.convert(location.coordinate, toPointTo: self) else { return }
+                self?.userCourseView.center = point
+            })
         }
         
         userCourseView.update(location: location, pitch: self.camera.pitch, direction: direction, animated: animated, tracksUserCourse: tracksUserCourse)
     }
     
-    //MARK: - Gesture Recognizers
+    //MARK: -  Gesture Recognizers
     
     /**
      Fired when NavigationMapView detects a tap not handled elsewhere by other gesture recognizers.
@@ -437,7 +399,13 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         if sender.state == .changed {
             guard let location = userLocationForCourseTracking else { return }
             
-            updateCourseView(to: location)
+            userCourseView.update(location: location,
+                                  pitch: camera.pitch,
+                                  direction: direction,
+                                  animated: false,
+                                  tracksUserCourse: tracksUserCourse)
+            
+            userCourseView.center = convert(location.coordinate, toPointTo: self)
         }
     }
     
@@ -449,8 +417,8 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     
     public func showcase(_ routes: [Route], animated: Bool = false) {
         guard let active = routes.first,
-              let coords = active.shape?.coordinates,
-              !coords.isEmpty else { return } //empty array
+            let coords = active.shape?.coordinates,
+            !coords.isEmpty else { return } //empty array
         
         removeArrow()
         removeRoutes()
@@ -468,301 +436,64 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         setUserTrackingMode(.none, animated: false, completionHandler: nil)
         let line = MGLPolyline(shape)
         
-        // Current contentInset gets incorporated to cameraThatFitsShape.
-        // edgePadding is set to .zero as there's no need for additional padding.
-        contentInset = safeArea + NavigationMapView.defaultPadding
-        let camera = cameraThatFitsShape(line, direction: direction, edgePadding: .zero)
+        // Workaround for https://github.com/mapbox/mapbox-gl-native/issues/15574
+        // Set content insets .zero, before cameraThatFitsShape + setCamera.
+        contentInset = .zero
+        let camera = cameraThatFitsShape(line, direction: direction, edgePadding: safeArea + NavigationMapView.defaultPadding)
         setCamera(camera, animated: animated)
     }
     
     /**
-     Adds or updates both the route line and the route line casing.
-
-     This method will be called multiple times:
-     • When the route preview map is shown, rendering alternative routes if necessary.
-     • When the navigation session starts, rendering only the single route line.
+     Adds or updates both the route line and the route line casing
      */
     public func show(_ routes: [Route], legIndex: Int = 0) {
         guard let style = style else { return }
-        
-        removeRoutes()
-        
+        guard let mainRoute = routes.first else { return }
         self.routes = routes
         
-        var parentLayer: MGLStyleLayer? = nil
-        for (index, route) in routes.enumerated() {
-            guard let routeSourceIdentifier = identifier(route, identifierType: .source),
-                  let routeCasingSourceIdentifier = identifier(route, identifierType: .source, isMainRouteCasingSource: true),
-                  let routeIdentifier = identifier(route, identifierType: .route),
-                  let routeCasingIdentifier = identifier(route, identifierType: .routeCasing) else { continue }
-            
-            // In case of main route there is the ability to provide custom `MGLShape` for either route or route casing by implemeting
-            // `NavigationMapViewDelegate.navigationMapView(_:shapeFor:)` or `NavigationMapViewDelegate.navigationMapView(_:simplifiedShapeFor:)`.
-            if index == 0 {
-                
-                let routeShape = navigationMapViewDelegate?.navigationMapView(self, shapeFor: [route]) ??
-                    shape(for: route, legIndex: legIndex, isAlternateRoute: false)
-                
-                let routeSource = addRouteSource(style, identifier: routeSourceIdentifier, shape: routeShape)
-                
-                let fractionTraveledForGradient = routeLineTracksTraversal ? fractionTraveled : 0.0
-                
-                let mainRouteLayer = addMainRouteLayer(style,
-                                                       source: routeSource,
-                                                       identifier: routeIdentifier,
-                                                       lineGradient: routeLineGradient(route, fractionTraveled: fractionTraveledForGradient))
-                
-                let mainRouteCasingShape = navigationMapViewDelegate?.navigationMapView(self, simplifiedShapeFor: route) ??
-                    shape(forCasingOf: route, legIndex: legIndex)
-                
-                let routeCasingSource = addRouteSource(style, identifier: routeCasingSourceIdentifier, shape: mainRouteCasingShape)
-                
-                parentLayer = addMainRouteCasingLayer(style,
-                                                      source: routeCasingSource,
-                                                      identifier: routeCasingIdentifier,
-                                                      lineGradient: routeCasingGradient(fractionTraveledForGradient),
-                                                      below: mainRouteLayer)
-                
-                if routeLineTracksTraversal {
-                    initPrimaryRoutePoints(route: route)
-                }
-                
-                continue
-            }
-            
-            let routeShape = shape(for: route, legIndex: legIndex, isAlternateRoute: true)
-            let routeSource = addRouteSource(style, identifier: routeSourceIdentifier, shape: routeShape)
-            
-            if let tempLayer = parentLayer {
-                let alternativeRouteLayer = addAlternativeRoutesLayer(style,
-                                                                      source: routeSource,
-                                                                      identifier: routeIdentifier,
-                                                                      below: tempLayer)
-                
-                parentLayer = addAlternativeRoutesCasingLayer(style,
-                                                              source: routeSource,
-                                                              identifier: routeCasingIdentifier,
-                                                              below: alternativeRouteLayer)
-            }
-        }
-    }
-    
-    // MARK: - Route line insertion methods
-    
-    func identifier(_ route: Route?, identifierType: IdentifierType, isMainRouteCasingSource: Bool = false) -> String? {
-        guard let route = route else { return nil }
-        let identifier = Unmanaged.passUnretained(route).toOpaque()
+        let polylines = navigationMapViewDelegate?.navigationMapView(self, shapeFor: routes) ?? shape(for: routes, legIndex: legIndex)
+        let mainPolylineSimplified = navigationMapViewDelegate?.navigationMapView(self, simplifiedShapeFor: mainRoute) ?? shape(forCasingOf: mainRoute, legIndex: legIndex)
         
-        switch identifierType {
-        case .source:
-            if isMainRouteCasingSource {
-                return "\(identifier)_casing_source"
-            }
+        if let source = style.source(withIdentifier: SourceIdentifier.route) as? MGLShapeSource,
+            let sourceSimplified = style.source(withIdentifier: SourceIdentifier.routeCasing) as? MGLShapeSource {
+            source.shape = polylines
+            sourceSimplified.shape = mainPolylineSimplified
+        } else {
+            let lineSource = MGLShapeSource(identifier: SourceIdentifier.route, shape: polylines, options: [.lineDistanceMetrics: true])
+            let lineCasingSource = MGLShapeSource(identifier: SourceIdentifier.routeCasing, shape: mainPolylineSimplified, options: [.lineDistanceMetrics: true])
+            style.addSource(lineSource)
+            style.addSource(lineCasingSource)
             
-            return "\(identifier)_source"
+            let line = navigationMapViewDelegate?.navigationMapView(self, routeStyleLayerWithIdentifier: StyleLayerIdentifier.route, source: lineSource) ?? routeStyleLayer(identifier: StyleLayerIdentifier.route, source: lineSource)
+            let lineCasing = navigationMapViewDelegate?.navigationMapView(self, routeCasingStyleLayerWithIdentifier: StyleLayerIdentifier.routeCasing, source: lineCasingSource) ?? routeCasingStyleLayer(identifier: StyleLayerIdentifier.routeCasing, source: lineSource)
             
-        case .route:
-            return "\(identifier)_route"
-            
-        case .routeCasing:
-            return "\(identifier)_casing"
-        }
-    }
-    
-    func addRouteSource(_ style: MGLStyle, identifier: String, shape: MGLShape?) -> MGLSource {
-        if let routeSource = style.source(withIdentifier: identifier) as? MGLShapeSource {
-            routeSource.shape = shape
-            return routeSource
-        }
-        
-        let routeSource = MGLShapeSource(identifier: identifier, shape: shape, options: [.lineDistanceMetrics: true])
-        style.addSource(routeSource)
-        
-        return routeSource
-    }
-
-    @discardableResult func addMainRouteLayer(_ style: MGLStyle, source: MGLSource, identifier: String, lineGradient: NSExpression?) -> MGLStyleLayer {
-        let customMainRouteLayer = navigationMapViewDelegate?.navigationMapView(self,
-                                                                                mainRouteStyleLayerWithIdentifier: identifier,
-                                                                                source: source)
-        let currentMainRouteLayer = style.layer(withIdentifier: identifier)
-        
-        var parentLayer: MGLStyleLayer? {
-            let identifiers = [
-                StyleLayerIdentifier.arrow,
-                StyleLayerIdentifier.arrowSymbol,
-                StyleLayerIdentifier.arrowCasingSymbol,
-                StyleLayerIdentifier.arrowStroke,
-                StyleLayerIdentifier.waypointCircle
-            ]
-            
-            var parentLayer: MGLStyleLayer? = nil
             for layer in style.layers.reversed() {
-                if !(layer is MGLSymbolStyleLayer) && !identifiers.contains(layer.identifier) {
-                    // MGLMapView automatically adds an MGLLineStyleLayer or MGLFillStyleLayer to the top of the layer stack when adding a polyline or polygon annotation, respectively. There’s no way to insert them lower in the layer stack, so they aren’t good indicators of where to insert the route line.
-                    // Detect and skip such a layer by checking if its source lacks a dedicated MGLSource subclass.
-                    if let vectorLayer = layer as? MGLVectorStyleLayer,
-                       let sourceIdentifier = vectorLayer.sourceIdentifier,
-                       let source = style.source(withIdentifier: sourceIdentifier), type(of: source) == MGLSource.self {
-                        continue
-                    }
-                    
-                    parentLayer = layer
+                if !(layer is MGLSymbolStyleLayer) &&
+                layer.identifier != StyleLayerIdentifier.arrow && layer.identifier != StyleLayerIdentifier.arrowSymbol && layer.identifier != StyleLayerIdentifier.arrowCasingSymbol && layer.identifier != StyleLayerIdentifier.arrowStroke && layer.identifier != StyleLayerIdentifier.waypointCircle {
+                    style.insertLayer(line, below: layer)
+                    style.insertLayer(lineCasing, below: line)
                     break
                 }
             }
-            
-            return parentLayer
         }
-        
-        if let mainRouteLayer = customMainRouteLayer, currentMainRouteLayer == nil, let parentLayer = parentLayer {
-            style.insertLayer(mainRouteLayer, above: parentLayer)
-            return mainRouteLayer
-        }
-        
-        if let mainRouteLayer = currentMainRouteLayer as? MGLLineStyleLayer {
-            return mainRouteLayer
-        }
-        
-        let mainRouteLayer = MGLLineStyleLayer(identifier: identifier, source: source)
-        mainRouteLayer.predicate = NSPredicate(format: "isAlternateRoute == false")
-        mainRouteLayer.lineColor = NSExpression(forConstantValue: trafficUnknownColor)
-        mainRouteLayer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel)
-        mainRouteLayer.lineJoin = NSExpression(forConstantValue: "round")
-        mainRouteLayer.lineCap = NSExpression(forConstantValue: "round")
-        mainRouteLayer.lineGradient = lineGradient
-        
-        if let parentLayer = parentLayer {
-            style.insertLayer(mainRouteLayer, above: parentLayer)
-        }
-        
-        return mainRouteLayer
-    }
-
-    @discardableResult func addMainRouteCasingLayer(_ style: MGLStyle, source: MGLSource, identifier: String, lineGradient: NSExpression, below layer: MGLStyleLayer) -> MGLStyleLayer {
-        let customMainRouteCasingLayer = navigationMapViewDelegate?.navigationMapView(self,
-                                                                                      mainRouteCasingStyleLayerWithIdentifier: identifier,
-                                                                                      source: source)
-        let currentMainRouteCasingLayer = style.layer(withIdentifier: identifier)
-        
-        if let mainRouteCasingLayer = customMainRouteCasingLayer, let _ = currentMainRouteCasingLayer {
-            return mainRouteCasingLayer
-        }
-        
-        if let mainRouteCasingLayer = customMainRouteCasingLayer, currentMainRouteCasingLayer == nil {
-            style.insertLayer(mainRouteCasingLayer, below: layer)
-            return mainRouteCasingLayer
-        }
-        
-        if let mainRouteCasingLayer = currentMainRouteCasingLayer as? MGLLineStyleLayer {
-            return mainRouteCasingLayer
-        }
-        
-        let mainRouteCasingLayer = MGLLineStyleLayer(identifier: identifier, source: source)
-        mainRouteCasingLayer.predicate = NSPredicate(format: "isAlternateRoute == false")
-        mainRouteCasingLayer.lineColor = NSExpression(forConstantValue: routeCasingColor)
-        mainRouteCasingLayer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel.multiplied(by: 1.5))
-        mainRouteCasingLayer.lineJoin = NSExpression(forConstantValue: "round")
-        mainRouteCasingLayer.lineCap = NSExpression(forConstantValue: "round")
-        mainRouteCasingLayer.lineGradient = lineGradient
-        
-        style.insertLayer(mainRouteCasingLayer, below: layer)
-        
-        return mainRouteCasingLayer
-    }
-    
-    @discardableResult func addAlternativeRoutesLayer(_ style: MGLStyle, source: MGLSource, identifier: String, below layer: MGLStyleLayer) -> MGLStyleLayer {
-        let customAlternativeRoutesLayer = navigationMapViewDelegate?.navigationMapView(self,
-                                                                                        alternativeRouteStyleLayerWithIdentifier: identifier,
-                                                                                        source: source)
-        let currentAlternativeRoutesLayer = style.layer(withIdentifier: identifier)
-        
-        if let alternativeRoutesLayer = customAlternativeRoutesLayer, let _ = currentAlternativeRoutesLayer {
-            return alternativeRoutesLayer
-        }
-        
-        if let alternativeRoutesLayer = customAlternativeRoutesLayer, currentAlternativeRoutesLayer == nil {
-            style.insertLayer(alternativeRoutesLayer, below: layer)
-            return alternativeRoutesLayer
-        }
-        
-        if let alternativeRoutesLayer = currentAlternativeRoutesLayer {
-            return alternativeRoutesLayer
-        }
-        
-        let alternativeRoutesLayer = MGLLineStyleLayer(identifier: identifier, source: source)
-        alternativeRoutesLayer.predicate = NSPredicate(format: "isAlternateRoute == true")
-        alternativeRoutesLayer.lineColor = NSExpression(forConstantValue: routeAlternateColor)
-        alternativeRoutesLayer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel)
-        alternativeRoutesLayer.lineJoin = NSExpression(forConstantValue: "round")
-        alternativeRoutesLayer.lineCap = NSExpression(forConstantValue: "round")
-        style.insertLayer(alternativeRoutesLayer, below: layer)
-        
-        return alternativeRoutesLayer
-    }
-    
-    @discardableResult func addAlternativeRoutesCasingLayer(_ style: MGLStyle, source: MGLSource, identifier: String, below layer: MGLStyleLayer) -> MGLStyleLayer {
-        let customAlternativeRoutesCasingLayer = navigationMapViewDelegate?.navigationMapView(self,
-                                                                                              alternativeRouteCasingStyleLayerWithIdentifier: identifier,
-                                                                                              source: source)
-        let currentAlternativeRoutesCasingLayer = style.layer(withIdentifier: identifier)
-        
-        if let alternativeRoutesCasingLayer = customAlternativeRoutesCasingLayer, let _ = currentAlternativeRoutesCasingLayer {
-            return alternativeRoutesCasingLayer
-        }
-        
-        if let alternativeRoutesCasingLayer = customAlternativeRoutesCasingLayer, currentAlternativeRoutesCasingLayer == nil {
-            style.insertLayer(alternativeRoutesCasingLayer, below: layer)
-            return alternativeRoutesCasingLayer
-        }
-        
-        if let alternativeRoutesCasingLayer = currentAlternativeRoutesCasingLayer {
-            return alternativeRoutesCasingLayer
-        }
-        
-        let alternativeRoutesCasingLayer = MGLLineStyleLayer(identifier: identifier, source: source)
-        alternativeRoutesCasingLayer.predicate = NSPredicate(format: "isAlternateRoute == true")
-        alternativeRoutesCasingLayer.lineColor = NSExpression(forConstantValue: routeAlternateCasingColor)
-        alternativeRoutesCasingLayer.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel.multiplied(by: 1.5))
-        alternativeRoutesCasingLayer.lineJoin = NSExpression(forConstantValue: "round")
-        alternativeRoutesCasingLayer.lineCap = NSExpression(forConstantValue: "round")
-        style.insertLayer(alternativeRoutesCasingLayer, below: layer)
-        
-        return alternativeRoutesCasingLayer
     }
     
     /**
      Removes route line and route line casing from map
      */
     public func removeRoutes() {
-        guard let style = style else { return }
-        
-        var sourceIdentifiers = Set<String>()
-        var layerIdentifiers = Set<String>()
-        routes?.enumerated().forEach {
-            if $0.offset == 0, let identifier = identifier($0.element, identifierType: .source, isMainRouteCasingSource: true) {
-                sourceIdentifiers.insert(identifier)
-            }
-            
-            if let identifier = identifier($0.element, identifierType: .source) {
-                sourceIdentifiers.insert(identifier)
-            }
-            
-            if let identifier = identifier($0.element, identifierType: .route) {
-                layerIdentifiers.insert(identifier)
-            }
-            
-            if let identifier = identifier($0.element, identifierType: .routeCasing) {
-                layerIdentifiers.insert(identifier)
-            }
+        guard let style = style else {
+            return
         }
         
-        style.remove(layerIdentifiers.compactMap({ style.layer(withIdentifier: $0) }))
-        style.remove(Set(sourceIdentifiers.compactMap({ style.source(withIdentifier: $0) })))
-        
-        routes = nil
-        routePoints = nil
-        routeLineGranularDistances = nil
+        style.remove([
+            StyleLayerIdentifier.route,
+            StyleLayerIdentifier.routeCasing,
+        ].compactMap { style.layer(withIdentifier: $0) })
+        style.remove(Set([
+            SourceIdentifier.route,
+            SourceIdentifier.routeCasing,
+        ].compactMap { style.source(withIdentifier: $0) }))
     }
     
     /**
@@ -834,7 +565,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
      */
     public func addArrow(route: Route, legIndex: Int, stepIndex: Int) {
         guard route.legs.indices.contains(legIndex),
-              route.legs[legIndex].steps.indices.contains(stepIndex) else { return }
+            route.legs[legIndex].steps.indices.contains(stepIndex) else { return }
         
         let step = route.legs[legIndex].steps[stepIndex]
         let maneuverCoordinate = step.maneuverLocation
@@ -964,8 +695,8 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     /** Modifies the gesture recognizers to also disable course tracking. */
     func makeGestureRecognizersRespectCourseTracking() {
         for gestureRecognizer in gestureRecognizers ?? []
-        where gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UIRotationGestureRecognizer {
-            gestureRecognizer.addTarget(self, action: #selector(disableUserCourseTracking))
+            where gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UIRotationGestureRecognizer {
+                gestureRecognizer.addTarget(self, action: #selector(disableUserCourseTracking))
         }
     }
     
@@ -975,16 +706,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func updateCourseView(to location: CLLocation, pitch: CGFloat? = nil, direction: CLLocationDirection? = nil, animated: Bool = false) {
-        userCourseView.update(location: location,
-                              pitch: pitch ?? camera.pitch,
-                              direction: direction ?? self.direction,
-                              animated: animated,
-                              tracksUserCourse: tracksUserCourse)
-        
-        userCourseView.center = convert(location.coordinate, toPointTo: self)
-    }
-    
+    //TODO: Change to point-based distance calculation
     private func waypoints(on routes: [Route], closeTo point: CGPoint) -> [Waypoint]? {
         let tapCoordinate = convert(point, toCoordinateFrom: self)
         let multipointRoutes = routes.filter { $0.legs.count > 1}
@@ -995,8 +717,8 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         
         //lets sort the array in order of closest to tap
         let closest = waypoints.sorted { (left, right) -> Bool in
-            let leftDistance = calculateDistance(coordinate1: left.coordinate, coordinate2: tapCoordinate)
-            let rightDistance = calculateDistance(coordinate1: right.coordinate, coordinate2: tapCoordinate)
+            let leftDistance = left.coordinate.distance(to: tapCoordinate)
+            let rightDistance = right.coordinate.distance(to: tapCoordinate)
             return leftDistance < rightDistance
         }
         
@@ -1020,8 +742,8 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             //existance has been assured through use of filter.
             let leftLine = left.shape!
             let rightLine = right.shape!
-            let leftDistance = leftLine.closestCoordinate(to: tapCoordinate)!.coordinate.distance(to: tapCoordinate)
-            let rightDistance = rightLine.closestCoordinate(to: tapCoordinate)!.coordinate.distance(to: tapCoordinate)
+            let leftDistance = leftLine.closestCoordinate(to: tapCoordinate)!.distance
+            let rightDistance = rightLine.closestCoordinate(to: tapCoordinate)!.distance
             
             return leftDistance < rightDistance
         }
@@ -1036,45 +758,50 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         return candidates
     }
 
-    func shape(for route: Route, legIndex: Int?, isAlternateRoute: Bool) -> MGLShape? {
-        let mainRoute = MGLPolylineFeature(route.shape!)
-        mainRoute.attributes["isAlternateRoute"] = isAlternateRoute
-
-        return MGLShapeCollectionFeature(shapes: [mainRoute])
+    func shape(for routes: [Route], legIndex: Int?) -> MGLShape? {
+        guard let firstRoute = routes.first else { return nil }
+        guard let congestedRoute = addCongestion(to: firstRoute, legIndex: legIndex) else { return nil }
+        
+        var altRoutes: [MGLPolylineFeature] = []
+        
+        for route in routes.suffix(from: 1) {
+            let polyline = MGLPolylineFeature(route.shape!)
+            polyline.attributes["isAlternateRoute"] = true
+            altRoutes.append(polyline)
+        }
+        
+        return MGLShapeCollectionFeature(shapes: altRoutes + congestedRoute)
     }
     
     func addCongestion(to route: Route, legIndex: Int?) -> [MGLPolylineFeature]? {
         guard let coordinates = route.shape?.coordinates else { return nil }
-
+        
         var linesPerLeg: [MGLPolylineFeature] = []
-
+        
         for (index, leg) in route.legs.enumerated() {
             let lines: [MGLPolylineFeature]
+            // If there is no congestion, don't try and add it
             if let legCongestion = leg.segmentCongestionLevels, legCongestion.count < coordinates.count {
                 // The last coord of the preceding step, is shared with the first coord of the next step, we don't need both.
                 let legCoordinates: [CLLocationCoordinate2D] = leg.steps.enumerated().reduce([]) { allCoordinates, current in
                     let index = current.offset
                     let step = current.element
                     let stepCoordinates = step.shape!.coordinates
-
+                    
                     return index == 0 ? stepCoordinates : allCoordinates + stepCoordinates.suffix(from: 1)
                 }
                 
-                let mergedCongestionSegments = combine(legCoordinates,
-                                                       with: legCongestion,
-                                                       streetsRoadClasses: leg.streetsRoadClasses,
-                                                       roadClassesWithOverriddenCongestionLevels: roadClassesWithOverriddenCongestionLevels)
-
+                let mergedCongestionSegments = combine(legCoordinates, with: legCongestion)
+                
                 lines = mergedCongestionSegments.map { (congestionSegment: CongestionSegment) -> MGLPolylineFeature in
                     let polyline = MGLPolylineFeature(coordinates: congestionSegment.0, count: UInt(congestionSegment.0.count))
                     polyline.attributes[MBCongestionAttribute] = String(describing: congestionSegment.1)
                     return polyline
                 }
             } else {
-                // If there is no congestion, don't try and add it
                 lines = [MGLPolylineFeature(route.shape!)]
             }
-
+            
             for line in lines {
                 line.attributes["isAlternateRoute"] = false
                 if let legIndex = legIndex {
@@ -1083,66 +810,30 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
                     line.attributes[MBCurrentLegAttribute] = index == 0
                 }
             }
-
+            
             linesPerLeg.append(contentsOf: lines)
         }
-
+        
         return linesPerLeg
     }
     
-    /**
-     Returns an array of congestion segments by associating the given congestion levels with the coordinates of the respective line segments that they apply to.
-     
-     This method coalesces consecutive line segments that have the same congestion level.
-     
-     For each item in the`CongestionSegment` collection a `CongestionLevel` substitution will take place that has a streets road class contained in the `roadClassesWithOverriddenCongestionLevels` collection.
-     For each of these items the `CongestionLevel` for `.unknown` traffic congestion will be replaced with the `.low` traffic congestion.
-     
-     - parameter coordinates: The coordinates of a leg.
-     - parameter congestions: The congestion levels along a leg. There should be one fewer congestion levels than coordinates.
-     - parameter streetsRoadClasses: A collection of streets road classes for each geometry index in `Intersection`. There should be the same amount of `streetsRoadClasses` and `congestions`.
-     - parameter roadClassesWithOverriddenCongestionLevels: Streets road classes for which a `CongestionLevel` substitution should occur.
-     - returns: A list of `CongestionSegment` tuples with coordinate and congestion level.
-     */
-    func combine(_ coordinates: [CLLocationCoordinate2D],
-                 with congestions: [CongestionLevel],
-                 streetsRoadClasses: [MapboxStreetsRoadClass?]? = nil,
-                 roadClassesWithOverriddenCongestionLevels: Set<MapboxStreetsRoadClass>? = nil) -> [CongestionSegment] {
+    func combine(_ coordinates: [CLLocationCoordinate2D], with congestions: [CongestionLevel]) -> [CongestionSegment] {
         var segments: [CongestionSegment] = []
         segments.reserveCapacity(congestions.count)
-        
-        var index = 0
-        for (firstSegment, congestionLevel) in zip(zip(coordinates, coordinates.suffix(from: 1)), congestions) {
-            let coordinates = [firstSegment.0, firstSegment.1]
+        for (index, congestion) in congestions.enumerated() {
+            let congestionSegment: ([CLLocationCoordinate2D], CongestionLevel) = ([coordinates[index], coordinates[index + 1]], congestion)
+            let coordinates = congestionSegment.0
+            let congestionLevel = congestionSegment.1
             
-            var overriddenCongestionLevel = congestionLevel
-            if let streetsRoadClasses = streetsRoadClasses,
-               let roadClassesWithOverriddenCongestionLevels = roadClassesWithOverriddenCongestionLevels,
-               streetsRoadClasses.indices.contains(index),
-               let streetsRoadClass = streetsRoadClasses[index],
-               congestionLevel == .unknown,
-               roadClassesWithOverriddenCongestionLevels.contains(streetsRoadClass) {
-                overriddenCongestionLevel = .low
-            }
-            
-            if segments.last?.1 == overriddenCongestionLevel {
+            if segments.last?.1 == congestionLevel {
                 segments[segments.count - 1].0 += coordinates
             } else {
-                segments.append((coordinates, overriddenCongestionLevel))
+                segments.append(congestionSegment)
             }
-            
-            index += 1
         }
-        
         return segments
     }
-
-    /**
-     Creates a single route line for each route leg.
-
-     A route with multiple legs (caused by adding more than one waypoint),
-     will cause linesPerLeg.count > 1.
-     */
+    
     func shape(forCasingOf route: Route, legIndex: Int?) -> MGLShape? {
         var linesPerLeg: [MGLPolylineFeature] = []
         
@@ -1153,7 +844,6 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             } else {
                 polyline.attributes[MBCurrentLegAttribute] = index == 0
             }
-            polyline.attributes["isAlternateRoute"] = false
             linesPerLeg.append(polyline)
         }
         
@@ -1201,7 +891,42 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         
         return symbol
     }
-
+    
+    func routeStyleLayer(identifier: String, source: MGLSource) -> MGLStyleLayer {
+        let line = MGLLineStyleLayer(identifier: identifier, source: source)
+        line.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel)
+        line.lineOpacity = NSExpression(forConditional:
+            NSPredicate(format: "isAlternateRoute == true"),
+                                        trueExpression: NSExpression(forConstantValue: 1),
+                                        falseExpression: NSExpression(forConditional: NSPredicate(format: "isCurrentLeg == true"),
+                                                                      trueExpression: NSExpression(forConstantValue: 1),
+                                                                      falseExpression: NSExpression(forConstantValue: 0)))
+        line.lineColor = NSExpression(format: "TERNARY(isAlternateRoute == true, %@, MGL_MATCH(congestion, 'low' , %@, 'moderate', %@, 'heavy', %@, 'severe', %@, %@))", routeAlternateColor, trafficLowColor, trafficModerateColor, trafficHeavyColor, trafficSevereColor, trafficUnknownColor)
+        line.lineJoin = NSExpression(forConstantValue: "round")
+        
+        return line
+    }
+    
+    func routeCasingStyleLayer(identifier: String, source: MGLSource) -> MGLStyleLayer {
+        let lineCasing = MGLLineStyleLayer(identifier: identifier, source: source)
+        
+        // Take the default line width and make it wider for the casing
+        lineCasing.lineWidth = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", MBRouteLineWidthByZoomLevel.multiplied(by: 1.5))
+        
+        lineCasing.lineColor = NSExpression(forConditional: NSPredicate(format: "isAlternateRoute == true"),
+                                            trueExpression: NSExpression(forConstantValue: routeAlternateCasingColor),
+                                            falseExpression: NSExpression(forConstantValue: routeCasingColor))
+        
+        lineCasing.lineCap = NSExpression(forConstantValue: "round")
+        lineCasing.lineJoin = NSExpression(forConstantValue: "round")
+        
+        lineCasing.lineOpacity = NSExpression(forConditional: NSPredicate(format: "isAlternateRoute == true"),
+                                            trueExpression: NSExpression(forConstantValue: 1),
+                                            falseExpression: NSExpression(forConditional: NSPredicate(format: "isCurrentLeg == true"), trueExpression: NSExpression(forConstantValue: 1), falseExpression: NSExpression(forConstantValue: 0.85)))
+        
+        return lineCasing
+    }
+    
     /**
      Attempts to localize road labels into the local language and other labels
      into the system’s preferred language.
@@ -1242,7 +967,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         for layer in style.layers where layer is MGLSymbolStyleLayer {
             let layer = layer as! MGLSymbolStyleLayer
             guard let sourceIdentifier = layer.sourceIdentifier,
-                  streetsSourceIdentifiers.contains(sourceIdentifier) else {
+                streetsSourceIdentifiers.contains(sourceIdentifier) else {
                 continue
             }
             guard let text = layer.text else {
@@ -1270,7 +995,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             for (stepIndex, step) in leg.steps.enumerated() {
                 for instruction in step.instructionsSpokenAlongStep! {
                     let feature = MGLPointFeature()
-                    feature.coordinate = LineString(route.legs[legIndex].steps[stepIndex].shape!.coordinates.reversed()).coordinateFromStart(distance: instruction.distanceAlongStep)!
+                    feature.coordinate = Polyline(route.legs[legIndex].steps[stepIndex].shape!.coordinates.reversed()).coordinateFromStart(distance: instruction.distanceAlongStep)!
                     feature.attributes = [ "instruction": instruction.text ]
                     features.append(feature)
                 }
@@ -1307,7 +1032,7 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     /**
      Sets the camera directly over a series of coordinates.
      */
-    public func setOverheadCameraView(from userLocation: CLLocation, along lineString: LineString, for padding: UIEdgeInsets) {
+    public func setOverheadCameraView(from userLocation: CLLocationCoordinate2D, along lineString: LineString, for padding: UIEdgeInsets) {
         isAnimatingToOverheadMode = true
         
         let line = MGLPolyline(lineString)
@@ -1320,12 +1045,11 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
             let camera = self.camera
             camera.pitch = 0
             camera.heading = 0
-            camera.centerCoordinate = userLocation.coordinate
+            camera.centerCoordinate = userLocation
             camera.altitude = self.defaultAltitude
             setCamera(camera, withDuration: 1, animationTimingFunction: nil) { [weak self] in
                 self?.isAnimatingToOverheadMode = false
             }
-            self.updateCourseView(to: userLocation, pitch: camera.pitch, direction: camera.heading, animated: true)
             return
         }
         
@@ -1333,15 +1057,14 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
         currentCamera.pitch = 0
         currentCamera.heading = 0
 
-        contentInset = padding
-        // Current contentInset gets incorporated to calculated camera.
-        // edgePadding is set to .zero as there's no need for additional padding.
-        let newCamera = camera(currentCamera, fitting: line, edgePadding: .zero)
+        // Workaround for https://github.com/mapbox/mapbox-gl-native/issues/15574
+        // Set content insets .zero, before cameraThatFitsShape + setCamera.
+        contentInset = .zero
+        let newCamera = camera(currentCamera, fitting: line, edgePadding: padding)
         
         setCamera(newCamera, withDuration: 1, animationTimingFunction: nil) { [weak self] in
             self?.isAnimatingToOverheadMode = false
         }
-        self.updateCourseView(to: userLocation, pitch: newCamera.pitch, direction: newCamera.heading, animated: true)
     }
     
     /**
@@ -1353,107 +1076,17 @@ open class NavigationMapView: MGLMapView, UIGestureRecognizerDelegate {
     }
 }
 
-// MARK: - Building Extrusion Highlighting
+// MARK: - Deprecated
 
 extension NavigationMapView {
-       
-    /**
-     Receives coordinates for searching the map for buildings. If buildings are found, they will be highlighted in 2D or 3D depending on the `in3D` value.
-     
-     - parameter coordinates: Coordinates which represent building locations.
-     - parameter extrudesBuildings: Switch which allows to highlight buildings in either 2D or 3D. Defaults to true.
-     
-     - returns: Bool indicating if number of buildings found equals number of coordinates supplied.
-     */
-    @discardableResult public func highlightBuildings(at coordinates: [CLLocationCoordinate2D], in3D extrudesBuildings: Bool = true) -> Bool {
-        let foundBuildingIds = Set(coordinates.compactMap({ buildingIdentifier(at: $0) }))
-        highlightBuildings(with: foundBuildingIds, in3D: extrudesBuildings)
-        return foundBuildingIds.count == coordinates.count
+    @available(*, deprecated, renamed: "show(_:legIndex:)")
+    public func showRoutes(_ routes: [Route], legIndex: Int = 0) {
+        self.show(routes, legIndex: legIndex)
     }
     
-    /**
-     Removes the highlight from all buildings highlighted by `highlightBuildings(at:in3D:)`.
-     */
-    public func unhighlightBuildings() {
-        guard let highlightedBuildingsLayer = style?.layer(withIdentifier: StyleLayerIdentifier.buildingExtrusion) else { return }
-        
-        style?.removeLayer(highlightedBuildingsLayer)
-    }
-    
-    private func addBuildingsSource() -> MGLSource? {
-        let buildingsSource = style?.source(withIdentifier: SourceIdentifier.buildingExtrusion)
-        if buildingsSource == nil {
-            let buildingsSource = MGLVectorTileSource(identifier: SourceIdentifier.buildingExtrusion,
-                                                      configurationURL: URL(string: "mapbox://mapbox.mapbox-streets-v8")!)
-            style?.addSource(buildingsSource)
-            
-            return buildingsSource
-        }
-        
-        return buildingsSource
-    }
-    
-    private func addBuildingsLayer() -> MGLFillExtrusionStyleLayer? {
-        if let highlightedBuildingsLayer = style?.layer(withIdentifier: StyleLayerIdentifier.buildingExtrusion) as? MGLFillExtrusionStyleLayer { return highlightedBuildingsLayer }
-        guard let buildingsSource = addBuildingsSource() else { return nil }
-        
-        let highlightedBuildingsLayer = MGLFillExtrusionStyleLayer(identifier: StyleLayerIdentifier.buildingExtrusion, source: buildingsSource)
-        highlightedBuildingsLayer.sourceLayerIdentifier = "building"
-        highlightedBuildingsLayer.fillExtrusionColor = NSExpression(forConstantValue: buildingDefaultColor)
-        highlightedBuildingsLayer.fillExtrusionOpacity = NSExpression(forConstantValue: 0.05)
-        highlightedBuildingsLayer.fillExtrusionHeightTransition = MGLTransition(duration: 0.8, delay: 0)
-        highlightedBuildingsLayer.fillExtrusionOpacityTransition = MGLTransition(duration: 0.8, delay: 0)
-        
-        style?.addLayer(highlightedBuildingsLayer)
-        
-        return highlightedBuildingsLayer
-    }
-
-    private func buildingIdentifier(at coordinate: CLLocationCoordinate2D) -> Int64? {
-        let screenCoordinate = convert(coordinate, toPointTo: self)
-        guard let style = style else { return nil }
-        
-        let identifiers = Set(style.layers.compactMap({ $0 as? MGLVectorStyleLayer }).filter({ $0.sourceLayerIdentifier == "building" }).compactMap({ $0.identifier }))
-        let features = visibleFeatures(at: screenCoordinate, styleLayerIdentifiers: identifiers)
-
-        if let feature = features.first, let identifier = feature.identifier as? Int64 {
-            return identifier
-        }
-        
-        return nil
-    }
-    
-    private func highlightBuildings(with identifiers: Set<Int64>, in3D: Bool = false, extrudeAll: Bool = false) {
-        // In case if set with highlighted building identifiers is empty - do nothing.
-        if identifiers.isEmpty { return }
-        // Add layer which will be used to highlight buildings if it wasn't added yet.
-        guard let highlightedBuildingsLayer = addBuildingsLayer() else { return }
-        
-        if extrudeAll {
-            highlightedBuildingsLayer.predicate = NSPredicate(format: "extrude = 'true' AND underground = 'false'")
-        } else {
-            // Form a predicate to filter out the other buildings from the datasource so only the desired ones are included.
-            highlightedBuildingsLayer.predicate = NSPredicate(format: "extrude = 'true' AND underground = 'false' AND $featureIdentifier IN %@", identifiers.map { $0 })
-        }
-        
-        // Buildings with identifiers will be highlighted with provided color. Rest of the buildings will be highlighted, but kept at a uniform color.
-        let highlightedBuildingsHeightExpression = NSExpression(format: "TERNARY(%@ = TRUE AND (%@ = TRUE OR $featureIdentifier IN %@), height, 0)", in3D as NSValue, extrudeAll as NSValue, identifiers.map { $0 })
-        let colorsByBuilding = Dictionary(identifiers.map { (NSExpression(forConstantValue: $0), NSExpression(forConstantValue: buildingHighlightColor)) }) { (_, last) in last }
-        let highlightedBuildingsColorExpression = NSExpression(forMGLMatchingKey: NSExpression(forVariable: "featureIdentifier"), in: colorsByBuilding, default: NSExpression(forConstantValue: buildingDefaultColor))
-        
-        let fillExtrusionHeightStops = [0: NSExpression(forConstantValue: 0),
-                                        13: NSExpression(forConstantValue: 0),
-                                        13.25: highlightedBuildingsHeightExpression]
-        
-        let fillExtrusionBaseStops = [0: NSExpression(forConstantValue: 0),
-                                      13: NSExpression(forConstantValue: 0),
-                                      13.25: NSExpression(forKeyPath: "min_height")]
-        
-        let opacityStops = [13: 0.5, 17: 0.8]
-        
-        highlightedBuildingsLayer.fillExtrusionHeight = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", fillExtrusionHeightStops)
-        highlightedBuildingsLayer.fillExtrusionBase = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", fillExtrusionBaseStops)
-        highlightedBuildingsLayer.fillExtrusionColor = highlightedBuildingsColorExpression
-        highlightedBuildingsLayer.fillExtrusionOpacity = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:($zoomLevel, 'linear', nil, %@)", opacityStops)
+    @available(*, deprecated, renamed: "showWaypoints(on:legIndex:)")
+    public func showWaypoints(_ route: Route, legIndex: Int = 0) {
+        showWaypoints(on: route, legIndex: legIndex)
     }
 }
+

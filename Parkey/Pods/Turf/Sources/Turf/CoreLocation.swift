@@ -1,13 +1,8 @@
 import Foundation
 #if os(Linux)
 public struct CLLocationCoordinate2D {
-    public let latitude: Double
-    public let longitude: Double
-    
-    public init(latitude: Double, longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
-    }
+    let latitude: Double
+    let longitude: Double
 }
 public typealias CLLocationDirection = Double
 public typealias CLLocationDistance = Double
@@ -55,71 +50,18 @@ extension CLLocationDirection {
     }
 }
 
-struct CLLocationCoordinate2DCodable: Codable {
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
-    var decodedCoordinates: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude,
-                                      longitude: longitude)
-    }
-    
-    func encode(to encoder: Encoder) throws {
+extension CLLocationCoordinate2D: Codable {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.unkeyedContainer()
         try container.encode(longitude)
         try container.encode(latitude)
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
-        longitude = try container.decode(CLLocationDegrees.self)
-        latitude = try container.decode(CLLocationDegrees.self)
-    }
-    
-    init(_ coordinate: CLLocationCoordinate2D) {
-        latitude = coordinate.latitude
-        longitude = coordinate.longitude
-    }
-}
-
-extension CLLocationCoordinate2D {
-    var codableCoordinates: CLLocationCoordinate2DCodable {
-        return CLLocationCoordinate2DCodable(self)
-    }
-}
-
-extension Array where Element == CLLocationCoordinate2DCodable {
-    var decodedCoordinates: [CLLocationCoordinate2D] {
-        return map { $0.decodedCoordinates }
-    }
-}
-
-extension Array where Element == [CLLocationCoordinate2DCodable] {
-    var decodedCoordinates: [[CLLocationCoordinate2D]] {
-        return map { $0.decodedCoordinates }
-    }
-}
-
-extension Array where Element == [[CLLocationCoordinate2DCodable]] {
-    var decodedCoordinates: [[[CLLocationCoordinate2D]]] {
-        return map { $0.decodedCoordinates }
-    }
-}
-
-extension Array where Element == CLLocationCoordinate2D {
-    var codableCoordinates: [CLLocationCoordinate2DCodable] {
-        return map { $0.codableCoordinates }
-    }
-}
-
-extension Array where Element == [CLLocationCoordinate2D] {
-    var codableCoordinates: [[CLLocationCoordinate2DCodable]] {
-        return map { $0.codableCoordinates }
-    }
-}
-
-extension Array where Element == [[CLLocationCoordinate2D]] {
-    var codableCoordinates: [[[CLLocationCoordinate2DCodable]]] {
-        return map { $0.codableCoordinates }
+        let longitude = try container.decode(CLLocationDegrees.self)
+        let latitude = try container.decode(CLLocationDegrees.self)
+        self.init(latitude: latitude, longitude: longitude)
     }
 }
 
