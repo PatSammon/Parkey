@@ -158,7 +158,31 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         }
         let navigationViewController = NavigationViewController(for: route, routeOptions: routeOptions)
         navigationViewController.modalPresentationStyle = .fullScreen
-        self.present(navigationViewController, animated: true, completion: nil)
+        self.present(navigationViewController, animated: true, completion: {
+        //now add the points to the users account
+            if !self.ParkOut{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 10){
+                    Result in
+                    switch Result{
+                    case .success(let response):
+                        print(response)
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+            else{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 40){
+                    Result in
+                    switch Result{
+                    case .success(_):
+                        print("Success")
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+        })
     }
     
     func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
