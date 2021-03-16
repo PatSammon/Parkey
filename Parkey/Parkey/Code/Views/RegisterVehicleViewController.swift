@@ -8,17 +8,8 @@
 
 import UIKit
 
-class RegisterVehicleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+class RegisterVehicleViewController: UIViewController//, UITableViewDelegate, UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        <#code#>
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        <#code#>
-    }
     
     
     @IBOutlet weak var licensePlate: UITextField!
@@ -33,8 +24,19 @@ class RegisterVehicleViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
        
     }
+    /*
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return
+        
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        return
+    }
+    */
 
  
 }
