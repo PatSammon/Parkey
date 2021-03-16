@@ -10,10 +10,18 @@ import UIKit
 
 class RegisterVehicleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        <#code#>
+    }
+    
     
     @IBOutlet weak var licensePlate: UITextField!
-    
-    @IBOutlet weak var makeModel: UITextField!
     
     @IBOutlet weak var color: UITextField!
     

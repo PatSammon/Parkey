@@ -468,6 +468,9 @@
                                 <state key="normal" title="Keychain">
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <segue destination="lbO-F2-Jg4" kind="show" id="mNz-Bn-2CW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUL-ta-Lle">
                                 <rect key="frame" x="100" y="360" width="214" height="30"/>

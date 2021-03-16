@@ -107,7 +107,7 @@ class RequestHandler
             
             if let data = data
             {
-                let userRewards = try? JSONDecoder().decode([Reward].self, from: data)
+                let userVehicle = try? JSONDecoder().decode([Vehicle].self, from: data)
                
                 returnArray = userVehicle!
                 done=true
@@ -122,7 +122,7 @@ class RequestHandler
         return returnArray
     }
     
-    static func registerVehicle (userId: String, licensePlate: String, makeModel: String, color: String)
+    static func registerVehicle (userId: String, licensePlate: String, make: String, model: String, size: Int )
     {
         let url = URL(string: "http://127.0.0.1:8080/newReward")
         let encoder = JSONEncoder()
@@ -131,7 +131,7 @@ class RequestHandler
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, makeModel: makeModel, color: color)
+        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, make: make, model: model, size: size)
         request.httpBody = try? encoder.encode(newVehicle)
         
         URLSession.shared.dataTask(with: request)
@@ -140,6 +140,7 @@ class RequestHandler
         }.resume()
     }
     
+    /*
     static func removeVehicle (vehicleID: String)
     {
         var done = false
@@ -148,7 +149,7 @@ class RequestHandler
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
-        let postString = "rewardId=\(rewardId)"
+        let postString = "vehicleId=\(vehicleId)"
             
         request.httpBody = postString.data(using: String.Encoding.utf8)
             
@@ -162,6 +163,7 @@ class RequestHandler
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }while !done
     }
+ */
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
         let url = URL(string: "http://127.0.0.1:8080/user/signup")!

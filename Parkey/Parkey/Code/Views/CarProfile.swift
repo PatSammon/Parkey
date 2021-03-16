@@ -31,8 +31,8 @@ class CarProfile: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.backgroundColor = UIColor(red: 0.93, green: 0.97, blue: 1.0, alpha: 1.0)
         cell.imageView?.image = UIImage(named: "car.png")
         
-        let carDetail = vehicle[indexPath.row]
-        cell.textLabel?.text = "License Plate: " + carDetail.licensePlate! + "Make/Model: " + carDetail.makeModel! + "Color: " + carDetail.color!
+        let carDetail = registeredVehicle[indexPath.row]
+        cell.textLabel?.text = "License Plate: " + carDetail.licensePlate + "Make: " + carDetail.make + "Model: " + carDetail.model
         
         return cell
         
