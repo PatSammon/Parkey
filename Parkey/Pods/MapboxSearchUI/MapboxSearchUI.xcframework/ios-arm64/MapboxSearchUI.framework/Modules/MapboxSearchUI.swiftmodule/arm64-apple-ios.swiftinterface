@@ -1,0 +1,160 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MapboxSearchUI
+import CoreFoundation
+import CoreLocation
+import Foundation
+import MapKit
+@_exported import MapboxSearch
+import Swift
+import SystemConfiguration
+import UIKit.UIColor
+import UIKit.UIImage
+import UIKit
+@objc @_hasMissingDesignatedInitializers public class MapboxPanelController : UIKit.UIViewController {
+  public enum State {
+    case opened
+    case collapsed
+    case hidden
+    public static func == (a: MapboxSearchUI.MapboxPanelController.State, b: MapboxSearchUI.MapboxPanelController.State) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  public struct Configuration {
+    public static let `default`: MapboxSearchUI.MapboxPanelController.Configuration
+  }
+  public var state: MapboxSearchUI.MapboxPanelController.State {
+    get
+  }
+  public func setState(_ toState: MapboxSearchUI.MapboxPanelController.State, animated: Swift.Bool = true)
+  public init(rootViewController: UIKit.UIViewController, configuration: MapboxSearchUI.MapboxPanelController.Configuration = .default)
+  @objc override dynamic public func loadView()
+  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc override dynamic public func viewDidLayoutSubviews()
+  @objc override dynamic public func willMove(toParent parent: UIKit.UIViewController?)
+  public var dampingRatio: CoreGraphics.CGFloat
+  public var animationDuration: Swift.Double
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+}
+extension MapboxPanelController : UIKit.UIGestureRecognizerDelegate {
+  @objc dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
+}
+@_hasMissingDesignatedInitializers public class CategoriesProvider {
+  final public let categories: [MapboxSearchUI.Category]
+  public static let shared: MapboxSearchUI.CategoriesProvider
+  @objc deinit
+}
+public struct Category : Swift.Codable {
+  public static func makeServerCategory(name: Swift.String) -> MapboxSearchUI.Category?
+  public static func makeUnsafeCategory(canonicalId: Swift.String, name: Swift.String, legacyName: Swift.String, iconName: Swift.String) -> MapboxSearchUI.Category
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension Category {
+  public static let gas: MapboxSearchUI.Category
+  public static let parking: MapboxSearchUI.Category
+  public static let food: MapboxSearchUI.Category
+  public static let cafe: MapboxSearchUI.Category
+  public static let restaurant: MapboxSearchUI.Category
+  public static let bar: MapboxSearchUI.Category
+  public static let caffeeShop: MapboxSearchUI.Category
+  public static let hotel: MapboxSearchUI.Category
+  public static let gasStation: MapboxSearchUI.Category
+  public static let chargingStation: MapboxSearchUI.Category
+  public static let busStation: MapboxSearchUI.Category
+  public static let railwayStation: MapboxSearchUI.Category
+  public static let shoppingMall: MapboxSearchUI.Category
+  public static let grocery: MapboxSearchUI.Category
+  public static let clothingStore: MapboxSearchUI.Category
+  public static let pharmacy: MapboxSearchUI.Category
+  public static let museum: MapboxSearchUI.Category
+  public static let park: MapboxSearchUI.Category
+  public static let cinema: MapboxSearchUI.Category
+  public static let fitnessCentre: MapboxSearchUI.Category
+  public static let nightclub: MapboxSearchUI.Category
+  public static let autoRepair: MapboxSearchUI.Category
+  public static let atm: MapboxSearchUI.Category
+  public static let hospital: MapboxSearchUI.Category
+  public static let emergencyRoom: MapboxSearchUI.Category
+}
+public class DefaultCategoryDataProvider : MapboxSearchUI.CategoryDataProvider {
+  public static let minCategoriesCount: Swift.Int
+  public var categorySlots: [MapboxSearchUI.Category] {
+    get
+  }
+  public var categoryList: [MapboxSearchUI.Category]
+  public init()
+  @objc deinit
+}
+public protocol SearchControllerDelegate : AnyObject {
+  func searchResultSelected(_ searchResult: MapboxSearch.SearchResult)
+  func categorySearchResultsReceived(results: [MapboxSearch.SearchResult])
+  func userFavoriteSelected(_ userFavorite: MapboxSearch.FavoriteRecord)
+  func shouldCollapseForSelection(_ searchResult: MapboxSearch.SearchResult) -> Swift.Bool
+}
+extension SearchControllerDelegate {
+  public func shouldCollapseForSelection(_ searchResult: MapboxSearch.SearchResult) -> Swift.Bool
+}
+@objc public class MapboxSearchController : UIKit.UIViewController {
+  public class Configuration {
+    public var allowsFeedbackUI: Swift.Bool
+    public var categoryDataProvider: MapboxSearchUI.CategoryDataProvider
+    public var locationProvider: MapboxSearch.LocationProvider?
+    public init(categoryDataProvider: MapboxSearchUI.CategoryDataProvider = DefaultCategoryDataProvider(), locationProvider: MapboxSearch.LocationProvider? = DefaultLocationProvider(), searchResultLimit: Swift.Int = 10)
+    @objc deinit
+  }
+  public var favoritesProvider: MapboxSearch.FavoritesProvider
+  public var historyProvider: MapboxSearch.HistoryProvider
+  public var categorySearchEngine: MapboxSearch.CategorySearchEngine
+  public var searchEngine: MapboxSearch.SearchEngine {
+    get
+    set
+  }
+  public var searchOptions: MapboxSearch.SearchOptions?
+  public var categorySearchOptions: MapboxSearch.SearchOptions?
+  final public let configuration: MapboxSearchUI.MapboxSearchController.Configuration
+  weak public var delegate: MapboxSearchUI.SearchControllerDelegate?
+  required public init(accessToken: Swift.String, configuration: MapboxSearchUI.MapboxSearchController.Configuration = Configuration())
+  required public init(configuration: MapboxSearchUI.MapboxSearchController.Configuration = Configuration())
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
+  public func resetSearchUI(animated: Swift.Bool, collapse: MapboxSearchUI.MapboxPanelController.State? = .collapsed)
+  @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+}
+extension MapboxSearchController : MapboxSearch.SearchEngineDelegate {
+  public func resultsUpdated(searchEngine: MapboxSearch.SearchEngine)
+  public func resolvedResult(result: MapboxSearch.SearchResult)
+  public func searchErrorHappened(searchError: MapboxSearch.SearchError)
+}
+extension MapboxSearchController {
+  public func searchQueryDidChanged(_ newQuery: Swift.String?)
+  public func searchTextFieldBeginEditing()
+  public func cancelSearch()
+}
+extension Maki {
+  public var xcassetName: Swift.String {
+    get
+  }
+}
+extension Bundle {
+}
+public protocol CategoryDataProvider {
+  var categorySlots: [MapboxSearchUI.Category] { get }
+  var categoryList: [MapboxSearchUI.Category] { get }
+}
+extension NSNotification.Name {
+  public static let ReachabilityStatusChanged: Foundation.Notification.Name
+}
+public class ConstantCategoryDataProvider : MapboxSearchUI.CategoryDataProvider {
+  public var categoryList: [MapboxSearchUI.Category]
+  public var categorySlots: [MapboxSearchUI.Category]
+  public init(categories: [MapboxSearchUI.Category])
+  @objc deinit
+}
+extension MapboxSearchUI.MapboxPanelController.State : Swift.Equatable {}
+extension MapboxSearchUI.MapboxPanelController.State : Swift.Hashable {}

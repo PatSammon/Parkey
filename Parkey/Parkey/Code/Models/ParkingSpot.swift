@@ -1,16 +1,15 @@
 class ParkingSpot: Codable
 {
-    var id: String?
-    var navigationId: String
-    var currentLocation: String
+    var latitude: Float
+    var longitude: Float
     var available: Bool
-    var timeAvailable: Int
+    var timeAvailable: String
     
     
-    init(navigationId: String, currentLocation: String, available: Bool, timeAvailable: Int)
+    init( latitude: Float, longitude: Float, available: Bool, timeAvailable: String)
     {
-        self.navigationId = navigationId
-        self.currentLocation = currentLocation
+        self.latitude = latitude
+        self.longitude = longitude
         self.available = available
         self.timeAvailable = timeAvailable
     }
