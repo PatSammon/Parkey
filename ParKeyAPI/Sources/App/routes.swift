@@ -21,8 +21,7 @@ func routes(_ app: Application) throws
     app.get("leaderboard")
     {
         req -> EventLoopFuture<[User]> in
-        
-        return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
     }
     
     app.post("newPaymentInfo")
@@ -94,6 +93,12 @@ func routes(_ app: Application) throws
         req in
         
         Places.query(on: req.db).all()
+    }
+    app.get("parkingSpots")
+    {
+        req in
+        
+        ParkingSpot.query(on: req.db).all()
     }
     
     try app.register(collection: UserController())
