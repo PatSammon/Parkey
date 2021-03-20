@@ -189,6 +189,40 @@ class RequestHandler
         return returnArray
     }
     
+    static func getParkingSpots() -> [ParkingSpot]{
+        var done = false
+        var returnArray: [ParkingSpot] = []
+        let url = URL(string: "http://127.0.0.1:8080/parkingSpots")!
+            
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+                
+            if error != nil
+            {
+                print(error!)
+                return
+            }
+                
+            if let data = data
+            {
+                let ParkingSpots = try? JSONDecoder().decode([ParkingSpot].self, from: data)
+                   
+                returnArray = ParkingSpots!
+                done=true
+            }
+        }.resume()
+            
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+            
+        return returnArray
+    }
+    
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
         let url = URL(string: "http://127.0.0.1:8080/user/signup")!
