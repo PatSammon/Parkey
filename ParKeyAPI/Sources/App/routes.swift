@@ -94,6 +94,12 @@ func routes(_ app: Application) throws
         
         Places.query(on: req.db).all()
     }
+    app.get("parkingSpots")
+    {
+        req in
+        
+        ParkingSpot.query(on: req.db).all()
+    }
     
     try app.register(collection: UserController())
     try app.register(collection: PaymentInfoController())
