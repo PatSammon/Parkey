@@ -28,10 +28,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(ParkOut)
-        let userLocation = currentLocation()
-        //check to see if the user is Parking in or Parking out
 
         mapView = NavigationMapView(frame: view.bounds)
         mapView.frame = view.bounds
@@ -105,6 +101,13 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
                 }
             }
         }
+        let userLocation = mapView.userLocation?.coordinate
+
+        //check to see if the user is Parking in or Parking out
+        if ParkOut {
+            //store the latitude and longitude of the users location
+            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+        }
     }
 
     func drawRoute(route: MapboxDirections.Route) {
@@ -127,10 +130,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
             // Add the source and style layer of the route line to the map
             mapView.style?.addSource(source)
             mapView.style?.addLayer(lineStyle)
-        }
-        if ParkOut {
-            //store the latitude and longitude of the users location
-            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
         }
     }
     func showAnnotation(_ annotations: [MGLAnnotation], isPOI: Bool) {
@@ -195,7 +194,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         for item:ParkingSpot in array{
                 let annotation = MGLPointAnnotation()
                 annotation.title = "Possible Parking"
-            annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.latitude), CLLocationDegrees(item.longitude))
+                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.latitude), CLLocationDegrees(item.longitude))
                 //create the data source to hold the point data
                 let shapeSource = MGLShapeSource(identifier: "marker-source\(counter)", shape: annotation, options: nil)
                 
