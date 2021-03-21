@@ -28,13 +28,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(ParkOut)
-        //check to see if the user is Parking in or Parking out
-        if ParkOut {
-            //store the latitude and longitude of the users location
-            RequestHandler.addParkingSpot(latitude: Float(mapboxSFOfficeCoordinate.latitude), longitude: Float(mapboxSFOfficeCoordinate.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
-        }
 
         mapView = NavigationMapView(frame: view.bounds)
         mapView.frame = view.bounds
@@ -108,6 +101,13 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
                 }
             }
         }
+        let userLocation = mapView.userLocation?.coordinate
+
+        //check to see if the user is Parking in or Parking out
+        if ParkOut {
+            //store the latitude and longitude of the users location
+            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+        }
     }
 
     func drawRoute(route: MapboxDirections.Route) {
@@ -158,7 +158,59 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         }
         let navigationViewController = NavigationViewController(for: route, routeOptions: routeOptions)
         navigationViewController.modalPresentationStyle = .fullScreen
-        self.present(navigationViewController, animated: true, completion: nil)
+        self.present(navigationViewController, animated: true, completion: {
+        //now add the points to the users account
+            if !self.ParkOut{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 10){
+                    Result in
+                    switch Result{
+                    case .success(let response):
+                        print(response)
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+            else{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 40){
+                    Result in
+                    switch Result{
+                    case .success(_):
+                        print("Success")
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+        })
+    }
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+
+        //make request handler call
+        let array = RequestHandler.getParkingSpots()
+
+            //iterate through the items
+        var counter = 1
+        for item:ParkingSpot in array{
+                let annotation = MGLPointAnnotation()
+                annotation.title = "Possible Parking"
+                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.latitude), CLLocationDegrees(item.longitude))
+                //create the data source to hold the point data
+                let shapeSource = MGLShapeSource(identifier: "marker-source\(counter)", shape: annotation, options: nil)
+                
+                //create a style layer for the symbol
+                let shapeLayer = MGLSymbolStyleLayer(identifier: "marker-style\(counter)", source: shapeSource)
+                //addImage
+                if let image = UIImage(named: "circle.png"){
+                    //let image2=image.resizableImage(withCapInsets: UIEdgeInsets(top: CGFloat(100.0), left: CGFloat(100.0), bottom: CGFloat(100.0), right: 100.0))
+                    style.setImage(image, forName: "circle-symbol")
+                }
+                shapeLayer.iconImageName = NSExpression(forConstantValue: "circle-symbol")
+                shapeLayer.iconOpacity = NSExpression(forConstantValue: 0.3)
+                style.addSource(shapeSource)
+                style.addLayer(shapeLayer)
+                counter += 1
+            }
     }
     
     func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {

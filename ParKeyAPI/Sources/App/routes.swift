@@ -18,6 +18,12 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
+    /*app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
+    }*/
+
     app.post("newPaymentInfo")
     { req -> EventLoopFuture<PaymentInfo> in
         let payment = try req.content.decode(PaymentInfo.self)
@@ -81,11 +87,18 @@ func routes(_ app: Application) throws
         
         User.query(on: req.db).all()
     }
+    
     app.get("places")
     {
         req in
         
         Places.query(on: req.db).all()
+    }
+    app.get("parkingSpots")
+    {
+        req in
+        
+        ParkingSpot.query(on: req.db).all()
     }
     
     try app.register(collection: UserController())
