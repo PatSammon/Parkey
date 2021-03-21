@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class ViewController: UIViewController {
     // Storyboard variables
@@ -24,7 +25,27 @@ class ViewController: UIViewController {
     var error = ""
     var id = ""
     
-    
+    @IBAction func authentication(_ sender: Any) {
+        let context:LAContext = LAContext()
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+            context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Please authroize touch/face id") { (success, error) in
+                DispatchQueue.main.async {
+                    guard success, error == nil else {
+                        let alert = UIAlertController(title: "Failed to Authenticate", message: "Please try again", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                        self.present(alert, animated: true)
+                        return
+                    }
+                    self.goToDifferentView()
+                }
+            }
+        } else {
+            let alert = UIAlertController(title: "Unavailable", message: "You can't use this feature", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alert, animated: true)
+        }
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
