@@ -106,7 +106,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         //check to see if the user is Parking in or Parking out
         if ParkOut {
             //store the latitude and longitude of the users location
-            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: ParkViewController.getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
         }
     }
 
@@ -213,7 +213,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
             }
     }
     
-    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+    static func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
         let objDateformat: DateFormatter = DateFormatter()
         objDateformat.dateFormat = "yyyy-MM-dd"
         let strTime: String = objDateformat.string(from: dateToConvert as Date)
