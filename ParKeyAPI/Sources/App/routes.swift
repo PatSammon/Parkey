@@ -18,10 +18,16 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
-    app.get("leaderboard")
+    /*app.get("leaderboard")
     {
         req -> EventLoopFuture<[User]> in
         return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
+    }*/
+    
+    app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
     }
     
     app.post("newPaymentInfo")

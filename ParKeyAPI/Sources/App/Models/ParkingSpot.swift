@@ -23,6 +23,9 @@ final class ParkingSpot: Model, Content
     @Field(key: "timeAvailable")
     var timeAvailable: String
     
+    @Timestamp(key: "createdAt", on: .create)
+    var createdAt: Date?
+    
     init(latitude: Float,longitude: Float, available: Bool, timeAvailable: String)
     {
         self.id = ObjectId()
