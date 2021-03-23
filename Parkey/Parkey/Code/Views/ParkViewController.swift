@@ -34,7 +34,8 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.showsUserLocation = true
          
-        mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false);   view.addSubview(mapView)
+        //mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false)
+        view.addSubview(mapView)
 
         // Set the map view's delegate
         mapView.delegate = self
@@ -97,7 +98,27 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
                 // Display callout view on destination annotation
                 if let annotation = strongSelf.mapView.annotations?.first as? MGLPointAnnotation {
                     annotation.title = "Start navigation"
-                    strongSelf.mapView.selectAnnotation(annotation, animated: true, completionHandler: nil)
+                    strongSelf.mapView.selectAnnotation(annotation, animated: true, completionHandler: {
+                        let array = RequestHandler.getParkingSpots()
+                        //iterate through spots and see if there is one with similar coordinates
+                        if array.count != 0{
+                            var spotFound = false
+                            //iterate through Spots and see if there is somethign with coordinates close to it
+                            for item:ParkingSpot in array{
+                                if spotFound{
+                                    break
+                                }
+                                if (item.longitude > (Float(annotation.coordinate.longitude) - 0.0005)) && (item.longitude < (Float(annotation.coordinate.longitude) + 0.0005)){
+                                    //then check latitude
+                                    if (item.latitude > (Float(annotation.coordinate.latitude) - 0.0005)) && (item.latitude < (Float(annotation.coordinate.latitude) + 0.0005)){
+                                        //then delete the parking spot
+                                        RequestHandler.removeParkingSpot(latitude: item.latitude, longitude: item.longitude)
+                                        spotFound = true
+                                    }
+                                }
+                            }
+                        }
+                    })
                 }
             }
         }
@@ -188,7 +209,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
         //make request handler call
         let array = RequestHandler.getParkingSpots()
-
             //iterate through the items
         var counter = 1
         for item:ParkingSpot in array{

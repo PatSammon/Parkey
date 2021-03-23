@@ -74,6 +74,20 @@ func routes(_ app: Application) throws
         
         return reward.delete().transform(to: HTTPStatus.ok)
     }
+    app.post("removeParkingSpot")
+    { req -> EventLoopFuture<HTTPStatus> in
+        let var1 = String(req.body.string!)
+        let infoArray = var1.split(separator: "&")
+        let furtherInfoArray = infoArray[0].split(separator: "=")
+        let furtherInfoArray2 = infoArray[1].split(separator: "=")
+        let parkingLong = (furtherInfoArray2[1] as NSString).floatValue
+        let parkingLat = (furtherInfoArray[1] as NSString).floatValue
+        
+        let parkingSpot = ParkingSpot.query(on: req.db).filter(\.$latitude == parkingLat).filter(\.$longitude == parkingLong)
+        //let parkingSpot2 = ParkingSpot.query(on: req.db).filter(\.$id == parkingId!)
+        
+        return parkingSpot.delete().transform(to: HTTPStatus.ok)
+    }
     
     app.post("newNavigation")
     { req -> EventLoopFuture<Navigation> in

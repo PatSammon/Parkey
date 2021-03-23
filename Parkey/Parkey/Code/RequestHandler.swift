@@ -26,6 +26,28 @@ class RequestHandler
         }while !done
         
     }
+    static func removeParkingSpot(latitude: Float,longitude: Float)
+    {
+        var done = false
+        let url = URL(string: "http://127.0.0.1:8080/removeParkingSpot")
+        var request = URLRequest(url: url!)
+        let postString = "latitude=\(latitude)&longitude=\(longitude)";
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            done=true
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+        
+    }
     
     static func getLeaderboard() -> [User]
     {
