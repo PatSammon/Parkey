@@ -11,23 +11,26 @@ final class ParkingSpot: Model, Content
     @ID(custom: .id)
     var id: ObjectId?
     
-    @Field(key: "navigationId")
-    var navigationId: String
+    @Field(key: "latitude")
+    var latitude: Float
     
-    @Field(key: "currentLocation")
-    var currentLocation: String
+    @Field(key: "longitude")
+    var longitude: Float
     
     @Field(key: "available")
     var available: Bool
     
     @Field(key: "timeAvailable")
-    var timeAvailable: Int
+    var timeAvailable: String
     
-    init(navigationId: String, currentLocation: String, available: Bool, timeAvailable: Int)
+    @Timestamp(key: "createdAt", on: .create)
+    var createdAt: Date?
+    
+    init(latitude: Float,longitude: Float, available: Bool, timeAvailable: String)
     {
         self.id = ObjectId()
-        self.navigationId = navigationId
-        self.currentLocation = currentLocation
+        self.latitude = latitude
+        self.longitude = longitude
         self.available = available
         self.timeAvailable = timeAvailable
     }

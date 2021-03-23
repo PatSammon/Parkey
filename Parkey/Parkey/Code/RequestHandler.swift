@@ -26,6 +26,42 @@ class RequestHandler
         }while !done
         
     }
+    
+    static func getLeaderboard() -> [User]
+    {
+        var done = false
+        var returnArray: [User] = []
+        
+        let url = URL(string: "http://127.0.0.1:8080/leaderboard")
+        var request = URLRequest(url: url!)
+        
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+            
+        if error != nil
+        {
+            print(error!)
+            return
+        }
+    
+        if let data = data
+        {
+            let users = try? JSONDecoder().decode([User].self, from: data)
+            returnArray = users!
+            done=true
+        }
+            
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        } while !done
+        
+        return returnArray
+    }
+    
     static func addReward(userId: String, name: String, cost: Int)
     {
         let url = URL(string: "http://127.0.0.1:8080/newReward")
@@ -55,6 +91,23 @@ class RequestHandler
         
         let newPlace = Place(name: name, cost: cost, coordinates: coordinates)
         request.httpBody = try? encoder.encode(newPlace)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
+    static func addParkingSpot(latitude: Float, longitude: Float, date: String){
+        let url = URL(string: "http://127.0.0.1:8080/newParkingSpot")
+        let encoder = JSONEncoder()
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        let newParkingSpot = ParkingSpot(latitude: latitude, longitude: longitude, available: true, timeAvailable: date)
+        request.httpBody = try? encoder.encode(newParkingSpot)
         
         URLSession.shared.dataTask(with: request)
         {(data, response, error) in
@@ -124,6 +177,40 @@ class RequestHandler
                 let Places = try? JSONDecoder().decode([Place].self, from: data)
                    
                 returnArray = Places!
+                done=true
+            }
+        }.resume()
+            
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+            
+        return returnArray
+    }
+    
+    static func getParkingSpots() -> [ParkingSpot]{
+        var done = false
+        var returnArray: [ParkingSpot] = []
+        let url = URL(string: "http://127.0.0.1:8080/parkingSpots")!
+            
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+                
+            if error != nil
+            {
+                print(error!)
+                return
+            }
+                
+            if let data = data
+            {
+                let ParkingSpots = try? JSONDecoder().decode([ParkingSpot].self, from: data)
+                   
+                returnArray = ParkingSpots!
                 done=true
             }
         }.resume()

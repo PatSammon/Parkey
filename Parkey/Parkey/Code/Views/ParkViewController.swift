@@ -18,6 +18,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
+
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -100,6 +101,13 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
                 }
             }
         }
+        let userLocation = mapView.userLocation?.coordinate
+
+        //check to see if the user is Parking in or Parking out
+        if ParkOut {
+            //store the latitude and longitude of the users location
+            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: ParkViewController.getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+        }
     }
 
     func drawRoute(route: MapboxDirections.Route) {
@@ -150,7 +158,103 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         }
         let navigationViewController = NavigationViewController(for: route, routeOptions: routeOptions)
         navigationViewController.modalPresentationStyle = .fullScreen
-        self.present(navigationViewController, animated: true, completion: nil)
+        self.present(navigationViewController, animated: true, completion: {
+        //now add the points to the users account
+            if !self.ParkOut{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 10){
+                    Result in
+                    switch Result{
+                    case .success(let response):
+                        print(response)
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+            else{
+                RequestHandler.addPoints(userName: UserDefaults.standard.string(forKey: "Email") ?? "", password: UserDefaults.standard.string(forKey: "Password") ?? "", points: 40){
+                    Result in
+                    switch Result{
+                    case .success(_):
+                        print("Success")
+                    case .failure(let error):
+                        print(error as Error)
+                    }
+                }
+            }
+        })
+    }
+}
+extension ParkViewController: SearchControllerDelegate {
+    func categorySearchResultsReceived(results: [SearchResult]) {
+    let annotations = results.map { searchResult -> MGLPointAnnotation in
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = searchResult.coordinate
+    annotation.title = searchResult.name
+    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
+    return annotation
+    }
+     
+    showAnnotation(annotations, isPOI: false)
+    }
+     
+    func searchResultSelected(_ searchResult: SearchResult) {
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = searchResult.coordinate
+    annotation.title = searchResult.name
+    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
+     
+    showAnnotation([annotation], isPOI: searchResult.type == .POI)
+    }
+     
+    func userFavoriteSelected(_ userFavorite: FavoriteRecord) {
+    let annotation = MGLPointAnnotation()
+    annotation.coordinate = userFavorite.coordinate
+    annotation.title = userFavorite.name
+    annotation.subtitle = userFavorite.address?.formattedAddress(style: .medium)
+     
+    showAnnotation([annotation], isPOI: true)
+    }
+
+    }
+=======
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+
+        //make request handler call
+        let array = RequestHandler.getParkingSpots()
+
+            //iterate through the items
+        var counter = 1
+        for item:ParkingSpot in array{
+                let annotation = MGLPointAnnotation()
+                annotation.title = "Possible Parking"
+                annotation.coordinate = CLLocationCoordinate2DMake(CLLocationDegrees(item.latitude), CLLocationDegrees(item.longitude))
+                //create the data source to hold the point data
+                let shapeSource = MGLShapeSource(identifier: "marker-source\(counter)", shape: annotation, options: nil)
+                
+                //create a style layer for the symbol
+                let shapeLayer = MGLSymbolStyleLayer(identifier: "marker-style\(counter)", source: shapeSource)
+                //addImage
+                if let image = UIImage(named: "circle.png"){
+                    //let image2=image.resizableImage(withCapInsets: UIEdgeInsets(top: CGFloat(100.0), left: CGFloat(100.0), bottom: CGFloat(100.0), right: 100.0))
+                    style.setImage(image, forName: "circle-symbol")
+                }
+                shapeLayer.iconImageName = NSExpression(forConstantValue: "circle-symbol")
+                shapeLayer.iconOpacity = NSExpression(forConstantValue: 0.3)
+                style.addSource(shapeSource)
+                style.addLayer(shapeLayer)
+                counter += 1
+            }
+    }
+    
+    static func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+        let objDateformat: DateFormatter = DateFormatter()
+        objDateformat.dateFormat = "yyyy-MM-dd"
+        let strTime: String = objDateformat.string(from: dateToConvert as Date)
+        let objUTCDate: NSDate = objDateformat.date(from: strTime)! as NSDate
+        let milliseconds: Int64 = Int64(objUTCDate.timeIntervalSince1970)
+        let strTimeStamp: String = "\(milliseconds)"
+        return strTimeStamp
     }
 }
 extension ParkViewController: SearchControllerDelegate {
