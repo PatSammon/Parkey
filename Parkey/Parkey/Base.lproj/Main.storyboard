@@ -93,6 +93,17 @@
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zny-vX-BHA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2CD-o6-LOf">
+                                <rect key="frame" x="125" y="525" width="165" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <state key="normal" title="Touch ID/Face ID">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="authentication:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bfe-D3-hge"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -756,9 +767,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Rkj-hs-q1E"/>
-        <segue reference="CMZ-Sx-laU"/>
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="kKN-QJ-N9e"/>
-        <segue reference="OAk-PU-giw"/>
+        <segue reference="tR8-E4-76R"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>
