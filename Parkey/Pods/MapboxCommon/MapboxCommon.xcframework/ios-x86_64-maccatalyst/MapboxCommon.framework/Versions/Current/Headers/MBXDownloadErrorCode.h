@@ -1,3 +1,13 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:157b4ea49bb4f763061a1250529bdd01e4584c3497163bb1ee93d7324c383d0b
-size 636
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** Enum which represents different error cases which could happen during download session. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXDownloadErrorCode)
+{
+    /** General filesystem related error code. For cases like: write error, no such file or directory, not enough space and etc. */
+    MBXDownloadErrorCodeFileSystemError,
+    /** General network related error. Should be probably representation of HttpRequestError. */
+    MBXDownloadErrorCodeNetworkError
+} NS_SWIFT_NAME(DownloadErrorCode);

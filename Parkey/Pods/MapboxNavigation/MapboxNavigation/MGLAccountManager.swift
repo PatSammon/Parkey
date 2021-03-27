@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e928dfac419357298fd668e59df86681f305649eebc6f5f67aba2fc97aca7c35
-size 434
+import Foundation
+import Mapbox
+
+extension MGLAccountManager{
+    // Mapbox China base API URL
+    static let mapboxChinaBaseAPIURL = "https://api.mapbox.cn"
+    
+    /**
+     Returns true if the map's endpoint is China.
+     */
+    public class var hasChinaBaseURL : Bool{
+        let apiBaseURL = Bundle.main.object(forInfoDictionaryKey:"MGLMapboxAPIBaseURL") as? String
+        return apiBaseURL == mapboxChinaBaseAPIURL
+    }
+}

@@ -1,3 +1,1 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:794ea08146edce27c52c0259b382925d9b7952c1810867aa44f399e49113f1e9
-size 43
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxCommon

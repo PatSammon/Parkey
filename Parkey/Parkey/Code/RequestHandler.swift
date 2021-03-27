@@ -26,6 +26,64 @@ class RequestHandler
         }while !done
         
     }
+    static func removeParkingSpot(latitude: Float,longitude: Float)
+    {
+        var done = false
+        let url = URL(string: "http://127.0.0.1:8080/removeParkingSpot")
+        var request = URLRequest(url: url!)
+        let postString = "latitude=\(latitude)&longitude=\(longitude)";
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            done=true
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+        
+    }
+    
+    static func getLeaderboard() -> [User]
+    {
+        var done = false
+        var returnArray: [User] = []
+        
+        let url = URL(string: "http://127.0.0.1:8080/leaderboard")
+        var request = URLRequest(url: url!)
+        
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+            
+        if error != nil
+        {
+            print(error!)
+            return
+        }
+    
+        if let data = data
+        {
+            let users = try? JSONDecoder().decode([User].self, from: data)
+            returnArray = users!
+            done=true
+        }
+            
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        } while !done
+        
+        return returnArray
+    }
+    
     static func addReward(userId: String, name: String, cost: Int)
     {
         let url = URL(string: "http://127.0.0.1:8080/newReward")
@@ -37,6 +95,41 @@ class RequestHandler
         
         let newReward = Reward(userId: userId, name: name, cost: cost)
         request.httpBody = try? encoder.encode(newReward)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
+    static func addPlace(name: String, cost: Int, coordinates: [Float])
+    {
+        let url = URL(string: "http://127.0.0.1:8080/newPlace")
+        let encoder = JSONEncoder()
+
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let newPlace = Place(name: name, cost: cost, coordinates: coordinates)
+        request.httpBody = try? encoder.encode(newPlace)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
+    
+    static func addParkingSpot(latitude: Float, longitude: Float, date: String){
+        let url = URL(string: "http://127.0.0.1:8080/newParkingSpot")
+        let encoder = JSONEncoder()
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        let newParkingSpot = ParkingSpot(latitude: latitude, longitude: longitude, available: true, timeAvailable: date)
+        request.httpBody = try? encoder.encode(newParkingSpot)
         
         URLSession.shared.dataTask(with: request)
         {(data, response, error) in
@@ -83,87 +176,75 @@ class RequestHandler
         
         return returnArray
     }
-    
-    static func getVehicle(userId: String) -> [Vehicle]
-    {
+
+    static func getPlaces() -> [Place]{
         var done = false
-        var returnArray: [Vehicle] = []
-        let url = URL(string: "http://127.0.0.1:8080/userVehicle")!
+        var returnArray: [Place] = []
+        let url = URL(string: "http://127.0.0.1:8080/places")!
+            
+        
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let postString = "userId=\(userId)"
-        
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-        
+        request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request)
         { (data, response, error) in
-            
+                
             if error != nil
             {
                 print(error!)
                 return
             }
-            
+                
             if let data = data
             {
-                let userVehicle = try? JSONDecoder().decode([Vehicle].self, from: data)
-               
-                returnArray = userVehicle!
+                let Places = try? JSONDecoder().decode([Place].self, from: data)
+                   
+                returnArray = Places!
                 done=true
             }
         }.resume()
-        
+            
         repeat
         {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }while !done
-        
+            
         return returnArray
     }
     
-    static func registerVehicle (userId: String, licensePlate: String, make: String, model: String, size: Int )
-    {
-        let url = URL(string: "http://127.0.0.1:8080/newReward")
-        let encoder = JSONEncoder()
-
-        var request = URLRequest(url: url!)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, make: make, model: model, size: size)
-        request.httpBody = try? encoder.encode(newVehicle)
-        
-        URLSession.shared.dataTask(with: request)
-        {(data, response, error) in
-            
-        }.resume()
-    }
-    
-    /*
-    static func removeVehicle (vehicleID: String)
-    {
+    static func getParkingSpots() -> [ParkingSpot]{
         var done = false
-        let url = URL(string: "http://127.0.0.1:8080/removeVehicle")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var returnArray: [ParkingSpot] = []
+        let url = URL(string: "http://127.0.0.1:8080/parkingSpots")!
             
-        let postString = "vehicleId=\(vehicleId)"
-            
-        request.httpBody = postString.data(using: String.Encoding.utf8)
-            
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request)
-        {(data, response, error) in
-            done=true
+        { (data, response, error) in
+                
+            if error != nil
+            {
+                print(error!)
+                return
+            }
+                
+            if let data = data
+            {
+                let ParkingSpots = try? JSONDecoder().decode([ParkingSpot].self, from: data)
+                   
+                returnArray = ParkingSpots!
+                done=true
+            }
         }.resume()
             
         repeat
         {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }while !done
+            
+        return returnArray
     }
- */
+    
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
         let url = URL(string: "http://127.0.0.1:8080/user/signup")!

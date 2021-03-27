@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c0b19c07101c00e35766d76d05c58a86ecb73e26e9232b612e5082555cdf87f3
-size 1210
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** An error code describing why an error occurred. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXOfflineDataErrorCode)
+{
+    /** Unknown error */
+    MBXOfflineDataErrorCodeUnknown,
+    /** The offline pack could not be found on the server */
+    MBXOfflineDataErrorCodeNotFound,
+    /** The download failed because the access token is invalid */
+    MBXOfflineDataErrorCodeUnauthorized,
+    /** The download failed permanently because the request was rate limited */
+    MBXOfflineDataErrorCodeRateLimited,
+    /** The download failed permanently due to a connection issue */
+    MBXOfflineDataErrorCodeConnection,
+    /** The download failed permanently due to a server issue */
+    MBXOfflineDataErrorCodeServer,
+    /** The data received from the server is invalid */
+    MBXOfflineDataErrorCodeInvalidResponse,
+    /** The offline pack is corrupt and can't be used */
+    MBXOfflineDataErrorCodeCorrupt,
+    /** The offline pack could not be downloaded because a file system error occurred */
+    MBXOfflineDataErrorCodeFilesystem
+} NS_SWIFT_NAME(OfflineDataErrorCode);

@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b28944c5e3006283050c3576d6e79eaa6097fa66a862be17691847e7a9916cfb
-size 375
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+NS_SWIFT_NAME(Version)
+__attribute__((visibility ("default")))
+@interface MBXVersion : NSObject
+
++ (uint32_t)getMajorVersion;
++ (uint32_t)getMinorVersion;
++ (uint32_t)getPatchVersion;
++ (nonnull NSString *)getVersionString __attribute((ns_returns_retained));
+
+@end

@@ -10,45 +10,24 @@ func routes(_ app: Application) throws
         return user.create(on: req.db).map{user}
     }
     
-    app.post("loginUser")
-    { req -> String in
-        //decode the user login info
-        
-        var userName=""
-        var password=""
-        if req.headers.contains(name: "userName")
-        {
-            userName = req.headers.first(name: "userName")!
-        }
-        if req.headers.contains(name: "password"){
-            password = req.headers.first(name: "password")!
-        }
-        
-        //pose a query where it will find the user with that Username
-        var info:EventLoopFuture<User?> = User.query(on: req.db).filter(\.$userName == userName).filter(\.$password == password).first()
-        var flag = false
-        info.whenComplete{ result in
-            switch result{
-            case .success(let userCred):
-                if userCred != nil{
-                    print(userCred)
-                    flag = true
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-        //this might work?
-        return "Yes"
-    }
-    
-    
     app.post("userRewards")
     { req -> EventLoopFuture<[Reward]> in
         
         let userId = String(req.body.string!.dropFirst(7))
         
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
+    }
+    
+    /*app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
+    }*/
+    
+    app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
     }
     
     app.post("newPaymentInfo")
@@ -67,6 +46,11 @@ func routes(_ app: Application) throws
     { req -> EventLoopFuture<Reward> in
         let reward = try req.content.decode(Reward.self)
         return reward.create(on: req.db).map{reward}
+    }
+    app.post("newPlace")
+    { req -> EventLoopFuture<Places> in
+        let place = try req.content.decode(Places.self)
+        return place.create(on: req.db).map{place}
     }
     
     app.post("newParkingSpot")
@@ -90,6 +74,20 @@ func routes(_ app: Application) throws
         
         return reward.delete().transform(to: HTTPStatus.ok)
     }
+    app.post("removeParkingSpot")
+    { req -> EventLoopFuture<HTTPStatus> in
+        let var1 = String(req.body.string!)
+        let infoArray = var1.split(separator: "&")
+        let furtherInfoArray = infoArray[0].split(separator: "=")
+        let furtherInfoArray2 = infoArray[1].split(separator: "=")
+        let parkingLong = (furtherInfoArray2[1] as NSString).floatValue
+        let parkingLat = (furtherInfoArray[1] as NSString).floatValue
+        
+        let parkingSpot = ParkingSpot.query(on: req.db).filter(\.$latitude == parkingLat).filter(\.$longitude == parkingLong)
+        //let parkingSpot2 = ParkingSpot.query(on: req.db).filter(\.$id == parkingId!)
+        
+        return parkingSpot.delete().transform(to: HTTPStatus.ok)
+    }
     
     app.post("newNavigation")
     { req -> EventLoopFuture<Navigation> in
@@ -108,6 +106,19 @@ func routes(_ app: Application) throws
         req in
         
         User.query(on: req.db).all()
+    }
+    
+    app.get("places")
+    {
+        req in
+        
+        Places.query(on: req.db).all()
+    }
+    app.get("parkingSpots")
+    {
+        req in
+        
+        ParkingSpot.query(on: req.db).all()
     }
     
     try app.register(collection: UserController())

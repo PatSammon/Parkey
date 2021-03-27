@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:880166dc28020276c8075d9a7ad06baa0c88aae159a3dc85943328421db85e44
-size 1946
+import Foundation
+import CoreLocation
+
+extension CLLocationCoordinate2D {
+    internal var requestDescription: String {
+        return "\(longitude.rounded(to: 1e6)),\(latitude.rounded(to: 1e6))"
+    }
+}
+
+extension CLLocation {
+    /**
+     Initializes a CLLocation object with the given coordinate pair.
+     */
+    internal convenience init(coordinate: CLLocationCoordinate2D) {
+        self.init(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    }
+}

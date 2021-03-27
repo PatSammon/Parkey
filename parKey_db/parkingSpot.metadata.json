@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"74fb0d74b8cb4d70b41378b5c61afa1d","collectionName":"parkingSpot"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"createdAt":{"$numberDouble":"1.0"}},"name":"createdAt_1","expireAfterSeconds":{"$numberDouble":"300.0"}}],"uuid":"e08159e44e2b41598ea0e4a9499df0d6","collectionName":"parkingSpot"}

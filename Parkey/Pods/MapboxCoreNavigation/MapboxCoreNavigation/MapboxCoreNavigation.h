@@ -1,3 +1,9 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:85e879b507ca7513fdb58e3e354046517a227b5d27330bb061724b3f328ebf35
-size 375
+#import <Foundation/Foundation.h>
+
+//! Project version number for MapboxCoreNavigation.
+FOUNDATION_EXPORT double MapboxCoreNavigationVersionNumber;
+
+//! Project version string for MapboxCoreNavigation.
+FOUNDATION_EXPORT const unsigned char MapboxCoreNavigationVersionString[];
+
+#import "MBXAccounts+CoreNavigationAdditions.h"

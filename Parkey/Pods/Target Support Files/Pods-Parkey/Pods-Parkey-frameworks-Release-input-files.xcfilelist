@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:22ef6a21ab719c056daafa0f0ef0b2d815f73e736396d6d77f39f1dcaf3b323c
-size 870
+${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-frameworks.sh
+${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework
+${PODS_ROOT}/MapboxAccounts/MapboxAccounts.framework
+${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework
+${BUILT_PRODUCTS_DIR}/MapboxDirections/MapboxDirections.framework
+${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework
+${BUILT_PRODUCTS_DIR}/MapboxNavigation/MapboxNavigation.framework
+${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework
+${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework
+${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework
+${BUILT_PRODUCTS_DIR}/Solar/Solar.framework
+${BUILT_PRODUCTS_DIR}/Turf/Turf.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxCommon/MapboxCommon.framework/MapboxCommon
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearch/MapboxSearch.framework/MapboxSearch
+${PODS_XCFRAMEWORKS_BUILD_DIR}/MapboxSearchUI/MapboxSearchUI.framework/MapboxSearchUI

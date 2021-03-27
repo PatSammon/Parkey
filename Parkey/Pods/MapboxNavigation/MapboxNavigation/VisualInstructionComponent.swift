@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:108e47453cf661ef74d405f88e53623615222c214db8418f04bd5ad42c4fde65
-size 968
+import UIKit
+import MapboxDirections
+
+extension VisualInstruction.Component {
+    static let scale = UIScreen.main.scale
+    
+    var cacheKey: String? {
+        switch self {
+        case let .exit(representation), let .exitCode(representation):
+            let exitCode = representation.text
+            return "exit-" + exitCode + "-\(VisualInstruction.Component.scale)"
+        case let .image(imageRepresentation, alternativeText):
+            guard let imageURL = imageRepresentation.imageBaseURL else {
+                return "generic-" + alternativeText.text
+            }
+            
+            return "\(imageURL.absoluteString)-\(VisualInstruction.Component.scale)"
+        case .text, .delimiter, .lane:
+            return nil
+        }
+    }
+}

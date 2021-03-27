@@ -1,3 +1,2 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:be1eba29fe6e33bb7d3edb0b6998c8ee3352e17411dfd0a86918bf0d46d97619
-size 126
+${PODS_ROOT}/Target Support Files/MapboxCommon/MapboxCommon-xcframeworks.sh
+${PODS_ROOT}/MapboxCommon/MapboxCommon.xcframework

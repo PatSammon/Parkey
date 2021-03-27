@@ -1,3 +1,11 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b0669ced35c9fe17d39670f7ce235e7c2c5c6c9f28cf464f5e897d289ec5c0cf
-size 346
+#import <Foundation/Foundation.h>
+
+//! Project version number for Turf.
+FOUNDATION_EXPORT double TurfVersionNumber;
+
+//! Project version string for Turf.
+FOUNDATION_EXPORT const unsigned char TurfVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <Turf/PublicHeader.h>
+
+

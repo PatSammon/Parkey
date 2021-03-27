@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bf8b86f50e919f602a180d6bebeba878c937e9974fe823623c03885d6a4f9443
-size 477
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/**
+ * @brief Callback invoked once a request operation completes.
+ *
+ * In case of cancel request, this callback does not report if
+ * the actual cancelation worked or not.
+ *
+ * @param result \c true on successfull call; otherwise, it is invoked with \c false.
+ */
+NS_SWIFT_NAME(ResultCallback)
+typedef void (^MBXResultCallback)(BOOL result); // NOLINT(modernize-use-using)

@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3ddecd6a5d25e458e9e5216ea0f7de105c222538d1f0cda9cbb0d419619cf78f
-size 594
+// This file is generated and will be overwritten automatically.
+
+#import <Foundation/Foundation.h>
+
+/** @brief Enum representing state of download session. */
+// NOLINTNEXTLINE(modernize-use-using)
+typedef NS_CLOSED_ENUM(NSInteger, MBXDownloadState)
+{
+    /** Download session initiated but not started yet. */
+    MBXDownloadStatePending,
+    /** Download session is in progress. */
+    MBXDownloadStateDownloading,
+    /** Download session failed. */
+    MBXDownloadStateFailed,
+    /** Download session successfully finished. */
+    MBXDownloadStateFinished
+} NS_SWIFT_NAME(DownloadState);

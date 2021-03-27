@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:782ad6318429361fddc3fe9c0beb2f45f77010fc327c3c547fa29497223263e9
-size 601
+// This file is generated and will be overwritten automatically.
+
+#import "MBXHttpMethod.h"
+#import "MBXHttpRequestErrorType.h"
+#import "MBXDownloadErrorCode.h"
+#import "MBXDownloadState.h"
+#import "MBXUserAgentComponents.h"
+#import "MBXHttpRequest.h"
+#import "MBXHttpRequestError.h"
+#import "MBXHttpResponseData.h"
+#import "MBXHttpResponse.h"
+#import "MBXDownloadOptions.h"
+#import "MBXDownloadError.h"
+#import "MBXDownloadStatus.h"
+#import "MBXHttpServiceFactory.h"
+#import "MBXHttpResponseCallback.h"
+#import "MBXResultCallback.h"
+#import "MBXDownloadStatusCallback.h"
+#import "MBXHttpServiceInterface.h"

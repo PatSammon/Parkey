@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:066984aa20c44b99969f360ca092abdf33e35f0c08e2a387b8d3571b4e0336fd
-size 105
+framework module MapboxCommon {
+  umbrella header "MapboxCommon.h"
+
+  export *
+  module * { export * }
+}
