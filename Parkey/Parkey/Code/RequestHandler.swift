@@ -27,7 +27,10 @@ class RequestHandler
         
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     static func removeParkingSpot(latitude: Float,longitude: Float)
     {
         var done = false

@@ -29,6 +29,9 @@ final class ParkingSpot: Model, Content
     @Timestamp(key: "createdAt", on: .create)
     var createdAt: Date?
     
+    @Timestamp(key: "createdAt", on: .create)
+    var createdAt: Date?
+    
     init(latitude: Float,longitude: Float, available: Bool, timeAvailable: String)
 >>>>>>> Stashed changes
     {

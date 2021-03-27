@@ -10,6 +10,10 @@
 		0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47AB25EEF5520028D726 /* ParkViewController.swift */; };
 		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+		3B4B79CA2608C94700DBAD5E /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4B79C92608C94700DBAD5E /* circle.png */; };
+>>>>>>> Stashed changes
 =======
 		3B4B79CA2608C94700DBAD5E /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4B79C92608C94700DBAD5E /* circle.png */; };
 >>>>>>> Stashed changes
@@ -55,6 +59,11 @@
 		0C3F47AB25EEF5520028D726 /* ParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = Parkey/Code/Views/ParkViewController.swift; sourceTree = SOURCE_ROOT; };
 		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+		2B1160C688E4696533B5834C /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
+		3B4B79C92608C94700DBAD5E /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 =======
 		2B1160C688E4696533B5834C /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
 		3B4B79C92608C94700DBAD5E /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
@@ -296,6 +305,10 @@
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+				3B4B79CA2608C94700DBAD5E /* circle.png in Resources */,
+>>>>>>> Stashed changes
 =======
 				3B4B79CA2608C94700DBAD5E /* circle.png in Resources */,
 >>>>>>> Stashed changes

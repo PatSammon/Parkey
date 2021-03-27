@@ -28,6 +28,9 @@ class ParkViewController: UIViewController, MGLMapViewDelegate {
         mapView.showsUserLocation = true
          
         //mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         view.addSubview(mapView)
 
@@ -253,4 +256,7 @@ extension ParkViewController: SearchControllerDelegate {
     }
 
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes

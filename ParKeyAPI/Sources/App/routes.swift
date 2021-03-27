@@ -19,6 +19,7 @@ func routes(_ app: Application) throws
     }
     
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     
     app.post("userRewards")
     { req -> EventLoopFuture<[Reward]> in
@@ -27,6 +28,8 @@ func routes(_ app: Application) throws
         
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
 =======
+=======
+>>>>>>> Stashed changes
     /*app.get("leaderboard")
     {
         req -> EventLoopFuture<[User]> in
@@ -37,6 +40,9 @@ func routes(_ app: Application) throws
     {
         req -> EventLoopFuture<[User]> in
         return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
     
