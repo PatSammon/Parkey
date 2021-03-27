@@ -26,6 +26,67 @@ class RequestHandler
         }while !done
         
     }
+<<<<<<< Updated upstream
+=======
+    static func removeParkingSpot(latitude: Float,longitude: Float)
+    {
+        var done = false
+        let url = URL(string: "http://127.0.0.1:8080/removeParkingSpot")
+        var request = URLRequest(url: url!)
+        let postString = "latitude=\(latitude)&longitude=\(longitude)";
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            done=true
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+        
+    }
+    
+    static func getLeaderboard() -> [User]
+    {
+        var done = false
+        var returnArray: [User] = []
+        
+        let url = URL(string: "http://127.0.0.1:8080/leaderboard")
+        var request = URLRequest(url: url!)
+        
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { (data, response, error) in
+            
+        if error != nil
+        {
+            print(error!)
+            return
+        }
+    
+        if let data = data
+        {
+            let users = try? JSONDecoder().decode([User].self, from: data)
+            returnArray = users!
+            done=true
+        }
+            
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        } while !done
+        
+        return returnArray
+    }
+    
+>>>>>>> Stashed changes
     static func addReward(userId: String, name: String, cost: Int)
     {
         let url = URL(string: "http://127.0.0.1:8080/newReward")

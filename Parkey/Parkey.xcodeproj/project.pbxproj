@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0C3F47AC25EEF5520028D726 /* ParkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47AB25EEF5520028D726 /* ParkViewController.swift */; };
 		0C3F47C325EF3ADD0028D726 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */; };
+<<<<<<< Updated upstream
+=======
+		3B4B79CA2608C94700DBAD5E /* circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4B79C92608C94700DBAD5E /* circle.png */; };
+>>>>>>> Stashed changes
 		3B516D4825E879E400A49363 /* InitialScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4725E879E400A49363 /* InitialScreenController.swift */; };
 		3B516D4A25E934F500A49363 /* EarnPointsTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B516D4925E934F500A49363 /* EarnPointsTemp.swift */; };
 		3B56DB7125F11E6900F180B2 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B56DB7025F11E6900F180B2 /* Place.swift */; };
@@ -34,7 +38,6 @@
 		8280F13725D723A100306867 /* ParkingRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13625D723A100306867 /* ParkingRules.swift */; };
 		8280F13A25D723FB00306867 /* Vinny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8280F13925D723FB00306867 /* Vinny.swift */; };
 		829DA1A925CF52DC007B4EC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829DA1A825CF52DC007B4EC5 /* User.swift */; };
-		A3AC654A5AFC860934FF1817 /* Pods_Parkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */; };
 		AB25AF0225D9CB4600F0EB5B /* keychain_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0025D9CB4600F0EB5B /* keychain_1.png */; };
 		AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0125D9CB4600F0EB5B /* mic_1.png */; };
 		AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0425D9CB5300F0EB5B /* park_out.png */; };
@@ -45,12 +48,17 @@
 		AB25AF0F25D9CD5200F0EB5B /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */; };
 		AB4C480925F70B82003396C3 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C480825F70B82003396C3 /* SettingsCell.swift */; };
 		AB4C480C25F70B97003396C3 /* SpeechController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4C480B25F70B97003396C3 /* SpeechController.swift */; };
+		ACB392096E376A467CFA0FEA /* Pods_Parkey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DD1C811AD877039838956C /* Pods_Parkey.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
 		0C3F47AB25EEF5520028D726 /* ParkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ParkViewController.swift; path = Parkey/Code/Views/ParkViewController.swift; sourceTree = SOURCE_ROOT; };
 		0C3F47C225EF3ADD0028D726 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+=======
+		2B1160C688E4696533B5834C /* Pods-Parkey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.debug.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.debug.xcconfig"; sourceTree = "<group>"; };
+		3B4B79C92608C94700DBAD5E /* circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle.png; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		3B516D4725E879E400A49363 /* InitialScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScreenController.swift; sourceTree = "<group>"; };
 		3B516D4925E934F500A49363 /* EarnPointsTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPointsTemp.swift; sourceTree = "<group>"; };
 		3B56DB7025F11E6900F180B2 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -65,8 +73,7 @@
 		3BAE822925CB257500C1E7DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BAE822B25CB257500C1E7DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAE823B25D1877000C1E7DD /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
-		4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
-		6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70DD1C811AD877039838956C /* Pods_Parkey.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parkey.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		823E5DF625CF0BFF00F5C0E7 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		824C514C25EC23030047C468 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		8267022225EB6C9100D784C1 /* RewardsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardsController.swift; sourceTree = "<group>"; };
@@ -90,6 +97,7 @@
 		AB25AF0E25D9CD5200F0EB5B /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		AB4C480825F70B82003396C3 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		AB4C480B25F70B97003396C3 /* SpeechController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechController.swift; sourceTree = "<group>"; };
+		B25A7EF88CAE5FDE83FBA7EC /* Pods-Parkey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Parkey.release.xcconfig"; path = "Target Support Files/Pods-Parkey/Pods-Parkey.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,17 +105,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3AC654A5AFC860934FF1817 /* Pods_Parkey.framework in Frameworks */,
+				ACB392096E376A467CFA0FEA /* Pods_Parkey.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		25B7A6751D0EC818BD6647EA /* Frameworks */ = {
+		00EF8D41C132BCEAF7E0F3A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CA3F521DA155239D2732AE9 /* Pods_Parkey.framework */,
+				70DD1C811AD877039838956C /* Pods_Parkey.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -118,7 +126,7 @@
 				3BAE821925CB257300C1E7DD /* Parkey */,
 				3BAE821825CB257300C1E7DD /* Products */,
 				733E1BC08D7250E1CCA06BDA /* Pods */,
-				25B7A6751D0EC818BD6647EA /* Frameworks */,
+				00EF8D41C132BCEAF7E0F3A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,8 +157,8 @@
 		733E1BC08D7250E1CCA06BDA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */,
-				4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */,
+				2B1160C688E4696533B5834C /* Pods-Parkey.debug.xcconfig */,
+				B25A7EF88CAE5FDE83FBA7EC /* Pods-Parkey.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -161,6 +169,7 @@
 				AB25AF0A25D9CB5D00F0EB5B /* account_1.png */,
 				AB25AF0625D9CB5300F0EB5B /* park_in.png */,
 				3B56DB7225F3CD8100F180B2 /* food.png */,
+				3B4B79C92608C94700DBAD5E /* circle.png */,
 				AB25AF0425D9CB5300F0EB5B /* park_out.png */,
 				AB25AF0525D9CB5300F0EB5B /* ranking_1.png */,
 				AB25AF0025D9CB4600F0EB5B /* keychain_1.png */,
@@ -223,11 +232,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BAE822E25CB257500C1E7DD /* Build configuration list for PBXNativeTarget "Parkey" */;
 			buildPhases = (
-				FA5F2EEA974AFE1C495CCA42 /* [CP] Check Pods Manifest.lock */,
+				D5AC618612B8D348CC8BCBA8 /* [CP] Check Pods Manifest.lock */,
 				3BAE821325CB257300C1E7DD /* Sources */,
 				3BAE821425CB257300C1E7DD /* Frameworks */,
 				3BAE821525CB257300C1E7DD /* Resources */,
-				CB979408D85F7826E1438FD0 /* [CP] Embed Pods Frameworks */,
+				144833844AFA7C296DA6FC55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -286,6 +295,10 @@
 				AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */,
 				3BAE822225CB257300C1E7DD /* Main.storyboard in Resources */,
 				AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */,
+<<<<<<< Updated upstream
+=======
+				3B4B79CA2608C94700DBAD5E /* circle.png in Resources */,
+>>>>>>> Stashed changes
 				AB25AF0825D9CB5300F0EB5B /* ranking_1.png in Resources */,
 				3B56DB7325F3CD8100F180B2 /* food.png in Resources */,
 			);
@@ -294,7 +307,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CB979408D85F7826E1438FD0 /* [CP] Embed Pods Frameworks */ = {
+		144833844AFA7C296DA6FC55 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -311,7 +324,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Parkey/Pods-Parkey-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FA5F2EEA974AFE1C495CCA42 /* [CP] Check Pods Manifest.lock */ = {
+		D5AC618612B8D348CC8BCBA8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -508,7 +521,7 @@
 		};
 		3BAE822F25CB257500C1E7DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 007B82F06EE04D40F844FC4A /* Pods-Parkey.debug.xcconfig */;
+			baseConfigurationReference = 2B1160C688E4696533B5834C /* Pods-Parkey.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -526,7 +539,7 @@
 		};
 		3BAE823025CB257500C1E7DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A6F61E36682699C39A7B591 /* Pods-Parkey.release.xcconfig */;
+			baseConfigurationReference = B25A7EF88CAE5FDE83FBA7EC /* Pods-Parkey.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

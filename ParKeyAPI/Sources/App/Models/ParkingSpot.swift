@@ -23,7 +23,14 @@ final class ParkingSpot: Model, Content
     @Field(key: "timeAvailable")
     var timeAvailable: Int
     
+<<<<<<< Updated upstream
     init(navigationId: String, currentLocation: String, available: Bool, timeAvailable: Int)
+=======
+    @Timestamp(key: "createdAt", on: .create)
+    var createdAt: Date?
+    
+    init(latitude: Float,longitude: Float, available: Bool, timeAvailable: String)
+>>>>>>> Stashed changes
     {
         self.id = ObjectId()
         self.navigationId = navigationId

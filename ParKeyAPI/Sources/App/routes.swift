@@ -18,6 +18,7 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
+<<<<<<< Updated upstream
     
     app.post("userRewards")
     { req -> EventLoopFuture<[Reward]> in
@@ -25,6 +26,18 @@ func routes(_ app: Application) throws
         let userId = String(req.body.string!.dropFirst(7))
         
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
+=======
+    /*app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
+    }*/
+    
+    app.get("leaderboard")
+    {
+        req -> EventLoopFuture<[User]> in
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
+>>>>>>> Stashed changes
     }
     
     app.post("newPaymentInfo")
@@ -70,6 +83,20 @@ func routes(_ app: Application) throws
         let reward = Reward.query(on: req.db).filter(\.$id == rewardId!)
         
         return reward.delete().transform(to: HTTPStatus.ok)
+    }
+    app.post("removeParkingSpot")
+    { req -> EventLoopFuture<HTTPStatus> in
+        let var1 = String(req.body.string!)
+        let infoArray = var1.split(separator: "&")
+        let furtherInfoArray = infoArray[0].split(separator: "=")
+        let furtherInfoArray2 = infoArray[1].split(separator: "=")
+        let parkingLong = (furtherInfoArray2[1] as NSString).floatValue
+        let parkingLat = (furtherInfoArray[1] as NSString).floatValue
+        
+        let parkingSpot = ParkingSpot.query(on: req.db).filter(\.$latitude == parkingLat).filter(\.$longitude == parkingLong)
+        //let parkingSpot2 = ParkingSpot.query(on: req.db).filter(\.$id == parkingId!)
+        
+        return parkingSpot.delete().transform(to: HTTPStatus.ok)
     }
     
     app.post("newNavigation")
