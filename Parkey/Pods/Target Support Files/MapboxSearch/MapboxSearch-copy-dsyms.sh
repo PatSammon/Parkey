@@ -84,3 +84,4 @@ install_bcsymbolmap() {
 
 install_dsym "/Users/patricksammon/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearch/MapboxSearch.dSYMs/MapboxSearch.framework.ios-arm64.dSYM"
 install_dsym "/Users/patricksammon/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearch/MapboxSearch.dSYMs/MapboxSearch.framework.ios-x86_64-simulator.dSYM"
+
