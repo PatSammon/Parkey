@@ -20,33 +20,42 @@ class ProfileController: UIViewController {
     
     @IBOutlet weak var micButton: UIButton!
     
+    @IBOutlet weak var speechShow: UITextView!
+    
     var profileVinny = Vinny()
     var timer: Timer = Timer()
-    var timeLeft: Int = 3
+    var timeLeft: Int = 4
     var speechInput: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         speechInput = ""
+        speechShow.isHidden = true
+        speechShow.text = ""
     }
     
     @IBAction func micClicked(_ sender: Any) {
+        micButton.isEnabled = false
+        speechShow.isHidden = false
+        profileVinny.getPermission()
         profileVinny.speak(message: "What would you like to view?")
-        profileVinny.listen()
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
-    }
-    
-    @objc func timerCountdown() {
-        timeLeft -= 1
-        if (timeLeft == 0) {
-            timer.invalidate()
-            profileVinny.endSpeechRecognition()
-            speechInput = profileVinny.getMessage()
-            readSpeechInput(message: speechInput!)
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { speechTimer in
+            self.profileVinny.listen()
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
         }
     }
     
+    
+    @IBAction func keychainClicked(_ sender: Any) {
+        /*if (profileVinny.authorized) {
+            micButton.isEnabled = true
+        }*/
+    }
+    
     func readSpeechInput(message: String) {
+        speechShow.text = ""
+        speechInput = ""
+        micButton.isEnabled = true
         let noCaseMessage = message.lowercased()
         if (noCaseMessage.contains("account") || noCaseMessage.contains("profile") || noCaseMessage.contains("setting") ) {
             performSegue(withIdentifier: "settingsSegue", sender: self)
@@ -57,6 +66,23 @@ class ProfileController: UIViewController {
         else {
             profileVinny.speak(message: "I did not understand your message, please try again")
         }
+        
     }
+    
+    @objc func timerCountdown() {
+        timeLeft -= 1
+        if (profileVinny.isStarted()) {
+            speechShow.text = profileVinny.getMessage()
+            timeLeft += 1
+        }
+        else {
+            timer.invalidate()
+            timeLeft = 4
+            speechInput = profileVinny.getFinalMessage()
+            speechShow.isHidden = true
+            readSpeechInput(message: speechInput!)
+        }
+    }
+   
     
 }

@@ -1,9 +1,5 @@
 import Foundation
-#if canImport(CoreLocation)
 import CoreLocation
-#else
-import Turf
-#endif
 
 /**
  A `MatchOptions` object is a structure that specifies the criteria for results returned by the Mapbox Map Matching API.
@@ -13,7 +9,6 @@ import Turf
 open class MatchOptions: DirectionsOptions {
     // MARK: Creating a Match Options Object
     
-    #if canImport(CoreLocation)
     /**
      Initializes a match options object for matching locations against the road network.
 
@@ -26,7 +21,6 @@ open class MatchOptions: DirectionsOptions {
         }
         self.init(waypoints: waypoints, profileIdentifier: profileIdentifier)
     }
-    #endif
 
     /**
      Initializes a match options object for matching geographic coordinates against the road network.

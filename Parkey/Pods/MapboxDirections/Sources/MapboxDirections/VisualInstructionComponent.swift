@@ -1,26 +1,12 @@
 import Foundation
-
-#if canImport(CoreGraphics)
 import CoreGraphics
+
 #if os(macOS)
 import Cocoa
 #elseif os(watchOS)
 import WatchKit
 #else
 import UIKit
-#endif
-#endif
-
-#if canImport(CoreGraphics)
-/**
- An image scale factor.
- */
-public typealias Scale = CGFloat
-#else
-/**
- An image scale factor.
- */
-public typealias Scale = Double
 #endif
 
 public extension VisualInstruction {
@@ -49,12 +35,7 @@ public extension VisualInstruction {
         case image(image: ImageRepresentation, alternativeText: TextRepresentation)
         
         /**
-         The component is an image of a zoomed junction, with a fallback text representation.
-         */
-        case guidanceView(image: GuidanceViewImageRepresentation, alternativeText: TextRepresentation)
-        
-        /**
-         The component contains the localized word for “Exit”.
+         The compoment contains the localized word for “Exit”.
          
          This component may appear before or after an `.exitCode` component, depending on the language. You can hide this component if the adjacent `.exitCode` component has an obvious exit-number appearance, for example with an accompanying [motorway exit icon](https://commons.wikimedia.org/wiki/File:Sinnbild_Autobahnausfahrt.svg).
          */
@@ -142,7 +123,7 @@ public extension VisualInstruction.Component {
          - parameter format: The file format of the image. If this argument is unspecified, PNG is used.
          - returns: A remote URL to the image.
          */
-        public func imageURL(scale: Scale? = nil, format: Format = .png) -> URL? {
+        public func imageURL(scale: CGFloat? = nil, format: Format = .png) -> URL? {
             guard let imageBaseURL = imageBaseURL,
                 var imageURLComponents = URLComponents(url: imageBaseURL, resolvingAgainstBaseURL: false) else {
                 return nil
@@ -154,36 +135,18 @@ public extension VisualInstruction.Component {
         /**
          Returns the current screen’s native scale factor.
          */
-        static var currentScale: Scale {
-            let scale: Scale
-            #if os(iOS) || os(tvOS)
-            scale = UIScreen.main.scale
-            #elseif os(macOS)
+        static var currentScale: CGFloat {
+            let scale: CGFloat
+            #if os(macOS)
             scale = NSScreen.main?.backingScaleFactor ?? 1
             #elseif os(watchOS)
             scale = WKInterfaceDevice.current().screenScale
-            #elseif os(Linux)
-            scale = 1
+            #else
+            scale = UIScreen.main.scale
             #endif
             return scale
         }
     }
-}
-
-/// A guidance view image representation of a visual instruction component.
-public struct GuidanceViewImageRepresentation: Equatable {
-    /**
-     Initializes an image representation bearing the image at the given URL.
-     */
-    public init(imageURL: URL?) {
-        self.imageURL = imageURL
-    }
-
-    /**
-     Returns a remote URL to the image file that represents the component.
-     */
-    public let imageURL: URL?
-    
 }
 
 extension VisualInstruction.Component: Codable {
@@ -193,7 +156,6 @@ extension VisualInstruction.Component: Codable {
         case abbreviatedText = "abbr"
         case abbreviatedTextPriority = "abbr_priority"
         case imageBaseURL
-        case imageURL
         case directions
         case isActive = "active"
     }
@@ -202,7 +164,6 @@ extension VisualInstruction.Component: Codable {
         case delimiter
         case text
         case image = "icon"
-        case guidanceView = "guidance-view"
         case exit
         case exitCode = "exit-number"
         case lane
@@ -242,13 +203,6 @@ extension VisualInstruction.Component: Codable {
             self = .exitCode(text: textRepresentation)
         case .lane:
             preconditionFailure("Lane component should have been initialized before decoding text")
-        case .guidanceView:
-            var imageURL: URL?
-            if let imageURLString = try container.decodeIfPresent(String.self, forKey: .imageURL) {
-                imageURL = URL(string: imageURLString)
-            }
-            let guidanceViewImageRepresentation = GuidanceViewImageRepresentation(imageURL: imageURL)
-            self = .guidanceView(image: guidanceViewImageRepresentation, alternativeText: textRepresentation)
         }
     }
     
@@ -278,10 +232,6 @@ extension VisualInstruction.Component: Codable {
             textRepresentation = .init(text: "", abbreviation: nil, abbreviationPriority: nil)
             try container.encode(indications, forKey: .directions)
             try container.encode(isUsable, forKey: .isActive)
-        case .guidanceView(let image, let alternativeText):
-            try container.encode(Kind.guidanceView, forKey: .kind)
-            textRepresentation = alternativeText
-            try container.encodeIfPresent(image.imageURL?.absoluteString, forKey: .imageURL)
         }
         
         if let textRepresentation = textRepresentation {
@@ -304,10 +254,6 @@ extension VisualInstruction.Component: Equatable {
               let .image(rhsURL, rhsAlternativeText)):
             return lhsURL == rhsURL
                 && lhsAlternativeText == rhsAlternativeText
-        case (let .guidanceView(lhsURL, lhsAlternativeText),
-              let .guidanceView(rhsURL, rhsAlternativeText)):
-            return lhsURL == rhsURL
-                && lhsAlternativeText == rhsAlternativeText
         case (let .lane(lhsIndications, lhsIsUsable),
               let .lane(rhsIndications, rhsIsUsable)):
             return lhsIndications == rhsIndications
@@ -317,7 +263,6 @@ extension VisualInstruction.Component: Equatable {
              (.image, _),
              (.exit, _),
              (.exitCode, _),
-             (.guidanceView, _),
              (.lane, _):
             return false
         }

@@ -5,10 +5,10 @@ struct ParkingSpotFunctionality: Migration {
     {
         return database.schema("parkingSpot")
             .id()
-            .field("navigationId", .string, .required)
-            .field("currentLocation", .string, .required)
+            .field("longitude", .float, .required)
+            .field("latitude", .float, .required)
             .field("available", .bool, .required)
-            .field("timeAvailable", .int, .required)
+            .field("timeAvailable", .string, .required)
             .create()
     }
 

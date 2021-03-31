@@ -12,8 +12,13 @@ import CoreLocation
 
 class HomeViewController: UIViewController {
     
+    var parkout = false
+    
+    @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
+        parkout = true
+        performSegue(withIdentifier: "toMapView", sender: self)
     }
     //@IBOutlet weak var accountLabel: UIImageView!
     //@IBOutlet weak var mic: UIImageView!
@@ -21,14 +26,19 @@ class HomeViewController: UIViewController {
     //@IBOutlet weak var ParKey: UIImageView!
     //@IBOutlet weak var bottomLabel: UILabel!
     @IBAction func ParkIn(_ sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
-        present(vc, animated: true)
+        //let vc = storyboard?.instantiateViewController(identifier: "park-vc") as! ParkViewController
+        performSegue(withIdentifier: "toMapView", sender: self)
+        //present(vc, animated: true)
+    }
+    @IBAction func ToAccountPage(_ sender: Any) {
+        performSegue(withIdentifier: "AccountSegue", sender: self)
     }
     @IBOutlet weak var MapView: MKMapView!
     let locationManager = CLLocationManager()
     let regionInMeters: Double = 1000
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         CheckLocationServices()
     }
     
@@ -74,6 +84,16 @@ extension HomeViewController: CLLocationManagerDelegate{
     }
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         checkLocationAuthorization()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    
+        if segue.identifier == "toMapView"{
+            let ParkViewController:ParkViewController = segue.destination as! ParkViewController
+            ParkViewController.ParkOut = parkout
+        }
     }
 }
 

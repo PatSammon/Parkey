@@ -2,39 +2,48 @@ import AVFoundation
 import UIKit
 import Speech
 
-class Vinny
+class Vinny: NSObject
 {
     var id: String?
     var speech: String
+    var lastSpeech: String
+    var finalSpeech: String
     var audioEngine = AVAudioEngine()
     let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
     var recognitionRequest : SFSpeechAudioBufferRecognitionRequest?
-    var task : SFSpeechRecognitionTask!
+    var task : SFSpeechRecognitionTask?
     var started : Bool = false
-    var authorized : Bool = false
+    var speaking: Bool = false
+    var timer: Timer = Timer()
+    var timeLeft: Int = 4
     
-    
-    init()
+    override init() //gets authorization to record
     {
         speech = ""
+        lastSpeech = ""
+        finalSpeech = ""
         task?.cancel()
         self.task = nil
     }
     
+    /*
+     Takes a message as input and outputs with text to speech
+     */
     func speak(message: String) {
-        let utterance = AVSpeechUtterance(string: message)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.4
-        let synthesizer = AVSpeechSynthesizer()
-        synthesizer.speak(utterance)
+            let utterance = AVSpeechUtterance(string: message)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.rate = 0.6
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
     }
-    
+    /*
+     Gets permission to access mic and use speech recognition
+     */
     func getPermission() {
         SFSpeechRecognizer.requestAuthorization{ authStatus in
             OperationQueue.main.addOperation {
                 switch authStatus {
                     case .authorized:
-                        self.authorized = true
                         break
 
                     case .denied:
@@ -53,12 +62,8 @@ class Vinny
         }
     }
     
+    
     func listen() {
-        getPermission()
-        if (!authorized) {
-            print("not authorized")
-            return
-        }
         if (!started) {
             startSpeech()
         }
@@ -71,6 +76,7 @@ class Vinny
     
     
     func startSpeech() {
+        started = true
         speech = ""
         let audioSession = AVAudioSession.sharedInstance()
        
@@ -80,12 +86,8 @@ class Vinny
             try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
         }catch{
-            print("audio session failed")
+            NSLog("audio session failed")
         }
-        /*if(node.inputFormat(forBus: 0).channelCount == 0){
-            NSLog("not enough available input")
-            return
-        }*/
         let recordFormat = node.outputFormat(forBus: 0)
         
         node.installTap(onBus: 0, bufferSize: 1024, format: recordFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
@@ -95,11 +97,11 @@ class Vinny
         do {
             try audioEngine.start()
         } catch {
-            print("error starting audio engine")
+            NSLog("error starting audio engine")
         }
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         guard let recognitionRequest = recognitionRequest else {
-            print("unable to create recognition request")
+            NSLog("unable to create recognition request")
             return
         }
         started = true
@@ -118,21 +120,68 @@ class Vinny
                 self.task = nil
             }
         })
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
     }
     
+    /*
+     Ends speech recognition, resetting all variables for the next usage if applicable
+     */
     func endSpeechRecognition() {
-        task.finish()
-        task.cancel()
+        finalSpeech = speech
+        speech = ""
+        lastSpeech = ""
+        task?.finish()
+        task?.cancel()
         task = nil
         
         recognitionRequest?.endAudio()
+        audioEngine.reset()
         audioEngine.stop()
         audioEngine.inputNode.removeTap(onBus: 0)
-        print(speech)
         started = false
     }
     
     func getMessage() -> String {
         return speech
+    }
+    
+    func getFinalMessage() -> String {
+        return finalSpeech
+    }
+    
+    func isStarted() -> Bool {
+        return started
+    }
+    
+    func isSpeaking() -> Bool {
+        return speaking
+    }
+    
+    @objc func timerCountdown() {
+        timeLeft -= 1
+        if (speech != lastSpeech) {
+            timeLeft += 1
+            lastSpeech = speech
+        }
+        if (timeLeft == 0) {
+            timer.invalidate()
+            timeLeft = 4
+            endSpeechRecognition()
+        }
+    }
+}
+extension Vinny: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        self.speaking = true
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        self.speaking = false
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        self.speaking = false
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
 }

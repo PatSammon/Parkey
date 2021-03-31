@@ -82,5 +82,7 @@ install_bcsymbolmap() {
     rsync --delete -av "${RSYNC_PROTECT_TMP_FILES[@]}" --filter "- CVS/" --filter "- .svn/" --filter "- .git/" --filter "- .hg/" --filter "- Headers" --filter "- PrivateHeaders" --filter "- Modules" "${bcsymbolmap_path}" "${destination}"
 }
 
-install_dsym "/Users/user188405/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearchUI/MapboxSearchUI.dSYMs/MapboxSearchUI.framework.ios-arm64.dSYM"
-install_dsym "/Users/user188405/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearchUI/MapboxSearchUI.dSYMs/MapboxSearchUI.framework.ios-x86_64-simulator.dSYM"
+
+install_dsym "/Users/patricksammon/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearchUI/MapboxSearchUI.dSYMs/MapboxSearchUI.framework.ios-arm64.dSYM"
+install_dsym "/Users/patricksammon/Documents/GitHub/Parkey/Parkey/Pods/MapboxSearchUI/MapboxSearchUI.dSYMs/MapboxSearchUI.framework.ios-x86_64-simulator.dSYM"
+

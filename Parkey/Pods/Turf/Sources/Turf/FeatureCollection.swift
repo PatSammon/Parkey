@@ -2,10 +2,10 @@ import Foundation
 
 
 public struct FeatureCollection: GeoJSONObject {
-    public let type: FeatureType = .featureCollection
+    public var type: FeatureType = .featureCollection
     public var identifier: FeatureIdentifier?
-    public var features: Array<Feature> = []
-    public var properties: [String : Any?]?
+    public var features: Array<FeatureVariant> = []
+    public var properties: [String : AnyJSONType]?
     
     private enum CodingKeys: String, CodingKey {
         case type
@@ -13,14 +13,18 @@ public struct FeatureCollection: GeoJSONObject {
         case features
     }
     
-    public init(features: [Feature]) {
+    private enum GeometryCodingKeys: String, CodingKey {
+        case type
+    }
+    
+    public init(_ features: [FeatureVariant]) {
         self.features = features
     }
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.features = try container.decode([Feature].self, forKey: .features)
-        self.properties = try container.decodeIfPresent([String: Any?].self, forKey: .properties)
+        self.features = try container.decode([FeatureVariant].self, forKey: .features)
+        self.properties = try container.decodeIfPresent([String: AnyJSONType].self, forKey: .properties)
     }
     
     public func encode(to encoder: Encoder) throws {

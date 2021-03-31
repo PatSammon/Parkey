@@ -18,18 +18,6 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    
-    app.post("userRewards")
-    { req -> EventLoopFuture<[Reward]> in
-        
-        let userId = String(req.body.string!.dropFirst(7))
-        
-        return Reward.query(on: req.db).filter(\.$userId == userId).all()
-=======
-=======
->>>>>>> Stashed changes
     /*app.get("leaderboard")
     {
         req -> EventLoopFuture<[User]> in
@@ -40,10 +28,6 @@ func routes(_ app: Application) throws
     {
         req -> EventLoopFuture<[User]> in
         return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
     
     app.post("newPaymentInfo")
@@ -96,8 +80,8 @@ func routes(_ app: Application) throws
         let infoArray = var1.split(separator: "&")
         let furtherInfoArray = infoArray[0].split(separator: "=")
         let furtherInfoArray2 = infoArray[1].split(separator: "=")
-        let parkingLong = (furtherInfoArray2[1] as NSString).floatValue
-        let parkingLat = (furtherInfoArray[1] as NSString).floatValue
+        let parkingLong = (String(furtherInfoArray2[1]) as NSString).floatValue
+        let parkingLat = (String(furtherInfoArray[1]) as NSString).floatValue
         
         let parkingSpot = ParkingSpot.query(on: req.db).filter(\.$latitude == parkingLat).filter(\.$longitude == parkingLong)
         //let parkingSpot2 = ParkingSpot.query(on: req.db).filter(\.$id == parkingId!)
@@ -123,11 +107,18 @@ func routes(_ app: Application) throws
         
         User.query(on: req.db).all()
     }
+    
     app.get("places")
     {
         req in
         
         Places.query(on: req.db).all()
+    }
+    app.get("parkingSpots")
+    {
+        req in
+        
+        ParkingSpot.query(on: req.db).all()
     }
     
     try app.register(collection: UserController())

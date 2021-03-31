@@ -74,22 +74,6 @@ public class CarPlayNavigationViewController: UIViewController, NavigationMapVie
         }
     }
     
-    /**
-     Controls whether the main route style layer and its casing disappears
-     as the user location puck travels over it. Defaults to `false`.
-     
-     If `true`, the part of the route that has been traversed will be
-     rendered with full transparency, to give the illusion of a
-     disappearing route. To customize the color that appears on the
-     traversed section of a route, override the `traversedRouteColor` property
-     for the `NavigationMapView.appearance()`.
-     */
-    public var routeLineTracksTraversal: Bool = false {
-        didSet {
-            mapView?.routeLineTracksTraversal = routeLineTracksTraversal
-        }
-    }
-    
     var edgePadding: UIEdgeInsets {
         let padding:CGFloat = 15
         return UIEdgeInsets(top: view.safeAreaInsets.top + padding,
@@ -175,7 +159,6 @@ public class CarPlayNavigationViewController: UIViewController, NavigationMapVie
             self?.mapView?.localizeLabels()
             self?.updateRouteOnMap()
             self?.mapView?.recenterMap()
-            self?.mapView?.showsTraffic = false
         }
         
         styleManager = StyleManager()
@@ -291,8 +274,8 @@ public class CarPlayNavigationViewController: UIViewController, NavigationMapVie
                 mapView?.setContentInset(contentInset(forOverviewing: false), animated: true, completionHandler: nil)
             } else if tracksUserCourse && !newValue {
                 isOverviewingRoutes = !isPanningAway
-                guard let userLocation = self.navigationService.router.location,
-                      let shape = navigationService.route.shape else {
+                guard let userLocation = self.navigationService.router.location?.coordinate,
+                    let shape = navigationService.route.shape else {
                     return
                 }
                 mapView?.enableFrameByFrameCourseViewTracking(for: 1)
@@ -345,19 +328,14 @@ public class CarPlayNavigationViewController: UIViewController, NavigationMapVie
         let stepEstimates = CPTravelEstimates(distanceRemaining: stepDistance, timeRemaining: stepProgress.durationRemaining)
         carSession.updateEstimates(stepEstimates, for: maneuver)
         
-        if let compassView = self.compassView, !compassView.isHidden {
+        if let compassView = self.compassView,
+            !compassView.isHidden {
             compassView.course = location.course
         }
         
         if let speedLimitView = speedLimitView {
             speedLimitView.signStandard = routeProgress.currentLegProgress.currentStep.speedLimitSignStandard
             speedLimitView.speedLimit = routeProgress.currentLegProgress.currentSpeedLimit
-        }
-        
-        if routeLineTracksTraversal {
-            mapView?.updateUpcomingRoutePointIndex(routeProgress: routeProgress)
-            mapView?.updateTraveledRouteLine(location.coordinate)
-            mapView?.updateRoute(routeProgress)
         }
     }
     
@@ -459,12 +437,14 @@ public class CarPlayNavigationViewController: UIViewController, NavigationMapVie
     }
     
     func createFeedbackUI() -> CPGridTemplate {
-        let feedbackItems: [FeedbackItem] = [FeedbackType.incorrectVisual(subtype: nil),
-                                             FeedbackType.confusingAudio(subtype: nil),
-                                             FeedbackType.illegalRoute(subtype: nil),
-                                             FeedbackType.roadClosure(subtype: nil),
-                                             FeedbackType.routeQuality(subtype: nil),
-                                             FeedbackType.positioning(subtype: nil)].map { $0.generateFeedbackItem() }
+        let feedbackItems: [FeedbackItem] = [
+            .turnNotAllowed,
+            .closure,
+            .reportTraffic,
+            .confusingInstructions,
+            .generalMapError,
+            .badRoute
+        ]
         
         let feedbackButtonHandler: (_: CPGridButton) -> Void = { [weak self] (button) in
             self?.carInterfaceController.popTemplate(animated: true)

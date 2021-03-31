@@ -9,6 +9,6 @@ __attribute__((visibility ("default")))
 + (uint32_t)getMajorVersion;
 + (uint32_t)getMinorVersion;
 + (uint32_t)getPatchVersion;
-+ (nonnull NSString *)getCommonSDKVersionString __attribute((ns_returns_retained));
++ (nonnull NSString *)getVersionString __attribute((ns_returns_retained));
 
 @end

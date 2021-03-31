@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N8G-2D-Ylv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QVR-Qz-xaR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -152,7 +152,6 @@
                                 </state>
                                 <connections>
                                     <action selector="ParkIn:" destination="qBx-G2-GA8" eventType="touchUpInside" id="END-Qy-XSl"/>
-                                    <segue destination="EgS-Vw-M2d" kind="show" id="paz-mu-xWt"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-rL-8c3">
@@ -167,6 +166,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logowords.png" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-qq-TFE">
                                 <rect key="frame" x="-331" y="-114" width="834" height="403"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                </accessibility>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6c-82-Xrw">
                                 <rect key="frame" x="257" y="638" width="94" height="48"/>
@@ -176,7 +178,7 @@
                                     <color key="titleColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="ParkOut:" destination="qBx-G2-GA8" eventType="touchUpInside" id="TXl-X1-cUX"/>
+                                    <action selector="ParkOut:" destination="qBx-G2-GA8" eventType="touchUpInside" id="B5G-O9-Jtl"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="mic.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-s3-IBl">
@@ -184,6 +186,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0t-pD-mdA">
+                                <rect key="frame" x="337" y="106" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="ToAccountPage:" destination="qBx-G2-GA8" eventType="touchUpInside" id="cUb-Qk-Uhc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RiI-AC-yMf"/>
                         <color key="backgroundColor" systemColor="secondaryLabelColor"/>
@@ -195,6 +205,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4k6-c0-nNu"/>
+                    <connections>
+                        <outlet property="AccountIcon" destination="T82-gy-Hxs" id="YmN-Ia-nLs"/>
+                        <segue destination="QVR-Qz-xaR" kind="show" identifier="AccountSegue" id="kZD-b0-yZh"/>
+                        <segue destination="EgS-Vw-M2d" kind="show" identifier="toMapView" id="dIT-dj-d5E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ag5-Yk-GhE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -460,7 +475,7 @@
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="hKp-z9-xb4" kind="show" identifier="settingsSegue" id="Rkj-hs-q1E"/>
+                                    <segue destination="hKp-z9-xb4" kind="show" id="Rkj-hs-q1E"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsY-hh-Dq7">
@@ -470,7 +485,7 @@
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="keychainClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="it5-nX-hQE"/>
+                                    <action selector="keychainClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="jMg-K1-oKs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUL-ta-Lle">
@@ -479,20 +494,25 @@
                                 <state key="normal" title="Ranking">
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
-<<<<<<< Updated upstream
-=======
                                 <connections>
                                     <segue destination="iCO-b2-LBT" kind="show" identifier="rankingSegue" id="qEn-kC-nRI"/>
                                 </connections>
->>>>>>> Stashed changes
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-dV-sRO">
                                 <rect key="frame" x="50" y="490" width="314" height="61"/>
                                 <state key="normal" image="mic_1.png"/>
                                 <connections>
-                                    <action selector="micClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="BDQ-cR-pxa"/>
+                                    <action selector="micClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="lZX-pD-vyX"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IxD-3i-bnC">
+                                <rect key="frame" x="20" y="250" width="374" height="220"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b6B-jE-jtH"/>
                         <color key="backgroundColor" systemColor="secondaryLabelColor"/>
@@ -504,7 +524,9 @@
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="DQY-JR-wCo"/>
                             <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="20" id="Jmn-9A-O7l"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
+                            <constraint firstItem="UEg-dV-sRO" firstAttribute="top" secondItem="IxD-3i-bnC" secondAttribute="bottom" constant="20" id="WqZ-bO-4Cm"/>
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="YvI-RC-Zwj"/>
+                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="IxD-3i-bnC" secondAttribute="trailing" constant="20" id="cy9-f0-VSB"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="TUL-ta-Lle" secondAttribute="trailing" constant="100" id="eIf-HJ-O6m"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="50" id="hQb-r9-V6O"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="za1-xn-ACX" secondAttribute="trailing" constant="100" id="jaB-bb-2mp"/>
@@ -512,6 +534,8 @@
                             <constraint firstItem="za1-xn-ACX" firstAttribute="top" secondItem="gyD-bs-Rfj" secondAttribute="bottom" constant="50" id="ruU-Sh-bB5"/>
                             <constraint firstItem="gyD-bs-Rfj" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="rvJ-Dr-dmY"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="tsY-hh-Dq7" secondAttribute="trailing" constant="100" id="u5U-aC-n0L"/>
+                            <constraint firstItem="IxD-3i-bnC" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="20" id="uZR-P7-9nO"/>
+                            <constraint firstItem="IxD-3i-bnC" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="20" id="yv6-KA-DPs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="0Hg-TH-wRM"/>
@@ -521,7 +545,8 @@
                         <outlet property="micButton" destination="UEg-dV-sRO" id="mbl-cS-u2R"/>
                         <outlet property="profileImage" destination="gyD-bs-Rfj" id="py4-CH-gUA"/>
                         <outlet property="rankingButton" destination="TUL-ta-Lle" id="4o6-35-UM1"/>
-                        <segue destination="hKp-z9-xb4" kind="show" identifier="settingSegue" id="g3C-9X-6Cm"/>
+                        <outlet property="speechShow" destination="IxD-3i-bnC" id="Fck-l1-WgM"/>
+                        <segue destination="hKp-z9-xb4" kind="show" identifier="settingsSegue" id="g3C-9X-6Cm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ul6-xF-hbr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -669,6 +694,7 @@
                     <connections>
                         <outlet property="settingsList" destination="2kp-8a-idc" id="Ih3-TE-ZT3"/>
                         <segue destination="gAc-BQ-8AG" kind="show" identifier="Rewards" id="a0S-sL-QNp"/>
+                        <segue destination="6Aw-hH-j0S" kind="show" identifier="LogOut" id="kKN-QJ-N9e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HKj-jn-rb8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -715,8 +741,6 @@
             </objects>
             <point key="canvasLocation" x="5558" y="110"/>
         </scene>
-<<<<<<< Updated upstream
-=======
         <!--Leaderboard Controller-->
         <scene sceneID="XFW-tx-Hvd">
             <objects>
@@ -759,20 +783,12 @@
             </objects>
             <point key="canvasLocation" x="1924.6376811594205" y="1575.6696428571429"/>
         </scene>
->>>>>>> Stashed changes
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="g3C-9X-6Cm"/>
-        <segue reference="CMZ-Sx-laU"/>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="dxf-cy-JU4"/>
->>>>>>> Stashed changes
-=======
-        <segue reference="dxf-cy-JU4"/>
->>>>>>> Stashed changes
-        <segue reference="OAk-PU-giw"/>
+        <segue reference="tR8-E4-76R"/>
         <segue reference="bmw-e5-JLd"/>
     </inferredMetricsTieBreakers>
     <resources>

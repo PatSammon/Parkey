@@ -106,7 +106,7 @@ class SignUpController: UIViewController {
             ErrorMessage.isHidden=false
             return
         }
-        let name:String = FName.text! + LName.text!
+        let name:String = FName.text! + " " + LName.text!
         //then add the entry to the database
         RequestHandler.register(name: name, userName: Email.text!, password: Password.text!, email: Email.text!, phoneNum: 1234567) {
                 Result in

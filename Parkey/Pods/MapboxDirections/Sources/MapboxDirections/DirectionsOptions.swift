@@ -1,5 +1,6 @@
 import Foundation
 import Polyline
+import CoreLocation
 
 /**
  Maximum length of an HTTP request URL for the purposes of switching from GET to
@@ -154,6 +155,10 @@ open class DirectionsOptions: Codable {
         try container.encode(includesSpokenInstructions, forKey: .includesSpokenInstructions)
         try container.encode(distanceMeasurementSystem, forKey: .distanceMeasurementSystem)
         try container.encode(includesVisualInstructions, forKey: .includesVisualInstructions)
+        try container.encode(includesSpokenInstructions, forKey: .includesSpokenInstructions)
+        if includesSpokenInstructions {
+            try container.encode(distanceMeasurementSystem, forKey: .distanceMeasurementSystem)
+        }
     }
     
     public required init(from decoder: Decoder) throws {
@@ -311,12 +316,7 @@ open class DirectionsOptions: Codable {
         return "\(abridgedPath)/\(coordinates).json"
     }
     
-    /**
-     An array of URL query items (parameters) to include in an HTTP request.
-     
-     The query items are included in the URL of a GET request or the body of a POST request.
-     */
-    open var urlQueryItems: [URLQueryItem] {
+    var urlQueryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = [
             URLQueryItem(name: "geometries", value: shapeFormat.rawValue),
             URLQueryItem(name: "overview", value: routeShapeResolution.rawValue),

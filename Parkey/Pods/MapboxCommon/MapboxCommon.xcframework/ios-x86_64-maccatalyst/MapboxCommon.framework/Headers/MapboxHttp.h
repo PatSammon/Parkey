@@ -4,7 +4,7 @@
 #import "MBXHttpRequestErrorType.h"
 #import "MBXDownloadErrorCode.h"
 #import "MBXDownloadState.h"
-#import "MBXUAComponents.h"
+#import "MBXUserAgentComponents.h"
 #import "MBXHttpRequest.h"
 #import "MBXHttpRequestError.h"
 #import "MBXHttpResponseData.h"
