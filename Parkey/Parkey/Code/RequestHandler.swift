@@ -137,6 +137,86 @@ class RequestHandler
         }.resume()
     }
     
+    static func getVehicle() -> [Vehicle]
+    {
+        var done = false
+        var returnArray: [Vehicle] = []
+        
+        
+        let url = URL(string: "http://127.0.0.1:8080/vehicle" )
+        var request = URLRequest(url: url!)
+        
+        request.httpMethod = "GET"
+        URLSession.shared.dataTask(with: request)
+        { ( data, response, error ) in
+            
+            if error != nil
+            {
+                print (error!)
+                return
+            }
+                
+            if let data = data
+            {
+                let vehicles = try? JSONDecoder().decode([Vehicle].self, from: data)
+                returnArray = vehicles!
+                done = true
+                
+            }
+                
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+        
+        return returnArray
+
+    }
+    
+    static func addVehicle(userId: String, licensePlate: String, make: String, model: String, size: Int)
+    {
+        let url = URL(string: "http://127.0.0.1:8080/newVehicle")
+        let encoder = JSONEncoder()
+
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                
+        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, make: make, model: model, size: size)
+        request.httpBody = try? encoder.encode(newVehicle)
+                
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+                    
+        }.resume()
+    }
+    
+    
+    static func removeVehicle(licensePlate: String, make: String, model: String, size: Int)
+    {
+        var done = false
+        let url = URL(string: "http://127.0.0.1:8080/removeVehicle")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        let postString = "licensePlate=\(licensePlate) &make=\(make) &model\(model) &size\(size)";
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            done=true
+        }.resume()
+        
+        repeat
+        {
+            RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
+        }while !done
+        
+    }
+    
     static func getRewards(userId: String) -> [Reward]
     {
         var done = false
