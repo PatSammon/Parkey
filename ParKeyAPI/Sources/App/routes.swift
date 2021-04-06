@@ -80,8 +80,8 @@ func routes(_ app: Application) throws
         let infoArray = var1.split(separator: "&")
         let furtherInfoArray = infoArray[0].split(separator: "=")
         let furtherInfoArray2 = infoArray[1].split(separator: "=")
-        let parkingLong = (furtherInfoArray2[1] as NSString).floatValue
-        let parkingLat = (furtherInfoArray[1] as NSString).floatValue
+        let parkingLong = (String(furtherInfoArray2[1]) as NSString).floatValue
+        let parkingLat = (String(furtherInfoArray[1]) as NSString).floatValue
         
         let parkingSpot = ParkingSpot.query(on: req.db).filter(\.$latitude == parkingLat).filter(\.$longitude == parkingLong)
         //let parkingSpot2 = ParkingSpot.query(on: req.db).filter(\.$id == parkingId!)
