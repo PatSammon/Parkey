@@ -18,7 +18,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
-
+    var ParkOut = false
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -145,7 +145,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
             // Customize the route line color and width
             let lineStyle = MGLLineStyleLayer(identifier: "route-style", source: source)
-            lineStyle.lineColor = NSExpression(forConstantValue: #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1))
+            lineStyle.lineColor = NSExpression(forConstantValue:  UIColor(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1))
             lineStyle.lineWidth = NSExpression(forConstantValue: 3)
 
             // Add the source and style layer of the route line to the map
@@ -205,40 +205,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
             }
         })
     }
-}
-extension ParkViewController: SearchControllerDelegate {
-    func categorySearchResultsReceived(results: [SearchResult]) {
-    let annotations = results.map { searchResult -> MGLPointAnnotation in
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = searchResult.coordinate
-    annotation.title = searchResult.name
-    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
-    return annotation
-    }
-     
-    showAnnotation(annotations, isPOI: false)
-    }
-     
-    func searchResultSelected(_ searchResult: SearchResult) {
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = searchResult.coordinate
-    annotation.title = searchResult.name
-    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
-     
-    showAnnotation([annotation], isPOI: searchResult.type == .POI)
-    }
-     
-    func userFavoriteSelected(_ userFavorite: FavoriteRecord) {
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = userFavorite.coordinate
-    annotation.title = userFavorite.name
-    annotation.subtitle = userFavorite.address?.formattedAddress(style: .medium)
-     
-    showAnnotation([annotation], isPOI: true)
-    }
-
-    }
-=======
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
 
         //make request handler call
@@ -309,4 +275,5 @@ extension ParkViewController: SearchControllerDelegate {
     }
 
     }
+
 
