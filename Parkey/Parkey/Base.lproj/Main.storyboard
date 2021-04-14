@@ -140,7 +140,11 @@
             <objects>
                 <viewController id="qBx-G2-GA8" customClass="HomeViewController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vQw-P1-8aQ">
+<<<<<<< Updated upstream
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+>>>>>>> Stashed changes
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gu5-bk-GK8">
@@ -158,10 +162,13 @@
                                 <rect key="frame" x="64" y="245" width="287" height="229"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T82-gy-Hxs">
-                                <rect key="frame" x="326" y="41.5" width="68" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="T82-gy-Hxs">
+                                <rect key="frame" x="326" y="84.5" width="68" height="56"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="dss-Uf-UTn"/>
+                                    <constraint firstAttribute="height" constant="57" id="hxB-wE-pU2"/>
+                                </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logowords.png" translatesAutoresizingMaskIntoConstraints="NO" id="f4E-qq-TFE">
                                 <rect key="frame" x="-331" y="-114" width="834" height="403"/>
@@ -181,17 +188,23 @@
                                     <action selector="ParkOut:" destination="qBx-G2-GA8" eventType="touchUpInside" id="B5G-O9-Jtl"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="mic.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nFd-s3-IBl">
-                                <rect key="frame" x="283" y="45.5" width="42" height="46"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemBackgroundColor"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0t-pD-mdA">
                                 <rect key="frame" x="337" y="106" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="ToAccountPage:" destination="qBx-G2-GA8" eventType="touchUpInside" id="cUb-Qk-Uhc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzH-J8-Tc5">
+                                <rect key="frame" x="248" y="84.5" width="68" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="i9w-FY-AO3"/>
+                                    <constraint firstAttribute="height" constant="57" id="mng-6Z-TyY"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="mic.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="micPressed:" destination="qBx-G2-GA8" eventType="touchUpInside" id="z9G-fE-SHG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -201,7 +214,11 @@
                             <constraint firstAttribute="bottom" secondItem="H6c-82-Xrw" secondAttribute="bottom" constant="20" id="DSC-Pi-SQ6"/>
                             <constraint firstItem="gu5-bk-GK8" firstAttribute="leading" secondItem="vQw-P1-8aQ" secondAttribute="leading" constant="30" id="U9y-gC-6Id"/>
                             <constraint firstAttribute="bottom" secondItem="gu5-bk-GK8" secondAttribute="bottom" constant="20" id="VmV-N7-8vB"/>
+                            <constraint firstItem="T82-gy-Hxs" firstAttribute="leading" secondItem="GzH-J8-Tc5" secondAttribute="trailing" constant="10" id="dsX-VU-3SZ"/>
+                            <constraint firstItem="GzH-J8-Tc5" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="40" id="j61-i5-PeK"/>
                             <constraint firstAttribute="trailing" secondItem="H6c-82-Xrw" secondAttribute="trailing" constant="30" id="k2q-Uc-UgU"/>
+                            <constraint firstItem="T82-gy-Hxs" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="40" id="m4i-OZ-fDA"/>
+                            <constraint firstItem="RiI-AC-yMf" firstAttribute="trailing" secondItem="T82-gy-Hxs" secondAttribute="trailing" constant="20" id="nUv-RY-N77"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4k6-c0-nNu"/>
@@ -496,14 +513,22 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-dV-sRO">
-                                <rect key="frame" x="50" y="490" width="314" height="61"/>
+                                <rect key="frame" x="50" y="490" width="314" height="37"/>
                                 <state key="normal" image="mic_1.png"/>
                                 <connections>
+<<<<<<< Updated upstream
                                     <action selector="micClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="f0D-3A-Wha"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="y54-VS-i5M">
                                 <rect key="frame" x="30" y="30" width="354" height="430"/>
+=======
+                                    <action selector="micClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="fws-3w-KfS"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8uR-e4-P9x">
+                                <rect key="frame" x="30" y="191" width="354" height="368"/>
+>>>>>>> Stashed changes
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -519,14 +544,23 @@
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="top" secondItem="tsY-hh-Dq7" secondAttribute="bottom" constant="50" id="AjM-5Q-ejU"/>
                             <constraint firstItem="UEg-dV-sRO" firstAttribute="top" secondItem="TUL-ta-Lle" secondAttribute="bottom" constant="100" id="DFZ-ww-zh3"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="DQY-JR-wCo"/>
+<<<<<<< Updated upstream
                             <constraint firstItem="y54-VS-i5M" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="topMargin" constant="30" id="JNY-pP-rPs"/>
                             <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="20" id="Jmn-9A-O7l"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
                             <constraint firstItem="UEg-dV-sRO" firstAttribute="top" secondItem="y54-VS-i5M" secondAttribute="bottom" constant="30" id="UbA-TX-gh6"/>
+=======
+                            <constraint firstItem="b6B-jE-jtH" firstAttribute="bottom" secondItem="8uR-e4-P9x" secondAttribute="bottom" constant="303" id="HB5-Gh-mUy"/>
+                            <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="20" id="Jmn-9A-O7l"/>
+                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
+                            <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="8uR-e4-P9x" secondAttribute="trailing" constant="30" id="MuW-ED-THf"/>
+>>>>>>> Stashed changes
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="YvI-RC-Zwj"/>
+                            <constraint firstItem="8uR-e4-P9x" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="30" id="buf-bU-BAT"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="TUL-ta-Lle" secondAttribute="trailing" constant="100" id="eIf-HJ-O6m"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="50" id="hQb-r9-V6O"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="za1-xn-ACX" secondAttribute="trailing" constant="100" id="jaB-bb-2mp"/>
+                            <constraint firstItem="8uR-e4-P9x" firstAttribute="top" secondItem="b6B-jE-jtH" secondAttribute="top" constant="147" id="mpV-Bp-glU"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="gyD-bs-Rfj" secondAttribute="trailing" constant="100" id="oih-x5-xxi"/>
                             <constraint firstItem="za1-xn-ACX" firstAttribute="top" secondItem="gyD-bs-Rfj" secondAttribute="bottom" constant="50" id="ruU-Sh-bB5"/>
                             <constraint firstItem="gyD-bs-Rfj" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="rvJ-Dr-dmY"/>
@@ -541,13 +575,17 @@
                         <outlet property="micButton" destination="UEg-dV-sRO" id="mbl-cS-u2R"/>
                         <outlet property="profileImage" destination="gyD-bs-Rfj" id="py4-CH-gUA"/>
                         <outlet property="rankingButton" destination="TUL-ta-Lle" id="4o6-35-UM1"/>
+<<<<<<< Updated upstream
                         <outlet property="speechShow" destination="y54-VS-i5M" id="Uzw-Oh-fye"/>
+=======
+                        <outlet property="speechShow" destination="8uR-e4-P9x" id="Z5h-iF-Z3d"/>
+>>>>>>> Stashed changes
                         <segue destination="hKp-z9-xb4" kind="show" identifier="settingsSegue" id="g3C-9X-6Cm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ul6-xF-hbr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2883" y="872"/>
+            <point key="canvasLocation" x="2882.608695652174" y="871.875"/>
         </scene>
         <!--Rewards Controller-->
         <scene sceneID="Dx8-p5-nHv">
@@ -724,18 +762,40 @@
             <objects>
                 <viewController storyboardIdentifier="park-vc" id="EgS-Vw-M2d" customClass="ParkViewController" customModule="Parkey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0pC-CH-lkm">
+<<<<<<< Updated upstream
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+=======
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+>>>>>>> Stashed changes
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SXx-hT-tdv">
+                                <rect key="frame" x="30" y="191" width="354" height="368"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2rx-Td-wn4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2rx-Td-wn4" firstAttribute="trailing" secondItem="SXx-hT-tdv" secondAttribute="trailing" constant="30" id="CZr-yM-Scs"/>
+                            <constraint firstItem="SXx-hT-tdv" firstAttribute="leading" secondItem="2rx-Td-wn4" secondAttribute="leading" constant="30" id="TYH-jF-x5x"/>
+                            <constraint firstItem="SXx-hT-tdv" firstAttribute="top" secondItem="2rx-Td-wn4" secondAttribute="top" constant="147" id="bdw-Pd-YuA"/>
+                            <constraint firstItem="2rx-Td-wn4" firstAttribute="bottom" secondItem="SXx-hT-tdv" secondAttribute="bottom" constant="303" id="cg3-og-PaG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iF6-Bd-OyP">
                         <barButtonItem key="backBarButtonItem" title="Back" id="eMv-vf-EPz"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="speechShow" destination="SXx-hT-tdv" id="ggR-Y1-qEJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faw-br-Nnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5558" y="110"/>
+            <point key="canvasLocation" x="5543" y="120"/>
         </scene>
         <!--Leaderboard Controller-->
         <scene sceneID="XFW-tx-Hvd">
@@ -782,7 +842,12 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="g3C-9X-6Cm"/>
+<<<<<<< Updated upstream
         <segue reference="mcB-Dl-v9C"/>
+=======
+        <segue reference="Meu-VS-GBI"/>
+        <segue reference="CMZ-Sx-laU"/>
+>>>>>>> Stashed changes
         <segue reference="dxf-cy-JU4"/>
         <segue reference="tR8-E4-76R"/>
         <segue reference="bmw-e5-JLd"/>
@@ -790,7 +855,7 @@
     <resources>
         <image name="logo.png" width="2000" height="2000"/>
         <image name="logowords.png" width="750" height="1334"/>
-        <image name="mic.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="mic.circle" catalog="system" width="128" height="121"/>
         <image name="mic_1.png" width="42.599998474121094" height="36.599998474121094"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="darkTextColor">
