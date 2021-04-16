@@ -18,7 +18,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
-
+    var ParkOut = false
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -205,40 +205,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
             }
         })
     }
-}
-extension ParkViewController: SearchControllerDelegate {
-    func categorySearchResultsReceived(results: [SearchResult]) {
-    let annotations = results.map { searchResult -> MGLPointAnnotation in
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = searchResult.coordinate
-    annotation.title = searchResult.name
-    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
-    return annotation
-    }
-     
-    showAnnotation(annotations, isPOI: false)
-    }
-     
-    func searchResultSelected(_ searchResult: SearchResult) {
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = searchResult.coordinate
-    annotation.title = searchResult.name
-    annotation.subtitle = searchResult.address?.formattedAddress(style: .medium)
-     
-    showAnnotation([annotation], isPOI: searchResult.type == .POI)
-    }
-     
-    func userFavoriteSelected(_ userFavorite: FavoriteRecord) {
-    let annotation = MGLPointAnnotation()
-    annotation.coordinate = userFavorite.coordinate
-    annotation.title = userFavorite.name
-    annotation.subtitle = userFavorite.address?.formattedAddress(style: .medium)
-     
-    showAnnotation([annotation], isPOI: true)
-    }
-
-    }
-=======
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
 
         //make request handler call
@@ -307,6 +273,4 @@ extension ParkViewController: SearchControllerDelegate {
      
     showAnnotation([annotation], isPOI: true)
     }
-
-    }
-
+}
