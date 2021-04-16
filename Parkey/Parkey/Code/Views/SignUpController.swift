@@ -79,7 +79,7 @@ class SignUpController: UIViewController {
     }
     
     //method that will be called when the user tries to sign-up
-    @IBAction func SignUp(_ sender: Any) {
+    @IBAction func SignUp(_ sender: Any){
         //check that none of the fields are blank
         if Email.text == nil || Password.text == nil || Password2.text == nil || FName.text == nil || LName.text == nil{
             ErrorMessage.text = "Must include all fields"
