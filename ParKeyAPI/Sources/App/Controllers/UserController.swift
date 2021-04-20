@@ -50,7 +50,7 @@ struct UserController: RouteCollection
         return user.save(on: req.db).map { user }
     }*/
     fileprivate func create(req: Request) throws -> EventLoopFuture<NewSession> {
-      try UserSignup.validate(req)
+        try UserSignup.validate(content: req)
       let userSignup = try req.content.decode(UserSignup.self)
       let user = try User.create(from: userSignup)
       var token: Token!
