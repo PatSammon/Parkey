@@ -26,6 +26,7 @@ class RequestHandler
         }while !done
         
     }
+    
     static func removeParkingSpot(latitude: Float,longitude: Float)
     {
         var done = false
@@ -194,15 +195,16 @@ class RequestHandler
     }
     
     
-    static func removeVehicle(licensePlate: String, make: String, model: String, size: Int)
+    static func removeVehicle(vehicleID: String)
     {
         var done = false
-        let url = URL(string: "http://127.0.0.1:8080/removeVehicle")
+        let url = URL(string: "https://parkey.herokuapp.com/removeVehicle")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
-        
-        let postString = "licensePlate=\(licensePlate) &make=\(make) &model\(model) &size\(size)";
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let postString = "vehicleId=\(vehicleID)"
+        
         request.httpBody = postString.data(using: String.Encoding.utf8)
         
         URLSession.shared.dataTask(with: request)
@@ -214,7 +216,6 @@ class RequestHandler
         {
             RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.1))
         }while !done
-        
     }
     
     static func getRewards(userId: String) -> [Reward]

@@ -62,8 +62,9 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
                 
             }))
            
-            RequestHandler.removeVehicle(licensePlate: vehicles.licensePlate, make: vehicles.make, model: vehicles.model, size: vehicles.size)
-            //tableView.deleteRows(at: [indexPath], with: .fade)
+            RequestHandler.removeVehicle(vehicleID: vehicles.id!)
+            
+            //  tableView.deleteRows(at: [indexPath], with: .fade)
                        
                       
             self.registeredVehicles = RequestHandler.getVehicle()
