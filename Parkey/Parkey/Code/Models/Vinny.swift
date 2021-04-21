@@ -16,8 +16,9 @@ class Vinny: NSObject
     var speaking: Bool = false
     var timer: Timer = Timer()
     var timeLeft: Int = 4
+    var busNum: Int = 0
     
-    override init() //gets authorization to record
+    override init()
     {
         speech = ""
         lastSpeech = ""
@@ -25,6 +26,7 @@ class Vinny: NSObject
         task?.cancel()
         self.task = nil
     }
+    
     
     /*
      Takes a message as input and outputs with text to speech
@@ -83,14 +85,15 @@ class Vinny: NSObject
         let node = audioEngine.inputNode
         
         do{
-            try audioSession.setCategory(.record, mode: .measurement, options: .duckOthers)
+            try audioSession.setCategory(.playAndRecord, mode: .measurement, options: .mixWithOthers)
             try audioSession.setActive(true, options: .notifyOthersOnDeactivation)
+            try audioSession.setAllowHapticsAndSystemSoundsDuringRecording(true)
         }catch{
             NSLog("audio session failed")
         }
-        let recordFormat = node.outputFormat(forBus: 0)
+        let recordFormat = node.outputFormat(forBus: busNum)
         
-        node.installTap(onBus: 0, bufferSize: 1024, format: recordFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+        node.installTap(onBus: busNum, bufferSize: 1024, format: recordFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self.recognitionRequest?.append(buffer)
         }
         audioEngine.prepare()
@@ -115,7 +118,7 @@ class Vinny: NSObject
             }
             if error != nil {
                 self.audioEngine.stop()
-                node.removeTap(onBus: 0)
+                node.removeTap(onBus: self.busNum)
                 self.recognitionRequest = nil
                 self.task = nil
             }
@@ -137,7 +140,7 @@ class Vinny: NSObject
         recognitionRequest?.endAudio()
         audioEngine.reset()
         audioEngine.stop()
-        audioEngine.inputNode.removeTap(onBus: 0)
+        audioEngine.inputNode.removeTap(onBus: busNum)
         started = false
     }
     
@@ -170,7 +173,7 @@ class Vinny: NSObject
         }
     }
 }
-extension Vinny: AVSpeechSynthesizerDelegate {
+/*extension Vinny: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         self.speaking = true
     }
@@ -184,4 +187,4 @@ extension Vinny: AVSpeechSynthesizerDelegate {
         self.speaking = false
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
-}
+}*/

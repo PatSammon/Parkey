@@ -40,6 +40,7 @@ class ProfileController: UIViewController {
         profileVinny.getPermission()
         profileVinny.speak(message: "What would you like to view?")
         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { speechTimer in
+            self.speechShow.text = "Recording started"
             self.profileVinny.listen()
             self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
         }
@@ -72,7 +73,9 @@ class ProfileController: UIViewController {
     @objc func timerCountdown() {
         timeLeft -= 1
         if (profileVinny.isStarted()) {
-            speechShow.text = profileVinny.getMessage()
+            if (profileVinny.getMessage() != "") {
+                speechShow.text = profileVinny.getMessage()
+            }
             timeLeft += 1
         }
         else {
