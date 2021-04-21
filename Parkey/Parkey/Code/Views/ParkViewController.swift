@@ -18,7 +18,15 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
+    var parkVinny = Vinny()
     var ParkOut = false
+    var micUsed = false
+    var timer: Timer = Timer()
+    var timeLeft: Int = 4
+    var speechInput: String?
+    var geoCoder = CLGeocoder()
+    @IBOutlet weak var speechShow: UITextView!
+    
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -50,6 +58,56 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         // Add a gesture recognizer to the map view
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
         mapView.addGestureRecognizer(longPress)
+        speechShow.isHidden = true
+        speechShow.text = ""
+        if (micUsed == true) {
+            speechShow.isHidden = false
+            view.bringSubviewToFront(speechShow)
+            //micGetOriginAndDestination(message: "715 north avenue, new rochelle ny 10710")
+            micGetAddress()
+        }
+    }
+    func micGetAddress() {
+        parkVinny.getPermission()
+        parkVinny.speak(message: "Please say the address you wish to park near")
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { speechTimer in
+            self.speechShow.text = "Recording has started"
+            self.parkVinny.listen()
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func timerCountdown() {
+        timeLeft -= 1
+        if (parkVinny.isStarted()) {
+            timeLeft += 1
+        }
+        else {
+            timer.invalidate()
+            timeLeft = 4
+            self.speechShow.isHidden = true
+            self.speechShow.text = ""
+            self.view.sendSubviewToBack(speechShow)
+            speechInput = parkVinny.getFinalMessage()
+            self.micGetOriginAndDestination(message: speechInput!)
+        }
+    }
+    
+    func micGetOriginAndDestination(message: String) {
+        geoCoder.geocodeAddressString(message, completionHandler: {(placemarks, error) -> Void in
+            if ((error) != nil) {
+                print("error", error)
+            }
+            if let placemark = placemarks?.first {
+                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                if let origin = self.mapView.userLocation?.coordinate {
+                    self.calculateRoute(from: origin, to: coordinates)
+                } else {
+                    print("Failed to get user location, make sure to allow location access for this application.")
+                }
+                
+            }
+        })
     }
 
     @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {
