@@ -55,7 +55,21 @@ class ViewController: UIViewController {
             goToDifferentView()
             
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        EmailLogin.layer.masksToBounds = true
+        EmailLogin.layer.borderColor = UIColor.black.cgColor
+        EmailLogin.layer.borderWidth = 1.0
+        PasswordLogin.layer.masksToBounds = true
+        PasswordLogin.layer.borderColor = UIColor.black.cgColor
+        PasswordLogin.layer.borderWidth = 1.0
+        
     }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     
     /*
      This is the function that will be run when the user is trying to login to the app.

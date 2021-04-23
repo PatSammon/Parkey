@@ -22,7 +22,24 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
     {
         super.viewDidLoad()
         setupErrorMessage()
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        licensePlate.layer.masksToBounds = true
+        licensePlate.layer.borderColor = UIColor.black.cgColor
+        licensePlate.layer.borderWidth = 1.0
+        make.layer.masksToBounds = true
+        make.layer.borderColor = UIColor.black.cgColor
+        make.layer.borderWidth = 1.0
+        model.layer.masksToBounds = true
+        model.layer.borderColor = UIColor.black.cgColor
+        model.layer.borderWidth = 1.0
+        size.layer.masksToBounds = true
+        size.layer.borderColor = UIColor.black.cgColor
+        size.layer.borderWidth = 1.0
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     @IBAction func saveCarInfo(_ sender: Any)
