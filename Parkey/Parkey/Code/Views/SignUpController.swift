@@ -26,10 +26,28 @@ class SignUpController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        FName.layer.masksToBounds = true
+        FName.layer.borderColor = UIColor.black.cgColor
+        FName.layer.borderWidth = 1.0
+        LName.layer.masksToBounds = true
+        LName.layer.borderColor = UIColor.black.cgColor
+        LName.layer.borderWidth = 1.0
+        Email.layer.masksToBounds = true
+        Email.layer.borderColor = UIColor.black.cgColor
+        Email.layer.borderWidth = 1.0
+        Password.layer.masksToBounds = true
+        Password.layer.borderColor = UIColor.black.cgColor
+        Password.layer.borderWidth = 1.0
+        Password2.layer.masksToBounds = true
+        Password2.layer.borderColor = UIColor.black.cgColor
+        Password2.layer.borderWidth = 1.0
         // Do any additional setup after loading the view.
     }
-    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
 
     //method to check that the password contains an uppercase Character
     
