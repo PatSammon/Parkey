@@ -164,7 +164,9 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SYMBOL Parkey P1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-rL-8c3">
+
                                 <rect key="frame" x="10" y="140" width="394" height="220"/>
+
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="qM2-Ke-lir"/>
                                 </constraints>
@@ -195,10 +197,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-fe-ET2">
+
                                 <rect key="frame" x="304" y="20" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="jwF-4J-QAR"/>
                                     <constraint firstAttribute="width" constant="100" id="oRx-QS-KsM"/>
+
                                 </constraints>
                                 <state key="normal" image="default_prof_1.png"/>
                                 <connections>
@@ -212,9 +216,11 @@
                             <constraint firstItem="gu5-bk-GK8" firstAttribute="leading" secondItem="RiI-AC-yMf" secondAttribute="leading" constant="20" id="7Vy-4I-Y1G"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="bottom" secondItem="gu5-bk-GK8" secondAttribute="bottom" constant="20" id="8GE-lM-oPb"/>
                             <constraint firstItem="uWK-rL-8c3" firstAttribute="leading" secondItem="RiI-AC-yMf" secondAttribute="leading" constant="10" id="Hg9-Pn-1xR"/>
+
                             <constraint firstItem="gLL-fe-ET2" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="20" id="LqN-fU-Kcz"/>
                             <constraint firstItem="qq2-dY-K9e" firstAttribute="leading" secondItem="gu5-bk-GK8" secondAttribute="trailing" constant="35" id="a2k-HO-UP1"/>
                             <constraint firstItem="uWK-rL-8c3" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="140" id="cvw-W7-cQw"/>
+
                             <constraint firstItem="H6c-82-Xrw" firstAttribute="leading" secondItem="qq2-dY-K9e" secondAttribute="trailing" constant="35" id="epn-bY-RlN"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="trailing" secondItem="H6c-82-Xrw" secondAttribute="trailing" constant="20" id="jUT-5X-uCa"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="trailing" secondItem="uWK-rL-8c3" secondAttribute="trailing" constant="10" id="oP1-LL-YEl"/>
@@ -981,16 +987,19 @@
         <segue reference="g3C-9X-6Cm"/>
         <segue reference="Meu-VS-GBI"/>
         <segue reference="mcB-Dl-v9C"/>
+
         <segue reference="kKN-QJ-N9e"/>
         <segue reference="tR8-E4-76R"/>
         <segue reference="xCv-nS-fTP"/>
     </inferredMetricsTieBreakers>
     <resources>
+
         <image name="Parkey Logo.png" width="800.5" height="800"/>
         <image name="SYMBOL Parkey P1.png" width="1257" height="1281.5"/>
         <image name="account_1.png" width="111" height="36"/>
         <image name="default_prof_1.png" width="174.60000610351562" height="150"/>
         <image name="keychain_1.png" width="138.75" height="45"/>
+
         <image name="mic_1.png" width="42.599998474121094" height="36.599998474121094"/>
         <image name="ranking_1.png" width="138.75" height="45"/>
         <systemColor name="darkTextColor">
