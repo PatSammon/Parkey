@@ -18,7 +18,15 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
     var mapView: NavigationMapView!
     var routeOptions: NavigationRouteOptions?
     var route: MapboxDirections.Route?
+    var parkVinny = Vinny()
     var ParkOut = false
+    var micUsed = false
+    var timer: Timer = Timer()
+    var timeLeft: Int = 4
+    var speechInput: String?
+    var geoCoder = CLGeocoder()
+    @IBOutlet weak var speechShow: UITextView!
+    
     lazy var searchController = MapboxSearchController()
     
     /// `LocationProvider` protocol implementation
@@ -34,7 +42,8 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.showsUserLocation = true
          
-        mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false);   view.addSubview(mapView)
+        //mapView.setCenter(mapboxSFOfficeCoordinate, zoomLevel: 15, animated: false)
+        view.addSubview(mapView)
 
         // Set the map view's delegate
         mapView.delegate = self
@@ -49,6 +58,56 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         // Add a gesture recognizer to the map view
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
         mapView.addGestureRecognizer(longPress)
+        speechShow.isHidden = true
+        speechShow.text = ""
+        if (micUsed == true) {
+            speechShow.isHidden = false
+            view.bringSubviewToFront(speechShow)
+            //micGetOriginAndDestination(message: "715 north avenue, new rochelle ny 10710")
+            micGetAddress()
+        }
+    }
+    func micGetAddress() {
+        parkVinny.getPermission()
+        parkVinny.speak(message: "Please say the address you wish to park near")
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { speechTimer in
+            self.speechShow.text = "Recording has started"
+            self.parkVinny.listen()
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountdown), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func timerCountdown() {
+        timeLeft -= 1
+        if (parkVinny.isStarted()) {
+            timeLeft += 1
+        }
+        else {
+            timer.invalidate()
+            timeLeft = 4
+            self.speechShow.isHidden = true
+            self.speechShow.text = ""
+            self.view.sendSubviewToBack(speechShow)
+            speechInput = parkVinny.getFinalMessage()
+            self.micGetOriginAndDestination(message: speechInput!)
+        }
+    }
+    
+    func micGetOriginAndDestination(message: String) {
+        geoCoder.geocodeAddressString(message, completionHandler: {(placemarks, error) -> Void in
+            if ((error) != nil) {
+                print("error", error)
+            }
+            if let placemark = placemarks?.first {
+                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                if let origin = self.mapView.userLocation?.coordinate {
+                    self.calculateRoute(from: origin, to: coordinates)
+                } else {
+                    print("Failed to get user location, make sure to allow location access for this application.")
+                }
+                
+            }
+        })
     }
 
     @objc func didLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -97,7 +156,27 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
                 // Display callout view on destination annotation
                 if let annotation = strongSelf.mapView.annotations?.first as? MGLPointAnnotation {
                     annotation.title = "Start navigation"
-                    strongSelf.mapView.selectAnnotation(annotation, animated: true, completionHandler: nil)
+                    strongSelf.mapView.selectAnnotation(annotation, animated: true, completionHandler: {
+                        let array = RequestHandler.getParkingSpots()
+                        //iterate through spots and see if there is one with similar coordinates
+                        if array.count != 0{
+                            var spotFound = false
+                            //iterate through Spots and see if there is somethign with coordinates close to it
+                            for item:ParkingSpot in array{
+                                if spotFound{
+                                    break
+                                }
+                                if (item.longitude > (Float(annotation.coordinate.longitude) - 0.0005)) && (item.longitude < (Float(annotation.coordinate.longitude) + 0.0005)){
+                                    //then check latitude
+                                    if (item.latitude > (Float(annotation.coordinate.latitude) - 0.0005)) && (item.latitude < (Float(annotation.coordinate.latitude) + 0.0005)){
+                                        //then delete the parking spot
+                                        RequestHandler.removeParkingSpot(latitude: item.latitude, longitude: item.longitude)
+                                        spotFound = true
+                                    }
+                                }
+                            }
+                        }
+                    })
                 }
             }
         }
@@ -106,7 +185,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         //check to see if the user is Parking in or Parking out
         if ParkOut {
             //store the latitude and longitude of the users location
-            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
+            RequestHandler.addParkingSpot(latitude: Float(userLocation!.latitude), longitude: Float(userLocation!.longitude), date: ParkViewController.getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate()))
         }
     }
 
@@ -188,7 +267,6 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
 
         //make request handler call
         let array = RequestHandler.getParkingSpots()
-
             //iterate through the items
         var counter = 1
         for item:ParkingSpot in array{
@@ -213,7 +291,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
             }
     }
     
-    func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
+    static func getCurrentTimeStampWOMiliseconds(dateToConvert: NSDate) -> String {
         let objDateformat: DateFormatter = DateFormatter()
         objDateformat.dateFormat = "yyyy-MM-dd"
         let strTime: String = objDateformat.string(from: dateToConvert as Date)
@@ -253,6 +331,4 @@ extension ParkViewController: SearchControllerDelegate {
      
     showAnnotation([annotation], isPOI: true)
     }
-
-    }
-
+}
