@@ -164,9 +164,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SYMBOL Parkey P1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uWK-rL-8c3">
-
                                 <rect key="frame" x="10" y="140" width="394" height="220"/>
-
                                 <constraints>
                                     <constraint firstAttribute="height" constant="220" id="qM2-Ke-lir"/>
                                 </constraints>
@@ -197,12 +195,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLL-fe-ET2">
-
                                 <rect key="frame" x="304" y="20" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="jwF-4J-QAR"/>
                                     <constraint firstAttribute="width" constant="100" id="oRx-QS-KsM"/>
-
                                 </constraints>
                                 <state key="normal" image="default_prof_1.png"/>
                                 <connections>
@@ -216,11 +212,9 @@
                             <constraint firstItem="gu5-bk-GK8" firstAttribute="leading" secondItem="RiI-AC-yMf" secondAttribute="leading" constant="20" id="7Vy-4I-Y1G"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="bottom" secondItem="gu5-bk-GK8" secondAttribute="bottom" constant="20" id="8GE-lM-oPb"/>
                             <constraint firstItem="uWK-rL-8c3" firstAttribute="leading" secondItem="RiI-AC-yMf" secondAttribute="leading" constant="10" id="Hg9-Pn-1xR"/>
-
                             <constraint firstItem="gLL-fe-ET2" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="20" id="LqN-fU-Kcz"/>
                             <constraint firstItem="qq2-dY-K9e" firstAttribute="leading" secondItem="gu5-bk-GK8" secondAttribute="trailing" constant="35" id="a2k-HO-UP1"/>
                             <constraint firstItem="uWK-rL-8c3" firstAttribute="top" secondItem="RiI-AC-yMf" secondAttribute="top" constant="140" id="cvw-W7-cQw"/>
-
                             <constraint firstItem="H6c-82-Xrw" firstAttribute="leading" secondItem="qq2-dY-K9e" secondAttribute="trailing" constant="35" id="epn-bY-RlN"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="trailing" secondItem="H6c-82-Xrw" secondAttribute="trailing" constant="20" id="jUT-5X-uCa"/>
                             <constraint firstItem="RiI-AC-yMf" firstAttribute="trailing" secondItem="uWK-rL-8c3" secondAttribute="trailing" constant="10" id="oP1-LL-YEl"/>
@@ -497,15 +491,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_prof_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-bs-Rfj">
-                                <rect key="frame" x="100" y="20" width="214" height="130"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="PyN-2m-UML"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="za1-xn-ACX">
-                                <rect key="frame" x="100" y="180" width="214" height="60"/>
-                                <state key="normal" backgroundImage="account_1.png">
+                                <rect key="frame" x="100" y="224" width="214" height="60"/>
+                                <state key="normal" backgroundImage="account_2.png">
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -513,8 +501,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsY-hh-Dq7">
-                                <rect key="frame" x="100" y="270" width="214" height="60"/>
-                                <state key="normal" backgroundImage="keychain_1.png">
+                                <rect key="frame" x="100" y="314" width="214" height="60"/>
+                                <state key="normal" backgroundImage="keychain_2.png">
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -522,8 +510,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUL-ta-Lle">
-                                <rect key="frame" x="100" y="360" width="214" height="60"/>
-                                <state key="normal" backgroundImage="ranking_1.png">
+                                <rect key="frame" x="100" y="404" width="214" height="60"/>
+                                <state key="normal" backgroundImage="ranking_2.png">
                                     <color key="titleColor" systemColor="darkTextColor"/>
                                 </state>
                                 <connections>
@@ -531,7 +519,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEg-dV-sRO">
-                                <rect key="frame" x="50" y="495" width="314" height="61"/>
+                                <rect key="frame" x="50" y="539" width="314" height="61"/>
                                 <state key="normal" image="mic_1.png"/>
                                 <connections>
                                     <action selector="micClicked:" destination="QVR-Qz-xaR" eventType="touchUpInside" id="gtT-cU-DMX"/>
@@ -544,6 +532,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_prof_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="gyD-bs-Rfj">
+                                <rect key="frame" x="100" y="64" width="214" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="PyN-2m-UML"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b6B-jE-jtH"/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
@@ -554,10 +548,10 @@
                             <constraint firstItem="UEg-dV-sRO" firstAttribute="top" secondItem="TUL-ta-Lle" secondAttribute="bottom" constant="75" id="DFZ-ww-zh3"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="DQY-JR-wCo"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="38X-M9-fz0" secondAttribute="trailing" constant="30" id="DhL-FG-tIe"/>
-                            <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="top" constant="20" id="Jmn-9A-O7l"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="UEg-dV-sRO" secondAttribute="trailing" constant="50" id="Lcm-yj-Epd"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="bottom" secondItem="38X-M9-fz0" secondAttribute="bottom" constant="350" id="NsV-14-G7b"/>
                             <constraint firstItem="38X-M9-fz0" firstAttribute="top" secondItem="rKz-AZ-pCm" secondAttribute="topMargin" constant="150" id="Tjb-1e-NI2"/>
+                            <constraint firstItem="gyD-bs-Rfj" firstAttribute="top" secondItem="b6B-jE-jtH" secondAttribute="top" constant="20" id="Tnz-mL-IlE"/>
                             <constraint firstItem="TUL-ta-Lle" firstAttribute="leading" secondItem="b6B-jE-jtH" secondAttribute="leading" constant="100" id="YvI-RC-Zwj"/>
                             <constraint firstItem="b6B-jE-jtH" firstAttribute="trailing" secondItem="TUL-ta-Lle" secondAttribute="trailing" constant="100" id="eIf-HJ-O6m"/>
                             <constraint firstItem="tsY-hh-Dq7" firstAttribute="top" secondItem="za1-xn-ACX" secondAttribute="bottom" constant="30" id="hQb-r9-V6O"/>
@@ -582,7 +576,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ul6-xF-hbr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2883" y="872"/>
+            <point key="canvasLocation" x="2882.608695652174" y="871.875"/>
         </scene>
         <!--Rewards Controller-->
         <scene sceneID="Dx8-p5-nHv">
@@ -987,21 +981,18 @@
         <segue reference="g3C-9X-6Cm"/>
         <segue reference="Meu-VS-GBI"/>
         <segue reference="mcB-Dl-v9C"/>
-
-        <segue reference="kKN-QJ-N9e"/>
+        <segue reference="dxf-cy-JU4"/>
         <segue reference="tR8-E4-76R"/>
         <segue reference="xCv-nS-fTP"/>
     </inferredMetricsTieBreakers>
     <resources>
-
         <image name="Parkey Logo.png" width="800.5" height="800"/>
         <image name="SYMBOL Parkey P1.png" width="1257" height="1281.5"/>
-        <image name="account_1.png" width="111" height="36"/>
+        <image name="account_2.png" width="111" height="36"/>
         <image name="default_prof_1.png" width="174.60000610351562" height="150"/>
-        <image name="keychain_1.png" width="138.75" height="45"/>
-
+        <image name="keychain_2.png" width="138.75" height="45"/>
         <image name="mic_1.png" width="42.599998474121094" height="36.599998474121094"/>
-        <image name="ranking_1.png" width="138.75" height="45"/>
+        <image name="ranking_2.png" width="138.75" height="45"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
