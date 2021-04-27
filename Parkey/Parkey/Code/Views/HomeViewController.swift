@@ -13,6 +13,7 @@ import CoreLocation
 class HomeViewController: UIViewController {
     
     var parkout = false
+    var mic = false
     
     @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
@@ -21,7 +22,12 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "toMapView", sender: self)
     }
     //@IBOutlet weak var accountLabel: UIImageView!
-    //@IBOutlet weak var mic: UIImageView!
+    @IBAction func micPressed(_ sender: UIButton) {
+        mic = true
+        performSegue(withIdentifier: "toMapView", sender: self)
+    }
+    
+    
     //@IBOutlet weak var logo: UIImageView!
     //@IBOutlet weak var ParKey: UIImageView!
     //@IBOutlet weak var bottomLabel: UILabel!
@@ -56,6 +62,7 @@ class HomeViewController: UIViewController {
         
         }
     }
+    
     
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
@@ -93,6 +100,7 @@ extension HomeViewController: CLLocationManagerDelegate{
         if segue.identifier == "toMapView"{
             let ParkViewController:ParkViewController = segue.destination as! ParkViewController
             ParkViewController.ParkOut = parkout
+            ParkViewController.micUsed = mic
         }
     }
 }
