@@ -39,6 +39,10 @@ class LeaderboardController: UIViewController, UITableViewDelegate, UITableViewD
         {
             userRank.text = "Rank - #\(indexPath.row + 1)"
         }
+        else
+        {
+            userRank.text = "Rank - New"
+        }
         
         if(indexPath.row % 2 == 0)
         {
