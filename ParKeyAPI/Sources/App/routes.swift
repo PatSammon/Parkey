@@ -27,7 +27,7 @@ func routes(_ app: Application) throws
     app.get("leaderboard")
     {
         req -> EventLoopFuture<[User]> in
-        return User.query(on: req.db).sort(\.$totalPoints, .descending).all()
+        return User.query(on: req.db).sort(\.$totalPoints, .descending).filter(\.$totalPoints != 0).all()
     }
     
     app.post("newPaymentInfo")
