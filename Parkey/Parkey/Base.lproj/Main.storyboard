@@ -225,6 +225,9 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="4k6-c0-nNu"/>
                     <connections>
+                        <outlet property="MicButton" destination="qq2-dY-K9e" id="CEl-ic-otp"/>
+                        <outlet property="ParkIn" destination="gu5-bk-GK8" id="bRB-IC-mVr"/>
+                        <outlet property="ParkOut" destination="H6c-82-Xrw" id="zfQ-H9-caZ"/>
                         <segue destination="QVR-Qz-xaR" kind="show" identifier="AccountSegue" id="kZD-b0-yZh"/>
                         <segue destination="EgS-Vw-M2d" kind="show" identifier="toMapView" id="dIT-dj-d5E"/>
                     </connections>
