@@ -15,6 +15,14 @@ class HomeViewController: UIViewController {
     var parkout = false
     var mic = false
     
+    @IBOutlet weak var ParkIn: UIButton!
+    
+    @IBOutlet weak var MicButton: UIButton!
+    
+    @IBOutlet weak var ParkOut: UIButton!
+    
+    
+    
     @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
@@ -46,6 +54,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         CheckLocationServices()
+        ParkIn.titleLabel?.numberOfLines = 2
+        ParkIn.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        ParkOut.titleLabel?.numberOfLines = 2
+        ParkOut.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
     }
     
     func setupLocationManager() {

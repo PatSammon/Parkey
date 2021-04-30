@@ -109,13 +109,22 @@ class SettingsController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        view.backgroundColor = .cyan
+        view.backgroundColor = UIColorFromHex(rgbValue: 0xB2DE00, alpha: 1)
         let label = UILabel(frame: CGRect(x: 20, y: 0, width: view.frame.width, height: 50))
         label.text = Sections.init(rawValue: section)?.description
         label.font = UIFont.boldSystemFont(ofSize: 20)
         view.addSubview(label)
         return view
     }
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = Sections(rawValue: section) else { return 0}
