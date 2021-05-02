@@ -1,10 +1,13 @@
 import Foundation
 import UIKit
+import CryptoSwift
 	
 class RequestHandler
 {
     static func removeReward(rewardId: String)
     {
+        //http://127.0.0.1:8080/removeReward
+        
         var done = false
         let url = URL(string: "https://parkey.herokuapp.com/removeReward")
         var request = URLRequest(url: url!)
@@ -54,6 +57,7 @@ class RequestHandler
         var done = false
         var returnArray: [User] = []
         
+        //http://127.0.0.1:8080/leaderboard
         let url = URL(string: "https://parkey.herokuapp.com/leaderboard")
         var request = URLRequest(url: url!)
         
@@ -86,7 +90,9 @@ class RequestHandler
     
     static func addReward(userId: String, name: String, cost: Int)
     {
+        //http://127.0.0.1:8080/newReward
         let url = URL(string: "https://parkey.herokuapp.com/newReward")
+
         let encoder = JSONEncoder()
 
         var request = URLRequest(url: url!)
@@ -104,6 +110,8 @@ class RequestHandler
     
     static func addPlace(name: String, cost: Int, coordinates: [Float])
     {
+
+        //http://127.0.0.1:8080/newPlace
         let url = URL(string: "https://parkey.herokuapp.com/newPlace")
         let encoder = JSONEncoder()
 
@@ -121,6 +129,8 @@ class RequestHandler
     }
     
     static func addParkingSpot(latitude: Float, longitude: Float, date: String){
+        
+        //http://127.0.0.1:8080/newParkingSpot
         let url = URL(string: "https://parkey.herokuapp.com/newParkingSpot")
         let encoder = JSONEncoder()
         
@@ -142,8 +152,8 @@ class RequestHandler
         var done = false
         var returnArray: [Vehicle] = []
         
-        
-        let url = URL(string: "http://127.0.0.1:8080/vehicle" )
+        //http://127.0.0.1:8080/vehicle
+        let url = URL(string: "https://parkey.herokuapp.com/vehicle")
         var request = URLRequest(url: url!)
         
         request.httpMethod = "GET"
@@ -177,27 +187,38 @@ class RequestHandler
     
     static func addVehicle(userId: String, licensePlate: String, make: String, model: String, size: Int)
     {
-        let url = URL(string: "http://127.0.0.1:8080/newVehicle")
+        //http://127.0.0.1:8080/newVehicle
+        let url = URL(string: "https://parkey.herokuapp.com/newVehicle")
         let encoder = JSONEncoder()
 
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
-        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, make: make, model: model, size: size)
-        request.httpBody = try? encoder.encode(newVehicle)
-                
-        URLSession.shared.dataTask(with: request)
-        {(data, response, error) in
-                    
-        }.resume()
+        let byteText: Array<UInt8> = licensePlate.bytes
+        let iv = AES.randomIV (AES.blockSize)
+                do {
+                    let aes = try AES (key: [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00], blockMode: CBC (iv: iv))
+                    let encrypted = try aes.encrypt (byteText)
+                    //let strIV = NSData (bytes: iv, length: iv.count) .base64EncodedString (options: .lineLength64Characters)
+                    let strEnc = NSData (bytes: encrypted, length: encrypted.count) .base64EncodedString (options: .lineLength64Characters)
+                    print(strEnc)
+                    let newVehicle = Vehicle(userId: userId, licensePlate: strEnc, make: make, model: model, size: size)
+                    request.httpBody = try? encoder.encode(newVehicle)
+                            
+                    URLSession.shared.dataTask(with: request)
+                    {(data, response, error) in
+                                
+                    }.resume()
+                } catch {
+                }
     }
     
     
     static func removeVehicle(licensePlate: String, make: String, model: String, size: Int)
     {
         var done = false
-        let url = URL(string: "http://127.0.0.1:8080/removeVehicle")
+        //http://127.0.0.1:8080/removeVehicle
+        let url = URL(string: "https://parkey.herokuapp.com/removeVehicle")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         
@@ -221,9 +242,10 @@ class RequestHandler
     {
         var done = false
         var returnArray: [Reward] = []
-        let url = URL(string: "https://parkey.herokuapp.com/userRewards")!
         
-    
+        //http://127.0.0.1:8080/userRewards
+        let url = URL(string: "https://parkey.herokuapp.com/userRewards")!
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         
@@ -260,8 +282,9 @@ class RequestHandler
     static func getPlaces() -> [Place]{
         var done = false
         var returnArray: [Place] = []
+
+        //http://127.0.0.1:8080/places
         let url = URL(string: "https://parkey.herokuapp.com/places")!
-            
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -294,9 +317,10 @@ class RequestHandler
     static func getParkingSpots() -> [ParkingSpot]{
         var done = false
         var returnArray: [ParkingSpot] = []
+
+        //http://127.0.0.1:8080/parkingSpots
         let url = URL(string: "https://parkey.herokuapp.com/parkingSpots")!
-            
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request)
@@ -327,7 +351,10 @@ class RequestHandler
     
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
+        
+        //http://127.0.0.1:8080/user/signup
         let url = URL(string: "https://parkey.herokuapp.com/user/signup")!
+        
         //create the encoder that will be used
         let encoder = JSONEncoder()
         
@@ -357,7 +384,10 @@ class RequestHandler
     
     static func sign_in(userName: String, password: String, _ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
+        
+        //http://127.0.0.1:8080/user/login
         let url = URL(string: "https://parkey.herokuapp.com/user/login")!
+
         //create the encoder that will be used
         let encoder = JSONEncoder()
         //the data that you are sending over
@@ -397,8 +427,10 @@ class RequestHandler
      */
     static func addPoints(userName: String, password: String, points: Int,_ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database
+
+        //http://127.0.0.1:8080/user/addPoints
         let url = URL(string: "https://parkey.herokuapp.com/user/addPoints")!
-        
+
         //the data that you are sending over
         let json = ["username":userName,"password":password]
         //serialie the json data
@@ -437,8 +469,10 @@ class RequestHandler
      */
     static func spendPoints(userName: String, password: String, points: Int,_ completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database
+
+        //http://127.0.0.1:8080/user/spendPoints
         let url = URL(string: "https://parkey.herokuapp.com/user/spendPoints")!
-        
+
         //the data that you are sending over
         let json = ["username":userName,"password":password]
         //serialie the json data
@@ -474,6 +508,8 @@ class RequestHandler
     //method that will be used to get the users available and total points
     static func getPoints(userName: String, password: String,_ completion: @escaping (Result<(Data, User.points), Error>) -> Void){
         //grab the URL for the database
+        
+        //http://127.0.0.1:8080/user/getPoints
         let url = URL(string: "https://parkey.herokuapp.com/user/getPoints")!
         
         //the data that you are sending over
