@@ -1,4 +1,5 @@
 PODS:
+  - CryptoSwift (1.3.8)
   - Mapbox-iOS-SDK (5.9.0):
     - MapboxMobileEvents (= 0.10.2)
   - MapboxAccounts (2.2.0)
@@ -31,11 +32,13 @@ PODS:
   - Turf (0.3.0)
 
 DEPENDENCIES:
+  - CryptoSwift (~> 1.3.8)
   - MapboxNavigation (~> 0.19)
   - MapboxSearchUI (< 2.0, >= 1.0.0-beta.4)
 
 SPEC REPOS:
   trunk:
+    - CryptoSwift
     - Mapbox-iOS-SDK
     - MapboxAccounts
     - MapboxCommon
@@ -52,6 +55,7 @@ SPEC REPOS:
     - Turf
 
 SPEC CHECKSUMS:
+  CryptoSwift: 01b0f0cba1d5c212e5a335ff6c054fb75a204f00
   Mapbox-iOS-SDK: a5915700ec84bc1a7f8b3e746d474789e35b7956
   MapboxAccounts: f9716ba2cc66013e44ef93e0e16cfa1049f3aeec
   MapboxCommon: 1c856a49ca7e8acda99fee5f27ce2e7a05478a34
@@ -67,6 +71,6 @@ SPEC CHECKSUMS:
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: f160ca793e0ce5867665c9e29c03029f5fb86f19
+PODFILE CHECKSUM: 363e65ced9bd03d411a885e3fd0a917772c01724
 
 COCOAPODS: 1.10.1
