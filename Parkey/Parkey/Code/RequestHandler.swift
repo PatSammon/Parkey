@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import CryptoSwift
 	
 class RequestHandler
 {
@@ -193,14 +194,23 @@ class RequestHandler
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                
-        let newVehicle = Vehicle(userId: userId, licensePlate: licensePlate, make: make, model: model, size: size)
-        request.httpBody = try? encoder.encode(newVehicle)
-                
-        URLSession.shared.dataTask(with: request)
-        {(data, response, error) in
-                    
-        }.resume()
+        let byteText: Array<UInt8> = licensePlate.bytes
+        let iv = AES.randomIV (AES.blockSize)
+                do {
+                    let aes = try AES (key: [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00], blockMode: CBC (iv: iv))
+                    let encrypted = try aes.encrypt (byteText)
+                    //let strIV = NSData (bytes: iv, length: iv.count) .base64EncodedString (options: .lineLength64Characters)
+                    let strEnc = NSData (bytes: encrypted, length: encrypted.count) .base64EncodedString (options: .lineLength64Characters)
+                    print(strEnc)
+                    let newVehicle = Vehicle(userId: userId, licensePlate: strEnc, make: make, model: model, size: size)
+                    request.httpBody = try? encoder.encode(newVehicle)
+                            
+                    URLSession.shared.dataTask(with: request)
+                    {(data, response, error) in
+                                
+                    }.resume()
+                } catch {
+                }
     }
     
     
