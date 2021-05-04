@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Parkey would like to use microphone for vinny</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Parkey Would like to access voice recognition for Vinny</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please allow access to Touch/Face ID </string>
 	<key>UIBackgroundModes</key>
