@@ -9,7 +9,7 @@ class RequestHandler
         //http://127.0.0.1:8080/removeReward
         
         var done = false
-        let url = URL(string: "https://parkey.herokuapp.com/removeReward")
+        let url = URL(string: "https://parkeyny.herokuapp.com/removeReward")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -32,7 +32,7 @@ class RequestHandler
     static func removeParkingSpot(latitude: Float,longitude: Float)
     {
         var done = false
-        let url = URL(string: "https://parkey.herokuapp.com/removeParkingSpot")
+        let url = URL(string: "https://parkeyny.herokuapp.com/removeParkingSpot")
         var request = URLRequest(url: url!)
         let postString = "latitude=\(latitude)&longitude=\(longitude)";
         request.httpMethod = "POST"
@@ -58,7 +58,7 @@ class RequestHandler
         var returnArray: [User] = []
         
         //http://127.0.0.1:8080/leaderboard
-        let url = URL(string: "https://parkey.herokuapp.com/leaderboard")
+        let url = URL(string: "https://parkeyny.herokuapp.com/leaderboard")
         var request = URLRequest(url: url!)
         
         request.httpMethod = "GET"
@@ -91,7 +91,7 @@ class RequestHandler
     static func addReward(userId: String, name: String, cost: Int)
     {
         //http://127.0.0.1:8080/newReward
-        let url = URL(string: "https://parkey.herokuapp.com/newReward")
+        let url = URL(string: "https://parkeyny.herokuapp.com/newReward")
 
         let encoder = JSONEncoder()
 
@@ -112,7 +112,7 @@ class RequestHandler
     {
 
         //http://127.0.0.1:8080/newPlace
-        let url = URL(string: "https://parkey.herokuapp.com/newPlace")
+        let url = URL(string: "https://parkeyny.herokuapp.com/newPlace")
         let encoder = JSONEncoder()
 
         var request = URLRequest(url: url!)
@@ -131,7 +131,7 @@ class RequestHandler
     static func addParkingSpot(latitude: Float, longitude: Float, date: String){
         
         //http://127.0.0.1:8080/newParkingSpot
-        let url = URL(string: "https://parkey.herokuapp.com/newParkingSpot")
+        let url = URL(string: "https://parkeyny.herokuapp.com/newParkingSpot")
         let encoder = JSONEncoder()
         
         var request = URLRequest(url: url!)
@@ -153,7 +153,7 @@ class RequestHandler
         var returnArray: [Vehicle] = []
         
         //http://127.0.0.1:8080/vehicle
-        let url = URL(string: "https://parkey.herokuapp.com/vehicle")
+        let url = URL(string: "https://parkeyny.herokuapp.com/vehicle")
         var request = URLRequest(url: url!)
         
         request.httpMethod = "GET"
@@ -188,7 +188,7 @@ class RequestHandler
     static func addVehicle(userId: String, licensePlate: String, make: String, model: String, size: Int)
     {
         //http://127.0.0.1:8080/newVehicle
-        let url = URL(string: "https://parkey.herokuapp.com/newVehicle")
+        let url = URL(string: "https://parkeyny.herokuapp.com/newVehicle")
         let encoder = JSONEncoder()
 
         var request = URLRequest(url: url!)
@@ -218,7 +218,7 @@ class RequestHandler
     {
         var done = false
         //http://127.0.0.1:8080/removeVehicle
-        let url = URL(string: "https://parkey.herokuapp.com/removeVehicle")
+        let url = URL(string: "https://parkeyny.herokuapp.com/removeVehicle")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         
@@ -244,7 +244,7 @@ class RequestHandler
         var returnArray: [Reward] = []
         
         //http://127.0.0.1:8080/userRewards
-        let url = URL(string: "https://parkey.herokuapp.com/userRewards")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/userRewards")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -284,7 +284,7 @@ class RequestHandler
         var returnArray: [Place] = []
 
         //http://127.0.0.1:8080/places
-        let url = URL(string: "https://parkey.herokuapp.com/places")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/places")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -319,7 +319,7 @@ class RequestHandler
         var returnArray: [ParkingSpot] = []
 
         //http://127.0.0.1:8080/parkingSpots
-        let url = URL(string: "https://parkey.herokuapp.com/parkingSpots")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/parkingSpots")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -353,7 +353,7 @@ class RequestHandler
         //grab the URL for the database (currently set to local)
         
         //http://127.0.0.1:8080/user/signup
-        let url = URL(string: "https://parkey.herokuapp.com/user/signup")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/user/signup")!
         
         //create the encoder that will be used
         let encoder = JSONEncoder()
@@ -386,7 +386,7 @@ class RequestHandler
         //grab the URL for the database (currently set to local)
         
         //http://127.0.0.1:8080/user/login
-        let url = URL(string: "https://parkey.herokuapp.com/user/login")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/user/login")!
 
         //create the encoder that will be used
         let encoder = JSONEncoder()
@@ -429,7 +429,7 @@ class RequestHandler
         //grab the URL for the database
 
         //http://127.0.0.1:8080/user/addPoints
-        let url = URL(string: "https://parkey.herokuapp.com/user/addPoints")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/user/addPoints")!
 
         //the data that you are sending over
         let json = ["username":userName,"password":password]
@@ -471,7 +471,7 @@ class RequestHandler
         //grab the URL for the database
 
         //http://127.0.0.1:8080/user/spendPoints
-        let url = URL(string: "https://parkey.herokuapp.com/user/spendPoints")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/user/spendPoints")!
 
         //the data that you are sending over
         let json = ["username":userName,"password":password]
@@ -510,7 +510,7 @@ class RequestHandler
         //grab the URL for the database
         
         //http://127.0.0.1:8080/user/getPoints
-        let url = URL(string: "https://parkey.herokuapp.com/user/getPoints")!
+        let url = URL(string: "https://parkeyny.herokuapp.com/user/getPoints")!
         
         //the data that you are sending over
         let json = ["username":userName,"password":password]
