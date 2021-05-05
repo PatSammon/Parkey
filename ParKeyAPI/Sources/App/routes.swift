@@ -18,20 +18,13 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
-    app.post("getVehicle")
-    {
-        req -> EventLoopFuture<[Vehicle]> in
-      
+    app.post("userVehicles")
+    { req -> EventLoopFuture<[Vehicle]> in
+        
         let userId = String(req.body.string!.dropFirst(7))
-    
+        
         return Vehicle.query(on: req.db).filter(\.$userId == userId).all()
     }
-    
-    /*app.get("leaderboard")
-    {
-        req -> EventLoopFuture<[User]> in
-        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
-    }*/
     
     app.get("leaderboard")
     {
@@ -50,15 +43,7 @@ func routes(_ app: Application) throws
         let vehicle = try req.content.decode(Vehicle.self)
         return vehicle.create(on: req.db).map{vehicle}
     }
-    //Laydon
     
- //   app.get("getVehicle")
-   // {
-    //    req -> EventLoopFuture<[User]> in
-    //    return //User.query(on: req.db).sort(<#T##field: KeyPath<User, QueryableProperty>##KeyPath<User, QueryableProperty>#>)
-  //  }
-    
-
     app.post("newReward")
     { req -> EventLoopFuture<Reward> in
         let reward = try req.content.decode(Reward.self)
@@ -94,8 +79,11 @@ func routes(_ app: Application) throws
     
     app.post("removeVehicle")
     { req -> EventLoopFuture<HTTPStatus> in
-        let vehicleId = ObjectId(String(req.body.string!.dropFirst(1)))
+        
+        let vehicleId = ObjectId(String(req.body.string!.dropFirst(10)))
+        
         let vehicle = Vehicle.query(on: req.db).filter(\.$id == vehicleId!)
+        
         return vehicle.delete().transform(to: HTTPStatus.ok)
     }
     

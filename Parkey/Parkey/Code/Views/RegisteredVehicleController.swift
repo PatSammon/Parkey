@@ -1,11 +1,3 @@
-//
-//  RegisteredVehicleController.swift
-//  Parkey
-//
-//  Created by Laydon Owens on 3/27/21.
-//  Copyright © 2021 iona. All rights reserved.
-//
-
 import UIKit
 
 class RegisteredVehicleController: UIViewController, UITextFieldDelegate
@@ -16,7 +8,6 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var model: UITextField!
     @IBOutlet weak var size: UITextField!
     @IBOutlet weak var ErrorMessage: UILabel!
-    
     
     override func viewDidLoad()
     {
@@ -36,6 +27,14 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         size.layer.masksToBounds = true	
         size.layer.borderColor = UIColor.black.cgColor
         size.layer.borderWidth = 1.0
+        licensePlate.attributedPlaceholder =
+            NSAttributedString(string: "License Plate", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        make.attributedPlaceholder =
+            NSAttributedString(string: "Make", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        model.attributedPlaceholder =
+            NSAttributedString(string: "Model", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        size.attributedPlaceholder =
+            NSAttributedString(string: "Size", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -52,10 +51,15 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         }
         
         RequestHandler.addVehicle(userId: UserDefaults.standard.value(forKey: "UserID") as! String, licensePlate: licensePlate.text!, make: make.text!, model: model.text!, size: Int(size.text!) ?? 0)
-       
-       
         
+        performSegue(withIdentifier: "new2Home", sender: self)
         
+        /*if let navController =  self.navigationController
+        {
+            navController.popViewController(animated: true)
+        }*/
+        
+       
         if !ErrorMessage.isHidden
         {
             ErrorMessage.isHidden=true
