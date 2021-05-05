@@ -8,7 +8,7 @@ public func configure(_ app: Application) throws {
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
     try app.databases.use(.mongo(
-        connectionString: Environment.get("DATABASE_URL") ?? "mongodb+srv://PSammon:Sammon10@cluster0.ztbmp.mongodb.net/parkey?retryWrites=true&w=majority"
+        connectionString: Environment.get("DATABASE_URL") ?? "mongodb+srv://Lisbeth:ParKey2021$@cluster0.ngepl.mongodb.net/parkey?retryWrites=true&w=majority"
     ), as: .mongo)
     
     app.migrations.add(UserFunctionality())

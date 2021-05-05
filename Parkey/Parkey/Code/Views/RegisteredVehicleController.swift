@@ -33,7 +33,7 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         model.layer.masksToBounds = true
         model.layer.borderColor = UIColor.black.cgColor
         model.layer.borderWidth = 1.0
-        size.layer.masksToBounds = true
+        size.layer.masksToBounds = true	
         size.layer.borderColor = UIColor.black.cgColor
         size.layer.borderWidth = 1.0
     }

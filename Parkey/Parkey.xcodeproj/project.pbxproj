@@ -53,6 +53,7 @@
 		ABC0971926388C30006060EC /* keychain_2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABC0971826388C30006060EC /* keychain_2.png */; };
 		ABC0971D26388C5F006060EC /* account_2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABC0971C26388C5F006060EC /* account_2.png */; };
 		ABC0972026388C6E006060EC /* ranking_2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABC0971F26388C6E006060EC /* ranking_2.png */; };
+		ABC8BC2F2641052D003ECCF0 /* mic_2.png in Resources */ = {isa = PBXBuildFile; fileRef = ABC8BC2E2641052D003ECCF0 /* mic_2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		ABC0971826388C30006060EC /* keychain_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keychain_2.png; sourceTree = "<group>"; };
 		ABC0971C26388C5F006060EC /* account_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_2.png; sourceTree = "<group>"; };
 		ABC0971F26388C6E006060EC /* ranking_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranking_2.png; sourceTree = "<group>"; };
+		ABC8BC2E2641052D003ECCF0 /* mic_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				ABC8BC2E2641052D003ECCF0 /* mic_2.png */,
 				ABC0971F26388C6E006060EC /* ranking_2.png */,
 				ABC0971C26388C5F006060EC /* account_2.png */,
 				ABC0971826388C30006060EC /* keychain_2.png */,
@@ -302,6 +305,7 @@
 			files = (
 				107734602614AAD80037B58E /* car.png in Resources */,
 				823E5DF725CF0BFF00F5C0E7 /* logo.png in Resources */,
+				ABC8BC2F2641052D003ECCF0 /* mic_2.png in Resources */,
 				8280F11E25D6EF2700306867 /* logowords.png in Resources */,
 				3BAE822A25CB257500C1E7DD /* LaunchScreen.storyboard in Resources */,
 				ABC0972026388C6E006060EC /* ranking_2.png in Resources */,
@@ -544,7 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JNY7HS98RZ;
+				DEVELOPMENT_TEAM = SU5ARJFD25;
 				INFOPLIST_FILE = Parkey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -563,7 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JNY7HS98RZ;
+				DEVELOPMENT_TEAM = SU5ARJFD25;
 				INFOPLIST_FILE = Parkey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
