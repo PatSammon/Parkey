@@ -15,6 +15,18 @@ class HomeViewController: UIViewController {
     var parkout = false
     var mic = false
     
+    @IBOutlet weak var ParkIn: UIButton!
+    
+    @IBOutlet weak var MicButton: UIButton!
+    
+    @IBOutlet weak var ParkOut: UIButton!
+    
+    @IBOutlet weak var RankingNum: UILabel!
+    
+    @IBOutlet weak var MicHelp: UILabel!
+    
+    
+    
     @IBOutlet weak var AccountIcon: UIImageView!
     //@IBOutlet weak var label: UILabel!
     @IBAction func ParkOut(_ sender: UIButton) {
@@ -46,6 +58,25 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         CheckLocationServices()
+        ParkIn.titleLabel?.numberOfLines = 2
+        ParkIn.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        ParkOut.titleLabel?.numberOfLines = 2
+        ParkOut.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        
+        let boldText1 = "near.."
+        let attrs = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 30)]
+        let attributedString = NSMutableAttributedString(string:boldText1, attributes:attrs)
+        let normalText1 = "I am parking in "
+        let normalString = NSMutableAttributedString(string:normalText1)
+        let boldText2 = "from.."
+        let normalText2 = "\nI am parking out "
+        let attributedString2 = NSMutableAttributedString(string:boldText2, attributes: attrs)
+        let normalString2 = NSMutableAttributedString(string: normalText2)
+        
+        normalString.append(attributedString)
+        normalString.append(normalString2)
+        normalString.append(attributedString2)
+        MicHelp.attributedText = normalString
     }
     
     func setupLocationManager() {
