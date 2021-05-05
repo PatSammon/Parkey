@@ -36,6 +36,14 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         size.layer.masksToBounds = true	
         size.layer.borderColor = UIColor.black.cgColor
         size.layer.borderWidth = 1.0
+        licensePlate.attributedPlaceholder =
+            NSAttributedString(string: "License Plate", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        make.attributedPlaceholder =
+            NSAttributedString(string: "Make", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        model.attributedPlaceholder =
+            NSAttributedString(string: "Model", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        size.attributedPlaceholder =
+            NSAttributedString(string: "Size", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {

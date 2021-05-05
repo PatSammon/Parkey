@@ -77,6 +77,8 @@ class HomeViewController: UIViewController {
         normalString.append(normalString2)
         normalString.append(attributedString2)
         MicHelp.attributedText = normalString
+        
+        RankingNum.isHidden = true
     }
     
     func setupLocationManager() {
