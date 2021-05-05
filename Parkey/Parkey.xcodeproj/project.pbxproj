@@ -43,6 +43,7 @@
 		AB24C4FE262DE87B0068382F /* Parkey Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = AB24C4FD262DE87B0068382F /* Parkey Logo.png */; };
 		AB24C501262DE8950068382F /* SYMBOL Parkey P1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB24C500262DE8950068382F /* SYMBOL Parkey P1.png */; };
 		AB24C50C262E0B5C0068382F /* default_prof_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB24C50B262E0B5C0068382F /* default_prof_1.png */; };
+		AB24CC62264320910074DF54 /* Parkey green.png in Resources */ = {isa = PBXBuildFile; fileRef = AB24CC61264320910074DF54 /* Parkey green.png */; };
 		AB25AF0325D9CB4600F0EB5B /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0125D9CB4600F0EB5B /* mic_1.png */; };
 		AB25AF0725D9CB5300F0EB5B /* park_out.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0425D9CB5300F0EB5B /* park_out.png */; };
 		AB25AF0925D9CB5300F0EB5B /* park_in.png in Resources */ = {isa = PBXBuildFile; fileRef = AB25AF0625D9CB5300F0EB5B /* park_in.png */; };
@@ -97,6 +98,7 @@
 		AB24C4FD262DE87B0068382F /* Parkey Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parkey Logo.png"; sourceTree = "<group>"; };
 		AB24C500262DE8950068382F /* SYMBOL Parkey P1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SYMBOL Parkey P1.png"; sourceTree = "<group>"; };
 		AB24C50B262E0B5C0068382F /* default_prof_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_prof_1.png; sourceTree = "<group>"; };
+		AB24CC61264320910074DF54 /* Parkey green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Parkey green.png"; sourceTree = "<group>"; };
 		AB25AF0125D9CB4600F0EB5B /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
 		AB25AF0425D9CB5300F0EB5B /* park_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_out.png; sourceTree = "<group>"; };
 		AB25AF0625D9CB5300F0EB5B /* park_in.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = park_in.png; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		823E5DF525CF0A7000F5C0E7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AB24CC61264320910074DF54 /* Parkey green.png */,
 				ABC8BC2E2641052D003ECCF0 /* mic_2.png */,
 				ABC0971F26388C6E006060EC /* ranking_2.png */,
 				ABC0971C26388C5F006060EC /* account_2.png */,
@@ -320,6 +323,7 @@
 				3B4B79CA2608C94700DBAD5E /* circle.png in Resources */,
 				ABC0971926388C30006060EC /* keychain_2.png in Resources */,
 				ABC0971D26388C5F006060EC /* account_2.png in Resources */,
+				AB24CC62264320910074DF54 /* Parkey green.png in Resources */,
 				3B56DB7325F3CD8100F180B2 /* food.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

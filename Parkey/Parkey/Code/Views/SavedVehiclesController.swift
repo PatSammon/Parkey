@@ -45,6 +45,7 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
         
         if  editingStyle == UITableViewCell.EditingStyle.delete
         {
+            tableView.deleteRows(at: [indexPath], with: .fade)
             RequestHandler.removeVehicle(vehicleId: vehicle.id!)
             self.userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
             tableView.reloadData()
