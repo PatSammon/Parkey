@@ -1,11 +1,3 @@
-//
-//  RegisteredVehicleController.swift
-//  Parkey
-//
-//  Created by Laydon Owens on 3/27/21.
-//  Copyright © 2021 iona. All rights reserved.
-//
-
 import UIKit
 
 class RegisteredVehicleController: UIViewController, UITextFieldDelegate
