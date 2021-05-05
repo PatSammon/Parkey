@@ -19,7 +19,8 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        registeredVehicles = RequestHandler.getVehicle()
+        registeredVehicles = RequestHandler.getVehicle(userId: UserDefaults.standard.string(forKey: "UserID") as! String)
+       //registeredVehicles = RequestHandler.getVehicle()
         
     }
     
@@ -62,13 +63,14 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
                 
             }))
            
-            RequestHandler.removeVehicle(vehicleID: vehicles.id!)
+            RequestHandler.removeVehicle(vehicleId: vehicles.id!)
             
             //  tableView.deleteRows(at: [indexPath], with: .fade)
                        
                       
-            self.registeredVehicles = RequestHandler.getVehicle()
-                       
+            self.registeredVehicles = RequestHandler.getVehicle(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
+           // self.registeredVehicles = RequestHandler.getVehicle()
+                
             tableView.reloadData()
                        
             
