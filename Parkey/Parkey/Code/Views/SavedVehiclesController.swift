@@ -1,38 +1,32 @@
-//
-//  SavedVehiclesController.swift
-//  Parkey
-//
-//  Created by Laydon Owens on 3/27/21.
-//  Copyright © 2021 iona. All rights reserved.
-//
-
 import UIKit
 
-class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableViewDataSource
+{
 
     @IBOutlet weak var tableView: UITableView!
     
-    var registeredVehicles = [Vehicle]()
+    var userVehicles = [Vehicle]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        registeredVehicles = RequestHandler.getVehicle()
+        userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
+
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return registeredVehicles.count
+        return userVehicles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = UITableViewCell()
         
-        let vehicle = registeredVehicles[indexPath.row]
+        let vehicle = userVehicles[indexPath.row]
         
         cell.textLabel?.text = vehicle.make + "" + vehicle.model + "" + String(vehicle.size)
         cell.textLabel?.font = UIFont(name:"Helvetica-Bold", size: 20)
@@ -47,43 +41,22 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView,  commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-
-        let vehicles = registeredVehicles[indexPath.row]
+        let vehicle = userVehicles[indexPath.row]
+        
         if  editingStyle == UITableViewCell.EditingStyle.delete
         {
-            let alert = UIAlertController(title: "Delete Vehicle", message: "Are you sure you would like to delete this vehicle \(vehicles.make) \(vehicles.model)?", preferredStyle: UIAlertController.Style.alert)
-            
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in alert.dismiss(animated: true, completion: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in alert.dismiss(animated: true, completion: nil)
-                print("No")
-                
-                
-            }))
-           
-            RequestHandler.removeVehicle(licensePlate: vehicles.licensePlate, make: vehicles.make, model: vehicles.model, size: vehicles.size)
-            //tableView.deleteRows(at: [indexPath], with: .fade)
-                       
-                      
-            self.registeredVehicles = RequestHandler.getVehicle()
-                       
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            RequestHandler.removeVehicle(vehicleId: vehicle.id!)
+            self.userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
             tableView.reloadData()
-                       
-            
-            self.present(alert, animated: true)
-            
-            
         }
         
     }
     
-    
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-       
-        performSegue(withIdentifier: "EditVehicleSegue", sender: indexPath);
+        performSegue(withIdentifier: "EditVehicleSegue", sender: indexPath)
     }
 }
 

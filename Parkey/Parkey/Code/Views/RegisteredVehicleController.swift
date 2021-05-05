@@ -1,11 +1,3 @@
-//
-//  RegisteredVehicleController.swift
-//  Parkey
-//
-//  Created by Laydon Owens on 3/27/21.
-//  Copyright © 2021 iona. All rights reserved.
-//
-
 import UIKit
 
 class RegisteredVehicleController: UIViewController, UITextFieldDelegate
@@ -33,7 +25,7 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         model.layer.masksToBounds = true
         model.layer.borderColor = UIColor.black.cgColor
         model.layer.borderWidth = 1.0
-        size.layer.masksToBounds = true
+        size.layer.masksToBounds = true	
         size.layer.borderColor = UIColor.black.cgColor
         size.layer.borderWidth = 1.0
     }
