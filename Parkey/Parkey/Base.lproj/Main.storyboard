@@ -905,6 +905,7 @@ NUMBER</string>
                     <navigationItem key="navigationItem" id="bu3-7Z-pYb"/>
                     <connections>
                         <outlet property="tableView" destination="YmL-bY-obx" id="FNi-oP-LsS"/>
+                        <segue destination="Feb-3B-7HV" kind="show" identifier="EditVehicleSegue" id="oRt-rS-XAP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y3p-Lu-aZI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1048,6 +1049,7 @@ NUMBER</string>
     <inferredMetricsTieBreakers>
         <segue reference="g3C-9X-6Cm"/>
         <segue reference="Fc4-YA-iUi"/>
+        <segue reference="oRt-rS-XAP"/>
         <segue reference="1Zw-6T-Gpb"/>
         <segue reference="CMZ-Sx-laU"/>
         <segue reference="kKN-QJ-N9e"/>

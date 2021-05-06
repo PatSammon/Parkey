@@ -142,6 +142,23 @@ class RequestHandler
             
         }.resume()
     }
+
+    static func updateVehicle(vehicle: Vehicle){
+        let url = URL(string: "https://parkeyny.herokuapp.com/api/vehicles/\(vehicle.id!)")
+        let encoder = JSONEncoder()
+        
+        var request = URLRequest(url: url!)
+        request.httpMethod = "PUT"
+        request.setValue(vehicle.id, forHTTPHeaderField: "vehicleID")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+        request.httpBody = try? encoder.encode(vehicle)
+        
+        URLSession.shared.dataTask(with: request)
+        {(data, response, error) in
+            
+        }.resume()
+    }
     
     static func getVehicles(userId: String) -> [Vehicle]
     {
@@ -344,6 +361,7 @@ class RequestHandler
             
         return returnArray
     }
+        
     
     static func register(name: String, userName: String, password: String, email: String, phoneNum: Int, completion: @escaping (Result<(Data, [String:Any]?), Error>) -> Void){
         //grab the URL for the database (currently set to local)
