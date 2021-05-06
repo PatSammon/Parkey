@@ -79,6 +79,11 @@ class HomeViewController: UIViewController {
         MicHelp.attributedText = normalString
         
         RankingNum.isHidden = true
+        if (UserDefaults.standard.bool(forKey: "RankSet")) {
+            RankingNum.text = "Rank - #\(UserDefaults.standard.integer(forKey: "Rank"))"
+            RankingNum.isHidden = false
+        }
+        
     }
     
     func setupLocationManager() {
