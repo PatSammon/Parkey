@@ -30,14 +30,16 @@ class LeaderboardController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.textLabel?.text = user.name
         cell.textLabel?.font = UIFont(name:"Kohinoor Telugu", size: 20)
-        cell.textLabel?.textColor = .white
+        cell.textLabel?.textColor = .black
         cell.detailTextLabel?.text = "#" + String(indexPath.row + 1) + " - Points: " + String(user.totalPoints)
-        cell.detailTextLabel?.textColor = .white
+        cell.detailTextLabel?.textColor = .black
         cell.detailTextLabel?.font = UIFont(name:"Kohinoor Telugu", size: 16)
         
         if(user.email == UserDefaults.standard.string(forKey: "Email"))
         {
             userRank.text = "Rank - #\(indexPath.row + 1)"
+            UserDefaults.standard.set(indexPath.row + 1, forKey: "Rank")
+            UserDefaults.standard.set(true, forKey: "RankSet")
         }
         else
         {
@@ -46,11 +48,11 @@ class LeaderboardController: UIViewController, UITableViewDelegate, UITableViewD
         
         if(indexPath.row % 2 == 0)
         {
-            cell.backgroundColor = UIColor(red: 3/255.0, green: 28/255.0, blue: 59/255.0, alpha: 1)
+            cell.backgroundColor = UIColor.white
         }
         else
         {
-            cell.backgroundColor = .secondaryLabel
+            cell.backgroundColor = UIColor(red: 178/255.0, green: 222/255.0, blue: 0/255.0, alpha: 1)
         }
         
         return cell

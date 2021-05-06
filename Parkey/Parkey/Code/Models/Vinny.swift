@@ -34,7 +34,7 @@ class Vinny: NSObject
     func speak(message: String) {
             let utterance = AVSpeechUtterance(string: message)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-            utterance.rate = 0.6
+            utterance.rate = 0.4
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
     }
