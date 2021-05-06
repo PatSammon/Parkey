@@ -86,6 +86,23 @@ func routes(_ app: Application) throws
         
         return vehicle.delete().transform(to: HTTPStatus.ok)
     }
+    app.put("api", "vehicles", ":vehicleID") {
+      req -> EventLoopFuture<Vehicle> in
+      // 2
+      let updatedVehicle = try req.content.decode(Vehicle.self)
+      return Vehicle.find(
+          req.parameters.get("vehicleID"),
+          on: req.db)
+        .unwrap(or: Abort(.notFound)).flatMap { vehicle in
+            vehicle.make = updatedVehicle.make
+            vehicle.model = updatedVehicle.model
+            vehicle.licensePlate = updatedVehicle.licensePlate
+            vehicle.size = updatedVehicle.size
+          return vehicle.save(on: req.db).map {
+            vehicle
+          }
+      }
+    }
     
     app.post("removeParkingSpot")
     { req -> EventLoopFuture<HTTPStatus> in
