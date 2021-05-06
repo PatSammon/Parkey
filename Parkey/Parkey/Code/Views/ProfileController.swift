@@ -36,7 +36,7 @@ class ProfileController: UIViewController {
     
     @IBAction func micClicked(_ sender: Any) {
         micButton.isEnabled = false
-        speechShow.isHidden = false
+        //speechShow.isHidden = false
         profileVinny.getPermission()
         profileVinny.speak(message: "What would you like to view?")
         Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { speechTimer in
