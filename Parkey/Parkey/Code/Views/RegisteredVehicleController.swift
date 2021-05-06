@@ -9,7 +9,6 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var size: UITextField!
     @IBOutlet weak var ErrorMessage: UILabel!
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -52,10 +51,15 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
         }
         
         RequestHandler.addVehicle(userId: UserDefaults.standard.value(forKey: "UserID") as! String, licensePlate: licensePlate.text!, make: make.text!, model: model.text!, size: Int(size.text!) ?? 0)
-       
-       
         
+        performSegue(withIdentifier: "new2Home", sender: self)
         
+        /*if let navController =  self.navigationController
+        {
+            navController.popViewController(animated: true)
+        }*/
+        
+       
         if !ErrorMessage.isHidden
         {
             ErrorMessage.isHidden=true
