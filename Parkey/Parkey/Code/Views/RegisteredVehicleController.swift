@@ -9,6 +9,9 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var size: UITextField!
     @IBOutlet weak var ErrorMessage: UILabel!
     
+    var Editing = false
+    var Vehicle:Vehicle?
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -35,6 +38,15 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
             NSAttributedString(string: "Model", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
         size.attributedPlaceholder =
             NSAttributedString(string: "Size", attributes: [NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        
+        //check if it is editing
+        if isEditing{
+            //fill in the values of the attributes
+            licensePlate.text=Vehicle?.licensePlate
+            make.text=Vehicle?.make
+            model.text=Vehicle?.model
+            size.text = String(Vehicle?.size ?? 0)
+        }
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -50,9 +62,23 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
             return
         }
         
+        if !isEditing{
         RequestHandler.addVehicle(userId: UserDefaults.standard.value(forKey: "UserID") as! String, licensePlate: licensePlate.text!, make: make.text!, model: model.text!, size: Int(size.text!) ?? 0)
-        
-        performSegue(withIdentifier: "new2Home", sender: self)
+        }
+        else{
+            //make the request to update the vehicle
+            
+            //update the fields
+            Vehicle?.licensePlate=licensePlate.text!
+            Vehicle?.make=make.text!
+            Vehicle?.model=model.text!
+            Vehicle?.size=Int(size.text!) ?? 0
+            
+            //call request handler
+            RequestHandler.updateVehicle(vehicle: Vehicle!)
+        }
+        navigationController?.popViewController(animated: true)
+        //performSegue(withIdentifier: "new2Home", sender: self)
         
         /*if let navController =  self.navigationController
         {

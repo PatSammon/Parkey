@@ -6,6 +6,7 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var userVehicles = [Vehicle]()
+    var vehicleIndex=0
     
     override func viewDidLoad()
     {
@@ -56,7 +57,18 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        vehicleIndex=indexPath.row
         performSegue(withIdentifier: "EditVehicleSegue", sender: indexPath)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    
+        if segue.identifier == "EditVehicleSegue"{
+            let RegisteredVehicleController:RegisteredVehicleController = segue.destination as! RegisteredVehicleController
+            RegisteredVehicleController.isEditing = true
+            RegisteredVehicleController.Vehicle=userVehicles[vehicleIndex]
+        }
     }
 }
 
