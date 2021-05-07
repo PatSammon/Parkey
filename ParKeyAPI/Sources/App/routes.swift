@@ -18,11 +18,13 @@ func routes(_ app: Application) throws
         return Reward.query(on: req.db).filter(\.$userId == userId).all()
     }
     
-    /*app.get("leaderboard")
-    {
-        req -> EventLoopFuture<[User]> in
-        return User.query(on: req.db).sort(\.$totalPoints, .descending).range(..<5).all()
-    }*/
+    app.post("userVehicles")
+    { req -> EventLoopFuture<[Vehicle]> in
+        
+        let userId = String(req.body.string!.dropFirst(7))
+        
+        return Vehicle.query(on: req.db).filter(\.$userId == userId).all()
+    }
     
     app.get("leaderboard")
     {
@@ -74,6 +76,34 @@ func routes(_ app: Application) throws
         
         return reward.delete().transform(to: HTTPStatus.ok)
     }
+    
+    app.post("removeVehicle")
+    { req -> EventLoopFuture<HTTPStatus> in
+        
+        let vehicleId = ObjectId(String(req.body.string!.dropFirst(10)))
+        
+        let vehicle = Vehicle.query(on: req.db).filter(\.$id == vehicleId!)
+        
+        return vehicle.delete().transform(to: HTTPStatus.ok)
+    }
+    app.put("api", "vehicles", ":vehicleID") {
+      req -> EventLoopFuture<Vehicle> in
+      // 2
+      let updatedVehicle = try req.content.decode(Vehicle.self)
+      return Vehicle.find(
+          req.parameters.get("vehicleID"),
+          on: req.db)
+        .unwrap(or: Abort(.notFound)).flatMap { vehicle in
+            vehicle.make = updatedVehicle.make
+            vehicle.model = updatedVehicle.model
+            vehicle.licensePlate = updatedVehicle.licensePlate
+            vehicle.size = updatedVehicle.size
+          return vehicle.save(on: req.db).map {
+            vehicle
+          }
+      }
+    }
+    
     app.post("removeParkingSpot")
     { req -> EventLoopFuture<HTTPStatus> in
         let var1 = String(req.body.string!)
