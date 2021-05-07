@@ -142,7 +142,7 @@ class RequestHandler
             
         }.resume()
     }
-
+    
     static func updateVehicle(vehicle: Vehicle){
         let url = URL(string: "https://parkeyny.herokuapp.com/api/vehicles/\(vehicle.id!)")
         let encoder = JSONEncoder()
@@ -151,15 +151,29 @@ class RequestHandler
         request.httpMethod = "PUT"
         request.setValue(vehicle.id, forHTTPHeaderField: "vehicleID")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    
-        request.httpBody = try? encoder.encode(vehicle)
-        
-        URLSession.shared.dataTask(with: request)
-        {(data, response, error) in
-            
-        }.resume()
-    }
-    
+        let updatedMake = vehicle.make
+        let updatedModel = vehicle.model
+        let updatedSize = vehicle.size
+        let updatedUserID = vehicle.userId
+        let byteText = vehicle.licensePlate.bytes
+        let iv = AES.randomIV (AES.blockSize)
+            do {
+                let aes = try AES (key: [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00], blockMode: CBC (iv: iv))
+                let encrypted = try aes.encrypt (byteText)
+                let strEnc = NSData (bytes: encrypted, length: encrypted.count) .base64EncodedString (options: .lineLength64Characters)
+                //print(strEnc)
+                let updatedVehicle = Vehicle(userId: updatedUserID, licensePlate: strEnc, make: updatedMake, model: updatedModel, size: updatedSize)
+                request.httpBody = try? encoder.encode(updatedVehicle)
+                                   
+                URLSession.shared.dataTask(with: request)
+                {(data, response, error) in
+                                       
+                }.resume()
+            } catch {
+            }
+     }
+
+
     static func getVehicles(userId: String) -> [Vehicle]
     {
         var done = false
