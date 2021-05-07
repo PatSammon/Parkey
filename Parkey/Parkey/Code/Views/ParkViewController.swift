@@ -61,7 +61,7 @@ class ParkViewController: UIViewController,  LocationProvider, MGLMapViewDelegat
         speechShow.isHidden = true
         speechShow.text = ""
         if (micUsed == true) {
-            speechShow.isHidden = false
+            //speechShow.isHidden = false
             view.bringSubviewToFront(speechShow)
             //micGetOriginAndDestination(message: "715 north avenue, new rochelle ny 10710")
             micGetAddress()
