@@ -819,16 +819,6 @@ NUMBER</string>
                                     <action selector="saveCarInfo:" destination="Feb-3B-7HV" eventType="touchUpInside" id="N5T-pH-IMS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCB-YQ-zoX">
-                                <rect key="frame" x="290" y="64" width="104" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Car Profile">
-                                    <color key="titleColor" red="0.69803921570000005" green="0.87058823529999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="hpG-jw-fML" kind="show" identifier="userVehicles" id="Fc4-YA-iUi"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DFm-Ad-psX"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -839,7 +829,6 @@ NUMBER</string>
                             <constraint firstItem="6AL-R6-yvs" firstAttribute="top" secondItem="qvG-2x-Enw" secondAttribute="bottom" constant="10" id="BYJ-7I-9ho"/>
                             <constraint firstItem="DFm-Ad-psX" firstAttribute="trailing" secondItem="jFH-PI-gG9" secondAttribute="trailing" constant="30" id="CMa-gJ-ktZ"/>
                             <constraint firstItem="jFH-PI-gG9" firstAttribute="leading" secondItem="DFm-Ad-psX" secondAttribute="leading" constant="30" id="Cv0-l4-5k2"/>
-                            <constraint firstItem="bCB-YQ-zoX" firstAttribute="top" secondItem="DFm-Ad-psX" secondAttribute="top" constant="20" id="EwB-CD-yZ3"/>
                             <constraint firstItem="qvG-2x-Enw" firstAttribute="leading" secondItem="DFm-Ad-psX" secondAttribute="leading" constant="10" id="HPx-XL-57g"/>
                             <constraint firstItem="6AL-R6-yvs" firstAttribute="leading" secondItem="DFm-Ad-psX" secondAttribute="leading" constant="30" id="Hwi-Cf-aWN"/>
                             <constraint firstItem="DFm-Ad-psX" firstAttribute="trailing" secondItem="7Yo-8M-zFw" secondAttribute="trailing" constant="90" id="Ik4-fr-i2U"/>
@@ -851,7 +840,6 @@ NUMBER</string>
                             <constraint firstItem="7Yo-8M-zFw" firstAttribute="top" secondItem="n3s-c5-Eqc" secondAttribute="bottom" constant="161" id="Uuc-fW-3Po"/>
                             <constraint firstItem="HK4-ev-AY9" firstAttribute="leading" secondItem="DFm-Ad-psX" secondAttribute="leading" constant="30" id="XIB-Ht-sdS"/>
                             <constraint firstItem="DFm-Ad-psX" firstAttribute="trailing" secondItem="HK4-ev-AY9" secondAttribute="trailing" constant="30" id="bdY-fC-p20"/>
-                            <constraint firstItem="DFm-Ad-psX" firstAttribute="trailing" secondItem="bCB-YQ-zoX" secondAttribute="trailing" constant="20" id="ezY-2a-WX6"/>
                             <constraint firstItem="HK4-ev-AY9" firstAttribute="top" secondItem="jFH-PI-gG9" secondAttribute="bottom" constant="10" id="gRH-bp-nEt"/>
                             <constraint firstItem="DFm-Ad-psX" firstAttribute="bottom" secondItem="7Yo-8M-zFw" secondAttribute="bottom" constant="39" id="kFb-k6-kl2"/>
                             <constraint firstItem="DFm-Ad-psX" firstAttribute="trailing" secondItem="6AL-R6-yvs" secondAttribute="trailing" constant="30" id="vdP-U5-uCe"/>
@@ -1052,7 +1040,6 @@ NUMBER</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="g3C-9X-6Cm"/>
-        <segue reference="Fc4-YA-iUi"/>
         <segue reference="oRt-rS-XAP"/>
         <segue reference="1Zw-6T-Gpb"/>
         <segue reference="CMZ-Sx-laU"/>

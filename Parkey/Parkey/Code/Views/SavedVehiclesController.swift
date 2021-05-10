@@ -14,8 +14,12 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
-
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
