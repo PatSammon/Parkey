@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="PUl-7G-c6S">
-                                <rect key="frame" x="50" y="380" width="314" height="83"/>
+                                <rect key="frame" x="50" y="450" width="314" height="83"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ohJ-qA-9nM">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
@@ -60,8 +60,11 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The login credentials are incorrect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNu-Tw-8qO">
-                                <rect key="frame" x="50" y="329.5" width="314" height="20.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password must include a number, special character, and uppercase" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNu-Tw-8qO">
+                                <rect key="frame" x="0.0" y="329.5" width="414" height="90.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90.5" id="xnr-Nv-FLT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.84313725490000002" green="0.14901960780000001" blue="0.23921568630000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -113,7 +116,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2CD-o6-LOf" secondAttribute="trailing" constant="50" id="10V-go-HOI"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2CD-o6-LOf" secondAttribute="bottom" constant="20" id="352-Xr-gKk"/>
                             <constraint firstItem="B8V-8O-LXa" firstAttribute="top" secondItem="p2X-5f-ypd" secondAttribute="bottom" constant="10" id="4Fa-gP-BzS"/>
-                            <constraint firstItem="vNu-Tw-8qO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="4zU-qy-Mbu"/>
                             <constraint firstItem="6HV-cI-Y55" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="7D3-7y-odF"/>
                             <constraint firstItem="VL2-ab-eJ1" firstAttribute="top" secondItem="6HV-cI-Y55" secondAttribute="bottom" constant="50" id="A6q-YT-QTG"/>
                             <constraint firstItem="PUl-7G-c6S" firstAttribute="top" secondItem="vNu-Tw-8qO" secondAttribute="bottom" constant="30" id="BCb-b1-RZU"/>
@@ -124,12 +126,13 @@
                             <constraint firstItem="B8V-8O-LXa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="VZz-tW-fCY"/>
                             <constraint firstItem="p2X-5f-ypd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="75" id="WY8-jq-6dL"/>
                             <constraint firstItem="2CD-o6-LOf" firstAttribute="top" secondItem="B8V-8O-LXa" secondAttribute="bottom" constant="40" id="XoC-qP-TzJ"/>
+                            <constraint firstAttribute="trailing" secondItem="vNu-Tw-8qO" secondAttribute="trailing" id="dhm-i4-dOC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VL2-ab-eJ1" secondAttribute="trailing" constant="70" id="ehP-Q2-qTg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p2X-5f-ypd" secondAttribute="trailing" constant="75" id="fMU-MG-fvi"/>
                             <constraint firstItem="PUl-7G-c6S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="jIA-rs-gkP"/>
+                            <constraint firstItem="vNu-Tw-8qO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="jWX-PP-8CR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PUl-7G-c6S" secondAttribute="trailing" constant="50" id="kBr-Cn-Yn0"/>
                             <constraint firstItem="2CD-o6-LOf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="mNH-QT-lli"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vNu-Tw-8qO" secondAttribute="trailing" constant="50" id="nky-FC-s1M"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="B8V-8O-LXa" secondAttribute="trailing" constant="75" id="rTY-fQ-n2V"/>
                         </constraints>
                     </view>
@@ -1042,9 +1045,9 @@ NUMBER</string>
         <segue reference="g3C-9X-6Cm"/>
         <segue reference="oRt-rS-XAP"/>
         <segue reference="1Zw-6T-Gpb"/>
-        <segue reference="CMZ-Sx-laU"/>
+        <segue reference="mcB-Dl-v9C"/>
         <segue reference="kKN-QJ-N9e"/>
-        <segue reference="VCb-fy-dvP"/>
+        <segue reference="tR8-E4-76R"/>
         <segue reference="xCv-nS-fTP"/>
     </inferredMetricsTieBreakers>
     <resources>

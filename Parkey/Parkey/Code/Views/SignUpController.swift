@@ -121,6 +121,7 @@ class SignUpController: UIViewController {
         if !checkSymbol(password: passwordTemp) || !checkUpperCase(password: passwordTemp) || !checkNumber(password: passwordTemp){
             //tell the user they must contain the proper format
             ErrorMessage.text = "Password must include a number, special character, and uppercase"
+            ErrorMessage.numberOfLines = 3
             ErrorMessage.isHidden=false
             return
         }
