@@ -46,6 +46,9 @@ class RegisteredVehicleController: UIViewController, UITextFieldDelegate
             make.text=Vehicle?.make
             model.text=Vehicle?.model
             size.text = String(Vehicle?.size ?? 0)
+            
+            //hide the licenseplate text
+            licensePlate.isHidden = true
         }
     }
     
