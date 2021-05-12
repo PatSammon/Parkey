@@ -33,7 +33,7 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
         
         let vehicle = userVehicles[indexPath.row]
         
-        cell.textLabel?.text = vehicle.make + "" + vehicle.model + "" + String(vehicle.size)
+        cell.textLabel?.text = vehicle.make + " " + vehicle.model
         cell.textLabel?.font = UIFont(name:"Helvetica-Bold", size: 20)
         cell.textLabel?.textColor = .blue
         cell.detailTextLabel?.textColor = .black
@@ -50,7 +50,7 @@ class SavedVehiclesController: UIViewController, UITableViewDelegate, UITableVie
         
         if  editingStyle == UITableViewCell.EditingStyle.delete
         {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            //tableView.deleteRows(at: [indexPath], with: .fade)
             RequestHandler.removeVehicle(vehicleId: vehicle.id!)
             self.userVehicles = RequestHandler.getVehicles(userId: UserDefaults.standard.value(forKey: "UserID") as! String)
             tableView.reloadData()
